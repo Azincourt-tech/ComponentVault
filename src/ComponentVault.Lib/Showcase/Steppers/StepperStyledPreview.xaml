@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Steppers.StepperStyledPreview">
+
+    <!-- snippet:stepper.styled -->
+    <ContentView.Resources>
+        <!-- Botão do stepper: 44×44, sem fundo; o grupo inteiro tem uma única moldura. -->
+        <Style x:Key="StepButton" TargetType="Button">
+            <Setter Property="WidthRequest" Value="44" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderWidth" Value="0" />
+            <Setter Property="FontFamily" Value="{StaticResource FontMedium}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceAlt}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceHover}" />
+                                <Setter Property="Scale" Value="0.94" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.3" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <!-- Linha de carrinho: o stepper conversa com o total, e os limites desabilitam o botão. -->
+    <Border Style="{StaticResource Card}" Padding="16" MaximumWidthRequest="520" HorizontalOptions="Start">
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="12">
+            <VerticalStackLayout Spacing="2">
+                <Label Style="{StaticResource CardTitle}" Text="Camiseta ComponentVault" />
+                <Label Style="{StaticResource BodySmall}" Text="R$ 89,90 cada · máximo de 5 por pedido" />
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1" Padding="0" StrokeShape="RoundRectangle 10" StrokeThickness="1"
+                    Stroke="{DynamicResource HairlineStrong}" VerticalOptions="Center">
+                <HorizontalStackLayout>
+                    <Button x:Name="MinusButton" Text="−" Style="{StaticResource StepButton}" Clicked="OnMinus"
+                            SemanticProperties.Description="Diminuir quantidade" />
+                    <Label x:Name="QuantityLabel" Text="1" WidthRequest="36"
+                           FontFamily="{StaticResource FontSemiBold}" FontSize="16"
+                           TextColor="{DynamicResource Ink}"
+                           HorizontalTextAlignment="Center" VerticalOptions="Center" />
+                    <Button x:Name="PlusButton" Text="+" Style="{StaticResource StepButton}" Clicked="OnPlus"
+                            SemanticProperties.Description="Aumentar quantidade" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource Divider}" VerticalOptions="Start" />
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" Margin="0,12,0,0">
+                <Label Style="{StaticResource BodyMuted}" Text="Subtotal" />
+                <Label x:Name="TotalLabel" Grid.Column="1" Style="{StaticResource CardTitle}" Text="R$ 89,90" />
+            </Grid>
+        </Grid>
+    </Border>
+    <!-- /snippet:stepper.styled -->
+
+</ContentView>

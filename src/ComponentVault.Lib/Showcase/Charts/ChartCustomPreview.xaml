@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:charts="clr-namespace:ComponentVault.Lib.Showcase.Charts"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Charts.ChartCustomPreview">
+
+    <!-- snippet:chart.custom -->
+    <!-- Cards de indicador: o número é o protagonista; o gráfico só mostra a tendência. -->
+    <FlexLayout Wrap="Wrap" JustifyContent="Start">
+
+        <Border Style="{StaticResource Card}" Padding="18" WidthRequest="250" Margin="0,0,12,12">
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Receita do mês" />
+                <Label Style="{StaticResource PageTitle}" Text="R$ 48,2 mil" />
+                <HorizontalStackLayout Spacing="4">
+                    <mic:MauiIcon Icon="{mi:Fluent Icon=ArrowUp16}" IconSize="14"
+                                  IconColor="{DynamicResource SuccessText}" VerticalOptions="Center" />
+                    <Label Text="12,4% vs. outubro" FontFamily="{StaticResource FontMedium}" FontSize="13"
+                           TextColor="{DynamicResource SuccessText}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <charts:Sparkline HeightRequest="48" Points="31 34 33 38 36 41 40 44 43 48"
+                                  SemanticProperties.Description="Tendência de alta nos últimos 10 dias" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Style="{StaticResource Card}" Padding="18" WidthRequest="250" Margin="0,0,12,12">
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Tempo de resposta" />
+                <Label Style="{StaticResource PageTitle}" Text="2h 15min" />
+                <HorizontalStackLayout Spacing="4">
+                    <mic:MauiIcon Icon="{mi:Fluent Icon=ArrowUp16}" IconSize="14"
+                                  IconColor="{DynamicResource DangerText}" VerticalOptions="Center" />
+                    <Label Text="18 min mais lento" FontFamily="{StaticResource FontMedium}" FontSize="13"
+                           TextColor="{DynamicResource DangerText}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <charts:MiniBars HeightRequest="48" Points="5 6 4 7 6 8 7 9"
+                                 SemanticProperties.Description="Tempo de resposta por semana, a última em destaque" />
+            </VerticalStackLayout>
+        </Border>
+
+    </FlexLayout>
+    <!-- /snippet:chart.custom -->
+
+</ContentView>

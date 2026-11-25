@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
+             xmlns:controls="clr-namespace:ComponentVault.App.Controls"
+             xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
+             xmlns:motion="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
+             x:Class="ComponentVault.App.Views.Catalog.CatalogPage"
+             x:DataType="vm:CatalogViewModel"
+             Style="{StaticResource VaultPage}"
+             Title="">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tema" IconImageSource="theme.png" Command="{Binding ToggleThemeCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <!-- Luz ambiente (tema Vidro) atrás de tudo -->
+        <lib:AmbientBackground />
+
+        <Grid RowDefinitions="Auto,*" SizeChanged="OnPageSizeChanged">
+
+        <!-- Busca (RF04) e filtro de origem -->
+        <VerticalStackLayout Padding="{OnIdiom Phone='20,16,20,8', Default='40,28,40,8'}" Spacing="14"
+                             MaximumWidthRequest="880">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource PageTitle}" Text="Catálogo" />
+                <Label Grid.Column="1" Style="{StaticResource Caption}" Text="{Binding ResultSummary}" VerticalOptions="End" />
+            </Grid>
+
+            <lib:VaultTextField Placeholder="Buscar por nome, tag ou biblioteca"
+                                IconData="M7 1.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 1 0 0-11M11 11L14.5 14.5"
+                                Text="{Binding SearchText, Mode=TwoWay}" />
+
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout Spacing="8" BindableLayout.ItemsSource="{Binding Filters}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:OriginFilterOption">
+                            <Border Padding="14,0" HeightRequest="36" MinimumWidthRequest="44"
+                                    StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="1"
+                                    Stroke="{DynamicResource HairlineStrong}"
+                                    BackgroundColor="Transparent"
+                                    SemanticProperties.Description="{Binding Label, StringFormat='Filtro {0}'}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectFilterCommand, Source={RelativeSource AncestorType={x:Type vm:CatalogViewModel}}, x:DataType=vm:CatalogViewModel}"
+                                                          CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Border.Triggers>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
+                                        <Setter Property="Stroke" Value="{DynamicResource Ink}" />
+                                    </DataTrigger>
+                                </Border.Triggers>
+                                <Label Text="{Binding Label}" FontFamily="{StaticResource FontMedium}" FontSize="14"
+                                       VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="TextColor" Value="{DynamicResource OnInk}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Lista agrupada por categoria: linhas finas, virtualizada (RNF 7.2). -->
+        <CollectionView x:Name="ResultsList" Grid.Row="1" ItemsSource="{Binding Groups}" IsGrouped="True" SelectionMode="None">
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="vm:ComponentGroup">
+                    <HorizontalStackLayout Spacing="8" Padding="8,28,8,8">
+                        <Label Style="{StaticResource FieldLabel}" Text="{Binding Title}" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding Count}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ComponentCardModel">
+                    <VerticalStackLayout>
+                        <Grid Style="{StaticResource ListRow}" Padding="8,12" ColumnDefinitions="Auto,*,Auto" motion:Motion.Press="True"
+                              SemanticProperties.Description="{Binding Name}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenComponentCommand, Source={RelativeSource AncestorType={x:Type vm:CatalogViewModel}}, x:DataType=vm:CatalogViewModel}"
+                                                      CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            <controls:ComponentThumb WidthRequest="44" HeightRequest="44" IconName="{Binding Icon}" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" />
+                                    <Label Text="Novo" FontFamily="{StaticResource FontMedium}" FontSize="13"
+                                           TextColor="{DynamicResource AccentText}"
+                                           IsVisible="{Binding IsNew}" VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                                <Label Style="{StaticResource BodySmall}" Text="{Binding Summary}" MaxLines="2" LineBreakMode="TailTruncation" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding TiersText}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Style="{StaticResource Caption}" FontSize="20" Text="›" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" Margin="66,0,0,0" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="0,56" Spacing="12" HorizontalOptions="Center">
+                    <Label Style="{StaticResource CardTitle}" Text="Nada encontrado" HorizontalOptions="Center" />
+                    <Label Style="{StaticResource BodySmall}" Text="Nenhum componente casa com a busca e o filtro." HorizontalOptions="Center" />
+                    <Button Text="Limpar busca" Style="{StaticResource SecondaryButton}" HorizontalOptions="Center"
+                            Command="{Binding ClearSearchCommand}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.Footer>
+                <BoxView HeightRequest="32" Color="Transparent" />
+            </CollectionView.Footer>
+        </CollectionView>
+
+    </Grid>
+    </Grid>
+
+</ContentPage>

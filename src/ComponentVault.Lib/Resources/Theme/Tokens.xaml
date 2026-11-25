@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Espaçamento (base 4), raios, tipografia e alturas mínimas de toque. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Espaçamento: 4 8 12 16 24 32 48 64 -->
+    <x:Double x:Key="Space1">4</x:Double>
+    <x:Double x:Key="Space2">8</x:Double>
+    <x:Double x:Key="Space3">12</x:Double>
+    <x:Double x:Key="Space4">16</x:Double>
+    <x:Double x:Key="Space5">24</x:Double>
+    <x:Double x:Key="Space6">32</x:Double>
+    <x:Double x:Key="Space7">48</x:Double>
+    <x:Double x:Key="Space8">64</x:Double>
+
+    <OnIdiom x:Key="PagePadding" x:TypeArguments="Thickness" Default="40,32" Phone="20,16" />
+    <x:Double x:Key="ContentMaxWidth">1040</x:Double>
+
+    <!-- Raios: controles 10, painéis 14, cards 16 -->
+    <x:Int32 x:Key="RadiusControl">10</x:Int32>
+    <x:Int32 x:Key="RadiusPanel">14</x:Int32>
+    <x:Int32 x:Key="RadiusCard">16</x:Int32>
+
+    <!-- Famílias (registradas em UseVaultDesignSystem) -->
+    <x:String x:Key="FontRegular">JakartaRegular</x:String>
+    <x:String x:Key="FontMedium">JakartaMedium</x:String>
+    <x:String x:Key="FontSemiBold">JakartaSemiBold</x:String>
+    <x:String x:Key="FontBold">JakartaBold</x:String>
+    <x:String x:Key="FontMono">JetBrainsMono</x:String>
+
+    <!-- Escala tipográfica: nada abaixo de 13, corpo 16 -->
+    <x:Double x:Key="TextDisplay">34</x:Double>
+    <x:Double x:Key="TextTitle">26</x:Double>
+    <x:Double x:Key="TextHeadline">19</x:Double>
+    <x:Double x:Key="TextCardTitle">16</x:Double>
+    <x:Double x:Key="TextBody">16</x:Double>
+    <x:Double x:Key="TextSmall">14</x:Double>
+    <x:Double x:Key="TextLabel">13</x:Double>
+    <x:Double x:Key="TextCode">13.5</x:Double>
+
+    <!-- Alturas mínimas de toque -->
+    <x:Double x:Key="TouchButton">44</x:Double>
+    <x:Double x:Key="TouchInput">48</x:Double>
+
+</ResourceDictionary>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.CheckBoxes.CheckBoxStyledPreview">
+
+    <VerticalStackLayout Spacing="12">
+        <Label Style="{StaticResource FieldLabel}" Text="Lista com selecionar tudo" />
+
+        <!-- snippet:checkbox.styled -->
+        <Border Style="{StaticResource Card}">
+            <VerticalStackLayout>
+
+                <!-- Cabeçalho com estado triplo: vazio, traço (alguns) e marcado (todos). -->
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSelectAllTapped" />
+                    </Grid.GestureRecognizers>
+                    <Border x:Name="SelectAllBox" WidthRequest="20" HeightRequest="20"
+                            StrokeShape="RoundRectangle 5" StrokeThickness="1.5"
+                            Stroke="{DynamicResource HairlineStrong}"
+                            VerticalOptions="Center" Margin="12,0">
+                        <Path x:Name="SelectAllMark" Stroke="White" StrokeThickness="2"
+                              StrokeLineCap="Round" StrokeLineJoin="Round"
+                              WidthRequest="11" HeightRequest="11" Aspect="None"
+                              HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Grid.Column="1" Style="{StaticResource CardTitle}" Text="Notificações" VerticalOptions="Center" />
+                    <Label x:Name="CountLabel" Grid.Column="2" Style="{StaticResource Caption}" VerticalOptions="Center" />
+                </Grid>
+
+                <BoxView Style="{StaticResource Divider}" />
+
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference EmailCheck}" />
+                    </Grid.GestureRecognizers>
+                    <CheckBox x:Name="EmailCheck" Style="{StaticResource VaultCheckBox}" IsChecked="True"
+                              InputTransparent="True" VerticalOptions="Start" CheckedChanged="OnItemChanged"
+                              SemanticProperties.Description="Respostas por e-mail" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Respostas por e-mail" />
+                        <Label Style="{StaticResource BodySmall}" Text="Quando alguém comentar no seu componente" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference DigestCheck}" />
+                    </Grid.GestureRecognizers>
+                    <CheckBox x:Name="DigestCheck" Style="{StaticResource VaultCheckBox}"
+                              InputTransparent="True" VerticalOptions="Start" CheckedChanged="OnItemChanged"
+                              SemanticProperties.Description="Resumo semanal" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Resumo semanal" />
+                        <Label Style="{StaticResource BodySmall}" Text="Os componentes mais vistos da semana" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference ReleaseCheck}" />
+                    </Grid.GestureRecognizers>
+                    <CheckBox x:Name="ReleaseCheck" Style="{StaticResource VaultCheckBox}" IsChecked="True"
+                              InputTransparent="True" VerticalOptions="Start" CheckedChanged="OnItemChanged"
+                              SemanticProperties.Description="Novas versões" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Novas versões" />
+                        <Label Style="{StaticResource BodySmall}" Text="Quando uma biblioteca usada for atualizada" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <BoxView Style="{StaticResource Divider}" />
+
+                <!-- Bloqueado: marcado, sem toque, com o motivo escrito. -->
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*" Opacity="0.55">
+                    <CheckBox Style="{StaticResource VaultCheckBox}" IsChecked="True" IsEnabled="False" VerticalOptions="Start"
+                              SemanticProperties.Description="Alertas de segurança, sempre ativos" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Alertas de segurança" />
+                        <Label Style="{StaticResource BodySmall}" Text="Sempre ativos, não podem ser desligados" />
+                    </VerticalStackLayout>
+                </Grid>
+
+            </VerticalStackLayout>
+        </Border>
+        <!-- /snippet:checkbox.styled -->
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardExpanderPreview">
+
+    <VerticalStackLayout Spacing="20">
+
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Detalhes recolhíveis" />
+            <!-- snippet:card.expander -->
+            <Border Style="{StaticResource Card}" MaximumWidthRequest="560" HorizontalOptions="Fill">
+                <VerticalStackLayout>
+
+                    <toolkit:Expander x:Name="ShippingExpander" IsExpanded="True">
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="*,Auto" Padding="16,14" MinimumHeightRequest="52">
+                                <Label Style="{StaticResource CardTitle}" Text="Entrega" VerticalOptions="Center" />
+                                <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16"
+                                              IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center">
+                                    <mic:MauiIcon.Triggers>
+                                        <DataTrigger TargetType="mic:MauiIcon" x:DataType="toolkit:Expander"
+                                                     Binding="{Binding IsExpanded, Source={x:Reference ShippingExpander}}" Value="True">
+                                            <Setter Property="Rotation" Value="180" />
+                                        </DataTrigger>
+                                    </mic:MauiIcon.Triggers>
+                                </mic:MauiIcon>
+                            </Grid>
+                        </toolkit:Expander.Header>
+                        <VerticalStackLayout Padding="16,0,16,16" Spacing="6">
+                            <Label Style="{StaticResource BodyMuted}" Text="Envio expresso, chega em até 2 dias úteis." />
+                            <Label Style="{StaticResource Caption}" Text="Rua das Acácias, 120 · São Paulo" />
+                        </VerticalStackLayout>
+                    </toolkit:Expander>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <toolkit:Expander x:Name="PaymentExpander">
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" Padding="16,14" MinimumHeightRequest="52">
+                                <Label Style="{StaticResource CardTitle}" Text="Pagamento" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Style="{StaticResource Caption}" Text="Cartão final 4021" VerticalOptions="Center" />
+                                <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16"
+                                              IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center">
+                                    <mic:MauiIcon.Triggers>
+                                        <DataTrigger TargetType="mic:MauiIcon" x:DataType="toolkit:Expander"
+                                                     Binding="{Binding IsExpanded, Source={x:Reference PaymentExpander}}" Value="True">
+                                            <Setter Property="Rotation" Value="180" />
+                                        </DataTrigger>
+                                    </mic:MauiIcon.Triggers>
+                                </mic:MauiIcon>
+                            </Grid>
+                        </toolkit:Expander.Header>
+                        <VerticalStackLayout Padding="16,0,16,16" Spacing="6">
+                            <Label Style="{StaticResource BodyMuted}" Text="Cobrança à vista no cartão de crédito." />
+                            <Label Style="{StaticResource Caption}" Text="Nota fiscal enviada por e-mail após a confirmação." />
+                        </VerticalStackLayout>
+                    </toolkit:Expander>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <toolkit:Expander x:Name="ReturnsExpander">
+                        <toolkit:Expander.Header>
+                            <Grid ColumnDefinitions="*,Auto" Padding="16,14" MinimumHeightRequest="52">
+                                <Label Style="{StaticResource CardTitle}" Text="Trocas e devolução" VerticalOptions="Center" />
+                                <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16"
+                                              IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center">
+                                    <mic:MauiIcon.Triggers>
+                                        <DataTrigger TargetType="mic:MauiIcon" x:DataType="toolkit:Expander"
+                                                     Binding="{Binding IsExpanded, Source={x:Reference ReturnsExpander}}" Value="True">
+                                            <Setter Property="Rotation" Value="180" />
+                                        </DataTrigger>
+                                    </mic:MauiIcon.Triggers>
+                                </mic:MauiIcon>
+                            </Grid>
+                        </toolkit:Expander.Header>
+                        <Label Style="{StaticResource BodyMuted}" Padding="16,0,16,16"
+                               Text="Até 7 dias após o recebimento, sem custo. A coleta é agendada pelo app." />
+                    </toolkit:Expander>
+
+                </VerticalStackLayout>
+            </Border>
+            <!-- /snippet:card.expander -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Expander do CommunityToolkit.Maui cuida do toque no cabeçalho; o card só fornece a superfície. Detalhes secundários ficam recolhidos, o resumo fica sempre à vista." />
+
+    </VerticalStackLayout>
+
+</ContentView>

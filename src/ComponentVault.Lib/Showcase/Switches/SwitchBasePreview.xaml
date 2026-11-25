@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Switches.SwitchBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Padrão da plataforma" />
+            <!-- snippet:switch.base -->
+            <VerticalStackLayout Spacing="8">
+                <Switch x:Name="DemoSwitch" HorizontalOptions="Start" />
+                <Label x:DataType="Switch"
+                       Text="{Binding IsToggled, Source={x:Reference DemoSwitch}, StringFormat='IsToggled = {0}'}" />
+                <Switch IsToggled="True" IsEnabled="False" HorizontalOptions="Start" />
+            </VerticalStackLayout>
+            <!-- /snippet:switch.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Switch nativo só expõe OnColor e ThumbColor. A cor da trilha desligada, o tamanho e a animação ficam com a plataforma, e o rótulo precisa ser montado ao lado." />
+
+    </VerticalStackLayout>
+
+</ContentView>

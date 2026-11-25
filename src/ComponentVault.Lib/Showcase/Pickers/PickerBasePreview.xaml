@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Pickers.PickerBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Padrão da plataforma" />
+            <!-- snippet:picker.base -->
+            <Picker Title="Plataforma">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Android</x:String>
+                        <x:String>iOS</x:String>
+                        <x:String>Windows</x:String>
+                        <x:String>macOS</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <!-- /snippet:picker.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Picker abre a lista nativa (diálogo no Android, ComboBox no Windows). Sem rótulo externo, o Title some depois da escolha e não há indicação visual de que é um menu." />
+
+    </VerticalStackLayout>
+
+</ContentView>

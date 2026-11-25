@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             x:Class="ComponentVault.Lib.Showcase.Icons.IconsMauiIconsPreview">
+
+    <VerticalStackLayout Spacing="28">
+
+        <!-- snippet:icons.mauiicons -->
+        <VerticalStackLayout Spacing="24">
+
+            <!-- Ícones de interface usam a cor da tinta; a cor de destaque fica para o estado ativo. -->
+            <VerticalStackLayout Spacing="12">
+                <Label Style="{StaticResource FieldLabel}" Text="Tamanhos: 16, 20, 24 e 32" />
+                <HorizontalStackLayout Spacing="20">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="16" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="20" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="24" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="32" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12">
+                <Label Style="{StaticResource FieldLabel}" Text="Estados" />
+                <HorizontalStackLayout Spacing="20">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Heart24}" IconSize="24" IconColor="{DynamicResource InkTertiary}" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Heart24}" IconSize="24" IconColor="{StaticResource Accent}" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.CheckmarkCircle24}" IconSize="24" IconColor="{DynamicResource SuccessText}" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Warning24}" IconSize="24" IconColor="{DynamicResource WarningText}" />
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.ErrorCircle24}" IconSize="24" IconColor="{DynamicResource DangerText}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12">
+                <Label Style="{StaticResource FieldLabel}" Text="Ícone com texto" />
+                <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.ArrowDownload24}" IconSize="20"
+                             IconColor="{DynamicResource AccentText}"
+                             IconSuffix="Baixar relatório" IconSuffixFontSize="15"
+                             IconSuffixFontFamily="{StaticResource FontSemiBold}"
+                             IconSuffixTextColor="{DynamicResource AccentText}"
+                             HorizontalOptions="Start" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:icons.mauiicons -->
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Alguns dos mais de 6 mil ícones Fluent" />
+            <FlexLayout x:Name="Gallery" Wrap="Wrap" />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+
+</ContentView>

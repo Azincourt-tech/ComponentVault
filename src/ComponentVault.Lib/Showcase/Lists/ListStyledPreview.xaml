@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Lists"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Lists.ListStyledPreview"
+             x:Name="Root">
+
+    <!-- snippet:list.styled -->
+    <VerticalStackLayout Spacing="28" MaximumWidthRequest="520" HorizontalOptions="Fill">
+
+        <!-- Grupo de configurações: ícone, título, descrição e valor à direita. A linha inteira é o alvo. -->
+        <VerticalStackLayout Spacing="8">
+            <Label Style="{StaticResource FieldLabel}" Text="Conta" Margin="4,0" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="34" HeightRequest="34" StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" VerticalOptions="Center">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Person24}" IconSize="18" IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" Text="Perfil" />
+                            <Label Style="{StaticResource Caption}" Text="Nome, foto e e-mail" />
+                        </VerticalStackLayout>
+                        <mic:MauiIcon Grid.Column="3" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" Margin="62,0,0,0" />
+                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="34" HeightRequest="34" StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" VerticalOptions="Center">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=LockShield24}" IconSize="18" IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" Text="Segurança" />
+                            <Label Style="{StaticResource Caption}" Text="Senha e verificação em duas etapas" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource BodySmall}" Text="Ativa" VerticalOptions="Center" />
+                        <mic:MauiIcon Grid.Column="3" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" Margin="62,0,0,0" />
+                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="34" HeightRequest="34" StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" VerticalOptions="Center">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=LocalLanguage24}" IconSize="18" IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Label Grid.Column="1" Style="{StaticResource Body}" Text="Idioma" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Style="{StaticResource BodySmall}" Text="Português" VerticalOptions="Center" />
+                        <mic:MauiIcon Grid.Column="3" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!--
+          Lista com ação destrutiva: deslizar no toque, menu de contexto no Windows (clique direito)
+          e sempre com "Desfazer" em vez de diálogo de confirmação.
+        -->
+        <VerticalStackLayout Spacing="8">
+            <Grid ColumnDefinitions="*,Auto" Margin="4,0">
+                <Label Style="{StaticResource FieldLabel}" Text="Mensagens" VerticalOptions="Center" />
+                <Label Grid.Column="1" Style="{StaticResource Caption}" Text="Deslize ou clique com o botão direito" VerticalOptions="Center" />
+            </Grid>
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Messages, Source={x:Reference Root}, x:DataType=local:ListStyledPreview}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="local:InboxItem">
+                            <VerticalStackLayout>
+                                <SwipeView BackgroundColor="{DynamicResource Surface}">
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView Invoked="OnDeleteInvoked">
+                                                <Grid BackgroundColor="{StaticResource Danger}" WidthRequest="96">
+                                                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                                                        <mic:MauiIcon Icon="{mi:Fluent Icon=Delete24}" IconSize="18" IconColor="White" HorizontalOptions="Center" />
+                                                        <Label Text="Excluir" TextColor="White" FontFamily="{StaticResource FontMedium}" FontSize="13" />
+                                                    </VerticalStackLayout>
+                                                </Grid>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                        <FlyoutBase.ContextFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="Excluir" Clicked="OnDeleteMenuClicked" />
+                                            </MenuFlyout>
+                                        </FlyoutBase.ContextFlyout>
+                                        <Border WidthRequest="36" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 18"
+                                                BackgroundColor="{DynamicResource AccentTint}" VerticalOptions="Center">
+                                            <Label Text="{Binding Initials}" FontFamily="{StaticResource FontSemiBold}" FontSize="13"
+                                                   TextColor="{DynamicResource AccentText}"
+                                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontMedium}" Text="{Binding Sender}" />
+                                            <Label Style="{StaticResource BodySmall}" Text="{Binding Subject}" MaxLines="1" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Style="{StaticResource Caption}" Text="{Binding Time}" VerticalOptions="Start" />
+                                    </Grid>
+                                </SwipeView>
+                                <BoxView Style="{StaticResource Divider}" Margin="64,0,0,0" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Desfazer: aparece após excluir e some ao restaurar. -->
+            <Border x:Name="UndoBar" IsVisible="False" Padding="16,10" StrokeThickness="0" StrokeShape="RoundRectangle 12"
+                    BackgroundColor="{DynamicResource Ink}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label x:Name="UndoLabel" FontFamily="{StaticResource FontRegular}" FontSize="14"
+                           TextColor="{DynamicResource OnInk}" VerticalOptions="Center" />
+                    <Button Grid.Column="1" Text="Desfazer" Clicked="OnUndoClicked" BackgroundColor="Transparent"
+                            TextColor="{DynamicResource OnInk}" FontFamily="{StaticResource FontSemiBold}" FontSize="14"
+                            Padding="12,6" MinimumHeightRequest="36" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:list.styled -->
+
+</ContentView>

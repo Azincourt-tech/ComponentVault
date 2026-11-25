@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.DatePickers.DatePickerUraniumPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="DatePickerField e TimePickerField" />
+            <!-- snippet:datepicker.uranium -->
+            <VerticalStackLayout Spacing="16" MaximumWidthRequest="440" HorizontalOptions="Start">
+                <material:DatePickerField Title="Data de entrega" Format="dd/MM/yyyy" AllowClear="True" />
+                <material:TimePickerField Title="Horário" Format="HH:mm" AllowClear="True" />
+            </VerticalStackLayout>
+            <!-- /snippet:datepicker.uranium -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Campos Material com título flutuante e limpar. Úteis quando a data é opcional: vazio é um estado válido, diferente do DatePicker nativo, que sempre tem um valor." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:tabs="clr-namespace:Sharpnado.Tabs;assembly=Maui.Tabs"
+             x:Class="ComponentVault.Lib.Showcase.Segmented.SegmentedSharpnadoPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:segmented.sharpnado -->
+        <VerticalStackLayout Spacing="16" MaximumWidthRequest="480" HorizontalOptions="Fill">
+
+            <tabs:TabHostView x:Name="SectionTabs"
+                              IsSegmented="True"
+                              TabType="Fixed"
+                              HeightRequest="40"
+                              CornerRadius="10"
+                              SegmentedHasSeparator="True"
+                              SegmentedOutlineColor="{DynamicResource HairlineStrong}"
+                              BackgroundColor="{DynamicResource Surface}"
+                              SelectedIndex="0">
+                <tabs:SegmentedTabItem Label="Resumo" LabelSize="14" FontFamily="JakartaMedium"
+                                       SelectedTabColor="{DynamicResource Ink}"
+                                       SelectedLabelColor="{DynamicResource OnInk}"
+                                       UnselectedLabelColor="{DynamicResource InkSecondary}" />
+                <tabs:SegmentedTabItem Label="Detalhes" LabelSize="14" FontFamily="JakartaMedium"
+                                       SelectedTabColor="{DynamicResource Ink}"
+                                       SelectedLabelColor="{DynamicResource OnInk}"
+                                       UnselectedLabelColor="{DynamicResource InkSecondary}" />
+                <tabs:SegmentedTabItem Label="Histórico" LabelSize="14" FontFamily="JakartaMedium"
+                                       SelectedTabColor="{DynamicResource Ink}"
+                                       SelectedLabelColor="{DynamicResource OnInk}"
+                                       UnselectedLabelColor="{DynamicResource InkSecondary}" />
+            </tabs:TabHostView>
+
+            <!-- O ViewSwitcher troca o conteúdo pelo SelectedIndex das abas. -->
+            <tabs:ViewSwitcher x:DataType="tabs:TabHostView"
+                               SelectedIndex="{Binding SelectedIndex, Source={x:Reference SectionTabs}}"
+                               Animate="True">
+                <Label Style="{StaticResource BodyMuted}" Text="Resumo: 3 variantes, 2 bibliotecas, atualizado hoje." />
+                <Label Style="{StaticResource BodyMuted}" Text="Detalhes: propriedades, casos de uso e limitações conhecidas." />
+                <Label Style="{StaticResource BodyMuted}" Text="Histórico: criado em 10/11, última mudança em 25/11." />
+            </tabs:ViewSwitcher>
+
+        </VerticalStackLayout>
+        <!-- /snippet:segmented.sharpnado -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Sharpnado.Tabs entrega abas segmentadas, sublinhadas e de rodapé prontas, com separadores e efeito de toque. O ViewSwitcher só mantém visível a visão selecionada." />
+
+    </VerticalStackLayout>
+
+</ContentView>

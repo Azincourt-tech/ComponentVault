@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             x:Class="ComponentVault.Lib.Showcase.EmptyStates.EmptyStateStyledPreview">
+
+    <!-- snippet:emptystate.styled -->
+    <VerticalStackLayout Spacing="28">
+
+        <!-- Página inteira: diz o que aconteceu, por que, e oferece UMA saída. -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Busca sem resultado" />
+            <Border Style="{StaticResource Card}" Padding="24,32">
+                <VerticalStackLayout Spacing="14" HorizontalOptions="Center" MaximumWidthRequest="360">
+                    <Border WidthRequest="64" HeightRequest="64" StrokeThickness="0" StrokeShape="RoundRectangle 32"
+                            HorizontalOptions="Center" BackgroundColor="{DynamicResource SurfaceAlt}">
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.DocumentSearch24}" IconSize="28"
+                                     IconColor="{DynamicResource InkSecondary}"
+                                     HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Style="{StaticResource CardTitle}" FontSize="17" HorizontalTextAlignment="Center"
+                           Text="Nenhum componente para “gráfico de radar”" />
+                    <Label Style="{StaticResource BodySmall}" HorizontalTextAlignment="Center"
+                           Text="Confira a grafia ou tire o filtro de origem para buscar em todo o catálogo." />
+                    <Button Text="Limpar filtros" Style="{StaticResource PrimaryButton}" HorizontalOptions="Center"
+                            Margin="0,6,0,0" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Primeiro uso: explica o benefício em vez de só dizer "vazio". -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Primeiro uso" />
+            <Border Style="{StaticResource Card}" Padding="24,28">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center" MaximumWidthRequest="360">
+                    <Border WidthRequest="56" HeightRequest="56" StrokeThickness="0" StrokeShape="RoundRectangle 28"
+                            HorizontalOptions="Center" BackgroundColor="{DynamicResource SurfaceAlt}">
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Bookmark24}" IconSize="24"
+                                     IconColor="{DynamicResource InkSecondary}"
+                                     HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Style="{StaticResource CardTitle}" HorizontalTextAlignment="Center" Text="Seus favoritos aparecem aqui" />
+                    <Label Style="{StaticResource BodySmall}" HorizontalTextAlignment="Center"
+                           Text="Marque um componente para voltar a ele em um toque." />
+                    <Button Text="Explorar o catálogo" Style="{StaticResource SecondaryButton}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Compacto, dentro de uma lista: não ocupa a tela, só orienta. -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Em linha" />
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12" Padding="16,10,8,10">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.People24}" IconSize="20"
+                                 IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Style="{StaticResource BodySmall}" VerticalOptions="Center"
+                           Text="Ninguém foi convidado para este projeto." />
+                    <Button Grid.Column="2" Text="Convidar" Style="{StaticResource TertiaryButton}" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:emptystate.styled -->
+
+</ContentView>

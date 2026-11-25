@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ratings="clr-namespace:ComponentVault.Lib.Showcase.Ratings"
+             x:Class="ComponentVault.Lib.Showcase.Ratings.RatingCustomPreview">
+
+    <VerticalStackLayout Spacing="28">
+
+        <!-- snippet:rating.custom -->
+        <VerticalStackLayout Spacing="28">
+
+            <!-- Interativo: o significado de cada nota aparece em texto, não só em estrelas. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Avalie este componente" />
+                <ratings:RatingView x:Name="UserRating" Value="4" PropertyChanged="OnRatingChanged" />
+                <Label x:Name="MeaningLabel" Style="{StaticResource BodySmall}" Text="Muito bom" />
+            </VerticalStackLayout>
+
+            <!-- Meia estrela: toque na metade esquerda para x,5. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Com meia estrela" />
+                <ratings:RatingView Value="3.5" AllowHalf="True" StarSize="28" />
+            </VerticalStackLayout>
+
+            <!-- Só leitura: média fracionada com contagem ao lado. -->
+            <HorizontalStackLayout Spacing="10">
+                <ratings:RatingView Value="4.3" IsReadOnly="True" StarSize="18" VerticalOptions="Center" />
+                <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="4,3" VerticalOptions="Center" />
+                <Label Style="{StaticResource Caption}" Text="128 avaliações" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:rating.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Estrelas desenhadas com PathF e recortadas pela fração do valor, então 4,3 aparece como 4,3 e não arredondado. No Windows, passar o mouse mostra a prévia antes de confirmar." />
+
+    </VerticalStackLayout>
+
+</ContentView>

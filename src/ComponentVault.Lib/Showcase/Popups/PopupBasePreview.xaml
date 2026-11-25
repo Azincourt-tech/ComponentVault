@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Popups.PopupBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Diálogos da plataforma" />
+            <!-- snippet:popup.base -->
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Start">
+                <Button Text="Alerta" Clicked="OnAlertClicked" />
+                <Button Text="Confirmação" Clicked="OnConfirmClicked" />
+                <Button Text="Lista de ações" Clicked="OnActionSheetClicked" />
+            </VerticalStackLayout>
+            <!-- /snippet:popup.base -->
+            <Label x:Name="ResultLabel" Text="Nenhum diálogo aberto ainda" />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="DisplayAlertAsync e DisplayActionSheetAsync usam o diálogo nativo: acessível e rápido, mas sem controle de visual, sem ícone e com botões genéricos." />
+
+    </VerticalStackLayout>
+
+</ContentView>

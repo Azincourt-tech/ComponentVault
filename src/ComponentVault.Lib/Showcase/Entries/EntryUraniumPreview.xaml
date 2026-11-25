@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.Entries.EntryUraniumPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="TextField Material" />
+            <!-- snippet:entry.uranium -->
+            <VerticalStackLayout Spacing="16" MaximumWidthRequest="440" HorizontalOptions="Start">
+                <material:TextField Title="Nome do componente" AllowClear="True" />
+                <material:TextField Title="E-mail" Keyboard="Email" AccentColor="{StaticResource Accent}" />
+                <material:TextField Title="Senha" IsPassword="True" />
+            </VerticalStackLayout>
+            <!-- /snippet:entry.uranium -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O rótulo flutua para a borda ao focar ou preencher, e o AllowClear adiciona o botão de limpar. Tudo pronto, sem estilo próprio." />
+
+    </VerticalStackLayout>
+
+</ContentView>

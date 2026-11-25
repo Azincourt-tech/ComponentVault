@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             xmlns:materialres="clr-namespace:UraniumUI.Material.Resources;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.RadioButtons.RadioUraniumPreview">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialres:StyleResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="RadioButtonGroupView" />
+            <!-- snippet:radio.uranium -->
+            <!-- O grupo controla a seleção e expõe SelectedItem/SelectedIndex para binding. -->
+            <material:RadioButtonGroupView x:Name="ShippingGroup" Spacing="10" SelectedIndex="0">
+                <material:RadioButton Text="Retirar na loja (grátis)" Value="pickup" />
+                <material:RadioButton Text="Entrega padrão: 5 dias úteis" Value="standard" />
+                <material:RadioButton Text="Entrega expressa: amanhã" Value="express" />
+            </material:RadioButtonGroupView>
+            <!-- /snippet:radio.uranium -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O grupo do UraniumUI substitui o GroupName por um contêiner com SelectedItem e validação, o que simplifica o binding no MVVM." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Popups.PopupToolkitPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12" MaximumWidthRequest="440" HorizontalOptions="Start">
+            <Label Style="{StaticResource FieldLabel}" Text="Diálogo de confirmação" />
+            <!-- snippet:popup.toolkit -->
+            <Border Style="{StaticResource Card}" Padding="16">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                        <Label Style="{StaticResource CardTitle}" Text="Projeto Atlas" />
+                        <Label Style="{StaticResource Caption}" Text="18 tarefas · 4 membros" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="Excluir" Style="{StaticResource SecondaryButtonSmall}"
+                            Clicked="OnDeleteClicked" />
+                </Grid>
+            </Border>
+            <!-- /snippet:popup.toolkit -->
+            <Label x:Name="ResultLabel" Style="{StaticResource BodySmall}" Text="O diálogo devolve true ou false para quem abriu." />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Popup do CommunityToolkit.Maui aceita qualquer View: o diálogo usa os tokens do design system, diz o que será perdido e nomeia a ação no botão destrutivo." />
+
+    </VerticalStackLayout>
+
+</ContentView>

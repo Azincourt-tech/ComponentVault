@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:segmented="clr-namespace:ComponentVault.Lib.Showcase.Segmented"
+             x:Class="ComponentVault.Lib.Showcase.Segmented.SegmentedCustomPreview">
+
+    <VerticalStackLayout Spacing="28">
+
+        <!-- snippet:segmented.custom -->
+        <VerticalStackLayout Spacing="12" MaximumWidthRequest="480" HorizontalOptions="Fill">
+            <Label Style="{StaticResource FieldLabel}" Text="Período" />
+            <segmented:SegmentedControl x:Name="PeriodControl" SelectedIndex="1" SelectionChanged="OnPeriodChanged">
+                <segmented:SegmentedControl.Items>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Dia</x:String>
+                        <x:String>Semana</x:String>
+                        <x:String>Mês</x:String>
+                        <x:String>Ano</x:String>
+                    </x:Array>
+                </segmented:SegmentedControl.Items>
+            </segmented:SegmentedControl>
+
+            <!-- O conteúdo abaixo responde à escolha: o controle troca a visão, não navega. -->
+            <Border Style="{StaticResource Card}" Padding="16,14">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Style="{StaticResource Caption}" Text="Cópias de código" />
+                        <Label x:Name="MetricLabel" Style="{StaticResource PageTitle}" Text="1.284" />
+                    </VerticalStackLayout>
+                    <Label x:Name="DeltaLabel" Grid.Column="1" Style="{StaticResource BodySmall}"
+                           VerticalOptions="End" Text="+12% vs. semana anterior" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+        <!-- /snippet:segmented.custom -->
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Duas opções, largura do conteúdo" />
+            <segmented:SegmentedControl WidthRequest="220" HorizontalOptions="Start">
+                <segmented:SegmentedControl.Items>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Lista</x:String>
+                        <x:String>Grade</x:String>
+                    </x:Array>
+                </segmented:SegmentedControl.Items>
+            </segmented:SegmentedControl>
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI não tem controle segmentado. Este usa só Border e Label: a trilha é neutra, o indicador desliza em 200ms e cada segmento anuncia posição e seleção para o leitor de tela." />
+
+    </VerticalStackLayout>
+
+</ContentView>

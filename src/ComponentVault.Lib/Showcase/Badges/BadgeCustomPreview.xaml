@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             xmlns:mi="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             x:Class="ComponentVault.Lib.Showcase.Badges.BadgeCustomPreview">
+
+    <ContentView.Resources>
+        <!-- Status: fundo suave + texto escuro da mesma família, nunca branco sobre cor forte. -->
+        <Style x:Key="StatusPill" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+            <Setter Property="Padding" Value="9,4" />
+        </Style>
+        <Style x:Key="StatusText" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontMedium}" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <!-- Contador: mínimo 20px de altura e de largura, cresce com o número. -->
+        <Style x:Key="Counter" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource Danger}" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stroke" Value="{DynamicResource Surface}" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 11" />
+            <Setter Property="MinimumWidthRequest" Value="22" />
+            <Setter Property="HeightRequest" Value="22" />
+            <Setter Property="Padding" Value="6,0" />
+            <Setter Property="HorizontalOptions" Value="End" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="Margin" Value="0,-6,-8,0" />
+        </Style>
+    </ContentView.Resources>
+
+    <!-- snippet:badge.custom -->
+    <VerticalStackLayout Spacing="28">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Origem" />
+            <FlexLayout Wrap="Wrap" AlignItems="Center">
+                <controls:OriginBadge Kind="Native" Margin="0,0,8,8" />
+                <controls:OriginBadge Kind="Custom" Margin="0,0,8,8" />
+                <controls:OriginBadge Kind="FreeLibrary" Margin="0,0,8,8" />
+                <controls:OriginBadge Kind="Syncfusion" Margin="0,0,8,8" />
+                <controls:OriginBadge Kind="New" Margin="0,0,8,8" />
+                <controls:OriginBadge Kind="New" IsCompact="True" Text="v2" Margin="0,0,8,8" />
+            </FlexLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Status" />
+            <HorizontalStackLayout Spacing="8">
+                <Border Style="{StaticResource StatusPill}" BackgroundColor="{DynamicResource SuccessTint}">
+                    <Label Style="{StaticResource StatusText}" TextColor="{DynamicResource SuccessText}" Text="Publicado" />
+                </Border>
+                <Border Style="{StaticResource StatusPill}" BackgroundColor="{DynamicResource WarningTint}">
+                    <Label Style="{StaticResource StatusText}" TextColor="{DynamicResource WarningText}" Text="Em revisão" />
+                </Border>
+                <Border Style="{StaticResource StatusPill}" BackgroundColor="{DynamicResource DangerTint}">
+                    <Label Style="{StaticResource StatusText}" TextColor="{DynamicResource DangerText}" Text="Falhou" />
+                </Border>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Contador sobre ícone" />
+            <HorizontalStackLayout Spacing="28">
+                <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Caixa de entrada, 3 não lidas">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Mail24}" IconSize="24"
+                                 IconColor="{DynamicResource Ink}" />
+                    <Border Style="{StaticResource Counter}">
+                        <Label Text="3" FontFamily="{StaticResource FontSemiBold}" FontSize="13" TextColor="White"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+                <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Conversas, mais de 99 não lidas">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Chat24}" IconSize="24"
+                                 IconColor="{DynamicResource Ink}" />
+                    <Border Style="{StaticResource Counter}" Margin="0,-6,-16,0">
+                        <Label Text="99+" FontFamily="{StaticResource FontSemiBold}" FontSize="13" TextColor="White"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+                <!-- Só um ponto: "tem novidade", sem número. -->
+                <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Alertas, há novidades">
+                    <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Alert24}" IconSize="24"
+                                 IconColor="{DynamicResource Ink}" />
+                    <Ellipse WidthRequest="10" HeightRequest="10" Fill="{StaticResource Accent}"
+                             Stroke="{DynamicResource Surface}" StrokeThickness="2"
+                             HorizontalOptions="End" VerticalOptions="Start" />
+                </Grid>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:badge.custom -->
+
+</ContentView>

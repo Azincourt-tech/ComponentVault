@@ -1,0 +1,25 @@
+# Build
+bin/
+obj/
+artifacts/
+TestResults/
+*.binlog
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.rsuser
+
+# Segredos (PRD 10.1): chave da Syncfusion nunca vai para o repositório
+secrets.json
+*.local.json
+.env
+
+# Pacotes gerados
+*.apk
+*.aab
+*.msix
+*.appx

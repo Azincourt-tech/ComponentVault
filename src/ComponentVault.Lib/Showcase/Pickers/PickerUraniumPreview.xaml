@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.Pickers.PickerUraniumPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="PickerField Material" />
+            <!-- snippet:picker.uranium -->
+            <VerticalStackLayout Spacing="16" MaximumWidthRequest="440" HorizontalOptions="Start">
+                <material:PickerField Title="Plataforma" AllowClear="True">
+                    <material:PickerField.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Android</x:String>
+                            <x:String>iOS</x:String>
+                            <x:String>Windows</x:String>
+                            <x:String>macOS</x:String>
+                        </x:Array>
+                    </material:PickerField.ItemsSource>
+                </material:PickerField>
+            </VerticalStackLayout>
+            <!-- /snippet:picker.uranium -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Mesmo comportamento do TextField: o título flutua para a borda depois da escolha, e o AllowClear devolve o campo ao estado vazio." />
+
+    </VerticalStackLayout>
+
+</ContentView>

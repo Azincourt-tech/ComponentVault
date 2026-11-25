@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.DatePickers.DatePickerStyledPreview">
+
+    <!-- snippet:datepicker.styled -->
+    <VerticalStackLayout Spacing="14" MaximumWidthRequest="480" HorizontalOptions="Start">
+
+        <Label Style="{StaticResource CardTitle}" Text="Agendar lembrete" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+            <!-- Data: ícone de calendário e formato por extenso, sem ambiguidade dia/mês. -->
+            <VerticalStackLayout Spacing="6">
+                <Label Style="{StaticResource FieldLabel}" Text="Data" />
+                <Border Style="{StaticResource FieldFrame}" Padding="12,0">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=CalendarLtr20}" IconSize="18"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                        <controls:BorderlessDatePicker x:Name="DateInput" Grid.Column="1"
+                                                       Format="dd MMM yyyy"
+                                                       FontFamily="{StaticResource FontRegular}" FontSize="{StaticResource TextBody}"
+                                                       TextColor="{DynamicResource Ink}"
+                                                       VerticalOptions="Center"
+                                                       DateSelected="OnDateChanged" />
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                <Label Style="{StaticResource FieldLabel}" Text="Horário" />
+                <Border Style="{StaticResource FieldFrame}" Padding="12,0">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=Clock20}" IconSize="18"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                        <controls:BorderlessTimePicker x:Name="TimeInput" Grid.Column="1"
+                                                       Format="HH:mm"
+                                                       FontFamily="{StaticResource FontRegular}" FontSize="{StaticResource TextBody}"
+                                                       TextColor="{DynamicResource Ink}"
+                                                       VerticalOptions="Center"
+                                                       PropertyChanged="OnTimeChanged" />
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Resumo em linguagem natural: confirma o que foi escolhido. -->
+        <Border Style="{StaticResource Tag}" Padding="12,8" BackgroundColor="{DynamicResource InfoTint}">
+            <Label x:Name="SummaryLabel" Style="{StaticResource BodySmall}" TextColor="{DynamicResource Ink}" />
+        </Border>
+
+    </VerticalStackLayout>
+    <!-- /snippet:datepicker.styled -->
+
+</ContentView>

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Testes (Core)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Testes xUnit
+        run: dotnet test --project tests/ComponentVault.Tests -c Release
+
+  build:
+    name: Build do app (Windows + Android)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Workload MAUI
+        run: dotnet workload install maui-windows maui-android
+      - name: Build Release
+        run: dotnet build src/ComponentVault.App -c Release

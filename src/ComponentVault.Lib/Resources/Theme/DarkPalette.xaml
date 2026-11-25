@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Tema Escuro: quase-preto quente, superfícies em degraus, linhas finas. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="ComponentVault.Lib.Resources.Theme.DarkPalette">
+
+    <Color x:Key="Ink">#EDECE8</Color>
+    <Color x:Key="InkHover">#D6D5D0</Color>
+    <Color x:Key="OnInk">#111110</Color>
+    <Color x:Key="InkSecondary">#A8A69F</Color>
+    <Color x:Key="InkTertiary">#8A8881</Color>
+
+    <Color x:Key="Ground">#111110</Color>
+    <Color x:Key="Surface">#191918</Color>
+    <Color x:Key="SurfaceRaised">#212120</Color>
+    <Color x:Key="SurfaceAlt">#212120</Color>
+    <Color x:Key="SurfaceHover">#292927</Color>
+    <Color x:Key="Hairline">#2A2A27</Color>
+    <Color x:Key="HairlineStrong">#3C3B38</Color>
+    <SolidColorBrush x:Key="CardStroke" Color="#2A2A27" />
+
+    <Color x:Key="AccentText">#7EA8F6</Color>
+    <Color x:Key="AccentTint">#2E5D8FF0</Color>
+    <Color x:Key="SuccessText">#4CC38A</Color>
+    <Color x:Key="WarningText">#E9A93A</Color>
+    <Color x:Key="DangerText">#F07A7A</Color>
+    <Color x:Key="SuccessTint">#14271D</Color>
+    <Color x:Key="WarningTint">#2B2111</Color>
+    <Color x:Key="DangerTint">#2D1616</Color>
+    <Color x:Key="InfoTint">#15213A</Color>
+
+    <Color x:Key="SyntaxPlain">#E4E3DE</Color>
+    <Color x:Key="SyntaxKeyword">#7EA8F6</Color>
+    <Color x:Key="SyntaxType">#55C7BF</Color>
+    <Color x:Key="SyntaxString">#6CCB97</Color>
+    <Color x:Key="SyntaxNumber">#EBA067</Color>
+    <Color x:Key="SyntaxComment">#75736C</Color>
+    <Color x:Key="SyntaxElement">#7EA8F6</Color>
+    <Color x:Key="SyntaxAttribute">#E58AA6</Color>
+    <Color x:Key="SyntaxPunctuation">#807E77</Color>
+
+    <SolidColorBrush x:Key="AmbientBlue" Color="Transparent" />
+    <SolidColorBrush x:Key="AmbientTeal" Color="Transparent" />
+    <SolidColorBrush x:Key="AmbientRose" Color="Transparent" />
+
+</ResourceDictionary>

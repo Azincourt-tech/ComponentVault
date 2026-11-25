@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.RadioButtons.RadioStyledPreview">
+
+    <!-- snippet:radio.styled -->
+    <ContentView.Resources>
+        <!--
+          O RadioButton continua sendo RadioButton (grupo, teclado, acessibilidade);
+          só o visual é trocado: o card inteiro é o alvo de toque.
+        -->
+        <ControlTemplate x:Key="OptionCardTemplate">
+            <Border Padding="16,14"
+                    BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Hairline}"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 14">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="Stroke" Value="{StaticResource Accent}" />
+                                    <Setter Property="StrokeThickness" Value="2" />
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+                                    <Setter TargetName="Ring" Property="Stroke" Value="{StaticResource Accent}" />
+                                    <Setter TargetName="Dot" Property="Opacity" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="Dot" Property="Opacity" Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <Grid WidthRequest="20" HeightRequest="20" VerticalOptions="Start" Margin="0,2,0,0">
+                        <Ellipse x:Name="Ring" Stroke="{DynamicResource HairlineStrong}" StrokeThickness="1.5" />
+                        <Ellipse x:Name="Dot" Fill="{StaticResource Accent}" WidthRequest="10" HeightRequest="10"
+                                 HorizontalOptions="Center" VerticalOptions="Center" Opacity="0" />
+                    </Grid>
+                    <ContentPresenter Grid.Column="1" />
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="12" MaximumWidthRequest="480" HorizontalOptions="Fill">
+        <Label Style="{StaticResource FieldLabel}" Text="Plano" />
+
+        <RadioButton GroupName="plan" Value="free" ControlTemplate="{StaticResource OptionCardTemplate}"
+                     CheckedChanged="OnPlanChanged" SemanticProperties.Description="Gratuito, zero reais">
+            <RadioButton.Content>
+                <VerticalStackLayout Spacing="2">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource CardTitle}" Text="Gratuito" />
+                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 0" />
+                    </Grid>
+                    <Label Style="{StaticResource BodySmall}" Text="Até 3 projetos, para testar sem compromisso." />
+                </VerticalStackLayout>
+            </RadioButton.Content>
+        </RadioButton>
+
+        <RadioButton GroupName="plan" Value="pro" IsChecked="True" ControlTemplate="{StaticResource OptionCardTemplate}"
+                     CheckedChanged="OnPlanChanged" SemanticProperties.Description="Pro, 29 reais por mês, recomendado">
+            <RadioButton.Content>
+                <VerticalStackLayout Spacing="2">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                        <Label Style="{StaticResource CardTitle}" Text="Pro" VerticalOptions="Center" />
+                        <Border Grid.Column="1" Style="{StaticResource Tag}" HorizontalOptions="Start" VerticalOptions="Center">
+                            <Label Style="{StaticResource TagText}" Text="Recomendado" />
+                        </Border>
+                        <Label Grid.Column="2" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 29/mês" />
+                    </Grid>
+                    <Label Style="{StaticResource BodySmall}" Text="Projetos ilimitados e exportação do código." />
+                </VerticalStackLayout>
+            </RadioButton.Content>
+        </RadioButton>
+
+        <RadioButton GroupName="plan" Value="team" ControlTemplate="{StaticResource OptionCardTemplate}"
+                     CheckedChanged="OnPlanChanged" SemanticProperties.Description="Equipe, 79 reais por mês">
+            <RadioButton.Content>
+                <VerticalStackLayout Spacing="2">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource CardTitle}" Text="Equipe" />
+                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 79/mês" />
+                    </Grid>
+                    <Label Style="{StaticResource BodySmall}" Text="Até 10 pessoas, com permissões por projeto." />
+                </VerticalStackLayout>
+            </RadioButton.Content>
+        </RadioButton>
+
+        <!-- Uma linha de status confirma a escolha em texto. -->
+        <Label x:Name="SelectionLabel" Style="{StaticResource Caption}" Text="Plano escolhido: Pro" />
+    </VerticalStackLayout>
+    <!-- /snippet:radio.styled -->
+
+</ContentView>

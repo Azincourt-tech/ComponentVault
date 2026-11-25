@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Entries.EntryStyledPreview">
+
+    <!-- snippet:entry.styled -->
+    <!--
+      Formulário com validação no envio: o erro aparece embaixo do próprio campo e some
+      assim que o valor fica válido. Uma linha de status anuncia o resultado.
+    -->
+    <VerticalStackLayout Spacing="20" MaximumWidthRequest="440" HorizontalOptions="Start">
+
+        <controls:VaultTextField x:Name="NameField"
+                                 Label="Nome"
+                                 Placeholder="Como devemos te chamar"
+                                 ReturnType="Next"
+                                 TextChanged="OnFieldChanged" />
+
+        <controls:VaultTextField x:Name="EmailField"
+                                 Label="E-mail"
+                                 Placeholder="voce@exemplo.com"
+                                 Keyboard="Email"
+                                 ReturnType="Next"
+                                 TextChanged="OnFieldChanged" />
+
+        <controls:VaultTextField x:Name="PasswordField"
+                                 Label="Senha"
+                                 Hint="Mínimo de 8 caracteres"
+                                 IsPassword="True"
+                                 ReturnType="Done"
+                                 TextChanged="OnFieldChanged" />
+
+        <Button Text="Criar conta" Style="{StaticResource PrimaryButton}" HorizontalOptions="Fill" Clicked="OnSubmit" />
+
+        <Label x:Name="StatusLabel" Style="{StaticResource BodySmall}" IsVisible="False" />
+
+        <BoxView Style="{StaticResource Divider}" />
+
+        <controls:VaultTextField Label="Busca"
+                                 Placeholder="Buscar por nome ou tag"
+                                 IconData="M7 1.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 1 0 0-11M11 11L14.5 14.5" />
+
+    </VerticalStackLayout>
+    <!-- /snippet:entry.styled -->
+
+</ContentView>

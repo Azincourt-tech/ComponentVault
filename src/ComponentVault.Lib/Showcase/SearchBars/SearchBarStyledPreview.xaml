@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.SearchBars"
+             x:Class="ComponentVault.Lib.Showcase.SearchBars.SearchBarStyledPreview"
+             x:DataType="local:SearchBarStyledPreview">
+
+    <!-- snippet:searchbar.styled -->
+    <VerticalStackLayout Spacing="10" MaximumWidthRequest="520" HorizontalOptions="Start">
+
+        <controls:VaultTextField Placeholder="Buscar componente"
+                                 IconData="M7 1.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 1 0 0-11M11 11L14.5 14.5"
+                                 Text="{Binding Query, Mode=TwoWay}" />
+
+        <!-- Sem texto: buscas recentes. Com texto: resultados com o trecho encontrado em destaque. -->
+        <Label Style="{StaticResource FieldLabel}" Text="{Binding ListTitle}" Margin="2,6,0,0" />
+
+        <Border Style="{StaticResource Card}" IsVisible="{Binding HasResults}">
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Results}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="local:SearchResult">
+                        <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto" MinimumHeightRequest="48">
+                            <mic:MauiIcon Icon="{Binding Icon}" IconSize="18"
+                                          IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" VerticalOptions="Center"
+                                   FontFamily="{StaticResource FontRegular}" FontSize="{StaticResource TextBody}"
+                                   TextColor="{DynamicResource InkSecondary}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Before}" />
+                                        <Span Text="{Binding Match}" FontFamily="{StaticResource FontSemiBold}"
+                                              TextColor="{DynamicResource Ink}" />
+                                        <Span Text="{Binding After}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                          IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Vazio: diz o que foi buscado e o que tentar. -->
+        <Label Style="{StaticResource BodySmall}" Text="{Binding EmptyText}" IsVisible="{Binding IsEmpty}" Margin="2,0" />
+
+    </VerticalStackLayout>
+    <!-- /snippet:searchbar.styled -->
+
+</ContentView>

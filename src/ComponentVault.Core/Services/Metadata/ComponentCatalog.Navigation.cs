@@ -1,0 +1,114 @@
+using ComponentVault.Core.Models;
+
+namespace ComponentVault.Core.Services.Metadata;
+
+internal static partial class ComponentCatalog
+{
+    private static IEnumerable<ComponentItem> Navigation() =>
+    [
+        new()
+        {
+            Id = "tabs",
+            Name = "Tabs",
+            Icon = "Tabs24",
+            Category = ComponentCategory.Navigation,
+            Summary = "Alterna entre visões irmãs do mesmo contexto.",
+            Tags = ["abas", "tabs", "segmentado", "sharpnado", "navegação"],
+            AddedOn = new DateOnly(2026, 11, 24),
+            Docs = new ComponentDocs
+            {
+                Overview = "O MAUI só oferece abas no nível do Shell (TabBar). Abas dentro da página são montadas à mão ou com bibliotecas como Sharpnado.Tabs.",
+                Properties =
+                [
+                    new("SelectedIndex", "Aba ativa; ligue ao conteúdo (ViewSwitcher) nos dois sentidos."),
+                    new("TabType", "Fixed (largura igual) ou Scrollable (muitas abas)."),
+                    new("IsSegmented", "Vira um controle segmentado com contorno."),
+                ],
+                UseCases = ["Visões de um mesmo objeto (visão geral, atividade, membros).", "Filtros de período (dia, semana, mês)."],
+                Limitations = ["Mais de 4 abas fixas quebram no telefone: use rolagem ou outra navegação."],
+            },
+            Variants =
+            [
+                new()
+                {
+                    Id = "tabs.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Abas de largura igual com sublinhado que desliza entre elas.",
+                    Highlights =
+                    [
+                        "Um único sublinhado que desliza em 200ms: o olho acompanha a troca.",
+                        "Aba ativa em tinta e as demais em cinza legível, não só pela cor do sublinhado.",
+                        "O leitor de tela anuncia qual aba está selecionada.",
+                    ],
+                    Snippets = [Xaml("Uso", "tabs.custom"), CSharp("Seleção e animação", "tabs.custom.code")],
+                },
+                new()
+                {
+                    Id = "tabs.sharpnado",
+                    Title = "Sharpnado.Tabs",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "Sharpnado.Tabs.Maui",
+                    Summary = "TabHostView com abas sublinhadas, ViewSwitcher e controle segmentado.",
+                    Highlights =
+                    [
+                        "TabHostView e ViewSwitcher compartilham o SelectedIndex: zero código de ligação.",
+                        "O mesmo componente vira controle segmentado com IsSegmented.",
+                        "Cores do design system aplicadas por propriedade, inclusive no tema escuro.",
+                    ],
+                    Snippets = [Xaml("Uso", "tabs.sharpnado")],
+                },
+            ],
+        },
+        new()
+        {
+            Id = "popup",
+            Name = "Popup",
+            Icon = "Window24",
+            Category = ComponentCategory.Navigation,
+            Summary = "Diálogo modal para confirmar ou escolher.",
+            Tags = ["dialog", "modal", "alerta", "confirmação", "toolkit", "action sheet"],
+            AddedOn = new DateOnly(2026, 11, 25),
+            Docs = new ComponentDocs
+            {
+                Overview = "Para avisos simples, o diálogo nativo da página basta. Quando o diálogo precisa de identidade visual ou de conteúdo próprio, o Popup do CommunityToolkit.Maui aceita qualquer View e devolve um resultado.",
+                Properties =
+                [
+                    new("DisplayAlertAsync", "Alerta ou confirmação nativa; devolve bool."),
+                    new("DisplayActionSheetAsync", "Lista de ações nativa; devolve o texto escolhido."),
+                    new("Popup<T>.CloseAsync(resultado)", "Fecha o popup do Toolkit devolvendo um valor."),
+                    new("PopupOptions", "Forma, sombra, cor do fundo e se fecha ao tocar fora."),
+                ],
+                UseCases = ["Confirmar ações destrutivas.", "Escolher uma ação entre poucas."],
+                Limitations = ["Diálogo interrompe o fluxo: para ações reversíveis prefira \"Desfazer\"."],
+            },
+            Variants =
+            [
+                Base("popup.base", "Alerta, confirmação e lista de ações nativas da página."),
+                new()
+                {
+                    Id = "popup.toolkit",
+                    Title = "Toolkit Popup",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "CommunityToolkit.Maui",
+                    Summary = "Diálogo de confirmação próprio sobre o Popup<bool> do CommunityToolkit.",
+                    Highlights =
+                    [
+                        "O título diz a ação e o texto diz o que se perde (18 tarefas, 4 membros).",
+                        "O botão destrutivo repete o verbo (\"Excluir projeto\"), nunca \"OK\".",
+                        "Botões de mesma largura, cancelar à esquerda; tocar fora cancela.",
+                    ],
+                    Snippets =
+                    [
+                        Xaml("Uso", "popup.toolkit"),
+                        CSharp("Abrir e ler o resultado", "popup.toolkit.code"),
+                        CSharp("Diálogo (ConfirmDialog.cs)", "control.confirmdialog"),
+                    ],
+                },
+            ],
+        },
+    ];
+}

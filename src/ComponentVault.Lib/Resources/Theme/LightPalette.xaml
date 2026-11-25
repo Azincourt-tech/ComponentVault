@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Tema Claro: neutro, tinta quente, linhas finas, sem sombra. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="ComponentVault.Lib.Resources.Theme.LightPalette">
+
+    <Color x:Key="Ink">#1A1917</Color>
+    <Color x:Key="InkHover">#363430</Color>
+    <Color x:Key="OnInk">#FFFFFF</Color>
+    <Color x:Key="InkSecondary">#5C5A55</Color>
+    <Color x:Key="InkTertiary">#75736C</Color>
+
+    <Color x:Key="Ground">#F7F7F5</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="SurfaceRaised">#FFFFFF</Color>
+    <Color x:Key="SurfaceAlt">#F0EFEC</Color>
+    <Color x:Key="SurfaceHover">#E9E8E4</Color>
+    <Color x:Key="Hairline">#E4E3DF</Color>
+    <Color x:Key="HairlineStrong">#CFCEC8</Color>
+    <SolidColorBrush x:Key="CardStroke" Color="#E4E3DF" />
+
+    <Color x:Key="AccentText">#2560CC</Color>
+    <Color x:Key="AccentTint">#142F6FE4</Color>
+    <Color x:Key="SuccessText">#18704A</Color>
+    <Color x:Key="WarningText">#8F5806</Color>
+    <Color x:Key="DangerText">#B53131</Color>
+    <Color x:Key="SuccessTint">#EAF5EF</Color>
+    <Color x:Key="WarningTint">#FBF2E3</Color>
+    <Color x:Key="DangerTint">#FBEDEC</Color>
+    <Color x:Key="InfoTint">#EDF3FD</Color>
+
+    <Color x:Key="SyntaxPlain">#1A1917</Color>
+    <Color x:Key="SyntaxKeyword">#2560CC</Color>
+    <Color x:Key="SyntaxType">#0F7A75</Color>
+    <Color x:Key="SyntaxString">#1B7A50</Color>
+    <Color x:Key="SyntaxNumber">#A85A14</Color>
+    <Color x:Key="SyntaxComment">#8A8881</Color>
+    <Color x:Key="SyntaxElement">#2560CC</Color>
+    <Color x:Key="SyntaxAttribute">#A33A5C</Color>
+    <Color x:Key="SyntaxPunctuation">#8A8881</Color>
+
+    <!-- Sem manchas no tema claro -->
+    <SolidColorBrush x:Key="AmbientBlue" Color="Transparent" />
+    <SolidColorBrush x:Key="AmbientTeal" Color="Transparent" />
+    <SolidColorBrush x:Key="AmbientRose" Color="Transparent" />
+
+</ResourceDictionary>

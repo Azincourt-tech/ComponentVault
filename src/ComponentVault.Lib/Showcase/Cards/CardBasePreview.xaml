@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Border com valores padrão" />
+            <!-- snippet:card.base -->
+            <VerticalStackLayout Spacing="12">
+                <!-- Sem Stroke, o Border não desenha contorno nenhum. -->
+                <Border>
+                    <Label Text="Border sem propriedades" />
+                </Border>
+
+                <Border Stroke="Gray" StrokeThickness="1" Padding="16">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Título do card" FontAttributes="Bold" />
+                        <Label Text="Contorno e padding definidos à mão, cantos retos." />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+            <!-- /snippet:card.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Frame está obsoleto desde o .NET 9. O Border substitui com StrokeShape, Stroke e Shadow, mas não vem com nenhum visual pronto." />
+
+    </VerticalStackLayout>
+
+</ContentView>

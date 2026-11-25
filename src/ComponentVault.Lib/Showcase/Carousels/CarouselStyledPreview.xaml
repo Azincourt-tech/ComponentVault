@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Carousels"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Carousels.CarouselStyledPreview">
+
+    <!-- snippet:carousel.styled -->
+    <VerticalStackLayout Spacing="14">
+
+        <!-- Cabeçalho com posição em texto e setas: funciona com mouse, teclado e toque. -->
+        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                <Label Style="{StaticResource CardTitle}" Text="Primeiros passos" />
+                <Label x:Name="PositionLabel" Style="{StaticResource Caption}" Text="1 de 4" />
+            </VerticalStackLayout>
+            <Button x:Name="PreviousButton" Grid.Column="1" Style="{StaticResource SecondaryButtonSmall}"
+                    Text="‹" FontSize="18" WidthRequest="40" Padding="0" Clicked="OnPreviousClicked"
+                    SemanticProperties.Description="Slide anterior" />
+            <Button x:Name="NextButton" Grid.Column="2" Style="{StaticResource SecondaryButtonSmall}"
+                    Text="›" FontSize="18" WidthRequest="40" Padding="0" Clicked="OnNextClicked"
+                    SemanticProperties.Description="Próximo slide" />
+        </Grid>
+
+        <!-- O próximo card aparece pela borda (PeekAreaInsets): fica claro que há mais conteúdo. Nunca avança sozinho. -->
+        <CarouselView x:Name="Carousel"
+                      HeightRequest="196"
+                      Loop="False"
+                      PeekAreaInsets="0,0,56,0"
+                      PositionChanged="OnPositionChanged">
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12"
+                                   SnapPointsType="MandatorySingle" SnapPointsAlignment="Start" />
+            </CarouselView.ItemsLayout>
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="local:OnboardingSlide">
+                    <Border Style="{StaticResource Card}" Padding="20">
+                        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+                            <Border WidthRequest="40" HeightRequest="40" StrokeThickness="0" StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="{DynamicResource SurfaceAlt}" HorizontalOptions="Start">
+                                <mic:MauiIcon Icon="{Binding Icon}" IconSize="20" IconColor="{DynamicResource Ink}"
+                                              HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Row="1" Spacing="4" VerticalOptions="End">
+                                <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" />
+                                <Label Style="{StaticResource BodySmall}" Text="{Binding Description}" MaxLines="2" LineBreakMode="TailTruncation" />
+                            </VerticalStackLayout>
+                            <Label Grid.Row="2" Style="{StaticResource Caption}" Text="{Binding Duration}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- Indicador: o ponto atual vira uma barra; os outros são tocáveis. -->
+        <HorizontalStackLayout x:Name="Dots" Spacing="6" HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+    <!-- /snippet:carousel.styled -->
+
+</ContentView>

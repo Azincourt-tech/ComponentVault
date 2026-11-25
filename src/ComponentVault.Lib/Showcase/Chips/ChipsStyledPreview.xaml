@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Chips"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Chips.ChipsStyledPreview"
+             x:DataType="local:ChipsStyledPreview">
+
+    <!-- snippet:chips.styled -->
+    <ContentView.Resources>
+        <!-- Chip: 36px de altura, raio de controle, linha fina. Selecionado = destaque suave. -->
+        <Style x:Key="Chip" TargetType="Border">
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="HeightRequest" Value="36" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="{DynamicResource HairlineStrong}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+        </Style>
+        <Style x:Key="ChipText" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontMedium}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="28">
+
+        <!-- Escolha: exatamente um selecionado (como abas compactas). -->
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Escolha (um por vez)" />
+            <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding ChoiceChips}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="local:ChipItem">
+                        <Border Style="{StaticResource Chip}" SemanticProperties.Description="{Binding Text}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnChoiceTapped" />
+                            </Border.GestureRecognizers>
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+                                    <Setter Property="Stroke" Value="{StaticResource Accent}" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Label Style="{StaticResource ChipText}" Text="{Binding Text}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </VerticalStackLayout>
+
+        <!-- Filtro: vários ao mesmo tempo; o check deixa o estado claro sem depender da cor. -->
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Filtro (vários)" />
+            <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding FilterChips}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="local:ChipItem">
+                        <Border Style="{StaticResource Chip}" SemanticProperties.Description="{Binding Text}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFilterTapped" />
+                            </Border.GestureRecognizers>
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+                                    <Setter Property="Stroke" Value="{StaticResource Accent}" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <HorizontalStackLayout Spacing="6">
+                                <mic:MauiIcon Icon="{mi:Fluent Icon=Checkmark16}" IconSize="16"
+                                              IconColor="{DynamicResource AccentText}"
+                                              IsVisible="{Binding IsSelected}" VerticalOptions="Center" />
+                                <Label Style="{StaticResource ChipText}" Text="{Binding Text}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+            <Label Style="{StaticResource Caption}" Text="{Binding FilterSummary}" />
+        </VerticalStackLayout>
+
+        <!-- Entrada: tags digitadas, cada uma removível com alvo próprio. -->
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Tags (digite e tecle Enter)" />
+            <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding InputChips}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="local:ChipItem">
+                        <Border Style="{StaticResource Chip}" Padding="12,0,4,0"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0">
+                            <HorizontalStackLayout Spacing="2">
+                                <Label Style="{StaticResource ChipText}" Text="{Binding Text}" />
+                                <Grid WidthRequest="28" HeightRequest="28" VerticalOptions="Center"
+                                      SemanticProperties.Description="{Binding Text, StringFormat='Remover {0}'}">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnRemoveTapped" />
+                                    </Grid.GestureRecognizers>
+                                    <mic:MauiIcon Icon="{mi:Fluent Icon=Dismiss16}" IconSize="14"
+                                                  IconColor="{DynamicResource InkSecondary}"
+                                                  HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Grid>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+            <Border Style="{StaticResource FieldFrame}" MaximumWidthRequest="360" HorizontalOptions="Fill">
+                <controls:BorderlessEntry x:Name="TagEntry"
+                                          Style="{StaticResource BareEntry}"
+                                          Placeholder="Nova tag, ex.: xaml"
+                                          ReturnType="Done"
+                                          VerticalOptions="Center"
+                                          Completed="OnTagCompleted" />
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:chips.styled -->
+
+</ContentView>

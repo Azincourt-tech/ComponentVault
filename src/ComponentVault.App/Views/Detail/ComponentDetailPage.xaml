@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
+             xmlns:models="clr-namespace:ComponentVault.Core.Models;assembly=ComponentVault.Core"
+             xmlns:controls="clr-namespace:ComponentVault.App.Controls"
+             xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
+             x:Class="ComponentVault.App.Views.Detail.ComponentDetailPage"
+             x:DataType="vm:ComponentDetailViewModel"
+             Style="{StaticResource VaultPage}"
+             Title=""
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
+
+    <ContentPage.Resources>
+        <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
+        <controls:OriginToBrushConverter x:Key="OriginBrush" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <!-- Luz ambiente (tema Vidro) atrás de tudo -->
+        <lib:AmbientBackground />
+
+        <Grid RowDefinitions="Auto,*">
+
+        <!-- ===== Cabeçalho, níveis e abas (somem no modo apresentação) ===== -->
+        <VerticalStackLayout Padding="{OnIdiom Phone='20,12,20,0', Default='40,24,40,0'}" Spacing="18"
+                             MaximumWidthRequest="{StaticResource ContentMaxWidth}"
+                             IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Style="{StaticResource PageTitle}" Text="{Binding Component.Name}" />
+                    <Label Style="{StaticResource BodySmall}" Text="{Binding Component.Summary}" />
+                    <Label Style="{StaticResource Caption}" Text="{Binding Subtitle}" />
+                    <Label Style="{StaticResource Body}" TextColor="{DynamicResource DangerText}"
+                           Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" />
+                </VerticalStackLayout>
+                <Button Grid.Column="1" Text="Apresentar" Style="{StaticResource SecondaryButtonSmall}"
+                        VerticalOptions="Start" Command="{Binding TogglePresentationCommand}"
+                        SemanticProperties.Hint="Mostra só o componente, sem a interface ao redor" />
+            </Grid>
+
+            <!-- Seletor de nível: trilho segmentado, o selecionado vira superfície com linha fina -->
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12" Padding="4" HorizontalOptions="Start">
+                    <HorizontalStackLayout Spacing="4" BindableLayout.ItemsSource="{Binding Variants}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:VariantOption">
+                                <Border Padding="14,0" HeightRequest="40" StrokeShape="RoundRectangle 9"
+                                        StrokeThickness="1" Stroke="Transparent" BackgroundColor="Transparent"
+                                        SemanticProperties.Description="{Binding Title, StringFormat='Nível {0}'}">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectVariantCommand, Source={RelativeSource AncestorType={x:Type vm:ComponentDetailViewModel}}, x:DataType=vm:ComponentDetailViewModel}"
+                                                              CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+                                            <Setter Property="Stroke" Value="{DynamicResource Hairline}" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Ellipse WidthRequest="7" HeightRequest="7" VerticalOptions="Center"
+                                                 Fill="{Binding Origin, Converter={StaticResource OriginBrush}}" />
+                                        <Label Text="{Binding Title}" FontFamily="{StaticResource FontMedium}" FontSize="14"
+                                               VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </Border>
+            </ScrollView>
+
+            <!-- Abas Preview · Docs · Código -->
+            <VerticalStackLayout Spacing="0">
+                <HorizontalStackLayout Spacing="8">
+                    <VerticalStackLayout>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Preview}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Preview" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                               TextColor="{DynamicResource InkSecondary}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsPreviewTab}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsPreviewTab}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Margin="16,0,0,0" IsVisible="{Binding CanCompare}">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Compare}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Lado a lado" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                               TextColor="{DynamicResource InkSecondary}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsCompareTab}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsCompareTab}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Margin="16,0,0,0">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Docs}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Docs" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                               TextColor="{DynamicResource InkSecondary}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsDocsTab}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsDocsTab}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Margin="16,0,0,0">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Code}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Código" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                               TextColor="{DynamicResource InkSecondary}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsCodeTab}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsCodeTab}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <BoxView Style="{StaticResource Divider}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <!-- ===== Preview (RF02) + decisões do nível ===== -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsPreviewTab}">
+            <VerticalStackLayout Padding="{OnIdiom Phone='20,20,20,40', Default='40,28,40,48'}" Spacing="28"
+                                 MaximumWidthRequest="{StaticResource ContentMaxWidth}">
+                <Border Style="{StaticResource PreviewCanvas}" Padding="{OnIdiom Phone=20, Default=36}">
+                    <controls:PreviewHost VariantId="{Binding SelectedVariant.Id}" />
+                </Border>
+
+                <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*'}" ColumnSpacing="40" RowSpacing="24"
+                      RowDefinitions="{OnIdiom Phone='Auto,Auto', Default='Auto'}"
+                      IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Style="{StaticResource FieldLabel}" Text="Sobre este nível" />
+                        <Label Style="{StaticResource Body}" Text="{Binding SelectedVariant.Summary}" />
+                        <Border Style="{StaticResource Tag}" HorizontalOptions="Start" Margin="0,4,0,0"
+                                IsVisible="{Binding SelectedVariant.PackageId, Converter={toolkit:IsStringNotNullOrEmptyConverter}}">
+                            <Label Style="{StaticResource TagText}" FontFamily="{StaticResource FontMono}"
+                                   Text="{Binding SelectedVariant.PackageId}" />
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+                                         Spacing="10" IsVisible="{Binding SelectedVariant.HasHighlights}">
+                        <Label Style="{StaticResource FieldLabel}" Text="Decisões de design e usabilidade" />
+                        <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding SelectedVariant.Highlights}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Path Data="M1 5L4.5 8.5L11 1.5" Stroke="{StaticResource Accent}" StrokeThickness="1.8"
+                                              StrokeLineCap="Round" StrokeLineJoin="Round"
+                                              WidthRequest="12" HeightRequest="10" Aspect="Uniform" Margin="0,6,0,0" VerticalOptions="Start" />
+                                        <Label Grid.Column="1" Style="{StaticResource BodySmall}" Text="{Binding .}"
+                                               TextColor="{DynamicResource Ink}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ===== Lado a lado: todos os níveis ao vivo, para comparar o cru com o acabado ===== -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsCompareTab}">
+            <FlexLayout Padding="{OnIdiom Phone='20,20,20,40', Default='40,28,40,48'}"
+                        Direction="{OnIdiom Phone=Column, Default=Row}"
+                        Wrap="Wrap" AlignItems="Start" JustifyContent="Start"
+                        BindableLayout.ItemsSource="{Binding CompareVariants}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:VariantOption">
+                        <Border Style="{StaticResource PreviewCanvas}"
+                                WidthRequest="{OnIdiom Phone=-1, Default=440}"
+                                Margin="0,0,20,20" Padding="0">
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*,Auto" Padding="22,16">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" />
+                                        <Label Style="{StaticResource Caption}" Text="{Binding TierText}" />
+                                    </VerticalStackLayout>
+                                    <lib:OriginBadge Grid.Column="1" IsCompact="True" VerticalOptions="Center"
+                                                     Kind="{Binding Origin, Converter={StaticResource BadgeKind}}" />
+                                </Grid>
+                                <BoxView Style="{StaticResource Divider}" />
+                                <controls:PreviewHost VariantId="{Binding Id}" Margin="22,20,22,24" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </ScrollView>
+
+        <!-- ===== Docs (RF08) ===== -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsDocsTab}">
+            <VerticalStackLayout Padding="{OnIdiom Phone='20,24,20,40', Default='40,32,40,48'}" Spacing="32"
+                                 MaximumWidthRequest="760" HorizontalOptions="Start">
+                <Label Style="{StaticResource Body}" FontSize="17" Text="{Binding Docs.Overview}" />
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionHeader}" Text="Propriedades principais" />
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Docs.Properties}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="models:DocProperty">
+                                    <VerticalStackLayout>
+                                        <VerticalStackLayout Padding="18,14" Spacing="4">
+                                            <Label Style="{StaticResource CodeText}" Text="{Binding Name}"
+                                                   TextColor="{DynamicResource SyntaxElement}" />
+                                            <Label Style="{StaticResource BodySmall}" Text="{Binding Description}" />
+                                        </VerticalStackLayout>
+                                        <BoxView Style="{StaticResource Divider}" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionHeader}" Text="Quando usar" />
+                    <VerticalStackLayout Spacing="8" BindableLayout.ItemsSource="{Binding Docs.UseCases}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Label Style="{StaticResource Body}" Text="{Binding ., StringFormat='—  {0}'}" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionHeader}" Text="Limitações conhecidas" />
+                    <VerticalStackLayout Spacing="8" BindableLayout.ItemsSource="{Binding Docs.Limitations}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Label Style="{StaticResource BodyMuted}" Text="{Binding ., StringFormat='—  {0}'}" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ===== Código (RF03) ===== -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsCodeTab}">
+            <VerticalStackLayout Padding="{OnIdiom Phone='20,24,20,40', Default='40,32,40,48'}" Spacing="20"
+                                 MaximumWidthRequest="{StaticResource ContentMaxWidth}"
+                                 BindableLayout.ItemsSource="{Binding SnippetModels}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:CodeSnippetModel">
+                        <Border Style="{StaticResource Card}">
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" Padding="18,10,10,10">
+                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" VerticalOptions="Center" />
+                                    <Border Grid.Column="1" Style="{StaticResource Tag}" VerticalOptions="Center">
+                                        <Label Style="{StaticResource TagText}" Text="{Binding LanguageText}" />
+                                    </Border>
+                                    <Button Grid.Column="2" Text="Copiar" Style="{StaticResource SecondaryButtonSmall}"
+                                            IsEnabled="{Binding IsMissing, Converter={toolkit:InvertedBoolConverter}}"
+                                            Command="{Binding CopySnippetCommand, Source={RelativeSource AncestorType={x:Type vm:ComponentDetailViewModel}}, x:DataType=vm:ComponentDetailViewModel}"
+                                            CommandParameter="{Binding .}"
+                                            SemanticProperties.Description="{Binding Title, StringFormat='Copiar {0}'}" />
+                                </Grid>
+                                <BoxView Style="{StaticResource Divider}" />
+                                <ScrollView Orientation="Horizontal" BackgroundColor="{DynamicResource SurfaceAlt}">
+                                    <controls:CodeView Style="{StaticResource CodeText}" Padding="18,16"
+                                                       Tokens="{Binding Tokens}" FallbackText="{Binding Code}" />
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Saída do modo apresentação -->
+        <Button Grid.RowSpan="2" Text="Sair da apresentação" Style="{StaticResource SecondaryButtonSmall}"
+                HorizontalOptions="End" VerticalOptions="Start" Margin="16"
+                IsVisible="{Binding IsPresentationMode}"
+                Command="{Binding TogglePresentationCommand}" />
+
+        <!-- Aviso de cópia: pílula em tinta, some sozinho em 2s (ADR-007) -->
+        <Border Grid.Row="1" Margin="16,0,16,28" Padding="18,12"
+                HorizontalOptions="Center" VerticalOptions="End"
+                StrokeThickness="0" StrokeShape="RoundRectangle 12"
+                BackgroundColor="{DynamicResource Ink}"
+                IsVisible="{Binding HasCopyFeedback}">
+            <Label Text="{Binding CopyFeedback}" FontFamily="{StaticResource FontMedium}" FontSize="14"
+                   TextColor="{DynamicResource OnInk}" />
+        </Border>
+
+    </Grid>
+    </Grid>
+
+</ContentPage>

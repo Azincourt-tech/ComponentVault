@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ComponentVault.App/ComponentVault.App.csproj" />
+    <Project Path="src/ComponentVault.Core/ComponentVault.Core.csproj" />
+    <Project Path="src/ComponentVault.Lib/ComponentVault.Lib.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ComponentVault.Tests/ComponentVault.Tests.csproj" />
+  </Folder>
+</Solution>

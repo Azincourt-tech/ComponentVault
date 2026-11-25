@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
+             xmlns:controls="clr-namespace:ComponentVault.App.Controls"
+             xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
+             xmlns:motion="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.App.Views.Home.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Style="{StaticResource VaultPage}"
+             Title="">
+
+    <ContentPage.Resources>
+        <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
+        <controls:FluentIconConverter x:Key="FluentIcon" />
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tema" IconImageSource="theme.png" Command="{Binding Appearance.CycleCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <!-- Luz ambiente: só acende no tema Vidro, e deriva devagar. -->
+        <lib:AmbientBackground />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="52"
+                                 MaximumWidthRequest="{StaticResource ContentMaxWidth}">
+
+                <!-- Abertura -->
+                <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,Auto'}"
+                      RowDefinitions="{OnIdiom Phone='Auto,Auto', Default='Auto'}"
+                      ColumnSpacing="32" RowSpacing="24" Margin="0,12,0,0">
+
+                    <VerticalStackLayout Spacing="16">
+                        <Label Style="{StaticResource Display}" FontSize="{OnIdiom Phone=34, Default=48}"
+                               CharacterSpacing="-0.4" LineHeight="1.08"
+                               MaximumWidthRequest="640" HorizontalOptions="Start"
+                               Text="Do controle cru ao acabado."
+                               motion:Motion.Entrance="True" />
+                        <Label Style="{StaticResource BodyMuted}" FontSize="17" MaximumWidthRequest="540" HorizontalOptions="Start"
+                               Text="Componentes .NET MAUI em até quatro níveis, lado a lado, com as decisões de design e o código para copiar."
+                               motion:Motion.Entrance="True" motion:Motion.Delay="90" />
+                        <HorizontalStackLayout Spacing="12" Margin="0,8,0,0"
+                                               motion:Motion.Entrance="True" motion:Motion.Delay="160">
+                            <Button Text="Explorar o catálogo" Style="{StaticResource PrimaryButtonLarge}"
+                                    Command="{Binding OpenCatalogCommand}" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <!-- Aparência: três temas, troca ao vivo -->
+                    <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+                                         Spacing="10" VerticalOptions="End"
+                                         motion:Motion.Entrance="True" motion:Motion.Delay="220">
+                        <Label Style="{StaticResource FieldLabel}" Text="Aparência" />
+                        <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="1"
+                                Stroke="{DynamicResource CardStroke}" StrokeShape="RoundRectangle 22" Padding="4"
+                                HorizontalOptions="Start">
+                            <HorizontalStackLayout Spacing="4" BindableLayout.ItemsSource="{Binding Appearance.Options}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ThemeOption">
+                                        <Border HeightRequest="38" Padding="14,0" StrokeShape="RoundRectangle 19"
+                                                StrokeThickness="0" BackgroundColor="Transparent"
+                                                SemanticProperties.Description="{Binding Label, StringFormat='Tema {0}'}">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Appearance.SelectCommand, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, x:DataType=vm:HomeViewModel}"
+                                                                      CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Border.Triggers>
+                                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
+                                            <HorizontalStackLayout Spacing="8">
+                                                <mic:MauiIcon Icon="{Binding Icon, Converter={StaticResource FluentIcon}}" IconSize="16"
+                                                              IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center">
+                                                    <mic:MauiIcon.Triggers>
+                                                        <DataTrigger TargetType="mic:MauiIcon" Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="IconColor" Value="{DynamicResource OnInk}" />
+                                                        </DataTrigger>
+                                                    </mic:MauiIcon.Triggers>
+                                                </mic:MauiIcon>
+                                                <Label Text="{Binding Label}" FontFamily="{StaticResource FontMedium}" FontSize="14"
+                                                       VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="TextColor" Value="{DynamicResource OnInk}" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                            </HorizontalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Produto real em vez de ilustração: o mesmo Switch nos três níveis, ao vivo -->
+                <VerticalStackLayout Spacing="16" motion:Motion.Entrance="True" motion:Motion.Delay="300">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Style="{StaticResource SectionHeader}" Text="O mesmo controle, três níveis" />
+                        <Label Style="{StaticResource BodySmall}" Text="Toque nos alternadores: todos funcionam." />
+                    </VerticalStackLayout>
+                    <Border Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*,*'}"
+                              RowDefinitions="{OnIdiom Phone='Auto,Auto,Auto', Default='Auto'}">
+
+                            <VerticalStackLayout Padding="28,24" Spacing="16">
+                                <lib:OriginBadge Kind="Native" Text="Base MAUI" />
+                                <Switch HorizontalOptions="Start" IsToggled="True" />
+                                <Label Style="{StaticResource Caption}" Text="Visual da plataforma, sem tokens." />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+                                                 Padding="28,24" Spacing="16">
+                                <lib:OriginBadge Kind="Native" Text="Estilizado" />
+                                <Switch Style="{StaticResource VaultSwitch}" HorizontalOptions="Start" IsToggled="True" />
+                                <Label Style="{StaticResource Caption}" Text="Cor de destaque do design system." />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=2}" Grid.Row="{OnIdiom Phone=2, Default=0}"
+                                                 Padding="28,24" Spacing="16">
+                                <lib:OriginBadge Kind="Custom" Text="Custom" />
+                                <lib:VaultToggle IsToggled="True" />
+                                <Label Style="{StaticResource Caption}" Text="Desenhado com Microsoft.Maui.Graphics." />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Recentes (RF09) -->
+                <VerticalStackLayout Spacing="16" motion:Motion.Entrance="True" motion:Motion.Delay="380">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource SectionHeader}" Text="Adicionados recentemente" VerticalOptions="Center" />
+                        <Button Grid.Column="1" Text="Ver todos" Style="{StaticResource TertiaryButton}"
+                                Command="{Binding OpenCatalogCommand}" />
+                    </Grid>
+                    <Border Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Recent}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ComponentCardModel">
+                                    <VerticalStackLayout>
+                                        <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto"
+                                              motion:Motion.Press="True"
+                                              SemanticProperties.Description="{Binding Name}">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenComponentCommand, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, x:DataType=vm:HomeViewModel}"
+                                                                      CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                            <controls:ComponentThumb WidthRequest="40" HeightRequest="40" IconName="{Binding Icon}" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" />
+                                                    <Label Text="Novo" FontFamily="{StaticResource FontMedium}" FontSize="13"
+                                                           TextColor="{DynamicResource AccentText}"
+                                                           IsVisible="{Binding IsNew}" VerticalOptions="Center" />
+                                                </HorizontalStackLayout>
+                                                <Label Style="{StaticResource BodySmall}" Text="{Binding Summary}"
+                                                       MaxLines="1" LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                            <HorizontalStackLayout Grid.Column="2" Spacing="10" VerticalOptions="Center">
+                                                <Label Style="{StaticResource Caption}" Text="{Binding VariantCountText}" VerticalOptions="Center" />
+                                                <Label Style="{StaticResource Caption}" Text="›" FontSize="20" VerticalOptions="Center" />
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                        <BoxView Style="{StaticResource Divider}" Margin="70,0,0,0" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Legenda dos níveis -->
+                <VerticalStackLayout Spacing="16" Margin="0,0,0,32" motion:Motion.Entrance="True" motion:Motion.Delay="440">
+                    <Label Style="{StaticResource SectionHeader}" Text="Como ler os níveis" />
+                    <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*'}" ColumnSpacing="32" RowSpacing="18"
+                          RowDefinitions="{OnIdiom Phone='Auto,Auto,Auto,Auto', Default='Auto,Auto'}">
+                        <VerticalStackLayout Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[0].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[0].Title}" />
+                            <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[0].Description}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[1].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[1].Title}" />
+                            <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[1].Description}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="{OnIdiom Phone=2, Default=1}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[2].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[2].Title}" />
+                            <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[2].Description}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=3, Default=1}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[3].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[3].Title}" />
+                            <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[3].Description}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,32 @@
+<Project>
+
+  <!-- Versões centralizadas (Central Package Management): um lugar só para atualizar dependências. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <MauiVersion>10.0.130</MauiVersion>
+  </PropertyGroup>
+
+  <ItemGroup Label="MAUI">
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.15" />
+    <PackageVersion Include="CommunityToolkit.Maui" Version="16.0.0" />
+    <PackageVersion Include="UraniumUI.Material" Version="3.0.0" />
+    <PackageVersion Include="AathifMahir.Maui.MauiIcons.Fluent" Version="6.0.0" />
+    <PackageVersion Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.2.0" />
+    <PackageVersion Include="Sharpnado.Tabs.Maui" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Core">
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageVersion Include="ColorCode.Core" Version="2.0.15" />
+    <PackageVersion Include="sqlite-net-pcl" Version="1.11.285" />
+  </ItemGroup>
+
+  <ItemGroup Label="Testes">
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageVersion Include="xunit.v3" Version="4.0.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.11.1" />
+  </ItemGroup>
+
+</Project>

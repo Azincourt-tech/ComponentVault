@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Controls.VaultTextField"
+             x:DataType="controls:VaultTextField"
+             x:Name="Root">
+
+    <!-- snippet:control.textfield -->
+    <VerticalStackLayout Spacing="6">
+
+        <!-- Rótulo sempre acima do campo; o placeholder nunca faz papel de rótulo. -->
+        <Label Text="{Binding Label, Source={x:Reference Root}}"
+               IsVisible="{Binding Label, Source={x:Reference Root}, Converter={toolkit:IsStringNotNullOrEmptyConverter}}"
+               Style="{StaticResource FieldLabel}" />
+
+        <!-- Moldura própria: a cor e a espessura mudam com foco e estado (UpdateVisuals). -->
+        <Border x:Name="FieldBorder" Style="{StaticResource FieldFrame}">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Path Data="{Binding IconData, Source={x:Reference Root}}"
+                      IsVisible="{Binding IconData, Source={x:Reference Root}, Converter={toolkit:IsNotNullConverter}}"
+                      Stroke="{DynamicResource InkTertiary}"
+                      StrokeThickness="1.6"
+                      StrokeLineCap="Round"
+                      WidthRequest="16"
+                      HeightRequest="16"
+                      Aspect="Uniform"
+                      VerticalOptions="Center" />
+                <controls:BorderlessEntry x:Name="Input"
+                                          Grid.Column="1"
+                                          Style="{StaticResource BareEntry}"
+                                          Text="{Binding Text, Source={x:Reference Root}, Mode=TwoWay}"
+                                          Placeholder="{Binding Placeholder, Source={x:Reference Root}}"
+                                          Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
+                                          IsPassword="{Binding IsPassword, Source={x:Reference Root}}"
+                                          ReturnType="{Binding ReturnType, Source={x:Reference Root}}"
+                                          VerticalOptions="Center"
+                                          Focused="OnInputFocusChanged"
+                                          Unfocused="OnInputFocusChanged" />
+                <!-- Limpar: aparece só com texto, alvo de 32px. -->
+                <Border x:Name="ClearButton"
+                        Grid.Column="2"
+                        IsVisible="False"
+                        WidthRequest="28" HeightRequest="28"
+                        StrokeThickness="0" StrokeShape="RoundRectangle 14"
+                        BackgroundColor="{DynamicResource SurfaceAlt}"
+                        VerticalOptions="Center"
+                        SemanticProperties.Description="Limpar campo">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClearTapped" />
+                    </Border.GestureRecognizers>
+                    <Path Data="M1 1L9 9M9 1L1 9" Stroke="{DynamicResource InkSecondary}" StrokeThickness="1.6"
+                          StrokeLineCap="Round" WidthRequest="9" HeightRequest="9" Aspect="Uniform"
+                          HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Label x:Name="HintLabel"
+               Text="{Binding Hint, Source={x:Reference Root}}"
+               IsVisible="{Binding Hint, Source={x:Reference Root}, Converter={toolkit:IsStringNotNullOrEmptyConverter}}"
+               FontFamily="{StaticResource FontRegular}"
+               FontSize="{StaticResource TextLabel}" />
+
+    </VerticalStackLayout>
+    <!-- /snippet:control.textfield -->
+
+</ContentView>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Carousels.CarouselBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="CarouselView + IndicatorView" />
+            <!-- snippet:carousel.base -->
+            <VerticalStackLayout Spacing="8">
+                <CarouselView HeightRequest="180" IndicatorView="{x:Reference BaseIndicator}">
+                    <CarouselView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Primeiro slide</x:String>
+                            <x:String>Segundo slide</x:String>
+                            <x:String>Terceiro slide</x:String>
+                        </x:Array>
+                    </CarouselView.ItemsSource>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Border Stroke="Gray" Padding="24">
+                                <Label Text="{Binding .}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView x:Name="BaseIndicator" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <!-- /snippet:carousel.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Funciona com gesto de arrastar, mas no Windows sem tela de toque não há como avançar sem botões. Os indicadores são pontos genéricos sem contexto de posição." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Avatars.AvatarToolkitPreview">
+
+    <ContentView.Resources>
+        <!-- Base comum: iniciais em peso 600 sobre fundo neutro, sem cor por pessoa. -->
+        <Style x:Key="Avatar" TargetType="toolkit:AvatarView">
+            <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceAlt}" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+            <Setter Property="BorderWidth" Value="0" />
+        </Style>
+        <!-- No grupo, um anel da cor da superfície separa um avatar do outro. -->
+        <Style x:Key="GroupAvatar" TargetType="toolkit:AvatarView" BasedOn="{StaticResource Avatar}">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderWidth" Value="2" />
+            <Setter Property="BorderColor" Value="{DynamicResource Surface}" />
+        </Style>
+    </ContentView.Resources>
+
+    <!-- snippet:avatar.toolkit -->
+    <VerticalStackLayout Spacing="28">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Tamanhos" />
+            <HorizontalStackLayout Spacing="14">
+                <toolkit:AvatarView Style="{StaticResource Avatar}" Text="WA" WidthRequest="32" HeightRequest="32" CornerRadius="16" FontSize="13" VerticalOptions="Center" />
+                <toolkit:AvatarView Style="{StaticResource Avatar}" Text="WA" WidthRequest="40" HeightRequest="40" CornerRadius="20" FontSize="14" VerticalOptions="Center" />
+                <toolkit:AvatarView Style="{StaticResource Avatar}" Text="WA" WidthRequest="56" HeightRequest="56" CornerRadius="28" FontSize="18" VerticalOptions="Center" />
+                <toolkit:AvatarView Style="{StaticResource Avatar}" Text="WA" WidthRequest="72" HeightRequest="72" CornerRadius="36" FontSize="22" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Grupo" />
+            <HorizontalStackLayout Spacing="-10" SemanticProperties.Description="Ana, Diego, Lia e mais 3 pessoas">
+                <toolkit:AvatarView Style="{StaticResource GroupAvatar}" Text="AR" />
+                <toolkit:AvatarView Style="{StaticResource GroupAvatar}" Text="DM" />
+                <toolkit:AvatarView Style="{StaticResource GroupAvatar}" Text="LS" />
+                <toolkit:AvatarView Style="{StaticResource GroupAvatar}" Text="+3" TextColor="{DynamicResource InkSecondary}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Em uma linha de lista" />
+            <Border Style="{StaticResource Card}">
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto">
+                    <Grid WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                        <toolkit:AvatarView Style="{StaticResource Avatar}" Text="AR" WidthRequest="44" HeightRequest="44" CornerRadius="22" FontSize="15" />
+                        <!-- Presença: ponto verde com anel da superfície, no canto. -->
+                        <Ellipse WidthRequest="12" HeightRequest="12" Fill="{StaticResource Success}"
+                                 Stroke="{DynamicResource Surface}" StrokeThickness="2"
+                                 HorizontalOptions="End" VerticalOptions="End"
+                                 SemanticProperties.Description="Online" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontMedium}" Text="Ana Ribeiro" />
+                        <Label Style="{StaticResource BodySmall}" Text="Design system · online" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="2" Text="Mensagem" Style="{StaticResource SecondaryButtonSmall}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:avatar.toolkit -->
+
+</ContentView>

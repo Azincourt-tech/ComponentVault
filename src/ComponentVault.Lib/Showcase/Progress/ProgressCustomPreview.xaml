@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:progress="clr-namespace:ComponentVault.Lib.Showcase.Progress"
+             x:Class="ComponentVault.Lib.Showcase.Progress.ProgressCustomPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:progress.custom -->
+        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="28" HorizontalOptions="Start">
+
+            <VerticalStackLayout Spacing="8">
+                <Grid>
+                    <progress:ProgressRing x:Name="StorageRing" Progress="0.72" />
+                    <Label x:Name="StorageLabel" Style="{StaticResource CardTitle}" Text="72%"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <Label Style="{StaticResource Caption}" Text="Armazenamento" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="8">
+                <Grid>
+                    <progress:ProgressRing Progress="0.45" ProgressColor="{StaticResource Success}" />
+                    <Label Style="{StaticResource CardTitle}" Text="45%" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <Label Style="{StaticResource Caption}" Text="Meta semanal" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2" Spacing="8">
+                <Grid>
+                    <progress:ProgressRing Progress="0.9" ProgressColor="{StaticResource Warning}"
+                                           WidthRequest="64" HeightRequest="64" Thickness="6" />
+                    <Label Style="{StaticResource BodySmall}" FontFamily="{StaticResource FontSemiBold}" Text="90%"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
+                <Label Style="{StaticResource Caption}" Text="Cota" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+        </Grid>
+        <!-- /snippet:progress.custom -->
+
+        <VerticalStackLayout Spacing="6">
+            <Label Style="{StaticResource FieldLabel}" Text="Arraste para mudar o armazenamento" />
+            <Slider x:Name="StorageSlider" Style="{StaticResource VaultSlider}" Minimum="0" Maximum="100" Value="72"
+                    ValueChanged="OnStorageChanged" />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodyMuted}"
+               Text="O anel é desenhado num GraphicsView: pontas arredondadas, trilha no tom do tema e transição de 600ms até o valor novo, sem passar do ponto." />
+
+    </VerticalStackLayout>
+
+</ContentView>

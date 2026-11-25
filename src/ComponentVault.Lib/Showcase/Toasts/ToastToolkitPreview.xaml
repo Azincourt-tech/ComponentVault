@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Toasts.ToastToolkitPreview">
+
+    <VerticalStackLayout Spacing="20">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Toast do CommunityToolkit" />
+            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="10" HorizontalOptions="Start">
+                <Button Text="Toast curto" Style="{StaticResource SecondaryButton}" Clicked="OnShortClicked" />
+                <Button Grid.Column="1" Text="Toast longo" Style="{StaticResource SecondaryButton}" Clicked="OnLongClicked" />
+            </Grid>
+            <Label x:Name="ResultLabel" Style="{StaticResource BodySmall}" IsVisible="False" />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Usa o aviso nativo de cada plataforma: no Android é o Toast do sistema, embaixo da tela; no Windows vira uma notificação na central de notificações, fora do app. Para feedback dentro da tela, prefira a variante Custom." />
+
+    </VerticalStackLayout>
+
+</ContentView>

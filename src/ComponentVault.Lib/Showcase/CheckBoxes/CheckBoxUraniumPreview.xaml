@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             xmlns:materialres="clr-namespace:UraniumUI.Material.Resources;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.CheckBoxes.CheckBoxUraniumPreview">
+
+    <!-- Estilos Material restritos a esta View, para não vazarem para o resto do app. -->
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialres:StyleResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="CheckBox Material" />
+            <!-- snippet:checkbox.uranium -->
+            <VerticalStackLayout Spacing="12">
+                <!-- O texto faz parte do controle: tocar no rótulo também marca. -->
+                <material:CheckBox Text="Aceito os termos de uso" />
+                <material:CheckBox Text="Receber novidades" IsChecked="True" Type="Filled" />
+                <material:CheckBox Text="Lembrar deste aparelho" IsChecked="True" Type="Material" />
+                <material:CheckBox Text="Desabilitado" IsChecked="True" IsDisabled="True" />
+            </VerticalStackLayout>
+            <!-- /snippet:checkbox.uranium -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O CheckBox do UraniumUI (sobre o InputKit) já traz o texto clicável, três estilos de caixa e suporte a validação em formulários." />
+
+    </VerticalStackLayout>
+
+</ContentView>

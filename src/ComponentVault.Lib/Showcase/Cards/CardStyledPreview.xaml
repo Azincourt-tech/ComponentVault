@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardStyledPreview">
+
+    <!-- snippet:card.styled -->
+    <VerticalStackLayout Spacing="28">
+
+        <!-- 1. Card de resumo: título, número que importa e uma única ação. -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Card de resumo" />
+            <Border Style="{StaticResource Card}" Padding="20" MaximumWidthRequest="420" HorizontalOptions="Start">
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Style="{StaticResource CardTitle}" Text="Plano Equipe" />
+                            <Label Style="{StaticResource Caption}" Text="Renova em 12 de dezembro" />
+                        </VerticalStackLayout>
+                        <controls:OriginBadge Grid.Column="1" Kind="New" Text="Ativo" IsCompact="True" VerticalOptions="Start" />
+                    </Grid>
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Style="{StaticResource PageTitle}" Text="8 de 10" />
+                        <Label Style="{StaticResource BodySmall}" Text="assentos em uso" VerticalOptions="End" Margin="0,0,0,4" />
+                    </HorizontalStackLayout>
+                    <ProgressBar Progress="0.8" ProgressColor="{StaticResource Accent}" HeightRequest="6" />
+                    <Button Text="Gerenciar assentos" Style="{StaticResource SecondaryButton}" HorizontalOptions="Start" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- 2. Card de lista: cabeçalho e linhas separadas por linha fina, a linha inteira é tocável. -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Card com lista" />
+            <Border Style="{StaticResource Card}" MaximumWidthRequest="420" HorizontalOptions="Start">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto" Padding="16,14">
+                        <Label Style="{StaticResource CardTitle}" Text="Atividade recente" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Style="{StaticResource Caption}" Text="Hoje" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto">
+                        <Border WidthRequest="36" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 10"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" VerticalOptions="Center">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=DocumentText24}" IconSize="18"
+                                          IconColor="{DynamicResource InkSecondary}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontMedium}" Text="Contrato revisado" />
+                            <Label Style="{StaticResource Caption}" Text="Ana Souza · 09:42" />
+                        </VerticalStackLayout>
+                        <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" Margin="66,0,0,0" />
+                    <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto">
+                        <Border WidthRequest="36" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 10"
+                                BackgroundColor="{DynamicResource SurfaceAlt}" VerticalOptions="Center">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Receipt24}" IconSize="18"
+                                          IconColor="{DynamicResource InkSecondary}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontMedium}" Text="Fatura de novembro paga" />
+                            <Label Style="{StaticResource Caption}" Text="R$ 1.280,00 · 08:15" />
+                        </VerticalStackLayout>
+                        <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronRight20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- 3. Card de catálogo: clicável, sobe 2px e escurece a borda no hover. -->
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource FieldLabel}" Text="Card clicável" />
+            <Border Style="{StaticResource InteractiveCard}" WidthRequest="220" HorizontalOptions="Start">
+                <VerticalStackLayout>
+                    <Grid HeightRequest="96" BackgroundColor="{DynamicResource SurfaceAlt}">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=ToggleRight24}" IconSize="30"
+                                      IconColor="{DynamicResource Ink}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <VerticalStackLayout Padding="14,12" Spacing="8">
+                        <Label Style="{StaticResource CardTitle}" Text="VaultToggle" />
+                        <controls:OriginBadge Kind="Custom" IsCompact="True" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:card.styled -->
+
+</ContentView>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Tabs.TabsCustomPreview">
+
+    <!-- snippet:tabs.custom -->
+    <VerticalStackLayout Spacing="0" MaximumWidthRequest="560" HorizontalOptions="Fill">
+
+        <!-- Abas de largura igual; o sublinhado é um único elemento que desliza (TranslateTo, 200ms). -->
+        <Grid x:Name="TabStrip" ColumnDefinitions="*,*,*" RowDefinitions="44,2">
+            <Label x:Name="Tab0" Text="Visão geral" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}"
+                   FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="0" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label x:Name="Tab1" Grid.Column="1" Text="Atividade" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}"
+                   FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="1" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label x:Name="Tab2" Grid.Column="2" Text="Membros" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}"
+                   FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTabTapped" CommandParameter="2" />
+                </Label.GestureRecognizers>
+            </Label>
+            <BoxView x:Name="Underline" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Start"
+                     Color="{DynamicResource Ink}" CornerRadius="1" />
+        </Grid>
+        <BoxView Style="{StaticResource Divider}" />
+
+        <!-- Conteúdo de cada aba. -->
+        <Grid Padding="0,20,0,0" MinimumHeightRequest="150">
+            <VerticalStackLayout x:Name="Panel0" Spacing="12">
+                <Label Style="{StaticResource CardTitle}" Text="Projeto Atlas" />
+                <Label Style="{StaticResource BodyMuted}" Text="Redesenho do aplicativo de vendas. Entrega da fase 2 prevista para 15 de dezembro." />
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Style="{StaticResource SectionHeader}" Text="64%" />
+                        <Label Style="{StaticResource Caption}" Text="concluído" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Style="{StaticResource SectionHeader}" Text="18" />
+                        <Label Style="{StaticResource Caption}" Text="tarefas abertas" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="2">
+                        <Label Style="{StaticResource SectionHeader}" Text="3" />
+                        <Label Style="{StaticResource Caption}" Text="bloqueios" />
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+            <VerticalStackLayout x:Name="Panel1" Spacing="10" IsVisible="False">
+                <Label Style="{StaticResource Body}" Text="Ana moveu “Checkout” para Revisão" />
+                <Label Style="{StaticResource Caption}" Text="há 12 minutos" />
+                <BoxView Style="{StaticResource Divider}" />
+                <Label Style="{StaticResource Body}" Text="Bruno comentou em “Login com biometria”" />
+                <Label Style="{StaticResource Caption}" Text="há 1 hora" />
+            </VerticalStackLayout>
+            <VerticalStackLayout x:Name="Panel2" Spacing="10" IsVisible="False">
+                <Label Style="{StaticResource Body}" Text="Ana Souza · Design" />
+                <Label Style="{StaticResource Body}" Text="Bruno Lima · Mobile" />
+                <Label Style="{StaticResource Body}" Text="Carla Mendes · Produto" />
+                <Button Text="Convidar pessoa" Style="{StaticResource SecondaryButtonSmall}" HorizontalOptions="Start" Margin="0,6,0,0" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </VerticalStackLayout>
+    <!-- /snippet:tabs.custom -->
+
+</ContentView>

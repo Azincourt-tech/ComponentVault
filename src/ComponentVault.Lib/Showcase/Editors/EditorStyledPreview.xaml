@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Editors.EditorStyledPreview">
+
+    <!-- snippet:editor.styled -->
+    <VerticalStackLayout Spacing="6" MaximumWidthRequest="520" HorizontalOptions="Start">
+
+        <Label Style="{StaticResource FieldLabel}" Text="Descrição do componente" />
+
+        <!-- Começa com 3 linhas, cresce até 8 e depois rola: o formulário não "pula". -->
+        <Border x:Name="EditorFrame" Style="{StaticResource FieldFrame}" Padding="14,10">
+            <controls:BorderlessEditor x:Name="DescriptionEditor"
+                                       Style="{StaticResource BareEditor}"
+                                       Placeholder="O que ele resolve, quando usar, o que evitar..."
+                                       AutoSize="TextChanges"
+                                       MinimumHeightRequest="84"
+                                       MaximumHeightRequest="200"
+                                       MaxLength="280"
+                                       TextChanged="OnTextChanged"
+                                       Focused="OnFocusChanged"
+                                       Unfocused="OnFocusChanged" />
+        </Border>
+
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Style="{StaticResource Caption}" Text="Aparece no catálogo abaixo do nome." />
+            <!-- Contador: neutro, aviso perto do limite e erro no limite. -->
+            <Label x:Name="CounterLabel" Grid.Column="1" Style="{StaticResource Caption}" Text="0/280" />
+        </Grid>
+
+    </VerticalStackLayout>
+    <!-- /snippet:editor.styled -->
+
+</ContentView>

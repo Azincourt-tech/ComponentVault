@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Pickers.PickerStyledPreview">
+
+    <!-- snippet:picker.styled -->
+    <VerticalStackLayout Spacing="20" MaximumWidthRequest="440" HorizontalOptions="Start">
+
+        <!-- Rótulo fixo acima + chevron: fica claro que é um menu, mesmo depois de escolher. -->
+        <VerticalStackLayout Spacing="6">
+            <Label Style="{StaticResource FieldLabel}" Text="Plataforma" />
+            <Border x:Name="PlatformFrame" Style="{StaticResource FieldFrame}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <controls:BorderlessPicker x:Name="PlatformPicker"
+                                               Style="{StaticResource VaultPicker}"
+                                               Title="Selecione"
+                                               SelectedIndexChanged="OnPlatformChanged"
+                                               Focused="OnFocusChanged"
+                                               Unfocused="OnFocusChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Android</x:String>
+                                <x:String>iOS</x:String>
+                                <x:String>Windows</x:String>
+                                <x:String>macOS</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </controls:BorderlessPicker>
+                    <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
+                                  IconColor="{DynamicResource InkTertiary}"
+                                  VerticalOptions="Center" InputTransparent="True" />
+                </Grid>
+            </Border>
+            <Label x:Name="PlatformHint" Style="{StaticResource Caption}" Text="Define o alvo do build." />
+        </VerticalStackLayout>
+
+        <!-- Com valor padrão: a opção mais comum já vem escolhida. -->
+        <VerticalStackLayout Spacing="6">
+            <Label Style="{StaticResource FieldLabel}" Text="Ordenar por" />
+            <Border Style="{StaticResource FieldFrame}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <controls:BorderlessPicker Style="{StaticResource VaultPicker}" SelectedIndex="0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Mais recentes</x:String>
+                                <x:String>Nome (A–Z)</x:String>
+                                <x:String>Mais variantes</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </controls:BorderlessPicker>
+                    <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
+                                  IconColor="{DynamicResource InkTertiary}"
+                                  VerticalOptions="Center" InputTransparent="True" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Desabilitado: fundo alternativo e o motivo escrito embaixo. -->
+        <VerticalStackLayout Spacing="6" Opacity="0.6">
+            <Label Style="{StaticResource FieldLabel}" Text="Região" />
+            <Border Style="{StaticResource FieldFrame}" BackgroundColor="{DynamicResource SurfaceAlt}">
+                <controls:BorderlessPicker Style="{StaticResource VaultPicker}" Title="Brasil" IsEnabled="False" />
+            </Border>
+            <Label Style="{StaticResource Caption}" Text="Definida pela sua conta." />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:picker.styled -->
+
+</ContentView>

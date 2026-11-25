@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Steppers.StepperBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Padrão da plataforma" />
+            <!-- snippet:stepper.base -->
+            <HorizontalStackLayout Spacing="16">
+                <Stepper x:Name="QuantityStepper" Minimum="1" Maximum="10" Increment="1" Value="1" />
+                <Label x:DataType="Stepper"
+                       Text="{Binding Value, Source={x:Reference QuantityStepper}, StringFormat='Quantidade: {0}'}"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <!-- /snippet:stepper.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Stepper nativo não mostra o valor: ele precisa de um rótulo ao lado. No Windows os botões são pequenos para toque." />
+
+    </VerticalStackLayout>
+
+</ContentView>

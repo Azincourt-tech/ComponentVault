@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Sliders.SliderStyledPreview">
+
+    <!-- snippet:slider.styled -->
+    <VerticalStackLayout Spacing="32" MaximumWidthRequest="480" HorizontalOptions="Fill">
+
+        <!-- Rótulo e valor atual na mesma linha; limites embaixo. Encaixa de 5 em 5. -->
+        <VerticalStackLayout Spacing="6">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource FieldLabel}" Text="Volume" />
+                <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}"
+                       x:DataType="Slider"
+                       Text="{Binding Value, Source={x:Reference VolumeSlider}, StringFormat='{0:F0}%'}" />
+            </Grid>
+            <Slider x:Name="VolumeSlider" Style="{StaticResource VaultSlider}"
+                    Minimum="0" Maximum="100" Value="65"
+                    ValueChanged="OnVolumeChanged"
+                    SemanticProperties.Description="Volume" />
+            <Grid ColumnDefinitions="*,*">
+                <Label Style="{StaticResource Caption}" Text="0%" />
+                <Label Grid.Column="1" Style="{StaticResource Caption}" Text="100%" HorizontalOptions="End" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- O efeito aparece na hora: o texto de exemplo muda de tamanho junto. -->
+        <VerticalStackLayout Spacing="6">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource FieldLabel}" Text="Tamanho do texto" />
+                <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}"
+                       x:DataType="Slider"
+                       Text="{Binding Value, Source={x:Reference FontSlider}, StringFormat='{0:F0} px'}" />
+            </Grid>
+            <Slider x:Name="FontSlider" Style="{StaticResource VaultSlider}"
+                    Minimum="13" Maximum="24" Value="16"
+                    ValueChanged="OnFontChanged"
+                    SemanticProperties.Description="Tamanho do texto" />
+            <Border Style="{StaticResource Card}" Padding="16" Margin="0,8,0,0">
+                <Label Style="{StaticResource Body}" x:DataType="Slider"
+                       FontSize="{Binding Value, Source={x:Reference FontSlider}}"
+                       Text="Componentes que você copia e cola em menos de cinco minutos." />
+            </Border>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+    <!-- /snippet:slider.styled -->
+
+</ContentView>

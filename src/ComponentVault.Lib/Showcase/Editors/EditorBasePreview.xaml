@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Editors.EditorBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Padrão da plataforma" />
+            <!-- snippet:editor.base -->
+            <VerticalStackLayout Spacing="12">
+                <Editor Placeholder="Altura fixa de 120" HeightRequest="120" />
+                <Editor Placeholder="Cresce com o texto" AutoSize="TextChanges" />
+            </VerticalStackLayout>
+            <!-- /snippet:editor.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Editor é o campo de várias linhas. Sem altura ele colapsa; com AutoSize ele cresce, mas não mostra limite nem quanto falta para chegar nele." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Switches.SwitchCustomPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="VaultToggle" />
+            <!-- snippet:switch.custom -->
+            <VerticalStackLayout Spacing="16">
+
+                <!-- O estado é dito em texto, não só pela cor. -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <controls:VaultToggle x:Name="SyncToggle" IsToggled="True"
+                                          SemanticProperties.Description="Sincronização automática" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Sincronização automática" />
+                        <Label Style="{StaticResource BodySmall}" Text="Desligada: alterações ficam só neste aparelho">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" x:DataType="controls:VaultToggle"
+                                             Binding="{Binding IsToggled, Source={x:Reference SyncToggle}}" Value="True">
+                                    <Setter Property="Text" Value="Ligada: alterações vão para todos os aparelhos" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <controls:VaultToggle OnColor="{StaticResource Success}" IsToggled="True"
+                                          SemanticProperties.Description="Backup diário" />
+                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Cor semântica (sucesso)" VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <controls:VaultToggle WidthRequest="40" HeightRequest="24"
+                                          SemanticProperties.Description="Versão compacta" />
+                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Compacto, para listas densas" VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <controls:VaultToggle IsToggled="True" IsEnabled="False"
+                                          SemanticProperties.Description="Desabilitado" />
+                    <Label Grid.Column="1" Style="{StaticResource BodyMuted}" Text="Desabilitado" VerticalOptions="Center" />
+                </Grid>
+
+            </VerticalStackLayout>
+            <!-- /snippet:switch.custom -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Desenhado num GraphicsView: trilha, sombra e animação de 180ms são código nosso, idênticos no Android e no Windows. A trilha desligada acompanha o tema." />
+
+    </VerticalStackLayout>
+
+</ContentView>

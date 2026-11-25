@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Entries.EntryBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Padrão da plataforma" />
+            <!-- snippet:entry.base -->
+            <VerticalStackLayout Spacing="12">
+                <Entry Placeholder="Nome do componente" />
+                <Entry Placeholder="E-mail" Keyboard="Email" />
+                <Entry Placeholder="Senha" IsPassword="True" />
+                <Entry Text="Somente leitura" IsReadOnly="True" />
+            </VerticalStackLayout>
+            <!-- /snippet:entry.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Sem rótulo, dica nem estado de erro: o placeholder acaba fazendo papel de rótulo e some ao digitar. No Android o campo é um sublinhado; no Windows, uma caixa com destaque inferior no foco." />
+
+    </VerticalStackLayout>
+
+</ContentView>

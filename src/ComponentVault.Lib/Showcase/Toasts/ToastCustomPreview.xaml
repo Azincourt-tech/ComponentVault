@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toasts="clr-namespace:ComponentVault.Lib.Showcase.Toasts"
+             x:Class="ComponentVault.Lib.Showcase.Toasts.ToastCustomPreview">
+
+    <!-- snippet:toast.custom -->
+    <!-- O toast fica na mesma célula do conteúdo, ancorado embaixo, por cima de tudo. -->
+    <Grid MinimumHeightRequest="380">
+
+        <VerticalStackLayout Spacing="16" Padding="0,0,0,80">
+            <Label Style="{StaticResource FieldLabel}" Text="Rascunhos" />
+
+            <!-- Excluir é imediato e reversível: em vez de pedir confirmação, oferece Desfazer. -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout x:Name="ItemList" />
+            </Border>
+
+            <Button Text="Salvar alterações" Style="{StaticResource PrimaryButton}" HorizontalOptions="Start"
+                    Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+
+        <toasts:InAppToast x:Name="Toast" Margin="0,0,0,8" />
+
+    </Grid>
+    <!-- /snippet:toast.custom -->
+
+</ContentView>

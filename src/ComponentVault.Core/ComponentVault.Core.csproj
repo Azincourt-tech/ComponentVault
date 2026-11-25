@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Núcleo sem dependência de MAUI: modelos, serviços e ViewModels.
+    Ficar fora do MAUI é proposital (ADR-006): o compilador garante que nenhuma
+    ViewModel referencie Microsoft.Maui.*, e os testes xUnit rodam em net10.0 puro.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>ComponentVault.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="ColorCode.Core" />
+    <PackageReference Include="sqlite-net-pcl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ComponentVault.Tests" />
+  </ItemGroup>
+
+</Project>

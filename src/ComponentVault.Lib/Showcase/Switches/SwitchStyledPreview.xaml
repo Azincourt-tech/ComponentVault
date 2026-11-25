@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Switches.SwitchStyledPreview">
+
+    <VerticalStackLayout Spacing="12">
+        <Label Style="{StaticResource FieldLabel}" Text="Linhas de configuração" />
+
+        <!-- snippet:switch.styled -->
+        <!-- A linha inteira é o alvo de toque: tocar no texto também alterna. -->
+        <Border Style="{StaticResource Card}">
+            <VerticalStackLayout>
+
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="*,Auto">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference NotificationsSwitch}" />
+                    </Grid.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Notificações" />
+                        <Label Style="{StaticResource BodySmall}" Text="Avisar quando chegar um componente novo" />
+                    </VerticalStackLayout>
+                    <Switch x:Name="NotificationsSwitch" Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" InputTransparent="True"
+                            SemanticProperties.Description="Notificações" />
+                </Grid>
+
+                <BoxView Style="{StaticResource Divider}" Margin="16,0" />
+
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="*,Auto">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference SummarySwitch}" />
+                    </Grid.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Resumo semanal" />
+                        <Label Style="{StaticResource BodySmall}" Text="Um e-mail na segunda com o que mudou" />
+                    </VerticalStackLayout>
+                    <Switch x:Name="SummarySwitch" Grid.Column="1" Style="{StaticResource VaultSwitch}" InputTransparent="True"
+                            SemanticProperties.Description="Resumo semanal" />
+                </Grid>
+
+                <BoxView Style="{StaticResource Divider}" Margin="16,0" />
+
+                <!-- Desabilitado com o motivo escrito, não só esmaecido. -->
+                <Grid Style="{StaticResource ListRow}" ColumnDefinitions="*,Auto" Opacity="0.55">
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Style="{StaticResource Body}" Text="Sincronizar na nuvem" />
+                        <Label Style="{StaticResource BodySmall}" Text="Disponível quando houver uma conta conectada" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsEnabled="False"
+                            SemanticProperties.Description="Sincronizar na nuvem, indisponível" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </Border>
+        <!-- /snippet:switch.styled -->
+    </VerticalStackLayout>
+
+</ContentView>
