@@ -211,7 +211,11 @@ public class DateRangeStrip : ContentView, IDrawable
 
         if (_start is not null)
         {
-            // Faixa: uma pílula por semana, cobrindo do primeiro ao último dia que cai nela.
+            // Faixa: uma pílula por semana. Na ida e na volta ela termina na borda do círculo (do
+            // centro do dia mais o raio), e não na borda da célula: em células largas, como no
+            // desktop, a faixa passava do dia escolhido. Quando a semana continua na próxima linha,
+            // vai até a borda da linha.
+            var full = (Math.Min(width, RowHeight) / 2) - 3;
             float lo = Math.Min(_shownStart, _shownEnd), hi = Math.Max(_shownStart, _shownEnd);
             canvas.FillColor = ThemeColors.Resolve("AccentTint", Colors.Bisque);
             for (var row = 0; row < Weeks; row++)
@@ -219,13 +223,14 @@ public class DateRangeStrip : ContentView, IDrawable
                 float rowStart = row * Days, rowEnd = rowStart + Days - 1;
                 float a = Math.Max(lo, rowStart), b = Math.Min(hi, rowEnd);
                 if (b < a) continue;
-                float x0 = ((a - rowStart) * width) + 2, x1 = ((b - rowStart + 1) * width) - 2;
+                var x0 = a > rowStart || lo >= rowStart ? ((a - rowStart + 0.5f) * width) - full : 2;
+                var x1 = b < rowEnd || hi <= rowEnd ? ((b - rowStart + 0.5f) * width) + full : rect.Width - 2;
                 canvas.FillRoundedRectangle(x0, (row * RowHeight) + 5, x1 - x0, RowHeight - 10, (RowHeight - 10) / 2);
             }
 
             // Ida e volta: círculos cheios na cor de destaque.
             canvas.FillColor = accent;
-            var radius = ((Math.Min(width, RowHeight) / 2) - 3) * _pop;
+            var radius = full * _pop;
             var ends = _end == _start ? new[] { _shownStart } : new[] { _shownStart, _shownEnd };
             foreach (var index in ends)
             {
