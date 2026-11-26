@@ -9,7 +9,7 @@
         <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="PickerField Material" />
             <!-- snippet:picker.uranium -->
-            <VerticalStackLayout Spacing="16" MaximumWidthRequest="440" HorizontalOptions="Start">
+            <VerticalStackLayout Spacing="16" WidthRequest="{OnIdiom Phone=-1, Default=440}" HorizontalOptions="{OnIdiom Phone=Fill, Default=Start}">
                 <material:PickerField Title="Plataforma" AllowClear="True">
                     <material:PickerField.ItemsSource>
                         <x:Array Type="{x:Type x:String}">

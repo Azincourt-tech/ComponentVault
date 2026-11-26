@@ -9,7 +9,7 @@
         <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="DatePickerField e TimePickerField" />
             <!-- snippet:datepicker.uranium -->
-            <VerticalStackLayout Spacing="16" MaximumWidthRequest="440" HorizontalOptions="Start">
+            <VerticalStackLayout Spacing="16" WidthRequest="{OnIdiom Phone=-1, Default=440}" HorizontalOptions="{OnIdiom Phone=Fill, Default=Start}">
                 <material:DatePickerField Title="Data de entrega" Format="dd/MM/yyyy" AllowClear="True" />
                 <material:TimePickerField Title="Horário" Format="HH:mm" AllowClear="True" />
             </VerticalStackLayout>
