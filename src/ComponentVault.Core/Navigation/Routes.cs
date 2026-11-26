@@ -15,5 +15,8 @@ public static class Routes
     {
         public const string ComponentId = "id";
         public const string VariantId = "variant";
+
+        /// <summary>"true" abre o detalhe já no modo Apresentar.</summary>
+        public const string Present = "present";
     }
 }

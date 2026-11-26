@@ -223,6 +223,53 @@ public class ComponentDetailViewModelTests
         _vm.TogglePresentationCommand.Execute(null);
         Assert.False(_vm.IsPresentationMode);
     }
+
+    [Fact]
+    public void Proximo_e_anterior_percorrem_os_niveis_em_volta()
+    {
+        Open("button");
+        var count = _vm.Variants.Count;
+        Assert.True(count > 1);
+        Assert.Equal($"1 de {count}", _vm.PositionText);
+
+        _vm.NextVariantCommand.Execute(null);
+        Assert.Same(_vm.Variants[1], _vm.SelectedVariant);
+        Assert.Equal($"2 de {count}", _vm.PositionText);
+        Assert.Single(_vm.Variants, v => v.IsSelected);
+
+        // Do primeiro, "anterior" vai para o último; do último, "próximo" volta ao primeiro.
+        _vm.PreviousVariantCommand.Execute(null);
+        _vm.PreviousVariantCommand.Execute(null);
+        Assert.Same(_vm.Variants[^1], _vm.SelectedVariant);
+
+        _vm.NextVariantCommand.Execute(null);
+        Assert.Same(_vm.Variants[0], _vm.SelectedVariant);
+    }
+
+    [Fact]
+    public void Link_com_present_abre_na_apresentacao()
+    {
+        _vm.OnNavigatedTo(new Dictionary<string, object>
+        {
+            [Routes.Params.ComponentId] = "button",
+            [Routes.Params.Present] = "true",
+        });
+
+        Assert.True(_vm.IsPresentationMode);
+        Assert.True(_vm.IsPreviewTab);
+    }
+
+    [Fact]
+    public void Sair_da_apresentacao_so_sai()
+    {
+        Open("button");
+        _vm.ExitPresentationCommand.Execute(null);
+        Assert.False(_vm.IsPresentationMode);
+
+        _vm.TogglePresentationCommand.Execute(null);
+        _vm.ExitPresentationCommand.Execute(null);
+        Assert.False(_vm.IsPresentationMode);
+    }
 }
 
 public class HomeViewModelTests

@@ -7,6 +7,8 @@
              xmlns:controls="clr-namespace:ComponentVault.App.Controls"
              xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
              xmlns:motion="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              x:Class="ComponentVault.App.Views.Detail.ComponentDetailPage"
              x:DataType="vm:ComponentDetailViewModel"
              Style="{StaticResource VaultPage}"
@@ -30,7 +32,8 @@
         <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" ShowBack="True"
                           IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}" />
 
-        <Grid Grid.Row="1" RowDefinitions="Auto,*">
+        <Grid Grid.Row="1" RowDefinitions="Auto,*"
+              IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
 
         <!-- ===== Cabeçalho, níveis e abas (somem no modo apresentação) ===== -->
         <VerticalStackLayout Padding="{OnIdiom Phone='20,12,20,0', Default='40,12,40,0'}" Spacing="18"
@@ -311,12 +314,6 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Saída do modo apresentação -->
-        <Button Grid.RowSpan="2" Text="Sair da apresentação" Style="{StaticResource SecondaryButtonSmall}"
-                HorizontalOptions="End" VerticalOptions="Start" Margin="16"
-                IsVisible="{Binding IsPresentationMode}"
-                Command="{Binding TogglePresentationCommand}" />
-
         <!-- Aviso de cópia: pílula em tinta, some sozinho em 2s (ADR-007) -->
         <Border Grid.Row="1" Margin="16,0,16,28" Padding="18,12"
                 HorizontalOptions="Center" VerticalOptions="End"
@@ -328,6 +325,114 @@
         </Border>
 
     </Grid>
+
+        <!--
+          ===== Modo Apresentar (RF10) =====
+          Só o componente, centralizado, sobre o fundo. Troca de nível pelo controle embaixo,
+          pelas setas do teclado ou deslizando para os lados fora do componente; Esc sai.
+          No Windows a janela vai para tela cheia (code-behind).
+        -->
+        <Grid Grid.RowSpan="3" RowDefinitions="Auto,*,Auto" Padding="{OnIdiom Phone='16,20', Default='40,28'}"
+              IsVisible="{Binding IsPresentationMode}">
+
+            <!-- Área de gesto: atrás do componente, para não brigar com o que ele faz ao toque -->
+            <BoxView Grid.RowSpan="3" Color="Transparent">
+                <BoxView.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Left" Command="{Binding NextVariantCommand}" />
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding PreviousVariantCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <!-- Qual componente e qual nível -->
+            <VerticalStackLayout Spacing="6" HorizontalOptions="Center" InputTransparent="True">
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Ellipse WidthRequest="8" HeightRequest="8" VerticalOptions="Center"
+                             Fill="{Binding SelectedVariant.Origin, Converter={StaticResource OriginBrush}}" />
+                    <Label Style="{StaticResource CardTitle}" FontSize="20" VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Component.Name}" />
+                                <Span Text="  ·  " TextColor="{DynamicResource InkTertiary}" />
+                                <Span Text="{Binding SelectedVariant.Title}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </HorizontalStackLayout>
+                <Label Style="{StaticResource Caption}" Text="{Binding PositionText}" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- O componente -->
+            <Border Grid.Row="1" Style="{StaticResource PreviewCanvas}"
+                    MaximumWidthRequest="760" VerticalOptions="Center" Margin="0,24"
+                    Padding="{OnIdiom Phone=24, Default=48}">
+                <controls:PreviewHost VariantId="{Binding SelectedVariant.Id}" />
+            </Border>
+
+            <!-- Controle: anterior · pontos dos níveis · próximo | sair -->
+            <VerticalStackLayout Grid.Row="2" Spacing="10" HorizontalOptions="Center">
+                <Border BackgroundColor="{DynamicResource Chrome}" Stroke="{DynamicResource ChromeStroke}"
+                        StrokeThickness="1" StrokeShape="RoundRectangle 25" Padding="5" HorizontalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Opacity="0.22" Radius="30" Offset="0,10" />
+                    </Border.Shadow>
+                    <HorizontalStackLayout Spacing="2">
+                        <Grid WidthRequest="40" HeightRequest="40" motion:Motion.Press="True"
+                              ToolTipProperties.Text="Nível anterior (←)" SemanticProperties.Description="Nível anterior">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PreviousVariantCommand}" />
+                            </Grid.GestureRecognizers>
+                            <mic:MauiIcon Icon="{x:Static fluent:FluentIcons.ChevronLeft24}" IconSize="18"
+                                          IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+
+                        <HorizontalStackLayout Spacing="6" Padding="8,0" VerticalOptions="Center"
+                                               BindableLayout.ItemsSource="{Binding Variants}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:VariantOption">
+                                    <Border HeightRequest="8" WidthRequest="8" StrokeThickness="0" StrokeShape="RoundRectangle 4"
+                                            BackgroundColor="{DynamicResource HairlineStrong}" VerticalOptions="Center"
+                                            SemanticProperties.Description="{Binding Title, StringFormat='Nível {0}'}">
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectVariantCommand, Source={RelativeSource AncestorType={x:Type vm:ComponentDetailViewModel}}, x:DataType=vm:ComponentDetailViewModel}"
+                                                                  CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                        <Border.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="WidthRequest" Value="24" />
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+
+                        <Grid WidthRequest="40" HeightRequest="40" motion:Motion.Press="True"
+                              ToolTipProperties.Text="Próximo nível (→)" SemanticProperties.Description="Próximo nível">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextVariantCommand}" />
+                            </Grid.GestureRecognizers>
+                            <mic:MauiIcon Icon="{x:Static fluent:FluentIcons.ChevronRight24}" IconSize="18"
+                                          IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView WidthRequest="1" HeightRequest="20" Margin="6,0" Color="{DynamicResource ChromeStroke}"
+                                 VerticalOptions="Center" />
+
+                        <!-- Botão de verdade: recebe o foco ao entrar, e é por ele que as teclas chegam no Windows -->
+                        <Button x:Name="ExitPresentationButton" Text="✕  Sair" Command="{Binding ExitPresentationCommand}"
+                                HeightRequest="40" Padding="14,0" CornerRadius="20" BorderWidth="0"
+                                BackgroundColor="Transparent" TextColor="{DynamicResource Ink}"
+                                FontFamily="{StaticResource FontMedium}" FontSize="14"
+                                ToolTipProperties.Text="Sair da apresentação (Esc)"
+                                SemanticProperties.Description="Sair da apresentação" />                    </HorizontalStackLayout>
+                </Border>
+
+                <Label Style="{StaticResource Caption}" HorizontalOptions="Center" InputTransparent="True"
+                       Text="← → trocam o nível  ·  Esc sai"
+                       IsVisible="{OnIdiom Phone=False, Default=True}" />
+            </VerticalStackLayout>
+        </Grid>
     </Grid>
 
 </ContentPage>

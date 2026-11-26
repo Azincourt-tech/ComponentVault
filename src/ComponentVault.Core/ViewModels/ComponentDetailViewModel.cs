@@ -30,6 +30,7 @@ public sealed partial class ComponentDetailViewModel : BaseViewModel, INavigatio
     private IReadOnlyList<VariantOption> _variants = [];
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PositionText))]
     private VariantOption? _selectedVariant;
 
     [ObservableProperty]
@@ -84,6 +85,11 @@ public sealed partial class ComponentDetailViewModel : BaseViewModel, INavigatio
 
     public bool HasCopyFeedback => CopyFeedback is not null;
 
+    /// <summary>Posição do nível na apresentação, ex.: "2 de 3".</summary>
+    public string PositionText => SelectedVariant is null
+        ? string.Empty
+        : $"{IndexOf(SelectedVariant) + 1} de {Variants.Count}";
+
     public void OnNavigatedTo(IReadOnlyDictionary<string, object> parameters)
     {
         var id = parameters.TryGetValue(Routes.Params.ComponentId, out var value) ? value?.ToString() : null;
@@ -101,6 +107,13 @@ public sealed partial class ComponentDetailViewModel : BaseViewModel, INavigatio
 
         var requested = parameters.TryGetValue(Routes.Params.VariantId, out var variantId) ? variantId?.ToString() : null;
         SelectVariant(Variants.FirstOrDefault(v => v.Variant.Id == requested) ?? Variants[0]);
+
+        if (parameters.TryGetValue(Routes.Params.Present, out var present)
+            && bool.TryParse(present?.ToString(), out var presenting) && presenting)
+        {
+            SelectedTab = DetailTab.Preview;
+            IsPresentationMode = true;
+        }
     }
 
     [RelayCommand]
@@ -122,6 +135,32 @@ public sealed partial class ComponentDetailViewModel : BaseViewModel, INavigatio
     {
         IsPresentationMode = !IsPresentationMode;
         if (IsPresentationMode) SelectedTab = DetailTab.Preview;
+    }
+
+    [RelayCommand]
+    private void ExitPresentation() => IsPresentationMode = false;
+
+    /// <summary>Próximo nível, voltando ao primeiro depois do último (setas, gesto, apresentação).</summary>
+    [RelayCommand]
+    private void NextVariant() => Step(+1);
+
+    [RelayCommand]
+    private void PreviousVariant() => Step(-1);
+
+    private void Step(int direction)
+    {
+        if (Variants.Count < 2 || SelectedVariant is null) return;
+        var index = (IndexOf(SelectedVariant) + direction + Variants.Count) % Variants.Count;
+        SelectVariant(Variants[index]);
+    }
+
+    private int IndexOf(VariantOption option)
+    {
+        for (var i = 0; i < Variants.Count; i++)
+        {
+            if (ReferenceEquals(Variants[i], option)) return i;
+        }
+        return 0;
     }
 
     [RelayCommand]

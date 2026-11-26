@@ -82,7 +82,8 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [x] ~~Transição entre páginas~~: o ícone e o título da linha tocada (Catálogo ou recentes da Home) voam até o cabeçalho do Detalhe, que ganhou o ícone do componente, e o resto entra em cascata (`App/Controls/Hero.cs`). Testado pelo dono no Windows.
 - [x] ~~Transição de volta~~: ao voltar do Detalhe, o ícone e o título descem do cabeçalho até a linha de onde saíram, no Catálogo ou nos recentes da Home. Voam como cópias por cima da página, porque a lista recorta o que passa fora dela. Na barra, tocar na seção de onde o Detalhe veio volta uma página. Testado pelo dono no Windows.
 - [x] ~~Entrada em cascata~~ dos itens e grupos do catálogo, ao abrir a página e ao trocar o filtro (`App/Controls/Cascade.cs`). De propósito, não anima ao rolar, ao digitar na busca nem ao voltar do Detalhe. Testado pelo dono no Windows.
-- [ ] **Modo Apresentar**: tela cheia com o componente centralizado e troca de nível por gesto ou teclado.
+- [x] ~~Modo Apresentar~~: componente centralizado sobre o fundo, com nome, nível e "2 de 3" no topo e um controle flutuante embaixo (anterior, pontos dos níveis, próximo, sair). No Windows abre em tela cheia, ← e → trocam o nível e Esc sai. Deslizar para os lados fora do componente também troca. O voltar do Android sai da apresentação. Link direto com `present=true`. Teclado e cliques testados pelo dono no Windows; gesto e voltar do Android dependem do Android.
+- [ ] **Tela cheia imersiva no Android** durante a apresentação (esconder barras do sistema).
 - [ ] **Microinterações**: feedback háptico no Android (`HapticFeedback`) e o realce do botão copiar.
 - [ ] **Fundo ambiente que reage**: as manchas puxam levemente para o ponteiro ou o toque, ou mudam de tom conforme a categoria.
 - [ ] **Respeitar "reduzir movimento"** do sistema e desligar a deriva e as entradas.

@@ -101,7 +101,7 @@ tests/ComponentVault.Tests xUnit v3.
 
 Para capturar uma tela sem interagir, abra o exe com estas variáveis:
 
-- `COMPONENTVAULT_START`: uma rota do Shell (`catalog`, `component?id=switch`, `catalog/component?id=switch`);
+- `COMPONENTVAULT_START`: uma rota do Shell (`catalog`, `component?id=switch`, `catalog/component?id=switch`; `&variant=switch.styled` escolhe o nível e `&present=true` abre no modo Apresentar);
 - `COMPONENTVAULT_THEME`: `Light`, `Dark` ou `Glass`.
 
 Depois capture a janela (ex.: `PrintWindow`). As exceções não tratadas vão para `%LOCALAPPDATA%\ComponentVault\crash.log`.
