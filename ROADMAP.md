@@ -15,13 +15,11 @@ O que ainda falta no ComponentVault, em ordem de prioridade. Situação em 26/11
 O que foi escrito, mas ainda não rodou de ponta a ponta.
 
 - [ ] **Android em execução.** O build Android completo não coube no disco (sobram cerca de 2 GB). Liberar espaço e rodar no emulador: fontes, os 3 temas, o `AmbientBackground` e os mappers `Borderless*` (Background nulo).
-- [ ] **Componentes de biblioteca em execução**, em cada tema:
-  - [ ] SwipeView
-  - [ ] Carousel
-  - [ ] Tabs (Sharpnado)
-  - [ ] Gráficos (LiveCharts): os eixos e as séries seguem a paleta?
-  - [ ] Popup (CommunityToolkit)
-  - [ ] Controles UraniumUI
+- [x] ~~Componentes de biblioteca nos 3 temas~~ (varredura por captura em 27/11/2026: UraniumUI, Sharpnado, LiveCharts, Toolkit, MauiIcons, Carousel e Glass; correções testadas pelo dono no Windows). Achados e corrigidos:
+  - LiveCharts com fundo preto sólido no Escuro e no Vidro, fonte do sistema nos eixos, total errado (1.284 em vez de 1.176), rosca com fatias em preto e branco e card dentro de card. O preview foi refeito: painel único, fundo transparente, mês atual em destaque, meta tracejada, rosca em tons de azul com o total no meio e legenda em XAML. A fonte do app vale para todos os gráficos (`HasTextSettings` em `UseVaultDesignSystem`).
+  - Campos da UraniumUI (Entry, Picker e DatePicker) encolhidos ao tamanho do texto de exemplo: agora 440 px no desktop e largura total no celular.
+- [ ] **UraniumUI `TimePickerField` vazio** mostra o título no alto, como se tivesse valor. É comportamento da biblioteca: avaliar um valor inicial ou trocar de exemplo.
+- [ ] **SwipeView e Popup com interação real** (deslizar a linha, abrir o popup): as capturas só mostram o estado inicial.
 - [ ] **Interação real no Windows.** As capturas automatizadas só abrem rotas. Clicar à mão e conferir:
   - [ ] o seletor "Aparência"
   - [ ] o botão Tema
@@ -31,14 +29,14 @@ O que foi escrito, mas ainda não rodou de ponta a ponta.
   - [ ] a busca e os filtros
 - [x] ~~Barra flutuante com cliques reais~~ (testada pelo dono no Windows em 26/11/2026).
 - [ ] **Barra flutuante no celular:** a largura (só a seção ativa mostra o nome) e a margem sobre a barra de gestos do Android.
-- [ ] **Foco automático na busca** ao abrir o Catálogo no Windows. Decidir se fica; no celular abriria o teclado sem pedir.
+- [x] ~~Foco automático na busca~~ ao abrir o Catálogo: o campo recusa o foco que a plataforma dá sozinha no primeiro segundo (`VaultTextField.RefusesInitialFocus`).
 - [ ] **Tema Vidro em todas as telas** além de Home, Catálogo e Detalhe do Switch: o componente Glass, a aba Código (cores de sintaxe) e os popups.
 
 ## 2. Bugs conhecidos
 
 - [x] ~~Título da janela ilegível no tema Claro~~ (barra de título com as cores da paleta).
 - [x] ~~Seletor de tema fora de sincronia com `COMPONENTVAULT_THEME`~~ (`IThemeService.Preview`).
-- [ ] **Catálogo às vezes abre rolado** (visto uma vez antes da navegação empilhada). Agora a página é nova a cada abertura; confirmar se ainda acontece.
+- [x] ~~Catálogo às vezes abre rolado~~: não se repetiu em dezenas de aberturas desde a navegação empilhada (a página é nova a cada abertura).
 - [x] ~~Código morto do botão Tema antigo~~ (removido da Home, do Catálogo e do seletor de aparência).
 - [ ] **ScrollView + UI Automation derruba o app no Windows** (bug do framework, descrito no README). Testar de novo a cada versão do MAUI e do Windows App SDK.
 
