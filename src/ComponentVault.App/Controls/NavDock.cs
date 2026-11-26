@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using ComponentVault.App.Views.Catalog;
 using ComponentVault.Core.Navigation;
 using ComponentVault.Core.ViewModels;
 using ComponentVault.Lib.Theming;
@@ -128,10 +129,12 @@ public sealed class NavDock : ContentView
         UpdateThemeItems();
         _themeSlider.JumpTo(SelectedThemeView());
 
-        // Detalhe: a seção é de onde ele foi aberto (//home/catalog/component ou //home/component).
-        if (ShowBack && Shell.Current?.CurrentState.Location.OriginalString is { } location)
+        if (ShowBack)
         {
-            Section = location.Contains($"/{Routes.Catalog}/", StringComparison.OrdinalIgnoreCase) ? NavSection.Catalog : NavSection.Home;
+            UpdateSectionFromStack();
+            // Numa rota com várias páginas (ex.: catalog/component), o Shell só insere as de baixo
+            // depois que a de cima carrega: confere de novo quando a navegação termina.
+            if (Shell.Current is { } shell) shell.Navigated += OnShellNavigated;
         }
 
         PlayIntro();
@@ -139,8 +142,22 @@ public sealed class NavDock : ContentView
 
     private void OnUnloaded(object? sender, EventArgs e)
     {
-        // O seletor de aparência é singleton: sem isso cada página visitada ficaria presa a ele.
+        // O seletor de aparência e o Shell vivem mais que a página: sem isso ela ficaria presa a eles.
         if (_appearance is not null) _appearance.PropertyChanged -= OnAppearanceChanged;
+        if (Shell.Current is { } shell) shell.Navigated -= OnShellNavigated;
+    }
+
+    private void OnShellNavigated(object? sender, ShellNavigatedEventArgs e) => UpdateSectionFromStack();
+
+    // Detalhe: a seção é de onde ele foi aberto, lida na pilha de páginas abaixo da dele.
+    private void UpdateSectionFromStack()
+    {
+        if (Shell.Current?.Navigation.NavigationStack is not { } stack) return;
+
+        Element? page = Parent;
+        while (page is not null and not Page) page = page.Parent;
+        var below = page is not null && stack.Contains(page) ? stack.TakeWhile(p => p != page) : stack;
+        Section = below.Any(p => p is CatalogPage) ? NavSection.Catalog : NavSection.Home;
     }
 
     private void OnAppearanceChanged(object? sender, PropertyChangedEventArgs e)
