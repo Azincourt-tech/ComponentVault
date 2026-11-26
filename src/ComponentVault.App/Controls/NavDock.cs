@@ -346,6 +346,14 @@ public sealed class NavDock : ContentView
         if (Shell.Current is not { } shell) return;
         if (section == Section && !ShowBack) return;
 
+        // No detalhe, a seção ativa é a página logo abaixo dele: voltar uma página mantém a
+        // rolagem e o filtro dela e permite a transição de volta.
+        if (section == Section)
+        {
+            _ = shell.GoToAsync("..");
+            return;
+        }
+
         // Rota absoluta: desempilha o que estiver por cima (o detalhe, por exemplo).
         _ = shell.GoToAsync(section == NavSection.Home ? Routes.Home : Routes.CatalogRoot);
     }

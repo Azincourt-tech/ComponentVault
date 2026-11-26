@@ -14,7 +14,7 @@
         <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid x:Name="Root" RowDefinitions="Auto,*,Auto">
         <!-- Luz ambiente: só acende no tema Vidro, e deriva devagar. -->
         <lib:AmbientBackground Grid.RowSpan="3" />
 

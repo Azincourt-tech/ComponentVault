@@ -18,11 +18,13 @@ public partial class CatalogPage : ContentPage
     }
 
     // Só animação: a lista entra em cascata ao abrir e a cada troca de filtro, não a cada tecla.
-    // Ao voltar do detalhe a página reaparece, mas a lista já estava lá: entra parada.
+    // Ao voltar do detalhe a página reaparece, mas a lista já estava lá: entra parada, e só o
+    // ícone e o título da linha tocada descem do cabeçalho do detalhe.
     protected override void OnAppearing()
     {
         base.OnAppearing();
         if (!_appeared) Cascade.Begin();
+        else Hero.PlayReturn(Root);
         _appeared = true;
         _viewModel.PropertyChanged += OnViewModelChanged;
     }

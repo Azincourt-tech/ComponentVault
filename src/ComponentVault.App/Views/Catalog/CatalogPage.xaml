@@ -16,7 +16,7 @@
         <BackButtonBehavior IsVisible="False" />
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid x:Name="Root" RowDefinitions="Auto,*,Auto">
         <!-- Luz ambiente (tema Vidro) atrás de tudo -->
         <lib:AmbientBackground Grid.RowSpan="3" />
 

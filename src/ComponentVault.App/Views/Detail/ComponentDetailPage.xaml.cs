@@ -34,6 +34,13 @@ public partial class ComponentDetailPage : ContentPage, IQueryAttributable
         Loaded += (_, _) => Hero.PlayInto(Header);
     }
 
+    // Ao sair, guarda onde o cabeçalho está, para a volta: a página de baixo faz o voo inverso.
+    protected override void OnDisappearing()
+    {
+        Hero.CaptureReturn(Header);
+        base.OnDisappearing();
+    }
+
     // Só repassa: IQueryAttributable é do MAUI e a ViewModel não pode conhecê-lo (RNF 7.1).
     public void ApplyQueryAttributes(IDictionary<string, object> query) =>
         _viewModel.OnNavigatedTo(new ReadOnlyDictionary<string, object>(query));

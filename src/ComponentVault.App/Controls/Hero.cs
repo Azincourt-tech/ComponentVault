@@ -8,6 +8,10 @@ namespace ComponentVault.App.Controls;
 /// páginas, recebem <c>Hero.Key="thumb"</c> / <c>Hero.Key="title"</c>. A página de destino chama
 /// <see cref="PlayInto"/> quando carrega. Sem toque recente (link direto, voltar), nada acontece.
 /// </para>
+/// <para>
+/// Na volta, o detalhe chama <see cref="CaptureReturn"/> ao sair e a página de origem chama
+/// <see cref="PlayReturn"/> ao reaparecer: ícone e título descem do cabeçalho para a linha.
+/// </para>
 /// </summary>
 public static class Hero
 {
@@ -23,6 +27,12 @@ public static class Hero
 
     private static Dictionary<string, Rect>? s_origin;
     private static DateTime s_capturedAt;
+
+    // Para a volta: a linha tocada (e o item que ela mostrava) e onde o cabeçalho estava ao sair.
+    private static WeakReference<Element>? s_sourceRow;
+    private static object? s_sourceItem;
+    private static Dictionary<string, Rect>? s_return;
+    private static DateTime s_returnAt;
 
     public static string? GetKey(BindableObject view) => (string?)view.GetValue(KeyProperty);
 
@@ -72,6 +82,109 @@ public static class Hero
 
         s_origin = origin.Count > 0 ? origin : null;
         s_capturedAt = DateTime.UtcNow;
+        s_sourceRow = new WeakReference<Element>(row);
+        s_sourceItem = row.BindingContext;
+    }
+
+    /// <summary>Guarda onde os elementos marcados de <paramref name="header"/> estão, antes de a página sair.</summary>
+    public static void CaptureReturn(Element header)
+    {
+        var bounds = new Dictionary<string, Rect>();
+        foreach (var (view, key) in Keyed(header))
+        {
+            if (WindowBounds(view) is { } rect && rect.Width > 0) bounds[key] = rect;
+        }
+
+        s_return = bounds.Count > 0 ? bounds : null;
+        s_returnAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Na página que reaparece: se a linha tocada é dela, ícone e título descem do cabeçalho
+    /// guardado até a linha. Voam como cópias numa camada por cima de <paramref name="overlay"/>,
+    /// porque a lista recorta o que passa fora dela; a linha real reaparece quando a cópia pousa.
+    /// </summary>
+    public static void PlayReturn(Grid overlay)
+    {
+        var from = s_return;
+        s_return = null;
+        if (from is null || DateTime.UtcNow - s_returnAt > MaxAge) return;
+        if (s_sourceRow is null || !s_sourceRow.TryGetTarget(out var row)) return;
+
+        // A linha precisa estar nesta página e ainda mostrar o mesmo item (a lista recicla linhas).
+        if (!ReferenceEquals(row.BindingContext, s_sourceItem) || !IsInside(row, overlay)) return;
+
+        var targets = Keyed(row).Where(t => from.ContainsKey(t.Key)).ToList();
+        if (targets.Count == 0) return;
+
+        foreach (var (view, _) in targets) view.Opacity = 0;
+        WhenMeasured(targets, attempt: 0, () =>
+        {
+            var host = WindowBounds(overlay);
+            foreach (var (view, key) in targets)
+            {
+                if (host is null || WindowBounds(view) is not { } to || to.Height <= 0 || Ghost(view) is not { } ghost)
+                {
+                    view.Opacity = 1;
+                    continue;
+                }
+
+                FlyGhost(overlay, host.Value, ghost, from[key], to, view);
+            }
+        });
+    }
+
+    private static void FlyGhost(Grid overlay, Rect host, View ghost, Rect from, Rect to, VisualElement real)
+    {
+        ghost.WidthRequest = to.Width;
+        ghost.HeightRequest = to.Height;
+        ghost.HorizontalOptions = LayoutOptions.Start;
+        ghost.VerticalOptions = LayoutOptions.Start;
+        ghost.InputTransparent = true;
+        ghost.AnchorX = 0;
+        ghost.AnchorY = 0;
+        ghost.TranslationX = from.X - host.X;
+        ghost.TranslationY = from.Y - host.Y;
+        ghost.Scale = from.Height / to.Height;
+        Grid.SetRowSpan(ghost, Math.Max(1, overlay.RowDefinitions.Count));
+        Grid.SetColumnSpan(ghost, Math.Max(1, overlay.ColumnDefinitions.Count));
+        overlay.Add(ghost);
+
+        var flight = new Animation
+        {
+            { 0, 1, new Animation(v => ghost.TranslationX = v, ghost.TranslationX, to.X - host.X, Easing.CubicInOut) },
+            { 0, 1, new Animation(v => ghost.TranslationY = v, ghost.TranslationY, to.Y - host.Y, Easing.CubicInOut) },
+            { 0, 1, new Animation(v => ghost.Scale = v, ghost.Scale, 1, Easing.CubicInOut) },
+        };
+        flight.Commit(ghost, "HeroReturn", rate: 16, length: Length, finished: (_, _) =>
+        {
+            real.Opacity = 1;
+            overlay.Remove(ghost);
+        });
+    }
+
+    // Cópia visual do elemento que voa: só o que a vitrine marca (ícone e título).
+    private static View? Ghost(VisualElement view) => view switch
+    {
+        ComponentThumb thumb => new ComponentThumb { IconName = thumb.IconName, IconSize = thumb.IconSize },
+        Label label => new Label
+        {
+            Text = label.Text,
+            FontFamily = label.FontFamily,
+            FontSize = label.FontSize,
+            TextColor = label.TextColor,
+            LineBreakMode = LineBreakMode.NoWrap,
+        },
+        _ => null,
+    };
+
+    private static bool IsInside(Element element, Element ancestor)
+    {
+        for (var current = element; current is not null; current = current.Parent)
+        {
+            if (ReferenceEquals(current, ancestor)) return true;
+        }
+        return false;
     }
 
     private static void Fly(VisualElement view, Rect from)

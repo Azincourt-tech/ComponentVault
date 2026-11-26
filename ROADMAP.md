@@ -80,7 +80,7 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [x] ~~Seletor de nível do detalhe com a pílula deslizante~~ (testado pelo dono no Windows; `SlidingIndicator`, que agora também acompanha itens criados depois, como os de um `BindableLayout`).
 - [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima. Só faz sentido no celular, então fica para quando o Android rodar.
 - [x] ~~Transição entre páginas~~: o ícone e o título da linha tocada (Catálogo ou recentes da Home) voam até o cabeçalho do Detalhe, que ganhou o ícone do componente, e o resto entra em cascata (`App/Controls/Hero.cs`). Testado pelo dono no Windows.
-- [ ] **Transição de volta** (Detalhe → Catálogo), com o ícone voltando para a linha.
+- [x] ~~Transição de volta~~: ao voltar do Detalhe, o ícone e o título descem do cabeçalho até a linha de onde saíram, no Catálogo ou nos recentes da Home. Voam como cópias por cima da página, porque a lista recorta o que passa fora dela. Na barra, tocar na seção de onde o Detalhe veio volta uma página. Testado pelo dono no Windows.
 - [x] ~~Entrada em cascata~~ dos itens e grupos do catálogo, ao abrir a página e ao trocar o filtro (`App/Controls/Cascade.cs`). De propósito, não anima ao rolar, ao digitar na busca nem ao voltar do Detalhe. Testado pelo dono no Windows.
 - [ ] **Modo Apresentar**: tela cheia com o componente centralizado e troca de nível por gesto ou teclado.
 - [ ] **Microinterações**: feedback háptico no Android (`HapticFeedback`) e o realce do botão copiar.
