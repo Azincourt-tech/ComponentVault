@@ -92,3 +92,9 @@ public partial class EntryUraniumPreview : ContentView
 {
     public EntryUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("entry.syncfusion")]
+public partial class EntrySyncfusionPreview : ContentView
+{
+    public EntrySyncfusionPreview() => InitializeComponent();
+}

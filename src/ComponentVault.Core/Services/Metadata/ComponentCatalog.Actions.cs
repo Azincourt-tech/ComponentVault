@@ -69,6 +69,23 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "button.uranium")],
                 },
+                new()
+                {
+                    Id = "button.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfButton com degradê, modo alternar, contorno tracejado e conteúdo livre.",
+                    Highlights =
+                    [
+                        "Fundo aceita qualquer Brush: degradê da paleta sem desenhar nada.",
+                        "IsCheckable faz o mesmo botão ligar e desligar, com o texto dizendo o estado.",
+                        "DashArray no contorno vira área de soltar arquivos, com ícone acima do texto.",
+                        "Content aceita qualquer layout: ícone, título e detalhe dentro do botão.",
+                    ],
+                    Snippets = [Xaml("Uso", "button.syncfusion")],
+                },
             ],
         },
         new()

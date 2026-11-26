@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:car="clr-namespace:Syncfusion.Maui.Toolkit.Carousel;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Carousels"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Carousels.CarouselSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:carousel.syncfusion -->
+        <VerticalStackLayout Spacing="14">
+
+            <!--
+              Cover flow (ViewMode Default): o item do centro vem para a frente e os vizinhos giram e
+              recuam. Toque, arraste ou use as setas do teclado.
+            -->
+            <car:SfCarousel x:Name="Covers"
+                            ViewMode="Default"
+                            HeightRequest="250"
+                            ItemWidth="170" ItemHeight="220"
+                            ItemSpacing="8" Offset="24" RotationAngle="40" ScaleOffset="0.82"
+                            SelectedIndex="2"
+                            SelectionChanged="OnSelectionChanged">
+                <car:SfCarousel.ItemTemplate>
+                    <DataTemplate x:DataType="local:CoverItem">
+                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 20" Background="{Binding Fill}">
+                            <Grid RowDefinitions="*,Auto" Padding="18">
+                                <mic:MauiIcon Icon="{Binding Icon}" IconSize="34" IconColor="White" HorizontalOptions="Start" VerticalOptions="Start" />
+                                <VerticalStackLayout Grid.Row="1" Spacing="2">
+                                    <Label Text="{Binding Title}" FontFamily="JakartaBold" FontSize="18" TextColor="White" />
+                                    <Label Text="{Binding Subtitle}" FontFamily="JakartaRegular" FontSize="13" TextColor="#E6FFFFFF" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </car:SfCarousel.ItemTemplate>
+            </car:SfCarousel>
+
+            <Label x:Name="CoverLabel" Style="{StaticResource Caption}" HorizontalOptions="Center" Text="3 de 5" />
+
+        </VerticalStackLayout>
+        <!-- /snippet:carousel.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfCarousel (Syncfusion Toolkit, MIT) tem o modo cover flow, com giro e escala dos vizinhos, e o modo linear. Ângulo, recuo e espaçamento são propriedades; o CarouselView do MAUI só tem o linear." />
+
+    </VerticalStackLayout>
+
+</ContentView>

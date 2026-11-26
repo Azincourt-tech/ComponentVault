@@ -143,6 +143,10 @@ tests/ComponentVault.Tests xUnit v3.
   - Várias propriedades documentadas são internas (`HoveredBackground`, `FocusedStroke` e `SeparatorColor` do OTP) ou fogem da convenção (`SelectedSegmentTextColor`). Algumas o XamlC barra; outras só quebram ao abrir a tela ("Attempt to access field ...Property failed"). Antes de usar uma propriedade, confira por reflexão se o setter é público.
   - Cores de foco, seleção e hover vêm das chaves globais `Primary*` (`PrimaryBackground`, `PrimaryBorderFocused`...), sobrescritas no `Colors.xaml` com o Cayenne. Sem isso, a lib sai no roxo do Material 3.
   - No `SfChip`, `IsSelected` não é definível no XAML: selecione pelo grupo (`SelectedItem`) no código.
+  - **Tema da lib:** o `VaultThemeManager` põe um `SyncfusionThemeResourceDictionary` no início dos recursos, `MaterialLight` no Claro e `MaterialDark` no Escuro e no Vidro. Sem isso, a lib usa sempre o claro e o texto some nos temas escuros (o calendário ficava ilegível).
+  - Tipos que o XAML não converte: `SfButton.DashArray` é `float[]` (defina no código) e `SfButton.Content` é um `DataTemplate`. O `Stroke` do `SfTextInputLayout` é uma cor, não um pincel.
+  - Estados que a chave de tema não alcança (erro do `SfTextInputLayout`) vão pelas propriedades do controle: `ErrorLabelStyle` e `HintLabelStyle` são `Element` e aceitam `DynamicResource`.
+  - No `SfCalendar`, `MonthView.HeaderView.TextFormat="ddd"` mostra os dias da semana com três letras.
   - O `SfSegmentedControl` usa largura fixa por segmento e se centraliza. Para ocupar a linha, use `VisibleSegmentsCount` igual ao número de itens; mudar o `SegmentWidth` pelo código não pega.
   - Ele traz um WebView2 que pede o `WinRT.Runtime` 2.3.1. Por isso o `Directory.Build.props` fixa o `WindowsSdkPackageVersion` em 10.0.19041.86; sem isso, o build avisa (MSB3277).
   - Origem no catálogo: `ComponentOrigin.Syncfusion`, nível `Library`, `PackageId = "Syncfusion.Maui.Toolkit"`.

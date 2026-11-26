@@ -62,6 +62,10 @@
     <Color x:Key="PrimaryOverlayBackgroundFocused">#1FE85D04</Color>
     <Color x:Key="PrimaryOverlayBackgroundPressed">#29E85D04</Color>
     <Color x:Key="PrimaryOverlayBackgroundSelected">#1FE85D04</Color>
+    <!-- Calendário: faixa do intervalo no tom do destaque, número escolhido em branco e "hoje" no Cayenne. -->
+    <Color x:Key="SfCalendarRangeSelectionColor">#38E85D04</Color>
+    <Color x:Key="SfCalendarMonthSelectionTextColor">#FFFFFF</Color>
+    <Color x:Key="SfCalendarTodayHighlightColor">#E85D04</Color>
 
     <!-- Origens: o badge é neutro e só o ponto é colorido. Syncfusion em rosa, sem violeta. -->
     <Color x:Key="OriginNative">#2F6FE4</Color>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:til="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Entries.EntrySyncfusionPreview">
+
+    <ContentView.Resources>
+        <!-- Comum aos campos: contorno de 14 de raio, anel de destaque no foco e fonte do design system. -->
+        <Style x:Key="VaultInputLayout" TargetType="til:SfTextInputLayout">
+            <Setter Property="OutlineCornerRadius" Value="14" />
+            <Setter Property="Stroke" Value="{DynamicResource HairlineStrong}" />
+            <Setter Property="UnfocusedStrokeThickness" Value="1" />
+            <Setter Property="FocusedStrokeThickness" Value="2" />
+            <Setter Property="ContainerBackground" Value="Transparent" />
+        </Style>
+        <Style x:Key="InputText" TargetType="Entry">
+            <Setter Property="FontFamily" Value="JakartaRegular" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:entry.syncfusion -->
+        <Grid ColumnDefinitions="{fit:OnWidth Compact='*', Default='*,*'}"
+              RowDefinitions="{fit:OnWidth Compact='Auto,Auto,Auto,Auto', Default='Auto,Auto'}"
+              ColumnSpacing="20" RowSpacing="8">
+
+            <!-- Rótulo flutuante: dentro do campo quando vazio, sobe para a borda ao focar. -->
+            <til:SfTextInputLayout Style="{StaticResource VaultInputLayout}" ContainerType="Outlined"
+                                   Hint="Nome completo" HelperText="Como aparece no seu perfil.">
+                <til:SfTextInputLayout.LeadingView>
+                    <mic:MauiIcon Icon="{mi:Fluent Icon=Person20}" IconSize="18" IconColor="{DynamicResource InkTertiary}" />
+                </til:SfTextInputLayout.LeadingView>
+                <Entry Style="{StaticResource InputText}" />
+            </til:SfTextInputLayout>
+
+            <!-- Erro: a mensagem substitui a ajuda, e a borda e o rótulo ficam na cor de erro. -->
+            <til:SfTextInputLayout Grid.Column="{fit:OnWidth Compact=0, Default=1}" Grid.Row="{fit:OnWidth Compact=1, Default=0}"
+                                   Style="{StaticResource VaultInputLayout}" ContainerType="Outlined"
+                                   Hint="E-mail" HasError="True" ErrorText="Falta o domínio, ex.: @empresa.com"
+                                   Stroke="{StaticResource Danger}">
+                <!-- Erro na cor de erro do tema, legível nos três temas (o padrão da lib some no Claro). -->
+                <til:SfTextInputLayout.HintLabelStyle>
+                    <til:LabelStyle TextColor="{DynamicResource DangerText}" FontFamily="JakartaMedium" FontSize="13" />
+                </til:SfTextInputLayout.HintLabelStyle>
+                <til:SfTextInputLayout.ErrorLabelStyle>
+                    <til:LabelStyle TextColor="{DynamicResource DangerText}" FontFamily="JakartaMedium" FontSize="13" />
+                </til:SfTextInputLayout.ErrorLabelStyle>
+                <til:SfTextInputLayout.LeadingView>
+                    <mic:MauiIcon Icon="{mi:Fluent Icon=Mail20}" IconSize="18" IconColor="{DynamicResource InkTertiary}" />
+                </til:SfTextInputLayout.LeadingView>
+                <Entry Style="{StaticResource InputText}" Text="ana.souza" Keyboard="Email" />
+            </til:SfTextInputLayout>
+
+            <!-- Senha: olho para mostrar/ocultar e contador de caracteres, prontos. -->
+            <til:SfTextInputLayout Grid.Row="{fit:OnWidth Compact=2, Default=1}"
+                                   Style="{StaticResource VaultInputLayout}" ContainerType="Outlined"
+                                   Hint="Senha" EnablePasswordVisibilityToggle="True" CharMaxLength="20"
+                                   HelperText="De 8 a 20 caracteres.">
+                <til:SfTextInputLayout.LeadingView>
+                    <mic:MauiIcon Icon="{mi:Fluent Icon=LockClosed20}" IconSize="18" IconColor="{DynamicResource InkTertiary}" />
+                </til:SfTextInputLayout.LeadingView>
+                <Entry Style="{StaticResource InputText}" IsPassword="True" />
+            </til:SfTextInputLayout>
+
+            <!-- Preenchido: o mesmo campo no estilo Filled, com fundo de campo do design system. -->
+            <til:SfTextInputLayout Grid.Column="{fit:OnWidth Compact=0, Default=1}" Grid.Row="{fit:OnWidth Compact=3, Default=1}"
+                                   Style="{StaticResource VaultInputLayout}" ContainerType="Filled"
+                                   ContainerBackground="{DynamicResource FieldFill}"
+                                   Hint="Empresa" HelperText="Opcional.">
+                <Entry Style="{StaticResource InputText}" />
+            </til:SfTextInputLayout>
+
+        </Grid>
+        <!-- /snippet:entry.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfTextInputLayout (Syncfusion Toolkit, MIT) envolve um Entry e traz rótulo flutuante animado, ajuda, erro, contador, olho da senha e ícones nas pontas, nos estilos Outlined, Filled e None." />
+
+    </VerticalStackLayout>
+
+</ContentView>

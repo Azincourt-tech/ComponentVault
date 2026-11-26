@@ -66,6 +66,23 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "entry.uranium")],
                 },
+                new()
+                {
+                    Id = "entry.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfTextInputLayout com rótulo flutuante, ajuda, erro, contador e olho da senha.",
+                    Highlights =
+                    [
+                        "O rótulo fica dentro do campo vazio e sobe para a borda ao focar.",
+                        "Ajuda e erro no mesmo lugar: a mensagem de erro substitui a ajuda.",
+                        "Olho da senha e contador de caracteres sem código.",
+                        "Estilos Outlined, Filled e None com o mesmo XAML.",
+                    ],
+                    Snippets = [Xaml("Uso", "entry.syncfusion")],
+                },
             ],
         },
         new()
@@ -326,6 +343,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "picker.uranium")],
                 },
+                new()
+                {
+                    Id = "picker.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfPicker em roda com duas colunas, faixa de seleção no tom do destaque.",
+                    Highlights =
+                    [
+                        "Roda como no iOS: as opções vizinhas ficam visíveis, o que a lista do Picker esconde.",
+                        "Várias colunas no mesmo controle, cada uma com cabeçalho.",
+                        "Também abre como popup com confirmar e cancelar; há versões prontas para data e hora.",
+                    ],
+                    Snippets = [Xaml("Uso", "picker.syncfusion")],
+                },
             ],
         },
         new()
@@ -381,6 +414,22 @@ internal static partial class ComponentCatalog
                         "Título flutuante igual aos demais campos da biblioteca.",
                     ],
                     Snippets = [Xaml("Uso", "datepicker.uranium")],
+                },
+                new()
+                {
+                    Id = "datepicker.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfCalendar sempre visível com seleção de intervalo e resumo em frase.",
+                    Highlights =
+                    [
+                        "Intervalo em dois toques: ida e volta; os dias entre eles no tom leve.",
+                        "Datas passadas bloqueadas (EnablePastDates=False).",
+                        "Navega por mês, ano, década e século; também abre como popup.",
+                    ],
+                    Snippets = [Xaml("Uso", "datepicker.syncfusion")],
                 },
             ],
         },

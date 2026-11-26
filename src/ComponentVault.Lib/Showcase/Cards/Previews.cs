@@ -17,3 +17,17 @@ public partial class CardExpanderPreview : ContentView
 {
     public CardExpanderPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("card.syncfusion")]
+public partial class CardSyncfusionPreview : ContentView
+{
+    public CardSyncfusionPreview() => InitializeComponent();
+
+    // Os avisos dispensados voltam, para dar para testar de novo.
+    private void OnRestoreClicked(object? sender, EventArgs e)
+    {
+        BuildCard.IsDismissed = false;
+        ReviewCard.IsDismissed = false;
+        QuotaCard.IsDismissed = false;
+    }
+}

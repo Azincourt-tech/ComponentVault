@@ -124,6 +124,22 @@ internal static partial class ComponentCatalog
                         CSharp("Diálogo (ConfirmDialog.cs)", "control.confirmdialog"),
                     ],
                 },
+                new()
+                {
+                    Id = "popup.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfPopup de confirmação destrutiva com fundo desfocado e zoom curto.",
+                    Highlights =
+                    [
+                        "Cabeçalho, mensagem e rodapé com dois botões, sem montar o layout.",
+                        "Excluir em vermelho, cancelar neutro; tocar fora conta como cancelar.",
+                        "Fundo desfocado (OverlayMode Blur) e seis animações de entrada.",
+                    ],
+                    Snippets = [Xaml("Uso", "popup.syncfusion")],
+                },
             ],
         },
     ];

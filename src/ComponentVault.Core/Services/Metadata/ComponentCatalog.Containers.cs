@@ -146,6 +146,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "card.expander")],
                 },
+                new()
+                {
+                    Id = "card.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfCardView com faixa indicadora e arrastar para dispensar, e a pilha do SfCardLayout.",
+                    Highlights =
+                    [
+                        "Faixa colorida na lateral (IndicatorColor) diz o tipo do aviso antes de ler.",
+                        "Arrastar para o lado dispensa, com esmaecimento (FadeOutOnSwiping).",
+                        "SfCardLayout empilha os cards: o de cima sai e revela o próximo, como num baralho.",
+                    ],
+                    Snippets = [Xaml("Uso", "card.syncfusion")],
+                },
             ],
         },
         new()
@@ -238,6 +254,22 @@ internal static partial class ComponentCatalog
                         "O ponto atual vira uma barra em 200ms, sem bounce.",
                     ],
                     Snippets = [Xaml("Uso", "carousel.styled"), CSharp("Indicador e navegação", "carousel.styled.code")],
+                },
+                new()
+                {
+                    Id = "carousel.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfCarousel em cover flow: o item do centro na frente, os vizinhos girando e recuando.",
+                    Highlights =
+                    [
+                        "Ângulo (RotationAngle), recuo (ScaleOffset) e espaçamento são propriedades.",
+                        "Toque, arraste ou setas do teclado; o contador diz a posição e o título.",
+                        "Também tem o modo linear, como o CarouselView do MAUI.",
+                    ],
+                    Snippets = [Xaml("Uso", "carousel.syncfusion")],
                 },
             ],
         },

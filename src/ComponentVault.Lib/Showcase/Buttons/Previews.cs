@@ -50,3 +50,25 @@ public partial class ButtonUraniumPreview : ContentView
 {
     public ButtonUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("button.syncfusion")]
+public partial class ButtonSyncfusionPreview : ContentView
+{
+    public ButtonSyncfusionPreview()
+    {
+        InitializeComponent();
+        // DashArray é float[] e o XAML não converte a partir de texto.
+        DropZone.DashArray = [5f, 4f];
+    }
+
+    // O texto diz o estado atual; ligado, o botão fica preenchido no tom do destaque.
+    private void OnFollowClicked(object? sender, EventArgs e)
+    {
+        var following = FollowButton.IsChecked;
+        FollowButton.Text = following ? "Seguindo" : "Seguir";
+        FollowButton.Background = following
+            ? new SolidColorBrush(ComponentVault.Lib.Theming.ThemeColors.Resolve("AccentTint", Colors.Transparent))
+            : Brush.Transparent;
+        FollowButton.TextColor = ComponentVault.Lib.Theming.ThemeColors.Resolve(following ? "AccentText" : "Ink", Colors.Black);
+    }
+}

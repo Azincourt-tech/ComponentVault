@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfb="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Buttons.ButtonSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:button.syncfusion -->
+        <VerticalStackLayout Spacing="22">
+
+            <!-- Degradê no fundo: o SfButton aceita qualquer Brush, não só uma cor. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Degradê e alternar" />
+                <HorizontalStackLayout Spacing="12">
+                    <sfb:SfButton Text="Publicar componente" HeightRequest="44" Padding="22,0" CornerRadius="22"
+                                  FontFamily="JakartaSemiBold" FontSize="15" TextColor="{StaticResource OnAccent}">
+                        <sfb:SfButton.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FAA307" Offset="0" />
+                                <GradientStop Color="#E85D04" Offset="0.55" />
+                                <GradientStop Color="#DC2F02" Offset="1" />
+                            </LinearGradientBrush>
+                        </sfb:SfButton.Background>
+                    </sfb:SfButton>
+
+                    <!-- IsCheckable: o mesmo botão liga e desliga, e o texto diz o estado atual. -->
+                    <sfb:SfButton x:Name="FollowButton" Text="Seguir" IsCheckable="True" Clicked="OnFollowClicked"
+                                  HeightRequest="44" Padding="22,0" CornerRadius="22" StrokeThickness="1"
+                                  FontFamily="JakartaSemiBold" FontSize="15"
+                                  Background="Transparent" Stroke="{DynamicResource HairlineStrong}"
+                                  TextColor="{DynamicResource Ink}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Contorno tracejado (DashArray, definido no código: é um float[]): área de soltar arquivos, com ícone. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Contorno tracejado" />
+                <sfb:SfButton x:Name="DropZone" Text="Solte os arquivos aqui ou clique para escolher"
+                              ImageSource="{mi:Fluent Icon=ArrowUpload20, IconSize=20, IconColor={DynamicResource AccentText}}"
+                              ShowIcon="True" ImageAlignment="Top" ImageSize="22"
+                              HeightRequest="96" CornerRadius="14" StrokeThickness="1.5"
+                              FontFamily="JakartaMedium" FontSize="14"
+                              Background="{DynamicResource FieldFill}" Stroke="{DynamicResource HairlineStrong}"
+                              TextColor="{DynamicResource InkSecondary}" />
+            </VerticalStackLayout>
+
+            <!-- Content (um DataTemplate): qualquer layout dentro do botão, aqui título e detalhe em duas linhas. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Conteúdo livre" />
+                <sfb:SfButton HeightRequest="64" CornerRadius="14" StrokeThickness="1"
+                              Background="{DynamicResource Surface}" Stroke="{DynamicResource Hairline}">
+                    <sfb:SfButton.Content>
+                        <DataTemplate>
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14" Padding="16,0">
+                            <Border WidthRequest="36" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="{DynamicResource AccentTint}" VerticalOptions="Center">
+                                <mic:MauiIcon Icon="{mi:Fluent Icon=DocumentPdf20}" IconSize="18" IconColor="{DynamicResource AccentText}"
+                                              HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Baixar relatório" />
+                                <Label Style="{StaticResource Caption}" Text="PDF · 2,4 MB" />
+                            </VerticalStackLayout>
+                            <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ArrowDownload20}" IconSize="18"
+                                          IconColor="{DynamicResource InkTertiary}" VerticalOptions="Center" />
+                        </Grid>
+                        </DataTemplate>
+                    </sfb:SfButton.Content>
+                </sfb:SfButton>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:button.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfButton (Syncfusion Toolkit, MIT) aceita degradê no fundo, contorno tracejado, ícone em qualquer lado, modo alternar (IsCheckable) e conteúdo livre, coisas que o Button do MAUI não tem." />
+
+    </VerticalStackLayout>
+
+</ContentView>

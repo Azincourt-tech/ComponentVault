@@ -61,6 +61,23 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "chart.livecharts"), CSharp("Séries e eixos", "chart.livecharts.code")],
                 },
+                new()
+                {
+                    Id = "chart.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "Colunas com o mês atual em destaque e rosca com o total no meio, nos tokens do design system.",
+                    Highlights =
+                    [
+                        "PointColorPath dá cor por ponto: só o mês atual em destaque, o resto neutro.",
+                        "Eixos e grade estilizados com os tokens; sem linha de eixo vertical nem marcas.",
+                        "A rosca aceita qualquer view no meio (CenterView) para o número principal.",
+                        "Tooltip e animação de entrada já vêm prontos.",
+                    ],
+                    Snippets = [Xaml("Uso", "chart.syncfusion")],
+                },
             ],
         },
     ];

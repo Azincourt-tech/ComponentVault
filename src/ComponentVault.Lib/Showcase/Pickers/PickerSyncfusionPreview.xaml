@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pk="clr-namespace:Syncfusion.Maui.Toolkit.Picker;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Pickers.PickerSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:picker.syncfusion -->
+        <VerticalStackLayout Spacing="12">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource FieldLabel}" Text="Tamanho e cor" VerticalOptions="Center" />
+                <Label x:Name="ChoiceLabel" Grid.Column="1" Style="{StaticResource Caption}" VerticalOptions="Center" />
+            </Grid>
+
+            <!--
+              Roda (wheel) com duas colunas, como no iOS: arrasta-se cada coluna até a faixa do meio.
+              Mostra as opções vizinhas, o que o Picker de lista do MAUI esconde.
+            -->
+            <Border Style="{StaticResource Card}" Padding="0">
+                <pk:SfPicker x:Name="SizePicker"
+                             HeightRequest="230"
+                             ItemHeight="44"
+                             Background="Transparent"
+                             SelectionChanged="OnSelectionChanged">
+                    <!-- Faixa do meio no tom do destaque; a opção escolhida forte, as vizinhas esmaecidas. -->
+                    <pk:SfPicker.SelectionView>
+                        <pk:PickerSelectionView Background="{DynamicResource AccentTint}" CornerRadius="12" Padding="12,0" />
+                    </pk:SfPicker.SelectionView>
+                    <pk:SfPicker.SelectedTextStyle>
+                        <pk:PickerTextStyle FontFamily="JakartaSemiBold" FontSize="17" TextColor="{DynamicResource Ink}" />
+                    </pk:SfPicker.SelectedTextStyle>
+                    <pk:SfPicker.TextStyle>
+                        <pk:PickerTextStyle FontFamily="JakartaRegular" FontSize="15" TextColor="{DynamicResource InkTertiary}" />
+                    </pk:SfPicker.TextStyle>
+                </pk:SfPicker>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:picker.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfPicker (Syncfusion Toolkit, MIT) monta rodas com várias colunas, cabeçalhos, rolagem infinita e modo popup com botões de confirmar. Há versões prontas para data, hora e data e hora." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -80,3 +80,28 @@ public partial class PopupToolkitPreview : ContentView
     }
     // /snippet:popup.toolkit.code
 }
+
+[ShowcasePreview("popup.syncfusion")]
+public partial class PopupSyncfusionPreview : ContentView
+{
+    private bool _accepted;
+
+    public PopupSyncfusionPreview()
+    {
+        InitializeComponent();
+        // O botão de excluir confirma; qualquer outra saída (cancelar, tocar fora, Esc) é cancelar.
+        DeletePopup.AcceptCommand = new Command(() => { _accepted = true; DeletePopup.IsOpen = false; });
+    }
+
+    private void OnOpenClicked(object? sender, EventArgs e)
+    {
+        _accepted = false;
+        DeletePopup.IsOpen = true;
+    }
+
+    private void OnPopupClosed(object? sender, EventArgs e)
+    {
+        ResultLabel.Text = _accepted ? "Componente excluído. Dá para desfazer em até 30 dias." : "Exclusão cancelada.";
+        ResultLabel.SetThemeColor(Label.TextColorProperty, _accepted ? "DangerText" : "InkSecondary");
+    }
+}

@@ -83,3 +83,38 @@ public partial class CarouselStyledPreview : ContentView
     }
     // /snippet:carousel.styled.code
 }
+
+/// <summary>Capa do cover flow: título, subtítulo, ícone e um degradê da paleta.</summary>
+public sealed record CoverItem(string Title, string Subtitle, FluentIcons Icon, Brush Fill);
+
+[ShowcasePreview("carousel.syncfusion")]
+public partial class CarouselSyncfusionPreview : ContentView
+{
+    private static LinearGradientBrush Gradient(string from, string to) => new(
+        [new GradientStop(Color.FromArgb(from), 0), new GradientStop(Color.FromArgb(to), 1)],
+        new Point(0, 0), new Point(1, 1));
+
+    private readonly List<CoverItem> _items =
+    [
+        new("Paleta", "10 tons de pôr do sol", FluentIcons.PaintBrush24, Gradient("#FFBA08", "#F48C06")),
+        new("Componentes", "30 no catálogo", FluentIcons.Board24, Gradient("#FAA307", "#E85D04")),
+        new("Lançamento", "Versão 1.0 em dezembro", FluentIcons.Rocket24, Gradient("#E85D04", "#D00000")),
+        new("Equipe", "6 pessoas no projeto", FluentIcons.PeopleTeam24, Gradient("#DC2F02", "#9D0208")),
+        new("Ideias", "Sugira um componente", FluentIcons.Lightbulb24, Gradient("#9D0208", "#370617")),
+    ];
+
+    public CarouselSyncfusionPreview()
+    {
+        InitializeComponent();
+        Covers.ItemsSource = _items;
+        UpdateLabel();
+    }
+
+    private void OnSelectionChanged(object? sender, EventArgs e) => UpdateLabel();
+
+    private void UpdateLabel()
+    {
+        var index = Math.Clamp(Covers.SelectedIndex, 0, _items.Count - 1);
+        CoverLabel.Text = $"{index + 1} de {_items.Count}: {_items[index].Title}";
+    }
+}

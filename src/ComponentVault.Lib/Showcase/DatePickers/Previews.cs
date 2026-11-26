@@ -56,3 +56,30 @@ public partial class DatePickerUraniumPreview : ContentView
 {
     public DatePickerUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("datepicker.syncfusion")]
+public partial class DatePickerSyncfusionPreview : ContentView
+{
+    private static readonly CultureInfo PtBr = CultureInfo.GetCultureInfo("pt-BR");
+
+    public DatePickerSyncfusionPreview()
+    {
+        InitializeComponent();
+        // Abre com uma semana já escolhida, para o intervalo aparecer de cara.
+        var start = DateTime.Today.AddDays(7);
+        TripCalendar.SelectedDateRange = new Syncfusion.Maui.Toolkit.Calendar.CalendarDateRange(start, start.AddDays(6));
+        TripCalendar.DisplayDate = start;
+        UpdateLabel();
+    }
+
+    private void OnSelectionChanged(object? sender, EventArgs e) => UpdateLabel();
+
+    // Resumo em frase: "14 dez → 20 dez · 6 noites", ou o que falta escolher.
+    private void UpdateLabel()
+    {
+        var range = TripCalendar.SelectedDateRange;
+        RangeLabel.Text = range?.StartDate is not DateTime from ? "Escolha a ida"
+            : range.EndDate is not DateTime to ? $"Ida em {from.ToString("d MMM", PtBr)}. Escolha a volta"
+            : $"{from.ToString("d MMM", PtBr)} → {to.ToString("d MMM", PtBr)} · {(to - from).Days} noites";
+    }
+}

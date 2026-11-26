@@ -1,4 +1,5 @@
 using ComponentVault.Lib.Resources.Theme;
+using Syncfusion.Maui.Toolkit.Themes;
 
 namespace ComponentVault.Lib.Theming;
 
@@ -29,6 +30,18 @@ public static class VaultThemeManager
         var merged = app.Resources.MergedDictionaries;
         foreach (var old in merged.Where(IsPalette).ToArray()) merged.Remove(old);
         merged.Add(Create(palette));
+
+        // Tema dos controles do Syncfusion Toolkit: claro no Pérola, escuro no Escuro e no Vidro (sem isto,
+        // a lib usa sempre o claro e o texto some nos temas escuros). Entra no início da lista para as
+        // nossas chaves (as Primary* do Colors.xaml, no Cayenne) continuarem valendo por cima das dele.
+        // MergedDictionaries não tem Insert: refaz a lista com o do Syncfusion primeiro.
+        var ours = merged.Where(d => d is not SyncfusionThemeResourceDictionary).ToArray();
+        merged.Clear();
+        merged.Add(new SyncfusionThemeResourceDictionary
+        {
+            VisualTheme = palette == VaultPalette.Light ? SfVisuals.MaterialLight : SfVisuals.MaterialDark,
+        });
+        foreach (var dictionary in ours) merged.Add(dictionary);
 
         // Controles nativos (Switch, Picker, barra de título) seguem claro/escuro;
         // o Vidro é um tema escuro.

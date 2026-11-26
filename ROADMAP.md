@@ -100,20 +100,20 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 | Componente | Base | Estilizado | Custom | Bibliotecas |
 |---|---|---|---|---|
 | Avatar | ✓ | | **+** anel de status/stories | ✓ Toolkit |
-| Button | ✓ | ✓ | **+** segurar para confirmar | ✓ UraniumUI, **+** Syncfusion `SfButton` |
-| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, **+** Syncfusion `SfCardView`, **+** Syncfusion `SfAccordion` |
-| Carousel | ✓ | ✓ | **+** pilha de cartões | **+** Syncfusion `SfCarousel` |
-| Chart | | | ✓ | ✓ LiveCharts, **+** Syncfusion `SfCartesianChart`, **+** Microcharts |
+| Button | ✓ | ✓ | **+** segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
+| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, **+** Syncfusion `SfAccordion` |
+| Carousel | ✓ | ✓ | **+** pilha de cartões | ✓ Syncfusion `SfCarousel` |
+| Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, **+** Microcharts |
 | CheckBox | ✓ | ✓ | **+** check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
-| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, **+** Syncfusion `SfCalendar`, **+** Plugin.Maui.Calendar |
+| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, **+** Plugin.Maui.Calendar |
 | Editor | ✓ | ✓ | **+** Markdown com prévia | |
-| Entry | ✓ | ✓ | **+** rótulo flutuante desenhado | ✓ UraniumUI, **+** Syncfusion `SfTextInputLayout` |
+| Entry | ✓ | ✓ | **+** rótulo flutuante desenhado | ✓ UraniumUI, ✓ Syncfusion `SfTextInputLayout` |
 | Icons | ✓ | | **+** ícone animado | ✓ MauiIcons |
 | List | ✓ | ✓ | **+** linhas com deslizar desenhado | **+** Syncfusion `SfPullToRefresh` |
 | Código OTP | **+** | | ✓ | ✓ Syncfusion `SfOtpInput` |
-| Picker | ✓ | ✓ | **+** roda (wheel) | ✓ UraniumUI, **+** Syncfusion `SfPicker` |
-| Popup | ✓ | | **+** folha inferior | ✓ Toolkit, **+** Syncfusion `SfPopup` |
+| Picker | ✓ | ✓ | **+** roda (wheel) | ✓ UraniumUI, ✓ Syncfusion `SfPicker` |
+| Popup | ✓ | | **+** folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
 | Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
 | Radio | ✓ | ✓ | **+** opções desenhadas | ✓ UraniumUI |
 | SearchBar | ✓ | ✓ | **+** busca com sugestões | **+** UraniumUI `AutoCompleteTextField` |
@@ -170,7 +170,7 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [ ] **Microinterações**: feedback háptico no Android (`HapticFeedback`) e o realce do botão copiar.
 - [ ] **Fundo ambiente que reage**: as manchas puxam levemente para o ponteiro ou o toque, ou mudam de tom conforme a categoria.
 - [ ] **Respeitar "reduzir movimento"** do sistema e desligar a deriva e as entradas.
-- [ ] **Ícone do app e splash** com a identidade nova (hoje são os padrões do template).
+- [x] ~~Ícone do app e splash com a identidade nova~~ (27/11/2026): degradê Amber Flame, Cayenne e Oxblood.
 
 ## 6. Produto (PRD)
 
@@ -187,3 +187,4 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [ ] **CI**: o workflow atual compila e testa. Adicionar os artefatos Windows e Android (APK) e o build com `TreatWarningsAsErrors`.
 - [ ] **Desempenho**: medir a abertura do catálogo e o custo da deriva do fundo em aparelho Android modesto.
 - [ ] **Primeiro commit e PR** para `develop`: identidade pessoal, mensagens em pt-BR.
+- [ ] **Capturas no README** quando os componentes estiverem completos: Home nos 3 temas, Detalhe com Lado a lado, Catálogo no Vidro e o celular (390 px). Guardar em `docs/images` e atualizar os selos de contagem (componentes e variantes).

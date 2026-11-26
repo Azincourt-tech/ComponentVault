@@ -36,3 +36,26 @@ public partial class PickerUraniumPreview : ContentView
 {
     public PickerUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("picker.syncfusion")]
+public partial class PickerSyncfusionPreview : ContentView
+{
+    private static readonly string[] Sizes = ["PP", "P", "M", "G", "GG"];
+    private static readonly string[] ColorNames = ["Areia", "Coral", "Grafite", "Oliva", "Vinho"];
+
+    public PickerSyncfusionPreview()
+    {
+        InitializeComponent();
+        SizePicker.Columns.Add(new Syncfusion.Maui.Toolkit.Picker.PickerColumn { HeaderText = "Tamanho", ItemsSource = Sizes, SelectedIndex = 2 });
+        SizePicker.Columns.Add(new Syncfusion.Maui.Toolkit.Picker.PickerColumn { HeaderText = "Cor", ItemsSource = ColorNames, SelectedIndex = 1 });
+        UpdateLabel();
+    }
+
+    private void OnSelectionChanged(object? sender, EventArgs e) => UpdateLabel();
+
+    private void UpdateLabel()
+    {
+        if (SizePicker.Columns.Count < 2) return;
+        ChoiceLabel.Text = $"{Sizes[SizePicker.Columns[0].SelectedIndex]} · {ColorNames[SizePicker.Columns[1].SelectedIndex]}";
+    }
+}

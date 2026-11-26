@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:card="clr-namespace:Syncfusion.Maui.Toolkit.Cards;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardSyncfusionPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="NoticeCard" TargetType="card:SfCardView">
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderColor" Value="{DynamicResource Hairline}" />
+            <Setter Property="Background" Value="{DynamicResource Surface}" />
+            <Setter Property="IndicatorPosition" Value="Left" />
+            <Setter Property="IndicatorThickness" Value="4" />
+            <Setter Property="SwipeToDismiss" Value="True" />
+            <Setter Property="FadeOutOnSwiping" Value="True" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:card.syncfusion -->
+        <VerticalStackLayout Spacing="22">
+
+            <!-- Avisos: faixa colorida à esquerda (IndicatorColor) e arrastar para o lado dispensa. -->
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Style="{StaticResource FieldLabel}" Text="Arraste para o lado para dispensar" VerticalOptions="Center" />
+                    <Button Grid.Column="1" Text="Restaurar" Style="{StaticResource TertiaryButton}" Clicked="OnRestoreClicked" />
+                </Grid>
+                <card:SfCardView x:Name="BuildCard" Style="{StaticResource NoticeCard}" IndicatorColor="{StaticResource Success}">
+                    <VerticalStackLayout Padding="18,14" Spacing="2">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Build concluído" />
+                        <Label Style="{StaticResource Caption}" Text="Windows e Android passaram nos 67 testes." />
+                    </VerticalStackLayout>
+                </card:SfCardView>
+                <card:SfCardView x:Name="ReviewCard" Style="{StaticResource NoticeCard}" IndicatorColor="{StaticResource Accent}">
+                    <VerticalStackLayout Padding="18,14" Spacing="2">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Revisão pedida" />
+                        <Label Style="{StaticResource Caption}" Text="Ana quer sua opinião sobre o novo Slider." />
+                    </VerticalStackLayout>
+                </card:SfCardView>
+                <card:SfCardView x:Name="QuotaCard" Style="{StaticResource NoticeCard}" IndicatorColor="{StaticResource Warning}">
+                    <VerticalStackLayout Padding="18,14" Spacing="2">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Armazenamento em 90%" />
+                        <Label Style="{StaticResource Caption}" Text="Libere espaço antes do próximo envio." />
+                    </VerticalStackLayout>
+                </card:SfCardView>
+            </VerticalStackLayout>
+
+            <!-- Pilha: o card de cima sai arrastando e revela o próximo, como num baralho. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Pilha (arraste o de cima para a esquerda)" />
+                <card:SfCardLayout HeightRequest="132" SwipeDirection="Left" ShowSwipedCard="True">
+                    <card:SfCardView CornerRadius="16" BorderWidth="1" BorderColor="{DynamicResource Hairline}" Background="{DynamicResource SurfaceAlt}">
+                        <VerticalStackLayout Padding="20,18" Spacing="4">
+                            <Label Style="{StaticResource Caption}" Text="3 de 3" />
+                            <Label Style="{StaticResource CardTitle}" Text="Convide sua equipe" />
+                            <Label Style="{StaticResource BodySmall}" Text="Componentes favoritos ficam visíveis para todos." />
+                        </VerticalStackLayout>
+                    </card:SfCardView>
+                    <card:SfCardView CornerRadius="16" BorderWidth="1" BorderColor="{DynamicResource Hairline}" Background="{DynamicResource Surface}">
+                        <VerticalStackLayout Padding="20,18" Spacing="4">
+                            <Label Style="{StaticResource Caption}" Text="2 de 3" />
+                            <Label Style="{StaticResource CardTitle}" Text="Escolha um tema" />
+                            <Label Style="{StaticResource BodySmall}" Text="Claro, Escuro ou Vidro, trocando ao vivo." />
+                        </VerticalStackLayout>
+                    </card:SfCardView>
+                    <card:SfCardView CornerRadius="16" BorderWidth="1" BorderColor="{DynamicResource HairlineStrong}" Background="{DynamicResource CardFill}">
+                        <VerticalStackLayout Padding="20,18" Spacing="4">
+                            <Label Style="{StaticResource Caption}" Text="1 de 3" />
+                            <Label Style="{StaticResource CardTitle}" Text="Bem-vindo ao ComponentVault" />
+                            <Label Style="{StaticResource BodySmall}" Text="Compare cada componente do cru ao acabado." />
+                        </VerticalStackLayout>
+                    </card:SfCardView>
+                </card:SfCardLayout>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:card.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfCardView (Syncfusion Toolkit, MIT) traz faixa indicadora, arrastar para dispensar com esmaecimento e, com o SfCardLayout, a pilha de cards que se desfaz como um baralho." />
+
+    </VerticalStackLayout>
+
+</ContentView>

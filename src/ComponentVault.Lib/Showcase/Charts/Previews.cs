@@ -133,3 +133,37 @@ public partial class ChartLiveChartsPreview : ContentView
     }
     // /snippet:chart.livecharts.code
 }
+
+/// <summary>Ponto de gráfico com a cor própria (PointColorPath).</summary>
+public sealed record ChartPoint(string Label, double Value, Brush Color);
+
+[ShowcasePreview("chart.syncfusion")]
+public partial class ChartSyncfusionPreview : ContentView
+{
+    public ChartSyncfusionPreview()
+    {
+        InitializeComponent();
+        Paint();
+        Loaded += (_, _) => ThemeColors.PaletteChanged += OnPaletteChanged;
+        Unloaded += (_, _) => ThemeColors.PaletteChanged -= OnPaletteChanged;
+    }
+
+    private void OnPaletteChanged(object? sender, AppThemeChangedEventArgs e) => Paint();
+
+    // Só o mês atual na cor de destaque; os anteriores em neutro, para o olho ir direto ao que importa.
+    private void Paint()
+    {
+        var accent = new SolidColorBrush(ThemeColors.Resolve("Accent", Colors.OrangeRed));
+        var neutral = new SolidColorBrush(ThemeColors.Resolve("HairlineStrong", Colors.LightGray));
+        string[] months = ["jun", "jul", "ago", "set", "out", "nov"];
+        double[] values = [6.1, 7.4, 6.8, 9.2, 10.5, 12.8];
+        DownloadSeries.ItemsSource = months.Select((m, i) => new ChartPoint(m, values[i], i == months.Length - 1 ? accent : neutral)).ToList();
+
+        PlatformSeries.ItemsSource = new List<ChartPoint>
+        {
+            new("Android", 62, accent),
+            new("Windows", 27, new SolidColorBrush(Color.FromArgb("#FAA307"))),
+            new("iOS", 11, new SolidColorBrush(ThemeColors.Resolve("InkTertiary", Colors.Gray))),
+        };
+    }
+}

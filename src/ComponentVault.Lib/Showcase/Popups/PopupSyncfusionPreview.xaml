@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pop="clr-namespace:Syncfusion.Maui.Toolkit.Popup;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Popups.PopupSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:popup.syncfusion -->
+        <VerticalStackLayout Spacing="12">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Confirmação destrutiva" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <Label x:Name="ResultLabel" Style="{StaticResource BodyMuted}" VerticalOptions="Center"
+                       Text="Nenhuma ação ainda." />
+                <Button Grid.Column="1" Text="Excluir componente…" Style="{StaticResource SecondaryButton}" Clicked="OnOpenClicked" />
+            </Grid>
+
+            <!--
+              Diálogo com dois botões: o de excluir em vermelho, cancelar neutro. O fundo desfoca (Blur)
+              e o diálogo entra com zoom curto. Fechar fora dele conta como cancelar.
+            -->
+            <pop:SfPopup x:Name="DeletePopup"
+                         HeaderTitle="Excluir “Switch”?"
+                         Message="As 3 variantes e os snippets saem do catálogo. Dá para desfazer em até 30 dias."
+                         ShowFooter="True"
+                         AppearanceMode="TwoButton"
+                         AcceptButtonText="Excluir"
+                         DeclineButtonText="Cancelar"
+                         OverlayMode="Blur"
+                         AnimationMode="Zoom"
+                         AnimationDuration="180"
+                         WidthRequest="380"
+                         AutoSizeMode="Height"
+                         Closed="OnPopupClosed">
+                <pop:SfPopup.PopupStyle>
+                    <pop:PopupStyle CornerRadius="20"
+                                    PopupBackground="{DynamicResource SurfaceRaised}"
+                                    HeaderBackground="{DynamicResource SurfaceRaised}"
+                                    MessageBackground="{DynamicResource SurfaceRaised}"
+                                    FooterBackground="{DynamicResource SurfaceRaised}"
+                                    HeaderFontFamily="JakartaBold" HeaderFontSize="18"
+                                    HeaderTextColor="{DynamicResource Ink}"
+                                    MessageFontFamily="JakartaRegular" MessageFontSize="15"
+                                    MessageTextColor="{DynamicResource InkSecondary}"
+                                    FooterFontFamily="JakartaSemiBold" FooterFontSize="15"
+                                    FooterButtonCornerRadius="20"
+                                    AcceptButtonBackground="{StaticResource Danger}"
+                                    AcceptButtonTextColor="White"
+                                    DeclineButtonBackground="{DynamicResource SurfaceAlt}"
+                                    DeclineButtonTextColor="{DynamicResource Ink}"
+                                    Stroke="{DynamicResource Hairline}" StrokeThickness="1" />
+                </pop:SfPopup.PopupStyle>
+            </pop:SfPopup>
+
+        </VerticalStackLayout>
+        <!-- /snippet:popup.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfPopup (Syncfusion Toolkit, MIT) traz cabeçalho, mensagem e rodapé com um ou dois botões, fundo desfocado, seis animações de entrada, posição relativa a outra view e modo tela cheia." />
+
+    </VerticalStackLayout>
+
+</ContentView>
