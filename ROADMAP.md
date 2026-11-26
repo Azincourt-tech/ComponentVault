@@ -18,7 +18,7 @@ O que foi escrito, mas ainda não rodou de ponta a ponta.
 - [x] ~~Componentes de biblioteca nos 3 temas~~ (varredura por captura em 27/11/2026: UraniumUI, Sharpnado, LiveCharts, Toolkit, MauiIcons, Carousel e Glass; correções testadas pelo dono no Windows). Achados e corrigidos:
   - LiveCharts com fundo preto sólido no Escuro e no Vidro, fonte do sistema nos eixos, total errado (1.284 em vez de 1.176), rosca com fatias em preto e branco e card dentro de card. O preview foi refeito: painel único, fundo transparente, mês atual em destaque, meta tracejada, rosca em tons de azul com o total no meio e legenda em XAML. A fonte do app vale para todos os gráficos (`HasTextSettings` em `UseVaultDesignSystem`).
   - Campos da UraniumUI (Entry, Picker e DatePicker) encolhidos ao tamanho do texto de exemplo: agora 440 px no desktop e largura total no celular.
-- [ ] **UraniumUI `TimePickerField` vazio** mostra o título no alto, como se tivesse valor. É comportamento da biblioteca: avaliar um valor inicial ou trocar de exemplo.
+- [x] ~~UraniumUI `TimePickerField` vazio com o título no alto~~: o exemplo ganhou um horário inicial (14:30), e o par agora mostra os dois estados (data vazia, horário preenchido). As caixas cinzas que o TimePicker nativo desenhava no Windows dentro do campo foram removidas (mesma limpeza dos campos sem borda). Os campos de data e horário ficaram com 280 px no desktop, o tamanho do conteúdo, em vez dos 440 px dos campos de texto.
 - [ ] **SwipeView e Popup com interação real** (deslizar a linha, abrir o popup): as capturas só mostram o estado inicial.
 - [ ] **Interação real no Windows.** As capturas automatizadas só abrem rotas. Clicar à mão e conferir:
   - [ ] o seletor "Aparência"
