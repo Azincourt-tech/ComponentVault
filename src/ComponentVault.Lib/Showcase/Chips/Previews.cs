@@ -28,6 +28,18 @@ public sealed class ChipItem(string text, bool isSelected = false) : INotifyProp
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
 
+[ShowcasePreview("chips.base")]
+public partial class ChipsBasePreview : ContentView
+{
+    public ChipsBasePreview() => InitializeComponent();
+}
+
+[ShowcasePreview("chips.custom")]
+public partial class ChipsCustomPreview : ContentView
+{
+    public ChipsCustomPreview() => InitializeComponent();
+}
+
 [ShowcasePreview("chips.styled")]
 public partial class ChipsStyledPreview : ContentView
 {

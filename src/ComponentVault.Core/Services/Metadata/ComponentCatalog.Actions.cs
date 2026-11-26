@@ -103,6 +103,21 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "chips.base",
+                    Title = "Base MAUI",
+                    Tier = VariantTier.Base,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Sem chips no MAUI: RadioButton para escolher um e CheckBox para filtrar vários.",
+                    Highlights =
+                    [
+                        "Funciona e é acessível, mas ocupa mais espaço e não lembra um chip.",
+                        "O CheckBox não tem rótulo: o texto vai num Label ao lado.",
+                        "No Windows o CheckBox reserva ~120px de largura, então o rótulo fica longe da caixa.",
+                    ],
+                    Snippets = [Xaml("Escolha", "chips.base"), Xaml("Filtro", "chips.base.filter")],
+                },
+                new()
+                {
                     Id = "chips.styled",
                     Title = "Estilizado",
                     Tier = VariantTier.Styled,
@@ -116,6 +131,28 @@ internal static partial class ComponentCatalog
                         "Tags removíveis têm um alvo de toque próprio para o X.",
                     ],
                     Snippets = [Xaml("Uso", "chips.styled")],
+                },
+                new()
+                {
+                    Id = "chips.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Escolha com uma pílula que desliza até o chip tocado; filtro em que o check entra com animação.",
+                    Highlights =
+                    [
+                        "Uma pílula só para a escolha: o olho acompanha a mudança, em vez de ver dois chips trocarem de cor.",
+                        "No filtro, o chip abre espaço e o check cresce dentro dele; ao ligar, um pulo de 6%.",
+                        "O estado continua legível sem cor: check no filtro, texto em destaque na escolha.",
+                        "O deslize é o mesmo SlidingIndicator da barra de navegação e das abas do app.",
+                    ],
+                    Snippets =
+                    [
+                        Xaml("Escolha", "chips.custom"),
+                        Xaml("Filtro", "chips.custom.filter"),
+                        CSharp("ChoiceChipGroup (ChipControls.cs)", "control.choicechips"),
+                        CSharp("FilterChip (ChipControls.cs)", "control.filterchip"),
+                    ],
                 },
             ],
         },
