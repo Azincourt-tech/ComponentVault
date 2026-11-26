@@ -11,8 +11,8 @@
 [![Plataformas](https://img.shields.io/badge/plataformas-Android%20%7C%20Windows-370617)](#começando)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-03071E)](LICENSE)
 
-![Componentes](https://img.shields.io/badge/componentes-30-F48C06)
-![Variantes](https://img.shields.io/badge/variantes-117-FAA307)
+![Componentes](https://img.shields.io/badge/componentes-31-F48C06)
+![Variantes](https://img.shields.io/badge/variantes-121-FAA307)
 ![Temas](https://img.shields.io/badge/temas-Claro%20%C2%B7%20Escuro%20%C2%B7%20Vidro-FFBA08)
 ![Testes](https://img.shields.io/badge/testes-xUnit%20v3-6A040F)
 
@@ -64,7 +64,7 @@ A cor de cada nível é a mesma em todo o app: no seletor de nível, nos selos, 
 | **Feedback** | Progress, Skeleton, Alert, Toast, Empty state |
 | **Exibição** | Badge, Avatar, Ícones |
 | **Contêineres** | Glass, Card, List, Carousel |
-| **Navegação** | Tabs, Popup |
+| **Navegação** | Tabs, Popup, Bottom sheet |
 | **Dados** | Chart |
 
 Mídia e documentos (player de vídeo e áudio, PDF, imagem e galeria) estão no [roadmap](ROADMAP.md#mídia-e-documentos).
@@ -115,7 +115,7 @@ Só entram libs **100% livres** (MIT ou equivalente, sem cadastro nem chave) e c
 
 | Biblioteca | Licença | Usada em |
 |---|---|---|
-| [Syncfusion Toolkit](https://github.com/syncfusion/maui-toolkit) | MIT | Button, Card, Accordion, Carousel, Chart, Chips, DatePicker, Entry, List, OTP, Picker, Popup, Progress, Segmented, Skeleton, Stepper, Tabs |
+| [Syncfusion Toolkit](https://github.com/syncfusion/maui-toolkit) | MIT | Bottom sheet, Button, Card, Accordion, Carousel, Chart, Chips, DatePicker, Entry, List, OTP, Picker, Popup, Progress, Segmented, Skeleton, Stepper, Tabs |
 | [UraniumUI](https://github.com/enisn/UraniumUI) | MIT | Button, CheckBox, DatePicker, Entry, Picker, RadioButton, SearchBar, Tabs |
 | [CommunityToolkit.Maui](https://github.com/CommunityToolkit/Maui) | MIT | Avatar, Card (Expander), Popup, Rating, Toast |
 | [Sharpnado.Tabs](https://github.com/roubachof/Sharpnado.Tabs) | MIT | Tabs, Segmented |

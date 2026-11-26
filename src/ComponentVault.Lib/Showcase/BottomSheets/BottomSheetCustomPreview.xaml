@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.BottomSheets"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.BottomSheets.BottomSheetCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="StepIcon" TargetType="Border">
+            <Setter Property="WidthRequest" Value="36" />
+            <Setter Property="HeightRequest" Value="36" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceAlt}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="16">
+
+        <!-- snippet:bottomsheet.custom -->
+        <!-- Mapa por baixo e o painel com três paradas por cima, na mesma célula do Grid. -->
+        <Border fit:Fit.MaxWidth="380" HeightRequest="520" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" Padding="0">
+            <Grid IsClippedToBounds="True">
+                <local:MapBackdrop />
+
+                <local:SnapSheet x:Name="Sheet" Stop="Half" StopChanged="OnStopChanged">
+                    <!-- Cabeçalho: é o que aparece recolhido e é por onde se arrasta. -->
+                    <local:SnapSheet.Header>
+                        <Grid ColumnDefinitions="*,Auto" Padding="0,0,0,14">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Style="{StaticResource SectionHeader}" Text="18 min" />
+                                <Label Style="{StaticResource BodySmall}" Text="6,2 km · chegada às 09:42" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="Iniciar" Style="{StaticResource PrimaryButtonSmall}" VerticalOptions="Center" />
+                        </Grid>
+                    </local:SnapSheet.Header>
+
+                    <!-- Conteúdo: a lista rola normalmente; o arrasto do painel fica no cabeçalho. -->
+                    <ScrollView>
+                        <VerticalStackLayout Spacing="16" Padding="0,4,0,24">
+                            <BoxView Style="{StaticResource Divider}" />
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Style="{StaticResource StepIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=ArrowUp20}" IconSize="18" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Body}" LineHeight="1" Text="Siga pela Rua Augusta" />
+                                    <Label Style="{StaticResource Caption}" Text="800 m" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Style="{StaticResource StepIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=ArrowTurnRight20}" IconSize="18" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Body}" LineHeight="1" Text="Vire à direita na Av. Paulista" />
+                                    <Label Style="{StaticResource Caption}" Text="3,1 km" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Style="{StaticResource StepIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=ArrowTurnRight20}" IconSize="18" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Body}" LineHeight="1" Text="Entre na Rua da Consolação" />
+                                    <Label Style="{StaticResource Caption}" Text="1,9 km" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Style="{StaticResource StepIcon}" BackgroundColor="{DynamicResource AccentTint}"><mic:MauiIcon Icon="{mi:Fluent Icon=Flag20}" IconSize="18" IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Body}" LineHeight="1" Text="Escritório, à esquerda" />
+                                    <Label Style="{StaticResource Caption}" Text="400 m" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </local:SnapSheet>
+            </Grid>
+        </Border>
+        <!-- /snippet:bottomsheet.custom -->
+
+        <Label x:Name="StopLabel" Style="{StaticResource Caption}" />
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="SnapSheet: três paradas (recolhido, metade e cheio) como nos apps de mapa. O painel acompanha o dedo e, ao soltar, vai para a parada seguinte na direção do arrasto. O fundo só escurece entre a metade e a cheia." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.BottomSheets"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.BottomSheets.BottomSheetBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <Border fit:Fit.MaxWidth="380" HeightRequest="460" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" Padding="0">
+            <!-- snippet:bottomsheet.base -->
+            <Grid IsClippedToBounds="True">
+                <local:MapBackdrop />
+                <Button Text="Ver rota" HorizontalOptions="Start" VerticalOptions="Start" Margin="16" Clicked="OnToggleClicked" />
+
+                <!-- Um Border no fim do Grid que aparece e some, sem animação nem fundo escurecido. -->
+                <Border x:Name="Sheet" IsVisible="False" VerticalOptions="End" BackgroundColor="White" Stroke="Gray" Padding="16">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="18 min (6,2 km)" FontSize="20" TextColor="Black" />
+                        <Label Text="Chegada às 09:42, trânsito leve" TextColor="Black" />
+                        <Button Text="Fechar" Clicked="OnToggleClicked" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            <!-- /snippet:bottomsheet.base -->
+        </Border>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI não tem bottom sheet. Um Border no fim do Grid resolve o básico, mas surge do nada, não escurece o fundo, não fecha tocando fora nem arrastando, e as cores fixas não acompanham o tema." />
+
+    </VerticalStackLayout>
+
+</ContentView>

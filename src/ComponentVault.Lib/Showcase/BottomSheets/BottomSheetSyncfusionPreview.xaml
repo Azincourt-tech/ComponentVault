@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.BottomSheets"
+             xmlns:sheet="clr-namespace:Syncfusion.Maui.Toolkit.BottomSheet;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.BottomSheets.BottomSheetSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="16">
+
+        <Border fit:Fit.MaxWidth="380" HeightRequest="520" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" Padding="0">
+            <!-- snippet:bottomsheet.syncfusion -->
+            <!--
+              Content é a tela por baixo; BottomSheetContent, o painel. HalfExpandedRatio define a meia
+              altura; arrastar a alça leva à cheia ou fecha. As cores vêm dos tokens (no código).
+            -->
+            <sheet:SfBottomSheet x:Name="Sheet"
+                                 State="HalfExpanded"
+                                 AllowedState="All"
+                                 HalfExpandedRatio="0.5"
+                                 FullExpandedRatio="0.92"
+                                 CornerRadius="24,24,0,0"
+                                 ContentPadding="20,4,20,20"
+                                 ShowGrabber="True"
+                                 CollapseOnOverlayTap="True"
+                                 StateChanged="OnStateChanged">
+                <sheet:SfBottomSheet.Content>
+                    <Grid IsClippedToBounds="True">
+                        <local:MapBackdrop />
+                        <Button Text="Ver rota" Style="{StaticResource PrimaryButtonSmall}" HorizontalOptions="Start" VerticalOptions="Start"
+                                Margin="16" Clicked="OnOpenClicked" />
+                    </Grid>
+                </sheet:SfBottomSheet.Content>
+
+                <sheet:SfBottomSheet.BottomSheetContent>
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Style="{StaticResource SectionHeader}" Text="18 min" />
+                                <Label Style="{StaticResource BodySmall}" Text="6,2 km · chegada às 09:42" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="Iniciar" Style="{StaticResource PrimaryButtonSmall}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=ArrowUp20}" IconSize="18" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Style="{StaticResource Body}" LineHeight="1" Text="Siga pela Rua Augusta · 800 m" VerticalOptions="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=ArrowTurnRight20}" IconSize="18" IconColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Style="{StaticResource Body}" LineHeight="1" Text="Vire à direita na Av. Paulista · 3,1 km" VerticalOptions="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Flag20}" IconSize="18" IconColor="{DynamicResource AccentText}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Style="{StaticResource Body}" LineHeight="1" Text="Escritório, à esquerda · 400 m" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </sheet:SfBottomSheet.BottomSheetContent>
+            </sheet:SfBottomSheet>
+            <!-- /snippet:bottomsheet.syncfusion -->
+        </Border>
+
+        <Label x:Name="StateLabel" Style="{StaticResource Caption}" />
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="SfBottomSheet (Syncfusion Toolkit, MIT): estados recolhido, meia altura e cheio, alça, fundo que escurece e fecha ao tocar, e o evento StateChanged. Background e a cor da alça são pincéis, então as cores do tema entram pelo código." />
+
+    </VerticalStackLayout>
+
+</ContentView>

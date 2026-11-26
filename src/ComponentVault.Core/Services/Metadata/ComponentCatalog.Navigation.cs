@@ -205,5 +205,84 @@ internal static partial class ComponentCatalog
                 },
             ],
         },
+        new()
+        {
+            Id = "bottomsheet",
+            Name = "Bottom sheet",
+            Icon = "PanelBottom20",
+            Category = ComponentCategory.Navigation,
+            Summary = "Painel que sobe da borda de baixo, com paradas em meia altura e cheio.",
+            Tags = ["bottom sheet", "painel", "folha", "gaveta", "mapa", "arrastar", "drawer"],
+            AddedOn = new DateOnly(2026, 11, 28),
+            Docs = new ComponentDocs
+            {
+                Overview = "O MAUI não tem bottom sheet. O Base usa um Border no fim do Grid; o Estilizado acrescenta tokens, fundo escurecido e animação; o Custom tem três paradas arrastáveis, como nos apps de mapa; e o SfBottomSheet do Syncfusion Toolkit traz tudo pronto.",
+                Properties =
+                [
+                    new("Stop / State", "Parada atual: recolhido, meia altura ou cheio."),
+                    new("HalfExpandedRatio", "Fração da altura na parada do meio (SfBottomSheet)."),
+                    new("Header", "Parte sempre visível e área de arrasto (SnapSheet)."),
+                    new("CollapseOnOverlayTap", "Tocar no fundo escurecido fecha ou recolhe."),
+                ],
+                UseCases = ["Detalhes de um ponto no mapa sem sair dele.", "Filtros e ações rápidas que o polegar alcança."],
+                Limitations = ["Com uma lista rolável dentro, deixe o arrasto só no cabeçalho para os dois gestos não brigarem."],
+            },
+            Variants =
+            [
+                Base("bottomsheet.base", "Border no fim do Grid, mostrado e escondido por IsVisible.",
+                    "Surge do nada, sem animação nem fundo escurecido.",
+                    "Não fecha tocando fora nem arrastando.",
+                    "Cores fixas que não acompanham o tema."),
+                new()
+                {
+                    Id = "bottomsheet.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "O mesmo Border com tokens, alça, fundo que escurece e a folha subindo da borda.",
+                    Highlights =
+                    [
+                        "Cantos de cima arredondados, alça e linhas finas do design system.",
+                        "Sobe em 260ms com TranslateTo; o fundo escurece junto.",
+                        "Tocar fora fecha; Fechar e Iniciar dividem a largura.",
+                        "Não arrasta: as paradas ficam para o Custom.",
+                    ],
+                    Snippets = [Xaml("Uso", "bottomsheet.styled")],
+                },
+                new()
+                {
+                    Id = "bottomsheet.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "SnapSheet: três paradas (recolhido, metade e cheio) arrastando o cabeçalho, como nos apps de mapa.",
+                    Highlights =
+                    [
+                        "O painel acompanha o dedo e, ao soltar, vai para a parada seguinte na direção do arrasto.",
+                        "Tocar no cabeçalho sobe uma parada; cheio, tocar no fundo volta à metade.",
+                        "O fundo só escurece entre a metade e a cheia: na metade, o mapa continua usável.",
+                        "A lista rola normalmente; o arrasto fica no cabeçalho.",
+                    ],
+                    Snippets = [Xaml("Uso", "bottomsheet.custom"), CSharp("Controle (SnapSheet.cs)", "control.snapsheet")],
+                },
+                new()
+                {
+                    Id = "bottomsheet.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfBottomSheet com meia altura, cheio, alça e evento de mudança de estado.",
+                    Highlights =
+                    [
+                        "Content é a tela por baixo e BottomSheetContent é o painel.",
+                        "HalfExpandedRatio e FullExpandedRatio definem as paradas.",
+                        "Fundo escurecido que fecha ao tocar (CollapseOnOverlayTap).",
+                        "Background e a cor da alça são pincéis: as cores do tema entram pelo código.",
+                    ],
+                    Snippets = [Xaml("Uso", "bottomsheet.syncfusion")],
+                },
+            ],
+        },
     ];
 }

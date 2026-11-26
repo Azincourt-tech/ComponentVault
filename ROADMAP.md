@@ -135,7 +135,7 @@ Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBotto
 
 Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, ScreensDesign) e as libs gratuitas do awesome-dotnet-maui:
 
-- [ ] **Bottom sheet**: Base com `Border` animado; Biblioteca com o `SfBottomSheet` do Syncfusion Toolkit (o The49 parou no .NET 8).
+- [x] ~~**Bottom sheet**~~: feito em 28/11/2026 com os quatro níveis: Base (`Border` com `IsVisible`), Estilizado (tokens, fundo escurecido e animação), Custom (`SnapSheet` com três paradas arrastáveis, como nos apps de mapa) e Biblioteca (`SfBottomSheet`). Falta testar o arrasto à mão.
 - [ ] **Expander / Accordion**: CommunityToolkit `Expander`, `SfExpander` e `SfAccordion` do Syncfusion Toolkit, e uma versão estilizada.
 - [ ] **FAB e menu de ações**: botão flutuante que abre as ações em leque.
 - [ ] **Assinatura / desenho**: CommunityToolkit `DrawingView`.

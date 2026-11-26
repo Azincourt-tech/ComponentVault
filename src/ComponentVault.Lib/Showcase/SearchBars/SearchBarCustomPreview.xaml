@@ -18,7 +18,7 @@
                                        ItemChosen="OnItemChosen" />
 
                 <Label x:Name="ResultLabel" Style="{StaticResource BodyMuted}"
-                       Text="Toque na lupa para buscar entre os 30 componentes." />
+                       Text="Toque na lupa para buscar um componente do catálogo." />
 
             </VerticalStackLayout>
         </Border>
