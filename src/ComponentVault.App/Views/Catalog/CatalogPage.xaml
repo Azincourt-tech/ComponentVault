@@ -77,7 +77,7 @@
 
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate x:DataType="vm:ComponentGroup">
-                    <HorizontalStackLayout Spacing="8" Padding="8,28,8,8">
+                    <HorizontalStackLayout Spacing="8" Padding="8,28,8,8" controls:Cascade.Item="True">
                         <Label Style="{StaticResource FieldLabel}" Text="{Binding Title}" />
                         <Label Style="{StaticResource Caption}" Text="{Binding Count}" />
                     </HorizontalStackLayout>
@@ -86,7 +86,8 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:ComponentCardModel">
-                    <VerticalStackLayout>
+                    <!-- Entra em cascata ao abrir a página e ao trocar o filtro (CatalogPage.xaml.cs) -->
+                    <VerticalStackLayout controls:Cascade.Item="True">
                         <Grid Style="{StaticResource ListRow}" Padding="8,12" ColumnDefinitions="Auto,*,Auto" motion:Motion.Press="True" controls:Hero.Source="True"
                               SemanticProperties.Description="{Binding Name}">
                             <Grid.GestureRecognizers>

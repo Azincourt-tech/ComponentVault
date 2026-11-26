@@ -81,7 +81,7 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima. Só faz sentido no celular, então fica para quando o Android rodar.
 - [x] ~~Transição entre páginas~~: o ícone e o título da linha tocada (Catálogo ou recentes da Home) voam até o cabeçalho do Detalhe, que ganhou o ícone do componente, e o resto entra em cascata (`App/Controls/Hero.cs`). Testado pelo dono no Windows.
 - [ ] **Transição de volta** (Detalhe → Catálogo), com o ícone voltando para a linha.
-- [ ] **Entrada em cascata** dos itens do catálogo ao rolar e ao filtrar.
+- [x] ~~Entrada em cascata~~ dos itens e grupos do catálogo, ao abrir a página e ao trocar o filtro (`App/Controls/Cascade.cs`). De propósito, não anima ao rolar, ao digitar na busca nem ao voltar do Detalhe. Testado pelo dono no Windows.
 - [ ] **Modo Apresentar**: tela cheia com o componente centralizado e troca de nível por gesto ou teclado.
 - [ ] **Microinterações**: feedback háptico no Android (`HapticFeedback`) e o realce do botão copiar.
 - [ ] **Fundo ambiente que reage**: as manchas puxam levemente para o ponteiro ou o toque, ou mudam de tom conforme a categoria.

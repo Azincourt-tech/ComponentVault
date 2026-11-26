@@ -67,6 +67,7 @@ tests/ComponentVault.Tests xUnit v3.
 - **Estilos sempre nomeados** (`Style="{StaticResource PrimaryButton}"`), nunca implícitos, para a variante Base continuar crua.
 - **Tipografia:** Plus Jakarta Sans (`FontRegular`/`Medium`/`SemiBold`/`Bold`) e JetBrains Mono (`FontMono`). Os arquivos ficam em `App/Resources/Fonts` como `MauiFont`.
 - **Transição de página (Hero):** a linha tocável recebe `controls:Hero.Source="True"`, e o ícone e o título, na linha e no destino, recebem `controls:Hero.Key="thumb"` / `"title"`. A página de destino chama `Hero.PlayInto(...)` no `Loaded`. As posições vêm da janela nativa (`TransformToVisual` no Windows, `GetLocationInWindow` no Android).
+- **Cascata em listas:** `controls:Cascade.Item="True"` na raiz do template do item, e `Cascade.Begin()` na página quando a lista deve entrar em sequência (abrir, trocar filtro). Itens que surgem fora dessa janela de 700ms entram parados.
 - **Movimento:** use `Motion.Entrance`, `Motion.Delay` e `Motion.Press` (propriedades anexadas em `Lib/Theming/Motion.cs`). O `AmbientBackground` é o fundo de luz do Vidro. Nos dois temas sólidos as manchas são transparentes.
 - **Regras de gosto** (adaptadas da taste-skill, Leonxlnx/taste-skill):
   - interface 90–95% neutra, com uma só cor de destaque;
