@@ -5,8 +5,10 @@
 
     <VerticalStackLayout Spacing="24">
 
+        <!-- Border invisível em volta: recorta o slide seguinte, que no Windows vazava até a borda do card. -->
         <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="CarouselView + IndicatorView" />
+            <Border StrokeThickness="0" Padding="0" BackgroundColor="Transparent">
             <!-- snippet:carousel.base -->
             <VerticalStackLayout Spacing="8">
                 <CarouselView HeightRequest="180" IndicatorView="{x:Reference BaseIndicator}">
@@ -28,6 +30,7 @@
                 <IndicatorView x:Name="BaseIndicator" HorizontalOptions="Center" />
             </VerticalStackLayout>
             <!-- /snippet:carousel.base -->
+            </Border>
         </VerticalStackLayout>
 
         <Label Style="{StaticResource BodySmall}"

@@ -54,3 +54,9 @@ public partial class SkeletonCustomPreview : ContentView
         }
     }
 }
+
+[ShowcasePreview("skeleton.syncfusion")]
+public partial class SkeletonSyncfusionPreview : ContentView
+{
+    public SkeletonSyncfusionPreview() => InitializeComponent();
+}

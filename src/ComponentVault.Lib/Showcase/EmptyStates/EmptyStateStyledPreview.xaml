@@ -13,7 +13,7 @@
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource FieldLabel}" Text="Busca sem resultado" />
             <Border Style="{StaticResource Card}" Padding="24,32">
-                <VerticalStackLayout Spacing="14" HorizontalOptions="Center" MaximumWidthRequest="360">
+                <VerticalStackLayout Spacing="14" HorizontalOptions="Center" MaximumWidthRequest="420">
                     <Border WidthRequest="64" HeightRequest="64" StrokeThickness="0" StrokeShape="RoundRectangle 32"
                             HorizontalOptions="Center" BackgroundColor="{DynamicResource SurfaceAlt}">
                         <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.DocumentSearch24}" IconSize="28"

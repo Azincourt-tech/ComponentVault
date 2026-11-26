@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  Tema Vidro (inspirado no Liquid Glass da Apple): fundo profundo com manchas de luz vivas e
-  superfícies translúcidas com brilho na borda superior. Sem desfoque real no MAUI multiplataforma,
-  é a translucidez sobre luz difusa que dá a leitura de vidro. Os controles nativos ficam no modo escuro.
+  Tema Vidro (inspirado no Liquid Glass da Apple, paleta Fiery Red Sunset): fundo Ink Black com
+  manchas de luz de pôr do sol (Red Ochre, Deep Saffron e Oxblood) e superfícies translúcidas com
+  brilho na borda superior. Sem desfoque real no MAUI multiplataforma, é a translucidez sobre luz
+  difusa que dá a leitura de vidro. Os controles nativos ficam no modo escuro.
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="ComponentVault.Lib.Resources.Theme.GlassPalette">
 
-    <Color x:Key="Ink">#F5F7FC</Color>
-    <Color x:Key="InkHover">#DCE2EF</Color>
-    <Color x:Key="OnInk">#0A0E1C</Color>
-    <Color x:Key="InkSecondary">#BAC3D8</Color>
-    <Color x:Key="InkTertiary">#909BB6</Color>
+    <Color x:Key="Ink">#FBF6F2</Color>
+    <Color x:Key="InkHover">#EADFD8</Color>
+    <Color x:Key="OnInk">#03071E</Color>
+    <Color x:Key="InkSecondary">#D2C6C2</Color>
+    <Color x:Key="InkTertiary">#A79C9C</Color>
 
-    <Color x:Key="Ground">#070A16</Color>
+    <Color x:Key="Ground">#03071E</Color>
     <!-- Vidro: branco com pouca opacidade sobre o fundo de luz -->
     <Color x:Key="Surface">#17FFFFFF</Color>
     <Color x:Key="SurfaceRaised">#24FFFFFF</Color>
@@ -22,51 +23,57 @@
     <Color x:Key="SurfaceHover">#2BFFFFFF</Color>
     <Color x:Key="Hairline">#1FFFFFFF</Color>
     <Color x:Key="HairlineStrong">#38FFFFFF</Color>
+    <!-- Campo preenchido: vidro mais escuro que o card, para o texto ganhar contraste -->
+    <Color x:Key="FieldFill">#33000000</Color>
+    <Color x:Key="FieldStroke">#29FFFFFF</Color>
     <!-- Borda com brilho em cima e quase nada embaixo: a "aresta" do vidro -->
     <LinearGradientBrush x:Key="CardStroke" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#73FFFFFF" Offset="0" />
         <GradientStop Color="#1AFFFFFF" Offset="0.35" />
         <GradientStop Color="#0DFFFFFF" Offset="1" />
     </LinearGradientBrush>
+    <!-- Vidro: preenchimento translúcido liso (o "metal" fica para o Claro e o Escuro) -->
+    <SolidColorBrush x:Key="CardFill" Color="#17FFFFFF" />
     <!-- Barra flutuante: vidro fumê, mais denso que os cards para continuar legível sobre o conteúdo -->
-    <Color x:Key="Chrome">#C7141A2D</Color>
+    <Color x:Key="Chrome">#C70B0F27</Color>
     <Color x:Key="ChromeStroke">#40FFFFFF</Color>
 
-    <Color x:Key="AccentText">#A3C4FF</Color>
-    <Color x:Key="AccentTint">#3D4F8EF7</Color>
+    <!-- Texto em destaque: Amber Flame, o tom mais claro da paleta, legível sobre o vidro -->
+    <Color x:Key="AccentText">#FFBA08</Color>
+    <Color x:Key="AccentTint">#40E85D04</Color>
     <Color x:Key="SuccessText">#7BE8B8</Color>
     <Color x:Key="WarningText">#FFD27A</Color>
-    <Color x:Key="DangerText">#FFA3A3</Color>
+    <Color x:Key="DangerText">#FF9A8F</Color>
     <Color x:Key="SuccessTint">#2934D399</Color>
-    <Color x:Key="WarningTint">#29FBBF24</Color>
-    <Color x:Key="DangerTint">#29F87171</Color>
-    <Color x:Key="InfoTint">#294F8EF7</Color>
+    <Color x:Key="WarningTint">#29FAA307</Color>
+    <Color x:Key="DangerTint">#29D00000</Color>
+    <Color x:Key="InfoTint">#292F6FE4</Color>
 
-    <Color x:Key="SyntaxPlain">#EEF1F8</Color>
-    <Color x:Key="SyntaxKeyword">#93B8FF</Color>
+    <Color x:Key="SyntaxPlain">#F3EEEA</Color>
+    <Color x:Key="SyntaxKeyword">#FAA307</Color>
     <Color x:Key="SyntaxType">#6FE3D6</Color>
     <Color x:Key="SyntaxString">#8AE6B0</Color>
-    <Color x:Key="SyntaxNumber">#FFB487</Color>
-    <Color x:Key="SyntaxComment">#7F8AA6</Color>
-    <Color x:Key="SyntaxElement">#93B8FF</Color>
-    <Color x:Key="SyntaxAttribute">#FF9EBB</Color>
-    <Color x:Key="SyntaxPunctuation">#8A95AF</Color>
+    <Color x:Key="SyntaxNumber">#FFD27A</Color>
+    <Color x:Key="SyntaxComment">#8E8790</Color>
+    <Color x:Key="SyntaxElement">#FFBA08</Color>
+    <Color x:Key="SyntaxAttribute">#FF9A8F</Color>
+    <Color x:Key="SyntaxPunctuation">#9A929A</Color>
 
-    <!-- Luz ambiente: azul, verde-água e rosa (sem violeta) -->
+    <!-- Luz de pôr do sol: Red Ochre, Deep Saffron e Oxblood (as chaves mantêm o nome antigo) -->
     <RadialGradientBrush x:Key="AmbientBlue" Center="0.5,0.5" Radius="0.5">
-        <GradientStop Color="#B32F6FE4" Offset="0" />
-        <GradientStop Color="#402F6FE4" Offset="0.5" />
-        <GradientStop Color="#002F6FE4" Offset="1" />
+        <GradientStop Color="#B3DC2F02" Offset="0" />
+        <GradientStop Color="#40DC2F02" Offset="0.5" />
+        <GradientStop Color="#00DC2F02" Offset="1" />
     </RadialGradientBrush>
     <RadialGradientBrush x:Key="AmbientTeal" Center="0.5,0.5" Radius="0.5">
-        <GradientStop Color="#9914B8A6" Offset="0" />
-        <GradientStop Color="#3314B8A6" Offset="0.5" />
-        <GradientStop Color="#0014B8A6" Offset="1" />
+        <GradientStop Color="#99F48C06" Offset="0" />
+        <GradientStop Color="#33F48C06" Offset="0.5" />
+        <GradientStop Color="#00F48C06" Offset="1" />
     </RadialGradientBrush>
     <RadialGradientBrush x:Key="AmbientRose" Center="0.5,0.5" Radius="0.5">
-        <GradientStop Color="#8CF0527E" Offset="0" />
-        <GradientStop Color="#2EF0527E" Offset="0.5" />
-        <GradientStop Color="#00F0527E" Offset="1" />
+        <GradientStop Color="#A69D0208" Offset="0" />
+        <GradientStop Color="#389D0208" Offset="0.5" />
+        <GradientStop Color="#009D0208" Offset="1" />
     </RadialGradientBrush>
 
 </ResourceDictionary>

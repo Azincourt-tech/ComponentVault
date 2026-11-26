@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
@@ -11,7 +12,7 @@
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource FieldLabel}" Text="Detalhes recolhíveis" />
             <!-- snippet:card.expander -->
-            <Border Style="{StaticResource Card}" MaximumWidthRequest="560" HorizontalOptions="Fill">
+            <Border Style="{StaticResource Card}">
                 <VerticalStackLayout>
 
                     <toolkit:Expander x:Name="ShippingExpander" IsExpanded="True">

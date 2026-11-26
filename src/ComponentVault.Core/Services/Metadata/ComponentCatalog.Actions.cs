@@ -154,6 +154,22 @@ internal static partial class ComponentCatalog
                         CSharp("FilterChip (ChipControls.cs)", "control.filterchip"),
                     ],
                 },
+                new()
+                {
+                    Id = "chips.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfChipGroup nos tipos escolha, filtro e entrada, com as cores do design system.",
+                    Highlights =
+                    [
+                        "ChipType troca o comportamento: Choice (um), Filter (vários, com check), Input (com remover).",
+                        "Um estilo só para os três grupos: altura de 36px, raio de pílula e fonte do design system.",
+                        "Escolha preenchida na cor de destaque; filtro no tom leve, para os dois não competirem.",
+                    ],
+                    Snippets = [Xaml("Uso", "chips.syncfusion")],
+                },
             ],
         },
     ];

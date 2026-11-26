@@ -17,14 +17,17 @@
 
         <!-- Moldura própria: a cor e a espessura mudam com foco e estado (UpdateVisuals). -->
         <Border x:Name="FieldBorder" Style="{StaticResource FieldFrame}">
-            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                <Path Data="{Binding IconData, Source={x:Reference Root}}"
+            <!-- Espaço por Margin, não ColumnSpacing: o espaçamento entre colunas fica mesmo com o ícone escondido. -->
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                <Path x:Name="IconPath"
+                      Data="{Binding IconData, Source={x:Reference Root}}"
                       IsVisible="{Binding IconData, Source={x:Reference Root}, Converter={toolkit:IsNotNullConverter}}"
                       Stroke="{DynamicResource InkTertiary}"
                       StrokeThickness="1.6"
                       StrokeLineCap="Round"
                       WidthRequest="16"
                       HeightRequest="16"
+                      Margin="0,0,10,0"
                       Aspect="Uniform"
                       VerticalOptions="Center" />
                 <controls:BorderlessEntry x:Name="Input"
@@ -33,7 +36,6 @@
                                           Text="{Binding Text, Source={x:Reference Root}, Mode=TwoWay}"
                                           Placeholder="{Binding Placeholder, Source={x:Reference Root}}"
                                           Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
-                                          IsPassword="{Binding IsPassword, Source={x:Reference Root}}"
                                           ReturnType="{Binding ReturnType, Source={x:Reference Root}}"
                                           VerticalOptions="Center"
                                           Focused="OnInputFocusChanged"
@@ -42,7 +44,7 @@
                 <Border x:Name="ClearButton"
                         Grid.Column="2"
                         IsVisible="False"
-                        WidthRequest="28" HeightRequest="28"
+                        WidthRequest="28" HeightRequest="28" Margin="10,0,0,0"
                         StrokeThickness="0" StrokeShape="RoundRectangle 14"
                         BackgroundColor="{DynamicResource SurfaceAlt}"
                         VerticalOptions="Center"
@@ -54,6 +56,21 @@
                           StrokeLineCap="Round" WidthRequest="9" HeightRequest="9" Aspect="Uniform"
                           HorizontalOptions="Center" VerticalOptions="Center" />
                 </Border>
+                <!-- Mostrar/ocultar senha: só em campo de senha. Conferir o que digitou evita erro no cadastro. -->
+                <Grid x:Name="RevealButton"
+                      Grid.Column="3"
+                      IsVisible="False"
+                      WidthRequest="32" HeightRequest="32" Margin="8,0,-6,0"
+                      VerticalOptions="Center"
+                      SemanticProperties.Description="Mostrar senha">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRevealTapped" />
+                    </Grid.GestureRecognizers>
+                    <Path x:Name="RevealIcon" Stroke="{DynamicResource InkSecondary}" StrokeThickness="1.5"
+                          StrokeLineCap="Round" StrokeLineJoin="Round"
+                          WidthRequest="18" HeightRequest="18" Aspect="Uniform"
+                          HorizontalOptions="Center" VerticalOptions="Center" />
+                </Grid>
             </Grid>
         </Border>
 

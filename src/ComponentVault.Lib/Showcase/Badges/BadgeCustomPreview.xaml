@@ -68,7 +68,7 @@
             <HorizontalStackLayout Spacing="28">
                 <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Caixa de entrada, 3 não lidas">
                     <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Mail24}" IconSize="24"
-                                 IconColor="{DynamicResource Ink}" />
+                                 IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Border Style="{StaticResource Counter}">
                         <Label Text="3" FontFamily="{StaticResource FontSemiBold}" FontSize="13" TextColor="White"
                                HorizontalOptions="Center" VerticalOptions="Center" />
@@ -76,7 +76,7 @@
                 </Grid>
                 <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Conversas, mais de 99 não lidas">
                     <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Chat24}" IconSize="24"
-                                 IconColor="{DynamicResource Ink}" />
+                                 IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Border Style="{StaticResource Counter}" Margin="0,-6,-16,0">
                         <Label Text="99+" FontFamily="{StaticResource FontSemiBold}" FontSize="13" TextColor="White"
                                HorizontalOptions="Center" VerticalOptions="Center" />
@@ -85,7 +85,7 @@
                 <!-- Só um ponto: "tem novidade", sem número. -->
                 <Grid WidthRequest="28" HeightRequest="28" SemanticProperties.Description="Alertas, há novidades">
                     <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Alert24}" IconSize="24"
-                                 IconColor="{DynamicResource Ink}" />
+                                 IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Ellipse WidthRequest="10" HeightRequest="10" Fill="{StaticResource Accent}"
                              Stroke="{DynamicResource Surface}" StrokeThickness="2"
                              HorizontalOptions="End" VerticalOptions="Start" />

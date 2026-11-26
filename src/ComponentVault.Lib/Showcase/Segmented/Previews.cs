@@ -25,3 +25,17 @@ public partial class SegmentedSharpnadoPreview : ContentView
 {
     public SegmentedSharpnadoPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("segmented.syncfusion")]
+public partial class SegmentedSyncfusionPreview : ContentView
+{
+    private static readonly string[] Periods = ["o dia de hoje", "a semana atual", "o mês atual", "o ano atual"];
+
+    public SegmentedSyncfusionPreview() => InitializeComponent();
+
+    private void OnSelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
+    {
+        var index = PeriodSegments.SelectedIndex ?? -1;
+        if (index >= 0 && index < Periods.Length) PeriodLabel.Text = $"Mostrando {Periods[index]}.";
+    }
+}

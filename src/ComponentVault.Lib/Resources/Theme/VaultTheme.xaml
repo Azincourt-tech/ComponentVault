@@ -101,21 +101,22 @@
         <Setter Property="BorderWidth" Value="0" />
     </Style>
 
+    <!-- Ação principal: a cor da marca. Uma por tela; as outras descem na hierarquia. -->
     <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource VaultButtonBase}">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
-        <Setter Property="TextColor" Value="{DynamicResource OnInk}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+        <Setter Property="TextColor" Value="{StaticResource OnAccent}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="PointerOver">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{DynamicResource InkHover}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource AccentHover}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Pressed">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{DynamicResource InkHover}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource AccentHover}" />
                             <Setter Property="Scale" Value="0.985" />
                             <Setter Property="TranslationY" Value="1" />
                         </VisualState.Setters>
@@ -324,13 +325,17 @@
         <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchInput}" />
     </Style>
 
-    <!-- Moldura de campo: superfície, linha forte, raio 10, 48px. -->
+    <!--
+      Moldura de campo "preenchida": tom próprio (FieldFill) com contorno quase invisível, raio 14, 48px.
+      No foco, FieldFrames.Apply clareia o fundo e põe o anel de 2px na cor de destaque. É o oposto da
+      caixa de contorno fino do nativo, e o campo continua claramente um campo.
+    -->
     <Style x:Key="FieldFrame" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceRaised}" />
-        <Setter Property="Stroke" Value="{DynamicResource HairlineStrong}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource FieldFill}" />
+        <Setter Property="Stroke" Value="{DynamicResource FieldStroke}" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
-        <Setter Property="Padding" Value="14,0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+        <Setter Property="Padding" Value="16,0" />
         <Setter Property="MinimumHeightRequest" Value="{StaticResource TouchInput}" />
     </Style>
     <!-- /snippet:styles.controls -->
@@ -339,8 +344,9 @@
 
     <!-- snippet:styles.card -->
     <!-- Card: linha fina, sem sombra. -->
+    <!-- Card: preenchimento e aresta vêm da paleta (metal no Claro e no Escuro, vidro no Vidro). -->
     <Style x:Key="Card" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Background" Value="{DynamicResource CardFill}" />
         <Setter Property="Stroke" Value="{DynamicResource CardStroke}" />
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="StrokeShape" Value="RoundRectangle 20" />
@@ -392,7 +398,7 @@
 
     <!-- Tela onde o componente é exibido. -->
     <Style x:Key="PreviewCanvas" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+        <Setter Property="Background" Value="{DynamicResource CardFill}" />
         <Setter Property="Stroke" Value="{DynamicResource CardStroke}" />
         <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="StrokeShape" Value="RoundRectangle 20" />

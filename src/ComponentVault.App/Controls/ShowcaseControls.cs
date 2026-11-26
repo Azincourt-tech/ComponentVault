@@ -193,6 +193,36 @@ public sealed class OriginToBrushConverter : IValueConverter
         throw new NotSupportedException();
 }
 
+/// <summary>Cor do nível (Base, Estilizado, Custom, Biblioteca): a mesma em todo o app.</summary>
+public sealed class TierToBrushConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        var key = OriginBadge.ColorKey(TierToBadgeKindConverter.KindFor(value));
+        return new SolidColorBrush(ThemeColors.Resolve(key, Colors.Gray));
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
+/// <summary>Nível do Core para o badge da Lib (o ponto ganha a cor do nível).</summary>
+public sealed class TierToBadgeKindConverter : IValueConverter
+{
+    public static BadgeKind KindFor(object? value) => value switch
+    {
+        VariantTier.Styled => BadgeKind.Styled,
+        VariantTier.Custom => BadgeKind.Custom,
+        VariantTier.Library => BadgeKind.Library,
+        _ => BadgeKind.Base,
+    };
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => KindFor(value);
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
 /// <summary>Converte a origem do Core para o tipo de badge da Lib (mesmos nomes; a Lib não conhece o Core).</summary>
 public sealed class OriginToBadgeKindConverter : IValueConverter
 {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sh="clr-namespace:Syncfusion.Maui.Toolkit.Shimmer;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Skeletons.SkeletonSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:skeleton.syncfusion -->
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Modelo pronto: Type escolhe o formato (Feed, Profile, Article, Shopping...). -->
+            <Label Style="{StaticResource FieldLabel}" Text="Modelo pronto (Feed)" />
+            <sh:SfShimmer Type="Feed" IsActive="True" HeightRequest="120"
+                          Fill="{DynamicResource SurfaceAlt}"
+                          WaveColor="{DynamicResource Surface}"
+                          WaveWidth="160" AnimationDuration="1400" />
+
+            <!-- Forma própria: CustomView desenha o esqueleto do item real da lista. -->
+            <Label Style="{StaticResource FieldLabel}" Text="Forma do item real (CustomView)" />
+            <sh:SfShimmer IsActive="True" HeightRequest="64"
+                          Fill="{DynamicResource SurfaceAlt}"
+                          WaveColor="{DynamicResource Surface}"
+                          WaveWidth="160" AnimationDuration="1400">
+                <sh:SfShimmer.CustomView>
+                    <Grid ColumnDefinitions="48,*,64" ColumnSpacing="14" RowDefinitions="*,*" RowSpacing="8" Padding="0,6">
+                        <sh:ShimmerView Grid.RowSpan="2" ShapeType="Circle" WidthRequest="48" HeightRequest="48" />
+                        <sh:ShimmerView Grid.Column="1" ShapeType="RoundedRectangle" HeightRequest="14" />
+                        <sh:ShimmerView Grid.Column="1" Grid.Row="1" ShapeType="RoundedRectangle" HeightRequest="12" Margin="0,0,60,0" />
+                        <sh:ShimmerView Grid.Column="2" ShapeType="RoundedRectangle" HeightRequest="12" />
+                    </Grid>
+                </sh:SfShimmer.CustomView>
+            </sh:SfShimmer>
+
+        </VerticalStackLayout>
+        <!-- /snippet:skeleton.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfShimmer traz sete modelos prontos e o CustomView para desenhar o esqueleto do item real. A onda passa por cima de todas as formas ao mesmo tempo, em sincronia." />
+
+    </VerticalStackLayout>
+
+</ContentView>

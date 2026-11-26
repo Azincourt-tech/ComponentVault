@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:otp="clr-namespace:Syncfusion.Maui.Toolkit.OtpInput;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Otp.OtpSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:otp.syncfusion -->
+        <VerticalStackLayout Spacing="24">
+
+            <!-- Preenchido: caixas no tom de campo, anel de destaque na caixa atual. -->
+            <VerticalStackLayout Spacing="8">
+                <Label Style="{StaticResource FieldLabel}" Text="Código enviado por SMS" />
+                <otp:SfOtpInput x:Name="SmsCode" Length="6" Type="Number" StylingMode="Filled"
+                                BoxWidth="48" BoxHeight="56"
+                                InputBackground="{DynamicResource FieldFill}"
+                                Stroke="{DynamicResource FieldStroke}"
+                                TextColor="{DynamicResource Ink}"
+                                ValueChanged="OnValueChanged" />
+                <Label x:Name="SmsHint" Style="{StaticResource Caption}" Text="Cole o código inteiro ou digite um dígito por caixa." />
+            </VerticalStackLayout>
+
+            <!-- Sublinhado e mascarado: PIN com separador no meio. -->
+            <VerticalStackLayout Spacing="8">
+                <Label Style="{StaticResource FieldLabel}" Text="PIN do cartão" />
+                <otp:SfOtpInput x:Name="PinCode" Length="4" Type="Password" StylingMode="Underlined" Separator="·"
+                                BoxWidth="48" BoxHeight="48"
+                                Stroke="{DynamicResource InkTertiary}"
+                                TextColor="{DynamicResource Ink}" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:otp.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfOtpInput (Syncfusion Toolkit, MIT) cuida do avanço entre caixas, colar, apagar para trás e dos estados de sucesso, aviso e erro. Três estilos: Outlined, Filled e Underlined." />
+
+    </VerticalStackLayout>
+
+</ContentView>

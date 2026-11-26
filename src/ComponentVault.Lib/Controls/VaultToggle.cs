@@ -14,7 +14,7 @@ public class VaultToggle : GraphicsView, IDrawable
         propertyChanged: (b, _, n) => ((VaultToggle)b).OnIsToggledChanged((bool)n));
 
     public static readonly BindableProperty OnColorProperty = BindableProperty.Create(
-        nameof(OnColor), typeof(Color), typeof(VaultToggle), Color.FromArgb("#2F6FE4"),
+        nameof(OnColor), typeof(Color), typeof(VaultToggle), Color.FromArgb("#E85D04"),
         propertyChanged: (b, _, _) => ((VaultToggle)b).Invalidate());
 
     public static readonly BindableProperty OffColorProperty = BindableProperty.Create(

@@ -289,6 +289,23 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "segmented.sharpnado")],
                 },
+                new()
+                {
+                    Id = "segmented.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfSegmentedControl com pílula preenchida e, na mesma lib, a versão sublinhada.",
+                    Highlights =
+                    [
+                        "Pílula animada, sublinhado ou borda: só muda o SelectionIndicatorPlacement.",
+                        "Rola sozinho quando há mais segmentos do que cabem (VisibleSegmentsCount).",
+                        "Navegação por teclado e realce de foco já vêm prontos.",
+                        "Toolkit open source (MIT): não pede chave, diferente da linha paga do Syncfusion.",
+                    ],
+                    Snippets = [Xaml("Uso", "segmented.syncfusion")],
+                },
             ],
         },
         new()

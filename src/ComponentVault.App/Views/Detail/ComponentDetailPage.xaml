@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:adaptive="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
              xmlns:models="clr-namespace:ComponentVault.Core.Models;assembly=ComponentVault.Core"
@@ -17,6 +18,8 @@
     <ContentPage.Resources>
         <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
         <controls:OriginToBrushConverter x:Key="OriginBrush" />
+        <controls:TierToBrushConverter x:Key="TierBrush" />
+        <controls:TierToBadgeKindConverter x:Key="TierBadge" />
     </ContentPage.Resources>
 
     <!-- O voltar é o da barra flutuante; o do Shell duplicaria na barra de título do Windows. -->
@@ -29,19 +32,38 @@
         <lib:AmbientBackground Grid.RowSpan="3" />
 
         <!-- Voltar, seções e tema; some no modo apresentação -->
-        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" ShowBack="True"
+        <controls:NavDock Grid.Row="{adaptive:OnWidth Compact=2, Default=0}" ShowBack="True"
                           IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}" />
 
         <Grid Grid.Row="1" RowDefinitions="Auto,*"
               IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
 
         <!-- ===== Cabeçalho, níveis e abas (somem no modo apresentação) ===== -->
-        <VerticalStackLayout Padding="{OnIdiom Phone='20,12,20,0', Default='40,12,40,0'}" Spacing="18"
+        <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,12,20,0', Default='40,12,40,0'}" Spacing="18"
                              MaximumWidthRequest="{StaticResource ContentMaxWidth}"
                              IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
 
+            <!-- Celular: voltar no canto superior esquerdo, onde se espera; a barra de baixo fica só com seções e tema. -->
+            <Border WidthRequest="40" HeightRequest="40" StrokeShape="RoundRectangle 20" StrokeThickness="1"
+                    Stroke="{DynamicResource ChromeStroke}" BackgroundColor="{DynamicResource Chrome}"
+                    HorizontalOptions="Start" Margin="0,4,0,-4"
+                    IsVisible="{adaptive:OnWidth Compact=True, Default=False}"
+                    motion:Motion.Press="True" SemanticProperties.Description="Voltar">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackTapped" />
+                </Border.GestureRecognizers>
+                <mic:MauiIcon Icon="{x:Static fluent:FluentIcons.ChevronLeft24}" IconSize="18"
+                              IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+
             <!-- Ícone e título vêm voando da linha tocada no catálogo (Hero) -->
-            <Grid x:Name="Header" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+            <!--
+              No celular o Apresentar desce para baixo do texto: ao lado, ele espremia a coluna do título
+              e nomes longos ("Segmented control") quebravam no meio da palavra.
+            -->
+            <Grid x:Name="Header" ColumnDefinitions="{adaptive:OnWidth Compact='Auto,*', Default='Auto,*,Auto'}"
+                  RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto', Default='Auto'}"
+                  ColumnSpacing="16" RowSpacing="14">
                 <controls:ComponentThumb WidthRequest="56" HeightRequest="56" IconSize="26"
                                          IconName="{Binding Component.Icon}" VerticalOptions="Start"
                                          controls:Hero.Key="thumb" />
@@ -55,9 +77,10 @@
                     <Label Style="{StaticResource Body}" TextColor="{DynamicResource DangerText}"
                            Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" />
                 </VerticalStackLayout>
-                <Button Grid.Column="2" Text="Apresentar" Style="{StaticResource SecondaryButtonSmall}"
+                <Button Grid.Column="{adaptive:OnWidth Compact=1, Default=2}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}"
+                        Text="Apresentar" Style="{StaticResource SecondaryButtonSmall}"
                         motion:Motion.Entrance="True" motion:Motion.Delay="200"
-                        VerticalOptions="Start" Command="{Binding TogglePresentationCommand}"
+                        HorizontalOptions="Start" VerticalOptions="Start" Command="{Binding TogglePresentationCommand}"
                         SemanticProperties.Hint="Mostra só o componente, sem a interface ao redor" />
             </Grid>
 
@@ -86,7 +109,7 @@
                                                                   CommandParameter="{Binding .}" />
                                         </HorizontalStackLayout.GestureRecognizers>
                                         <Ellipse WidthRequest="7" HeightRequest="7" VerticalOptions="Center"
-                                                 Fill="{Binding Origin, Converter={StaticResource OriginBrush}}" />
+                                                 Fill="{Binding Tier, Converter={StaticResource TierBrush}}" />
                                         <Label Text="{Binding Title}" FontFamily="{StaticResource FontMedium}" FontSize="14"
                                                VerticalOptions="Center" TextColor="{DynamicResource InkTertiary}">
                                             <Label.Triggers>
@@ -157,21 +180,21 @@
                 </HorizontalStackLayout>
                 <BoxView Grid.Row="1" Style="{StaticResource Divider}" />
                 <BoxView x:Name="TabUnderline" Grid.Row="1" HeightRequest="2" CornerRadius="1"
-                         Color="{DynamicResource Ink}" VerticalOptions="End" />
+                         Color="{StaticResource Accent}" VerticalOptions="End" />
             </Grid>
         </VerticalStackLayout>
 
         <!-- ===== Preview (RF02) + decisões do nível ===== -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsPreviewTab}"
                     motion:Motion.Entrance="True" motion:Motion.Delay="340">
-            <VerticalStackLayout Padding="{OnIdiom Phone='20,20,20,40', Default='40,28,40,48'}" Spacing="28"
+            <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,20,20,40', Default='40,28,40,48'}" Spacing="28"
                                  MaximumWidthRequest="{StaticResource ContentMaxWidth}">
-                <Border Style="{StaticResource PreviewCanvas}" Padding="{OnIdiom Phone=20, Default=36}">
+                <Border Style="{StaticResource PreviewCanvas}" Padding="{adaptive:OnWidth Compact=20, Default=36}">
                     <controls:PreviewHost VariantId="{Binding SelectedVariant.Id}" />
                 </Border>
 
-                <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*'}" ColumnSpacing="40" RowSpacing="24"
-                      RowDefinitions="{OnIdiom Phone='Auto,Auto', Default='Auto'}"
+                <Grid ColumnDefinitions="{adaptive:OnWidth Compact='*', Default='*,*'}" ColumnSpacing="40" RowSpacing="24"
+                      RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto', Default='Auto'}"
                       IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
                     <VerticalStackLayout Spacing="8">
                         <Label Style="{StaticResource FieldLabel}" Text="Sobre este nível" />
@@ -182,7 +205,7 @@
                                    Text="{Binding SelectedVariant.PackageId}" />
                         </Border>
                     </VerticalStackLayout>
-                    <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+                    <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}"
                                          Spacing="10" IsVisible="{Binding SelectedVariant.HasHighlights}">
                         <Label Style="{StaticResource FieldLabel}" Text="Decisões de design e usabilidade" />
                         <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding SelectedVariant.Highlights}">
@@ -204,38 +227,49 @@
         </ScrollView>
 
         <!-- ===== Lado a lado: todos os níveis ao vivo, para comparar o cru com o acabado ===== -->
+        <!--
+          Mesma coluna do cabeçalho (ContentMaxWidth, centralizada). Dois cards por linha no desktop:
+          a largura de cada item é calculada no code-behind (OnCompareSizeChanged), porque a base
+          percentual do FlexLayout não funciona no Windows. O espaço entre cards vem de Padding no
+          item (o FlexLayout não conta Margin) e a margem negativa absorve o da última coluna.
+        -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsCompareTab}">
-            <FlexLayout Padding="{OnIdiom Phone='20,20,20,40', Default='40,28,40,48'}"
-                        Direction="{OnIdiom Phone=Column, Default=Row}"
-                        Wrap="Wrap" AlignItems="Start" JustifyContent="Start"
+            <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,20,20,40', Default='40,28,40,48'}"
+                                 MaximumWidthRequest="{StaticResource ContentMaxWidth}">
+            <FlexLayout x:Name="CompareFlex" Margin="0,0,-20,-20"
+                        Direction="Row"
+                        Wrap="Wrap" AlignItems="Start" AlignContent="Start" JustifyContent="Start"
+                        SizeChanged="OnCompareSizeChanged"
+                        ChildAdded="OnCompareChildAdded"
                         BindableLayout.ItemsSource="{Binding CompareVariants}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="vm:VariantOption">
-                        <Border Style="{StaticResource PreviewCanvas}"
-                                WidthRequest="{OnIdiom Phone=-1, Default=440}"
-                                Margin="0,0,20,20" Padding="0">
+                        <Grid Padding="0,0,20,20">
+                        <Border Style="{StaticResource PreviewCanvas}" Padding="0">
                             <VerticalStackLayout>
                                 <Grid ColumnDefinitions="*,Auto" Padding="22,16">
-                                    <VerticalStackLayout Spacing="2">
-                                        <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" />
-                                        <Label Style="{StaticResource Caption}" Text="{Binding TierText}" />
-                                    </VerticalStackLayout>
+                                    <!-- O selo diz o nível com a cor dele; o título é o nome da variante. -->
+                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" VerticalOptions="Center" />
                                     <lib:OriginBadge Grid.Column="1" IsCompact="True" VerticalOptions="Center"
-                                                     Kind="{Binding Origin, Converter={StaticResource BadgeKind}}" />
+                                                     Kind="{Binding Tier, Converter={StaticResource TierBadge}}" />
                                 </Grid>
                                 <BoxView Style="{StaticResource Divider}" />
                                 <controls:PreviewHost VariantId="{Binding Id}" Margin="22,20,22,24" />
                             </VerticalStackLayout>
                         </Border>
+                        </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
 
         <!-- ===== Docs (RF08) ===== -->
+        <!-- Coluna do cabeçalho; dentro dela, o texto fica em 760px, a largura boa de leitura. -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsDocsTab}">
-            <VerticalStackLayout Padding="{OnIdiom Phone='20,24,20,40', Default='40,32,40,48'}" Spacing="32"
-                                 MaximumWidthRequest="760" HorizontalOptions="Start">
+            <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,24,20,40', Default='40,32,40,48'}"
+                                 MaximumWidthRequest="{StaticResource ContentMaxWidth}">
+            <VerticalStackLayout Spacing="32" MaximumWidthRequest="760" HorizontalOptions="Start">
                 <Label Style="{StaticResource Body}" FontSize="17" Text="{Binding Docs.Overview}" />
 
                 <VerticalStackLayout Spacing="12">
@@ -280,18 +314,19 @@
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </VerticalStackLayout>
+            </VerticalStackLayout>
         </ScrollView>
 
         <!-- ===== Código (RF03) ===== -->
         <ScrollView Grid.Row="1" IsVisible="{Binding IsCodeTab}">
-            <VerticalStackLayout Padding="{OnIdiom Phone='20,24,20,40', Default='40,32,40,48'}" Spacing="20"
+            <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,24,20,40', Default='40,32,40,48'}" Spacing="20"
                                  MaximumWidthRequest="{StaticResource ContentMaxWidth}"
                                  BindableLayout.ItemsSource="{Binding SnippetModels}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="vm:CodeSnippetModel">
                         <Border Style="{StaticResource Card}">
                             <VerticalStackLayout>
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" Padding="18,10,10,10">
+                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" Padding="18,10,12,10">
                                     <Label Style="{StaticResource CardTitle}" Text="{Binding Title}" VerticalOptions="Center" />
                                     <Border Grid.Column="1" Style="{StaticResource Tag}" VerticalOptions="Center">
                                         <Label Style="{StaticResource TagText}" Text="{Binding LanguageText}" />
@@ -332,7 +367,7 @@
           pelas setas do teclado ou deslizando para os lados fora do componente; Esc sai.
           No Windows a janela vai para tela cheia (code-behind).
         -->
-        <Grid Grid.RowSpan="3" RowDefinitions="Auto,*,Auto" Padding="{OnIdiom Phone='16,20', Default='40,28'}"
+        <Grid Grid.RowSpan="3" RowDefinitions="Auto,*,Auto" Padding="{adaptive:OnWidth Compact='16,20', Default='40,28'}"
               IsVisible="{Binding IsPresentationMode}">
 
             <!-- Área de gesto: atrás do componente, para não brigar com o que ele faz ao toque -->
@@ -347,7 +382,7 @@
             <VerticalStackLayout Spacing="6" HorizontalOptions="Center" InputTransparent="True">
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                     <Ellipse WidthRequest="8" HeightRequest="8" VerticalOptions="Center"
-                             Fill="{Binding SelectedVariant.Origin, Converter={StaticResource OriginBrush}}" />
+                             Fill="{Binding SelectedVariant.Tier, Converter={StaticResource TierBrush}}" />
                     <Label Style="{StaticResource CardTitle}" FontSize="20" VerticalOptions="Center">
                         <Label.FormattedText>
                             <FormattedString>
@@ -364,7 +399,7 @@
             <!-- O componente -->
             <Border Grid.Row="1" Style="{StaticResource PreviewCanvas}"
                     MaximumWidthRequest="760" VerticalOptions="Center" Margin="0,24"
-                    Padding="{OnIdiom Phone=24, Default=48}">
+                    Padding="{adaptive:OnWidth Compact=24, Default=48}">
                 <controls:PreviewHost VariantId="{Binding SelectedVariant.Id}" />
             </Border>
 
@@ -430,7 +465,7 @@
 
                 <Label Style="{StaticResource Caption}" HorizontalOptions="Center" InputTransparent="True"
                        Text="← → trocam o nível  ·  Esc sai"
-                       IsVisible="{OnIdiom Phone=False, Default=True}" />
+                       IsVisible="{adaptive:OnWidth Compact=False, Default=True}" />
             </VerticalStackLayout>
         </Grid>
     </Grid>

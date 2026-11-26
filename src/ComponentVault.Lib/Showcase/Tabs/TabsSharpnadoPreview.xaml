@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:tabs="clr-namespace:Sharpnado.Tabs;assembly=Maui.Tabs"
              x:Class="ComponentVault.Lib.Showcase.Tabs.TabsSharpnadoPreview">
 
-    <VerticalStackLayout Spacing="28" MaximumWidthRequest="560" HorizontalOptions="Fill">
+    <VerticalStackLayout Spacing="28">
 
         <!-- snippet:tabs.sharpnado -->
         <!-- Abas sublinhadas + ViewSwitcher: o SelectedIndex das duas peças anda junto. -->
@@ -33,7 +34,7 @@
             <tabs:ViewSwitcher x:DataType="tabs:TabHostView"
                                SelectedIndex="{Binding SelectedIndex, Source={x:Reference UnderlinedTabs}}"
                                Animate="True"
-                               HeightRequest="96"
+                               HeightRequest="56"
                                Padding="0,16,0,0">
                 <Label Style="{StaticResource BodyMuted}" Text="12 pedidos em andamento, 3 aguardando pagamento." />
                 <Label Style="{StaticResource BodyMuted}" Text="Nenhuma devolução aberta nos últimos 30 dias." />

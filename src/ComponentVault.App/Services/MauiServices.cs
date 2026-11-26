@@ -88,6 +88,10 @@ public sealed class EmbeddedSnippetSource : ISnippetSource
 {
     private const string Prefix = "snippets/";
 
+    // Os arquivos entram com ".src" no fim: o XamlC descarta, no Release, todo recurso terminado
+    // em .xaml (ver ComponentVault.Lib.csproj).
+    private const string Suffix = ".src";
+
     public IEnumerable<SnippetFile> GetFiles()
     {
         var assembly = typeof(PreviewRegistry).Assembly;
@@ -97,7 +101,9 @@ public sealed class EmbeddedSnippetSource : ISnippetSource
             if (stream is null) continue;
 
             using var reader = new StreamReader(stream);
-            yield return new SnippetFile(name[Prefix.Length..], reader.ReadToEnd());
+            var path = name[Prefix.Length..];
+            if (path.EndsWith(Suffix, StringComparison.Ordinal)) path = path[..^Suffix.Length];
+            yield return new SnippetFile(path, reader.ReadToEnd());
         }
     }
 }

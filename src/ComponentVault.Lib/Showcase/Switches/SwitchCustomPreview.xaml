@@ -12,8 +12,8 @@
             <!-- snippet:switch.custom -->
             <VerticalStackLayout Spacing="16">
 
-                <!-- O estado é dito em texto, não só pela cor. -->
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <!-- O estado é dito em texto, não só pela cor. Coluna fixa de 52 (o toggle padrão): os rótulos alinham mesmo com o compacto. -->
+                <Grid ColumnDefinitions="52,*" ColumnSpacing="14">
                     <controls:VaultToggle x:Name="SyncToggle" IsToggled="True"
                                           SemanticProperties.Description="Sincronização automática" />
                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
@@ -29,22 +29,22 @@
                     </VerticalStackLayout>
                 </Grid>
 
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Grid ColumnDefinitions="52,*" ColumnSpacing="14">
                     <controls:VaultToggle OnColor="{StaticResource Success}" IsToggled="True"
                                           SemanticProperties.Description="Backup diário" />
-                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Cor semântica (sucesso)" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Cor semântica (sucesso)" LineHeight="1" VerticalOptions="Center" />
                 </Grid>
 
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
-                    <controls:VaultToggle WidthRequest="40" HeightRequest="24"
+                <Grid ColumnDefinitions="52,*" ColumnSpacing="14">
+                    <controls:VaultToggle WidthRequest="40" HeightRequest="24" HorizontalOptions="Start"
                                           SemanticProperties.Description="Versão compacta" />
-                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Compacto, para listas densas" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Style="{StaticResource Body}" Text="Compacto, para listas densas" LineHeight="1" VerticalOptions="Center" />
                 </Grid>
 
-                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Grid ColumnDefinitions="52,*" ColumnSpacing="14">
                     <controls:VaultToggle IsToggled="True" IsEnabled="False"
                                           SemanticProperties.Description="Desabilitado" />
-                    <Label Grid.Column="1" Style="{StaticResource BodyMuted}" Text="Desabilitado" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Style="{StaticResource BodyMuted}" Text="Desabilitado" LineHeight="1" VerticalOptions="Center" />
                 </Grid>
 
             </VerticalStackLayout>

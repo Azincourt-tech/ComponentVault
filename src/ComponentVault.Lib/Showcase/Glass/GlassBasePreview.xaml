@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Glass.GlassBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Border translúcido, sem nada atrás" />
+            <!-- snippet:glass.base -->
+            <Border BackgroundColor="#40FFFFFF" Padding="20" StrokeThickness="0" MaximumWidthRequest="340" HorizontalOptions="Start">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Componentes no vault" />
+                    <Label Text="30" FontSize="32" FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Border>
+            <!-- /snippet:glass.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Só transparência não faz vidro. Sem algo vivo atrás e sem a aresta de luz, o painel vira um cinza lavado, e no tema Claro quase some. O MAUI também não tem desfoque de fundo multiplataforma." />
+
+    </VerticalStackLayout>
+
+</ContentView>

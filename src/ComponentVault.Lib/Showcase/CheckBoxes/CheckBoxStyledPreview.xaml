@@ -19,7 +19,7 @@
                     <Border x:Name="SelectAllBox" WidthRequest="20" HeightRequest="20"
                             StrokeShape="RoundRectangle 5" StrokeThickness="1.5"
                             Stroke="{DynamicResource HairlineStrong}"
-                            VerticalOptions="Center" Margin="12,0">
+                            VerticalOptions="Center" Margin="6,0,18,0">
                         <Path x:Name="SelectAllMark" Stroke="White" StrokeThickness="2"
                               StrokeLineCap="Round" StrokeLineJoin="Round"
                               WidthRequest="11" HeightRequest="11" Aspect="None"

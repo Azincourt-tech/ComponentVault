@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ComponentVault.Lib.Showcase.Steppers.StepperStyledPreview">
 
@@ -10,7 +11,8 @@
         <Style x:Key="StepButton" TargetType="Button">
             <Setter Property="WidthRequest" Value="44" />
             <Setter Property="HeightRequest" Value="44" />
-            <Setter Property="Padding" Value="0" />
+            <!-- 3px embaixo: no Windows o − e o + da Plus Jakarta ficam abaixo do centro do botão. -->
+            <Setter Property="Padding" Value="0,0,0,3" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="BorderWidth" Value="0" />
             <Setter Property="FontFamily" Value="{StaticResource FontMedium}" />
@@ -44,7 +46,7 @@
     </ContentView.Resources>
 
     <!-- Linha de carrinho: o stepper conversa com o total, e os limites desabilitam o botão. -->
-    <Border Style="{StaticResource Card}" Padding="16" MaximumWidthRequest="520" HorizontalOptions="Start">
+    <Border Style="{StaticResource Card}" Padding="16">
         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="16" RowSpacing="12">
             <VerticalStackLayout Spacing="2">
                 <Label Style="{StaticResource CardTitle}" Text="Camiseta ComponentVault" />
@@ -67,8 +69,8 @@
 
             <BoxView Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource Divider}" VerticalOptions="Start" />
             <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" Margin="0,12,0,0">
-                <Label Style="{StaticResource BodyMuted}" Text="Subtotal" />
-                <Label x:Name="TotalLabel" Grid.Column="1" Style="{StaticResource CardTitle}" Text="R$ 89,90" />
+                <Label Style="{StaticResource BodyMuted}" Text="Subtotal" LineHeight="1" VerticalOptions="Center" />
+                <Label x:Name="TotalLabel" Grid.Column="1" Style="{StaticResource CardTitle}" Text="R$ 89,90" VerticalOptions="Center" />
             </Grid>
         </Grid>
     </Border>

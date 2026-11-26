@@ -191,6 +191,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "stepper.styled")],
                 },
+                new()
+                {
+                    Id = "stepper.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfNumericUpDown: o número editável entre os botões, com formato, limites e passo.",
+                    Highlights =
+                    [
+                        "Campo e botões num controle só: dá para digitar o valor em vez de tocar várias vezes.",
+                        "CustomFormat formata sem código: quantidade inteira, porcentagem, moeda.",
+                        "Limites e passo (SmallChange) declarados no XAML; no limite o botão desabilita.",
+                    ],
+                    Snippets = [Xaml("Uso", "stepper.syncfusion")],
+                },
             ],
         },
         new()
@@ -232,6 +248,22 @@ internal static partial class ComponentCatalog
                         "Reenviar fica bloqueado por 30s com contagem visível.",
                     ],
                     Snippets = [Xaml("Uso", "otp.custom"), CSharp("Controle (OtpInput.cs)", "control.otp")],
+                },
+                new()
+                {
+                    Id = "otp.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfOtpInput preenchido para código de SMS e sublinhado, mascarado, para PIN.",
+                    Highlights =
+                    [
+                        "Avanço entre caixas, colar o código inteiro e apagar para trás já vêm prontos.",
+                        "Três estilos (Outlined, Filled, Underlined) e estados de sucesso, aviso e erro.",
+                        "Type=Password mascara os dígitos; Separator divide o código em grupos.",
+                    ],
+                    Snippets = [Xaml("Uso", "otp.syncfusion")],
                 },
             ],
         },

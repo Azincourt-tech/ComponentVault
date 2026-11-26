@@ -34,7 +34,14 @@ public partial class VaultTextField : ContentView
         nameof(Keyboard), typeof(Keyboard), typeof(VaultTextField), Keyboard.Default);
 
     public static readonly BindableProperty IsPasswordProperty = BindableProperty.Create(
-        nameof(IsPassword), typeof(bool), typeof(VaultTextField), false);
+        nameof(IsPassword), typeof(bool), typeof(VaultTextField), false,
+        propertyChanged: (b, _, _) => ((VaultTextField)b).UpdatePassword());
+
+    // Olho aberto e olho cortado (16x16), desenhados com Path como os demais ícones do campo.
+    private const string EyeData = "M1 8C2.5 5 5 3.5 8 3.5S13.5 5 15 8C13.5 11 11 12.5 8 12.5S2.5 11 1 8ZM8 6A2 2 0 1 0 8 10A2 2 0 1 0 8 6";
+    private const string EyeOffData = EyeData + "M2.5 2.5L13.5 13.5";
+    private static readonly PathGeometryConverter GeometryConverter = new();
+    private bool _revealed;
 
     public static readonly BindableProperty ReturnTypeProperty = BindableProperty.Create(
         nameof(ReturnType), typeof(ReturnType), typeof(VaultTextField), ReturnType.Default);
@@ -57,6 +64,7 @@ public partial class VaultTextField : ContentView
     public VaultTextField()
     {
         InitializeComponent();
+        UpdatePassword();
         UpdateVisuals();
         Loaded += (_, _) => _loadedAt = DateTime.UtcNow;
     }
@@ -103,6 +111,21 @@ public partial class VaultTextField : ContentView
         TextChanged?.Invoke(this, new TextChangedEventArgs(oldValue, newValue));
     }
 
+    private void OnRevealTapped(object? sender, TappedEventArgs e)
+    {
+        _revealed = !_revealed;
+        UpdatePassword();
+    }
+
+    private void UpdatePassword()
+    {
+        Input.IsPassword = IsPassword && !_revealed;
+        RevealButton.IsVisible = IsPassword;
+        RevealIcon.Data = (Geometry?)GeometryConverter.ConvertFromInvariantString(_revealed ? EyeOffData : EyeData);
+        SemanticProperties.SetDescription(RevealButton, _revealed ? "Ocultar senha" : "Mostrar senha");
+        UpdateClearButton();
+    }
+
     private void OnClearTapped(object? sender, TappedEventArgs e)
     {
         Text = string.Empty;
@@ -126,17 +149,16 @@ public partial class VaultTextField : ContentView
     private void UpdateVisuals()
     {
         // Erro e sucesso vencem o foco, para o feedback de validação não sumir ao digitar.
-        var (borderKey, hintKey) = State switch
+        var (stateKey, hintKey) = State switch
         {
             FieldState.Error => ("Danger", "DangerText"),
             FieldState.Success => ("Success", "SuccessText"),
-            _ when Input.IsFocused => ("Accent", "InkTertiary"),
-            _ => ("HairlineStrong", "InkTertiary"),
+            _ => ((string?)null, "InkTertiary"),
         };
 
-        FieldBorder.SetThemeBrush(Border.StrokeProperty, borderKey);
+        // Foco: o campo clareia e ganha o anel de 2px na cor de destaque, sem animação.
+        FieldFrames.Apply(FieldBorder, Input.IsFocused, stateKey);
         HintLabel.SetThemeColor(MauiLabel.TextColorProperty, hintKey);
-        // Foco: anel de 2px na cor de destaque, sem animação.
-        FieldBorder.StrokeThickness = Input.IsFocused || State != FieldState.Normal ? 2 : 1;
+        IconPath.SetThemeBrush(Microsoft.Maui.Controls.Shapes.Shape.StrokeProperty, Input.IsFocused ? "AccentText" : "InkTertiary");
     }
 }

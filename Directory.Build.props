@@ -11,4 +11,12 @@
     <Product>ComponentVault</Product>
   </PropertyGroup>
 
+  <!--
+    O Syncfusion Toolkit traz um WebView2 que pede o WinRT.Runtime 2.3.1; a projeção padrão do SDK
+    do Windows traz a 2.2.0 e o build avisa do conflito (MSB3277). A .86 já vem com a 2.3.1.
+  -->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <WindowsSdkPackageVersion>10.0.19041.86</WindowsSdkPackageVersion>
+  </PropertyGroup>
+
 </Project>

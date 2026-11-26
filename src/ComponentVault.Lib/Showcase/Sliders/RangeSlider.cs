@@ -53,7 +53,7 @@ public class RangeSlider : GraphicsView, IDrawable
 
     public void Draw(ICanvas canvas, RectF rect)
     {
-        var accent = ThemeColors.Resolve("Accent", Color.FromArgb("#2F6FE4"));
+        var accent = ThemeColors.Resolve("Accent", Color.FromArgb("#E85D04"));
         var track = ThemeColors.Resolve("HairlineStrong", Colors.LightGray);
         var cy = rect.Center.Y;
         var lowerX = XFor(LowerValue, rect);

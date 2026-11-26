@@ -19,7 +19,7 @@ public class ProgressRing : GraphicsView, IDrawable
         propertyChanged: (b, _, _) => ((ProgressRing)b).Invalidate());
 
     public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(
-        nameof(ProgressColor), typeof(Color), typeof(ProgressRing), Color.FromArgb("#2F6FE4"),
+        nameof(ProgressColor), typeof(Color), typeof(ProgressRing), Color.FromArgb("#E85D04"),
         propertyChanged: (b, _, _) => ((ProgressRing)b).Invalidate());
 
     private const string AnimationName = "ProgressRingValue";

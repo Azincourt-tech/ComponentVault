@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chip="clr-namespace:Syncfusion.Maui.Toolkit.Chips;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Chips.ChipsSyncfusionPreview">
+
+    <ContentView.Resources>
+        <!-- O que é comum aos grupos: altura de toque, raio de pílula, fonte e cores do design system. -->
+        <Style x:Key="VaultChipGroup" TargetType="chip:SfChipGroup">
+            <Setter Property="ChipCornerRadius" Value="17" />
+            <Setter Property="ItemHeight" Value="36" />
+            <Setter Property="ChipPadding" Value="14,0" />
+            <Setter Property="ChipFontFamily" Value="JakartaMedium" />
+            <Setter Property="ChipTextSize" Value="14" />
+            <Setter Property="ChipStrokeThickness" Value="1" />
+            <Setter Property="ChipStroke" Value="{DynamicResource HairlineStrong}" />
+            <Setter Property="ChipBackground" Value="{DynamicResource Surface}" />
+            <Setter Property="ChipTextColor" Value="{DynamicResource InkSecondary}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:chips.syncfusion -->
+        <VerticalStackLayout Spacing="22">
+
+            <!-- Escolha: um por vez, o selecionado preenchido na cor de destaque. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Escolha (um por vez)" />
+                <chip:SfChipGroup x:Name="ChoiceGroup" Style="{StaticResource VaultChipGroup}" ChipType="Choice" ChoiceMode="Single"
+                                  SelectedChipBackground="{StaticResource Accent}"
+                                  SelectedChipTextColor="{StaticResource OnAccent}">
+                    <chip:SfChipGroup.Items>
+                        <chip:SfChip Text="Todos" />
+                        <chip:SfChip Text="Nativos" />
+                        <chip:SfChip Text="Custom" />
+                        <chip:SfChip Text="Bibliotecas" />
+                    </chip:SfChipGroup.Items>
+                </chip:SfChipGroup>
+            </VerticalStackLayout>
+
+            <!-- Filtro: vários ao mesmo tempo, com check dentro do chip. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Filtro (vários)" />
+                <chip:SfChipGroup x:Name="FilterGroup" Style="{StaticResource VaultChipGroup}" ChipType="Filter"
+                                  SelectedChipBackground="{DynamicResource AccentTint}"
+                                  SelectedChipTextColor="{DynamicResource AccentText}"
+                                  SelectionIndicatorColor="{DynamicResource AccentText}">
+                    <chip:SfChipGroup.Items>
+                        <chip:SfChip Text="Android" />
+                        <chip:SfChip Text="Windows" />
+                        <chip:SfChip Text="iOS" />
+                        <chip:SfChip Text="Tema escuro" />
+                    </chip:SfChipGroup.Items>
+                </chip:SfChipGroup>
+            </VerticalStackLayout>
+
+            <!-- Entrada: cada tag com botão de remover. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Tags (com remover)" />
+                <chip:SfChipGroup Style="{StaticResource VaultChipGroup}" ChipType="Input"
+                                  ChipBackground="{DynamicResource SurfaceAlt}"
+                                  ChipStroke="Transparent"
+                                  CloseButtonColor="{DynamicResource InkTertiary}">
+                    <chip:SfChipGroup.Items>
+                        <chip:SfChip Text="maui" />
+                        <chip:SfChip Text="mvvm" />
+                        <chip:SfChip Text="design-system" />
+                    </chip:SfChipGroup.Items>
+                </chip:SfChipGroup>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:chips.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfChipGroup (Syncfusion Toolkit, MIT) tem quatro tipos prontos: Choice, Filter, Input e Action. Seleção, check e botão de remover já vêm feitos; as cores vêm dos tokens." />
+
+    </VerticalStackLayout>
+
+</ContentView>

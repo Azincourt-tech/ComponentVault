@@ -31,6 +31,8 @@ public partial class ProgressStyledPreview : ContentView
                 : $"{p * TotalMb:0.0} MB de {TotalMb:0} MB · cerca de {Math.Ceiling((1 - p) * 3)} s";
         };
         Unloaded += (_, _) => UploadBar.AbortAnimation("Progress");
+        // Abre já enviando: uma barra parada em 0% não mostra nada do que o estilo faz.
+        Loaded += (_, _) => Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(500), () => OnUploadClicked(null, EventArgs.Empty));
     }
 
     // Simulação: num app real o progresso vem do serviço de upload (IProgress<double>).
@@ -58,4 +60,10 @@ public partial class ProgressCustomPreview : ContentView
         StorageRing.Progress = e.NewValue / 100;
         StorageLabel.Text = $"{e.NewValue:0}%";
     }
+}
+
+[ShowcasePreview("progress.syncfusion")]
+public partial class ProgressSyncfusionPreview : ContentView
+{
+    public ProgressSyncfusionPreview() => InitializeComponent();
 }

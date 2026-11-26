@@ -28,11 +28,14 @@ public partial class ButtonStyledPreview : ContentView
         _busy = true;
         SaveButton.InputTransparent = true;
         SaveButton.Text = "Salvando…";
+        // Abre espaço à esquerda para o indicador só enquanto carrega; parado, o texto fica centrado.
+        SaveButton.Padding = new Thickness(44, 11, 20, 11);
         SaveSpinner.IsVisible = SaveSpinner.IsRunning = true;
 
         await Task.Delay(1500);
 
         SaveSpinner.IsVisible = SaveSpinner.IsRunning = false;
+        SaveButton.Padding = new Thickness(32, 11);
         SaveButton.Text = "Salvo";
         await Task.Delay(1200);
 

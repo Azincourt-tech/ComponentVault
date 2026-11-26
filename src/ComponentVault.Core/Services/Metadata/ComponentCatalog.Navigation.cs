@@ -60,6 +60,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "tabs.sharpnado")],
                 },
+                new()
+                {
+                    Id = "tabs.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfTabView com indicador deslizante e conteúdo que troca com transição e deslize.",
+                    Highlights =
+                    [
+                        "Abas e conteúdo no mesmo controle: não precisa de um ViewSwitcher à parte.",
+                        "Deslizar o dedo troca de aba no celular (EnableSwiping).",
+                        "Barra no topo, embaixo ou nas laterais, com rolagem quando as abas não cabem.",
+                    ],
+                    Snippets = [Xaml("Uso", "tabs.syncfusion")],
+                },
             ],
         },
         new()

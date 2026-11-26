@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:adaptive="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="ComponentVault.Lib.Showcase.Charts.ChartLiveChartsPreview">
 
@@ -29,7 +30,7 @@
 
         <BoxView Style="{StaticResource Divider}" />
 
-        <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='200,*'}" RowDefinitions="{OnIdiom Phone='Auto,Auto', Default='Auto'}"
+        <Grid ColumnDefinitions="{adaptive:OnWidth Compact='*', Default='200,*'}" RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto', Default='Auto'}"
               ColumnSpacing="32" RowSpacing="16">
             <Grid WidthRequest="200" HeightRequest="200" HorizontalOptions="Center">
                 <lvc:PieChart x:Name="ChannelChart" BackgroundColor="Transparent" />
@@ -39,7 +40,7 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+            <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}"
                                  Spacing="14" VerticalOptions="Center"
                                  MaximumWidthRequest="300" HorizontalOptions="Start">
                 <Label Style="{StaticResource CardTitle}" Text="Pedidos por canal" />

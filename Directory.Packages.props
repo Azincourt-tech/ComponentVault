@@ -14,6 +14,8 @@
     <PackageVersion Include="AathifMahir.Maui.MauiIcons.Fluent" Version="6.0.0" />
     <PackageVersion Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.2.0" />
     <PackageVersion Include="Sharpnado.Tabs.Maui" Version="4.0.1" />
+    <!-- Toolkit open source do Syncfusion (MIT, sem chave). Não confundir com a linha paga. -->
+    <PackageVersion Include="Syncfusion.Maui.Toolkit" Version="1.0.12" />
   </ItemGroup>
 
   <ItemGroup Label="Core">

@@ -27,8 +27,10 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Column="2" Spacing="8">
-                <Grid>
+                <!-- Mesma altura dos anéis grandes (96): o anel menor fica centrado e as legendas alinham. -->
+                <Grid HeightRequest="96">
                     <progress:ProgressRing Progress="0.9" ProgressColor="{StaticResource Warning}"
+                                           HorizontalOptions="Center" VerticalOptions="Center"
                                            WidthRequest="64" HeightRequest="64" Thickness="6" />
                     <Label Style="{StaticResource BodySmall}" FontFamily="{StaticResource FontSemiBold}" Text="90%"
                            HorizontalOptions="Center" VerticalOptions="Center" />

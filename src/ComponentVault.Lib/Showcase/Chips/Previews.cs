@@ -93,3 +93,15 @@ public partial class ChipsStyledPreview : ContentView
         TagEntry.Text = string.Empty;
     }
 }
+
+[ShowcasePreview("chips.syncfusion")]
+public partial class ChipsSyncfusionPreview : ContentView
+{
+    public ChipsSyncfusionPreview()
+    {
+        InitializeComponent();
+        // IsSelected do SfChip não é definível no XAML: a seleção inicial vai pelo grupo.
+        if (ChoiceGroup.Items is { Count: > 0 } choices) ChoiceGroup.SelectedItem = choices[0];
+        if (FilterGroup.Items is { Count: > 1 } filters) FilterGroup.SelectedItem = new ObservableCollection<object> { filters[0], filters[1] };
+    }
+}

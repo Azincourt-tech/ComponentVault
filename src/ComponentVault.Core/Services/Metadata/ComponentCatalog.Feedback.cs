@@ -69,6 +69,23 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "progress.custom"), CSharp("Desenho (ProgressRing.cs)", "control.progressring")],
                 },
+                new()
+                {
+                    Id = "progress.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "Barra linear com progresso secundário e em etapas, e anéis com o valor dentro ou indeterminados.",
+                    Highlights =
+                    [
+                        "SecondaryProgress mostra o que já foi carregado atrás do que foi assistido, como nos players.",
+                        "SegmentCount divide a mesma barra em etapas, sem montar várias barras à mão.",
+                        "O anel aceita qualquer conteúdo no meio (Content) e pontas arredondadas.",
+                        "Indeterminado para espera sem prazo, com a mesma espessura e cor.",
+                    ],
+                    Snippets = [Xaml("Uso", "progress.syncfusion")],
+                },
             ],
         },
         new()
@@ -108,6 +125,22 @@ internal static partial class ComponentCatalog
                         "A animação para ao sair da tela; nenhum loop fica rodando escondido.",
                     ],
                     Snippets = [Xaml("Placeholders", "skeleton.custom")],
+                },
+                new()
+                {
+                    Id = "skeleton.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfShimmer com um modelo pronto e com o esqueleto do item real (CustomView).",
+                    Highlights =
+                    [
+                        "Sete modelos prontos (Feed, Profile, Article, Shopping...) para começar sem desenhar.",
+                        "CustomView com ShimmerView em círculo e retângulo arredondado imita o item real da lista.",
+                        "Uma onda só atravessa todas as formas, em sincronia, em vez de cada bloco piscar sozinho.",
+                    ],
+                    Snippets = [Xaml("Uso", "skeleton.syncfusion")],
                 },
             ],
         },

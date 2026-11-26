@@ -51,6 +51,8 @@ public partial class ComponentDetailPage : ContentPage, IQueryAttributable
         base.OnDisappearing();
     }
 
+    private void OnBackTapped(object? sender, TappedEventArgs e) => _ = Shell.Current?.GoToAsync("..");
+
     // Voltar do sistema (Android) durante a apresentação sai dela, e não da página.
     protected override bool OnBackButtonPressed()
     {
@@ -142,6 +144,26 @@ public partial class ComponentDetailPage : ContentPage, IQueryAttributable
         else if (e.PropertyName == nameof(ComponentDetailViewModel.IsPresentationMode))
         {
             OnPresentationChanged(_viewModel.IsPresentationMode);
+        }
+    }
+
+    // Lado a lado: quantos cards por linha cabe no espaço real (um card precisa de ~380px), não no
+    // tipo de aparelho. Cada item inclui os 20px de espaço à direita, e a margem -20 do FlexLayout
+    // já deu a ele essa largura extra.
+    private const double MinCompareCard = 380;
+
+    private void OnCompareSizeChanged(object? sender, EventArgs e) => SizeCompareItems();
+
+    private void OnCompareChildAdded(object? sender, ElementEventArgs e) => Dispatcher.Dispatch(SizeCompareItems);
+
+    private void SizeCompareItems()
+    {
+        if (CompareFlex.Width <= 0) return;
+        var columns = Math.Clamp((int)(CompareFlex.Width / (MinCompareCard + 20)), 1, 3);
+        var width = Math.Floor(CompareFlex.Width / columns);
+        foreach (var item in CompareFlex.Children.OfType<View>())
+        {
+            if (Math.Abs(item.WidthRequest - width) > 0.5) item.WidthRequest = width;
         }
     }
 

@@ -25,6 +25,36 @@ public partial class EntryStyledPreview : ContentView
         if (_submitted) Validate();
     }
 
+    private void OnPasswordChanged(object? sender, TextChangedEventArgs e)
+    {
+        OnFieldChanged(sender, e);
+        UpdateStrength(e.NewTextValue ?? string.Empty);
+    }
+
+    // Força simples: comprimento e variedade de caracteres. Num app real, use uma lib como zxcvbn.
+    private void UpdateStrength(string password)
+    {
+        var score = password.Length == 0 ? 0 : 1;
+        if (password.Length >= 8) score++;
+        if (password.Any(char.IsDigit) && password.Any(char.IsLetter)) score++;
+        if (password.Length >= 12 && password.Any(c => !char.IsLetterOrDigit(c))) score++;
+
+        var (key, text) = score switch
+        {
+            0 => ("HairlineStrong", "Força da senha"),
+            1 => ("Danger", "Fraca"),
+            2 => ("Warning", "Razoável"),
+            3 => ("Accent", "Boa"),
+            _ => ("Success", "Forte"),
+        };
+
+        BoxView[] segments = [Strength1, Strength2, Strength3, Strength4];
+        for (var i = 0; i < segments.Length; i++)
+            segments[i].SetThemeColor(BoxView.ColorProperty, i < score ? key : "HairlineStrong");
+        StrengthLabel.Text = text;
+        StrengthLabel.SetThemeColor(Label.TextColorProperty, score == 0 ? "InkTertiary" : score == 1 ? "DangerText" : score == 4 ? "SuccessText" : "InkSecondary");
+    }
+
     private void OnSubmit(object? sender, EventArgs e)
     {
         _submitted = true;

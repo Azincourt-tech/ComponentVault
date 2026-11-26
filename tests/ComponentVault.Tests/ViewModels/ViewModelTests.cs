@@ -16,10 +16,12 @@ public class CatalogViewModelTests
     private readonly FakeNavigation _navigation = new();
     private readonly CatalogViewModel _vm;
 
+    private readonly ComponentMetadataService _metadata;
+
     public CatalogViewModelTests()
     {
-        var metadata = new ComponentMetadataService(new FakeTimeProvider(new DateTimeOffset(2026, 11, 25, 0, 0, 0, TimeSpan.Zero)));
-        _vm = new CatalogViewModel(metadata, _navigation);
+        _metadata = new ComponentMetadataService(new FakeTimeProvider(new DateTimeOffset(2026, 11, 25, 0, 0, 0, TimeSpan.Zero)));
+        _vm = new CatalogViewModel(_metadata, _navigation);
     }
 
     [Fact]
@@ -80,8 +82,12 @@ public class CatalogViewModelTests
     [Fact]
     public void Chips_so_mostram_origens_presentes_no_catalogo()
     {
-        // Ainda não há variante Syncfusion; o chip não deve aparecer vazio.
-        Assert.DoesNotContain(_vm.Filters, f => f.Origin == ComponentOrigin.Syncfusion);
+        // Nenhum chip de origem pode aparecer vazio: cada um tem pelo menos um componente no catálogo.
+        Assert.All(_vm.Filters.Where(f => f.Origin is not null),
+            f => Assert.Contains(_metadata.GetAll(), i => i.Origins.Contains(f.Origin!.Value)));
+        // Origem sem variante nenhuma (ex.: "Novo" sem item recente) não vira chip.
+        var vazias = Enum.GetValues<ComponentOrigin>().Where(o => !_metadata.GetAll().Any(i => i.Origins.Contains(o)));
+        Assert.All(vazias, o => Assert.DoesNotContain(_vm.Filters, f => f.Origin == o));
     }
 
     [Fact]
@@ -257,6 +263,18 @@ public class ComponentDetailViewModelTests
 
         Assert.True(_vm.IsPresentationMode);
         Assert.True(_vm.IsPreviewTab);
+    }
+
+    [Fact]
+    public void Link_com_tab_abre_na_aba_pedida()
+    {
+        _vm.OnNavigatedTo(new Dictionary<string, object>
+        {
+            [Routes.Params.ComponentId] = "button",
+            [Routes.Params.Tab] = "code",
+        });
+
+        Assert.True(_vm.IsCodeTab);
     }
 
     [Fact]

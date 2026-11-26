@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
@@ -11,7 +12,8 @@
 
     <!-- snippet:chips.styled -->
     <ContentView.Resources>
-        <!-- Chip: 36px de altura, raio de controle, linha fina. Selecionado = destaque suave. -->
+        <!-- Chip: 36px de altura, raio de controle, linha fina. Selecionado = destaque suave.
+             O espaço entre chips vem de um Grid com Padding no template: o FlexLayout não conta Margin ao medir. -->
         <Style x:Key="Chip" TargetType="Border">
             <Setter Property="Padding" Value="14,0" />
             <Setter Property="HeightRequest" Value="36" />
@@ -19,7 +21,6 @@
             <Setter Property="StrokeThickness" Value="1" />
             <Setter Property="Stroke" Value="{DynamicResource HairlineStrong}" />
             <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
-            <Setter Property="Margin" Value="0,0,8,8" />
         </Style>
         <Style x:Key="ChipText" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource FontMedium}" />
@@ -37,6 +38,7 @@
             <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding ChoiceChips}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="local:ChipItem">
+                        <Grid Padding="0,0,8,8">
                         <Border Style="{StaticResource Chip}" SemanticProperties.Description="{Binding Text}">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnChoiceTapped" />
@@ -55,6 +57,7 @@
                                 </Label.Triggers>
                             </Label>
                         </Border>
+                    </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
@@ -66,6 +69,7 @@
             <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding FilterChips}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="local:ChipItem">
+                        <Grid Padding="0,0,8,8">
                         <Border Style="{StaticResource Chip}" SemanticProperties.Description="{Binding Text}">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnFilterTapped" />
@@ -89,6 +93,7 @@
                                 </Label>
                             </HorizontalStackLayout>
                         </Border>
+                    </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
@@ -101,6 +106,7 @@
             <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding InputChips}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="local:ChipItem">
+                        <Grid Padding="0,0,8,8">
                         <Border Style="{StaticResource Chip}" Padding="12,0,4,0"
                                 BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0">
                             <HorizontalStackLayout Spacing="2">
@@ -116,10 +122,11 @@
                                 </Grid>
                             </HorizontalStackLayout>
                         </Border>
+                    </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
-            <Border Style="{StaticResource FieldFrame}" MaximumWidthRequest="360" HorizontalOptions="Fill">
+            <Border Style="{StaticResource FieldFrame}" fit:Fit.MaxWidth="360">
                 <controls:BorderlessEntry x:Name="TagEntry"
                                           Style="{StaticResource BareEntry}"
                                           Placeholder="Nova tag, ex.: xaml"

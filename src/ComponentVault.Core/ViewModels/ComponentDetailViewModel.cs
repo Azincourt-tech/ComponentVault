@@ -108,6 +108,13 @@ public sealed partial class ComponentDetailViewModel : BaseViewModel, INavigatio
         var requested = parameters.TryGetValue(Routes.Params.VariantId, out var variantId) ? variantId?.ToString() : null;
         SelectVariant(Variants.FirstOrDefault(v => v.Variant.Id == requested) ?? Variants[0]);
 
+        if (parameters.TryGetValue(Routes.Params.Tab, out var tab)
+            && Enum.TryParse<DetailTab>(tab?.ToString(), ignoreCase: true, out var initialTab)
+            && (initialTab != DetailTab.Compare || CanCompare))
+        {
+            SelectedTab = initialTab;
+        }
+
         if (parameters.TryGetValue(Routes.Params.Present, out var present)
             && bool.TryParse(present?.ToString(), out var presenting) && presenting)
         {
@@ -210,6 +217,8 @@ public sealed partial class VariantOption(ComponentVariant variant) : Observable
     public string Summary => Variant.Summary;
 
     public ComponentOrigin Origin => Variant.Origin;
+
+    public VariantTier Tier => Variant.Tier;
 
     public string TierText => Labels.Tier(Variant.Tier);
 

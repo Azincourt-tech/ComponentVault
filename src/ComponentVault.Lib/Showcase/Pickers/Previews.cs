@@ -1,3 +1,4 @@
+using MauiIcons.Fluent;
 using ComponentVault.Lib.Theming;
 
 namespace ComponentVault.Lib.Showcase.Pickers;
@@ -13,16 +14,21 @@ public partial class PickerStyledPreview : ContentView
 {
     public PickerStyledPreview() => InitializeComponent();
 
-    private void OnPlatformChanged(object? sender, EventArgs e) =>
-        PlatformHint.Text = PlatformPicker.SelectedItem is string platform
-            ? $"O build vai gerar o pacote para {platform}."
-            : "Define o alvo do build.";
-
-    private void OnFocusChanged(object? sender, FocusEventArgs e)
+    private void OnPlatformChanged(object? sender, EventArgs e)
     {
-        PlatformFrame.SetThemeBrush(Border.StrokeProperty, e.IsFocused ? "Accent" : "HairlineStrong");
-        PlatformFrame.StrokeThickness = e.IsFocused ? 2 : 1;
+        var platform = PlatformPicker.SelectedItem as string;
+        PlatformHint.Text = platform is null ? "Define o alvo do build." : $"O build vai gerar o pacote para {platform}.";
+        // O ícone acompanha a escolha: celular, computador ou Mac.
+        PlatformIcon.Icon = platform switch
+        {
+            "Android" or "iOS" => FluentIcons.Phone20,
+            "Windows" => FluentIcons.Desktop20,
+            "macOS" => FluentIcons.DesktopMac20,
+            _ => FluentIcons.PhoneLaptop20,
+        };
     }
+
+    private void OnFocusChanged(object? sender, FocusEventArgs e) => FieldFrames.Apply(PlatformFrame, e.IsFocused);
 }
 
 [ShowcasePreview("picker.uranium")]

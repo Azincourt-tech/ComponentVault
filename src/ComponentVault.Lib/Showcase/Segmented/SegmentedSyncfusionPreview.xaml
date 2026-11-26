@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:seg="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Segmented.SegmentedSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:segmented.syncfusion -->
+        <VerticalStackLayout Spacing="16">
+
+            <!--
+              Pílula preenchida na cor de destaque sobre um trilho só, sem contorno. VisibleSegmentsCount igual ao
+              número de itens faz os segmentos dividirem a largura (sem ele, cada um tem largura fixa e o controle
+              fica centralizado).
+            -->
+            <seg:SfSegmentedControl x:Name="PeriodSegments"
+                                    VisibleSegmentsCount="4"
+                                    SelectedIndex="1"
+                                    SegmentHeight="40"
+                                    CornerRadius="20"
+                                    SegmentCornerRadius="16"
+                                    StrokeThickness="0"
+                                    ShowSeparator="False"
+                                    SegmentBackground="Transparent"
+                                    Background="{DynamicResource SurfaceAlt}"
+                                    SelectionChanged="OnSelectionChanged">
+                <seg:SfSegmentedControl.TextStyle>
+                    <seg:SegmentTextStyle FontFamily="JakartaMedium" FontSize="14" TextColor="{DynamicResource InkSecondary}" />
+                </seg:SfSegmentedControl.TextStyle>
+                <seg:SfSegmentedControl.SelectionIndicatorSettings>
+                    <seg:SelectionIndicatorSettings SelectionIndicatorPlacement="Fill"
+                                                    Background="{StaticResource Accent}"
+                                                    TextColor="{StaticResource OnAccent}" />
+                </seg:SfSegmentedControl.SelectionIndicatorSettings>
+                <seg:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type seg:SfSegmentItem}">
+                        <seg:SfSegmentItem Text="Dia" />
+                        <seg:SfSegmentItem Text="Semana" />
+                        <seg:SfSegmentItem Text="Mês" />
+                        <seg:SfSegmentItem Text="Ano" />
+                    </x:Array>
+                </seg:SfSegmentedControl.ItemsSource>
+            </seg:SfSegmentedControl>
+
+            <Label x:Name="PeriodLabel" Style="{StaticResource BodyMuted}" Text="Mostrando a semana atual." />
+
+            <!-- Sublinhado: a mesma lib, só trocando o posicionamento do indicador. -->
+            <seg:SfSegmentedControl x:Name="SectionSegments"
+                                    VisibleSegmentsCount="3"
+                                    SelectedIndex="0"
+                                    SegmentHeight="40"
+                                    CornerRadius="0"
+                                    StrokeThickness="0"
+                                    ShowSeparator="False"
+                                    SegmentBackground="Transparent">
+                <seg:SfSegmentedControl.TextStyle>
+                    <seg:SegmentTextStyle FontFamily="JakartaMedium" FontSize="14" TextColor="{DynamicResource InkTertiary}" />
+                </seg:SfSegmentedControl.TextStyle>
+                <seg:SfSegmentedControl.SelectionIndicatorSettings>
+                    <seg:SelectionIndicatorSettings SelectionIndicatorPlacement="BottomBorder"
+                                                    Stroke="{StaticResource Accent}"
+                                                    StrokeThickness="2"
+                                                    TextColor="{DynamicResource Ink}" />
+                </seg:SfSegmentedControl.SelectionIndicatorSettings>
+                <seg:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type seg:SfSegmentItem}">
+                        <seg:SfSegmentItem Text="Visão geral" />
+                        <seg:SfSegmentItem Text="Atividade" />
+                        <seg:SfSegmentItem Text="Membros" />
+                    </x:Array>
+                </seg:SfSegmentedControl.ItemsSource>
+            </seg:SfSegmentedControl>
+
+        </VerticalStackLayout>
+        <!-- /snippet:segmented.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfSegmentedControl (Syncfusion Toolkit, MIT) traz a pílula animada, sublinhado, borda, rolagem com muitos segmentos e navegação por teclado prontos. Basta trocar SelectionIndicatorPlacement para mudar o estilo." />
+
+    </VerticalStackLayout>
+
+</ContentView>

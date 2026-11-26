@@ -23,18 +23,28 @@
     <PackageReference Include="AathifMahir.Maui.MauiIcons.Fluent" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" />
     <PackageReference Include="Sharpnado.Tabs.Maui" />
+    <PackageReference Include="Syncfusion.Maui.Toolkit" />
   </ItemGroup>
 
   <!--
     O próprio código-fonte vai embutido como recurso "snippets/...". O app extrai daí as regiões
     marcadas com snippet:id, então o código exibido na aba Código é sempre o código compilado.
+
+    Num alvo, e não num ItemGroup estático: o MAUI tira os .xaml de EmbeddedResource ao avaliar o
+    projeto (para tratá-los como MauiXaml), e no Release o XamlC descarta esses recursos depois de
+    compilar (qualquer recurso terminado em .xaml, mesmo com outro nome). Um item estático sumia
+    com eles, e a aba Código dizia "não encontrado" para todo snippet em XAML. Aqui os arquivos
+    entram depois da limpeza e com o sufixo ".src", que o XamlC não reconhece; quem lê
+    (EmbeddedSnippetSource, no App) tira o sufixo.
   -->
-  <ItemGroup>
-    <EmbeddedResource Include="**\*.xaml;**\*.cs"
-                      Exclude="bin\**;obj\**;Platforms\**"
-                      LogicalName="snippets/%(RecursiveDir)%(Filename)%(Extension)"
-                      WithCulture="false"
-                      Visible="false" />
-  </ItemGroup>
+  <Target Name="_VaultEmbedSnippetSources" BeforeTargets="PrepareResources">
+    <ItemGroup>
+      <_VaultSnippetSource Include="**\*.xaml;**\*.cs" Exclude="bin\**;obj\**;Platforms\**" />
+      <EmbeddedResource Include="@(_VaultSnippetSource)"
+                        LogicalName="snippets/%(_VaultSnippetSource.RecursiveDir)%(_VaultSnippetSource.Filename)%(_VaultSnippetSource.Extension).src"
+                        WithCulture="false"
+                        Type="Non-Resx" />
+    </ItemGroup>
+  </Target>
 
 </Project>

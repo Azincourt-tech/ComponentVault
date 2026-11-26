@@ -18,5 +18,8 @@ public static class Routes
 
         /// <summary>"true" abre o detalhe já no modo Apresentar.</summary>
         public const string Present = "present";
+
+        /// <summary>Aba inicial do detalhe: preview, compare, docs ou code.</summary>
+        public const string Tab = "tab";
     }
 }

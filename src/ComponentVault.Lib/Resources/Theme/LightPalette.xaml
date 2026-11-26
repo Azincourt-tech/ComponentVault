@@ -1,50 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Tema Claro: neutro, tinta quente, linhas finas, sem sombra. -->
+<!--
+  Tema Claro "Pérola" (paleta Fiery Red Sunset): fundo perolado quente, texto em Ink Black,
+  cards como metal claro com aresta em tom bronze (clara em cima, mais escura embaixo) e um
+  brilho de pôr do sol bem suave no fundo, em açafrão, ocre e âmbar.
+-->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="ComponentVault.Lib.Resources.Theme.LightPalette">
 
-    <Color x:Key="Ink">#1A1917</Color>
-    <Color x:Key="InkHover">#363430</Color>
+    <Color x:Key="Ink">#03071E</Color>
+    <Color x:Key="InkHover">#1C2038</Color>
     <Color x:Key="OnInk">#FFFFFF</Color>
-    <Color x:Key="InkSecondary">#5C5A55</Color>
-    <Color x:Key="InkTertiary">#75736C</Color>
+    <Color x:Key="InkSecondary">#4E4F63</Color>
+    <Color x:Key="InkTertiary">#6E6F82</Color>
 
-    <Color x:Key="Ground">#F7F7F5</Color>
+    <Color x:Key="Ground">#F6F1EC</Color>
     <Color x:Key="Surface">#FFFFFF</Color>
     <Color x:Key="SurfaceRaised">#FFFFFF</Color>
-    <Color x:Key="SurfaceAlt">#F0EFEC</Color>
-    <Color x:Key="SurfaceHover">#E9E8E4</Color>
-    <Color x:Key="Hairline">#E4E3DF</Color>
-    <Color x:Key="HairlineStrong">#CFCEC8</Color>
-    <SolidColorBrush x:Key="CardStroke" Color="#E4E3DF" />
+    <Color x:Key="SurfaceAlt">#EFE8E1</Color>
+    <Color x:Key="SurfaceHover">#E8DED5</Color>
+    <Color x:Key="Hairline">#E6DCD2</Color>
+    <Color x:Key="HairlineStrong">#D0C3B6</Color>
+    <!-- Campo preenchido: tom pérola em repouso, contorno quase invisível; no foco clareia e ganha o anel -->
+    <Color x:Key="FieldFill">#F4EEE8</Color>
+    <Color x:Key="FieldStroke">#E4D9CE</Color>
+    <!-- Metal claro: branco em cima, levemente perolado embaixo -->
+    <LinearGradientBrush x:Key="CardFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFFFFF" Offset="0" />
+        <GradientStop Color="#FBF8F4" Offset="0.5" />
+        <GradientStop Color="#F1EAE3" Offset="1" />
+    </LinearGradientBrush>
+    <!-- Aresta em bronze claro: clara em cima, mais escura embaixo, com a luz vindo de cima -->
+    <LinearGradientBrush x:Key="CardStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#E9DFD5" Offset="0" />
+        <GradientStop Color="#D3C4B5" Offset="0.5" />
+        <GradientStop Color="#B5A08C" Offset="1" />
+    </LinearGradientBrush>
     <!-- Barra flutuante: quase opaca, para o conteúdo que passa por baixo não brigar com ela -->
-    <Color x:Key="Chrome">#EDFFFFFF</Color>
-    <Color x:Key="ChromeStroke">#DAD9D3</Color>
+    <Color x:Key="Chrome">#F2FFFFFF</Color>
+    <Color x:Key="ChromeStroke">#DCCFC2</Color>
 
-    <Color x:Key="AccentText">#2560CC</Color>
-    <Color x:Key="AccentTint">#142F6FE4</Color>
+    <!-- Texto em destaque: Oxblood (contraste alto sobre branco) -->
+    <Color x:Key="AccentText">#9D0208</Color>
+    <Color x:Key="AccentTint">#1FE85D04</Color>
     <Color x:Key="SuccessText">#18704A</Color>
-    <Color x:Key="WarningText">#8F5806</Color>
-    <Color x:Key="DangerText">#B53131</Color>
+    <Color x:Key="WarningText">#9A4A00</Color>
+    <Color x:Key="DangerText">#9D0208</Color>
     <Color x:Key="SuccessTint">#EAF5EF</Color>
-    <Color x:Key="WarningTint">#FBF2E3</Color>
-    <Color x:Key="DangerTint">#FBEDEC</Color>
-    <Color x:Key="InfoTint">#EDF3FD</Color>
+    <Color x:Key="WarningTint">#FDF1DE</Color>
+    <Color x:Key="DangerTint">#FBE9E6</Color>
+    <Color x:Key="InfoTint">#EEF1FB</Color>
 
-    <Color x:Key="SyntaxPlain">#1A1917</Color>
-    <Color x:Key="SyntaxKeyword">#2560CC</Color>
+    <Color x:Key="SyntaxPlain">#03071E</Color>
+    <Color x:Key="SyntaxKeyword">#9D0208</Color>
     <Color x:Key="SyntaxType">#0F7A75</Color>
     <Color x:Key="SyntaxString">#1B7A50</Color>
-    <Color x:Key="SyntaxNumber">#A85A14</Color>
-    <Color x:Key="SyntaxComment">#8A8881</Color>
-    <Color x:Key="SyntaxElement">#2560CC</Color>
-    <Color x:Key="SyntaxAttribute">#A33A5C</Color>
-    <Color x:Key="SyntaxPunctuation">#8A8881</Color>
+    <Color x:Key="SyntaxNumber">#C24E00</Color>
+    <Color x:Key="SyntaxComment">#85808A</Color>
+    <Color x:Key="SyntaxElement">#DC2F02</Color>
+    <Color x:Key="SyntaxAttribute">#6A040F</Color>
+    <Color x:Key="SyntaxPunctuation">#85808A</Color>
 
-    <!-- Sem manchas no tema claro -->
-    <SolidColorBrush x:Key="AmbientBlue" Color="Transparent" />
-    <SolidColorBrush x:Key="AmbientTeal" Color="Transparent" />
-    <SolidColorBrush x:Key="AmbientRose" Color="Transparent" />
+    <!-- Pôr do sol suave: açafrão, ocre e âmbar, bem mais discretos que no Vidro -->
+    <RadialGradientBrush x:Key="AmbientBlue" Center="0.5,0.5" Radius="0.5">
+        <GradientStop Color="#33F48C06" Offset="0" />
+        <GradientStop Color="#12F48C06" Offset="0.5" />
+        <GradientStop Color="#00F48C06" Offset="1" />
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="AmbientTeal" Center="0.5,0.5" Radius="0.5">
+        <GradientStop Color="#29DC2F02" Offset="0" />
+        <GradientStop Color="#0EDC2F02" Offset="0.5" />
+        <GradientStop Color="#00DC2F02" Offset="1" />
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="AmbientRose" Center="0.5,0.5" Radius="0.5">
+        <GradientStop Color="#2EFFBA08" Offset="0" />
+        <GradientStop Color="#10FFBA08" Offset="0.5" />
+        <GradientStop Color="#00FFBA08" Offset="1" />
+    </RadialGradientBrush>
 
 </ResourceDictionary>

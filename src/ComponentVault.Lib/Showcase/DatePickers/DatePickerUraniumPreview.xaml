@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
              x:Class="ComponentVault.Lib.Showcase.DatePickers.DatePickerUraniumPreview">
 
@@ -13,7 +14,7 @@
               280 é o mínimo que cabe o seletor de horário nativo do Windows mais o botão de limpar.
             -->
             <!-- snippet:datepicker.uranium -->
-            <VerticalStackLayout Spacing="16" WidthRequest="{OnIdiom Phone=-1, Default=280}" HorizontalOptions="{OnIdiom Phone=Fill, Default=Start}">
+            <VerticalStackLayout Spacing="16" fit:Fit.MaxWidth="280">
                 <material:DatePickerField Title="Data de entrega" Format="dd/MM/yyyy" AllowClear="True" />
                 <material:TimePickerField Title="Horário" Format="HH:mm" AllowClear="True" Time="14:30" />
             </VerticalStackLayout>

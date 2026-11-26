@@ -31,11 +31,13 @@
                       PeekAreaInsets="0,0,56,0"
                       PositionChanged="OnPositionChanged">
             <CarouselView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12"
+                <!-- Espaço entre cards no próprio template: o ItemSpacing do Windows também recua o primeiro card. -->
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="0"
                                    SnapPointsType="MandatorySingle" SnapPointsAlignment="Start" />
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="local:OnboardingSlide">
+                    <Grid Padding="0,0,12,0">
                     <Border Style="{StaticResource Card}" Padding="20">
                         <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
                             <Border WidthRequest="40" HeightRequest="40" StrokeThickness="0" StrokeShape="RoundRectangle 12"
@@ -50,6 +52,7 @@
                             <Label Grid.Row="2" Style="{StaticResource Caption}" Text="{Binding Duration}" />
                         </Grid>
                     </Border>
+                    </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>

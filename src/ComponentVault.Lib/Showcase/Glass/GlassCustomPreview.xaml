@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:mi="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
              xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              x:Class="ComponentVault.Lib.Showcase.Glass.GlassCustomPreview">
@@ -67,7 +68,7 @@
         </Border>
 
         <!-- Painéis de vidro -->
-        <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="340">
+        <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center" HorizontalOptions="Center" fit:Fit.MaxWidth="340">
 
             <!-- Tocando agora -->
             <Border Style="{StaticResource GlassPanel}" Padding="18">
@@ -79,7 +80,7 @@
                                 <GradientStop Color="#F0527E" Offset="1" />
                             </LinearGradientBrush>
                         </Border.Background>
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Play24}" IconSize="22" IconColor="White" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Play24}" IconSize="22" IconColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                         <Label Style="{StaticResource OnGlass}" Text="Tocando agora" FontSize="13" Opacity="0.75" />
@@ -88,7 +89,7 @@
                     <Border Grid.Column="2" WidthRequest="44" HeightRequest="44" StrokeThickness="0" StrokeShape="RoundRectangle 22"
                             BackgroundColor="#33FFFFFF" VerticalOptions="Center"
                             SemanticProperties.Description="Pausar">
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Pause24}" IconSize="18" IconColor="White" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Pause24}" IconSize="18" IconColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                 </Grid>
             </Border>
@@ -109,19 +110,19 @@
                 <HorizontalStackLayout Spacing="6">
                     <Border WidthRequest="44" HeightRequest="44" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="White"
                             SemanticProperties.Description="Início">
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="20" IconColor="#0A0E1C" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Home24}" IconSize="20" IconColor="#0A0E1C" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <Border WidthRequest="44" HeightRequest="44" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="Transparent"
                             SemanticProperties.Description="Buscar">
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Search24}" IconSize="20" IconColor="White" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Search24}" IconSize="20" IconColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <Border WidthRequest="44" HeightRequest="44" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="Transparent"
                             SemanticProperties.Description="Favoritos">
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Heart24}" IconSize="20" IconColor="White" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Heart24}" IconSize="20" IconColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <Border WidthRequest="44" HeightRequest="44" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="Transparent"
                             SemanticProperties.Description="Ajustes">
-                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Settings24}" IconSize="20" IconColor="White" />
+                        <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Settings24}" IconSize="20" IconColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                 </HorizontalStackLayout>
             </Border>

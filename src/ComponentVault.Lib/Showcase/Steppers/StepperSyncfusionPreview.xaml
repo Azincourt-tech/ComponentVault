@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:num="clr-namespace:Syncfusion.Maui.Toolkit.NumericUpDown;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Steppers.StepperSyncfusionPreview">
+
+    <ContentView.Resources>
+        <!-- Botões "–" e "+" no lugar das setas: dizem o que fazem e têm alvo de 32px. -->
+        <DataTemplate x:Key="PlusButton">
+            <Grid WidthRequest="32" HeightRequest="32">
+                <Label Text="+" FontFamily="JakartaSemiBold" FontSize="20" TextColor="{StaticResource Accent}"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MinusButton">
+            <Grid WidthRequest="32" HeightRequest="32">
+                <Label Text="–" FontFamily="JakartaSemiBold" FontSize="20" TextColor="{StaticResource Accent}"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+        <!--
+          Na moldura de campo do design system (sem a borda da lib). Em "Both" o Syncfusion põe o botão de
+          aumentar à esquerda; FlowDirection invertido deixa no padrão: "–" à esquerda e "+" à direita.
+        -->
+        <Style x:Key="VaultNumericUpDown" TargetType="num:SfNumericUpDown">
+            <Setter Property="ShowBorder" Value="False" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="FlowDirection" Value="RightToLeft" />
+            <Setter Property="UpDownPlacementMode" Value="Inline" />
+            <Setter Property="UpDownButtonAlignment" Value="Both" />
+            <Setter Property="UpButtonTemplate" Value="{StaticResource PlusButton}" />
+            <Setter Property="DownButtonTemplate" Value="{StaticResource MinusButton}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="JakartaSemiBold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="HeightRequest" Value="46" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:stepper.syncfusion -->
+        <Grid ColumnDefinitions="{fit:OnWidth Compact='*', Default='*,*'}"
+              RowDefinitions="{fit:OnWidth Compact='Auto,Auto', Default='Auto'}"
+              ColumnSpacing="20" RowSpacing="20">
+
+            <!-- Quantidade: limites 1 a 5 e o número editável no meio. -->
+            <VerticalStackLayout Spacing="6">
+                <Label Style="{StaticResource FieldLabel}" Text="Quantidade" />
+                <Border Style="{StaticResource FieldFrame}" Padding="4,0">
+                    <num:SfNumericUpDown Style="{StaticResource VaultNumericUpDown}"
+                                         Value="1" Minimum="1" Maximum="5" SmallChange="1" CustomFormat="0" />
+                </Border>
+                <Label Style="{StaticResource Caption}" Text="Máximo de 5 por pedido." />
+            </VerticalStackLayout>
+
+            <!-- Gorjeta: porcentagem, passo de 5 e digitação livre. -->
+            <VerticalStackLayout Grid.Column="{fit:OnWidth Compact=0, Default=1}" Grid.Row="{fit:OnWidth Compact=1, Default=0}" Spacing="6">
+                <Label Style="{StaticResource FieldLabel}" Text="Gorjeta" />
+                <Border Style="{StaticResource FieldFrame}" Padding="4,0">
+                    <num:SfNumericUpDown Style="{StaticResource VaultNumericUpDown}"
+                                         Value="10" Minimum="0" Maximum="30" SmallChange="5" CustomFormat="0'%'" />
+                </Border>
+                <Label Style="{StaticResource Caption}" Text="De 0% a 30%, de 5 em 5." />
+            </VerticalStackLayout>
+
+        </Grid>
+        <!-- /snippet:stepper.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfNumericUpDown junta o campo e os botões num controle só: formatação (moeda, porcentagem), limites, passo e digitação livre. O Stepper do MAUI não mostra o valor." />
+
+    </VerticalStackLayout>
+
+</ContentView>

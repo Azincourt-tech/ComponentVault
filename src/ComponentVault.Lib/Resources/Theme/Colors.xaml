@@ -3,25 +3,70 @@
   Cores FIXAS (iguais nos três temas). Tudo que muda com o tema mora nas paletas
   (LightPalette, DarkPalette, GlassPalette) e é consumido com {DynamicResource Chave},
   para a troca de tema acontecer ao vivo, sem recarregar telas.
+
+  Paleta da marca: "Fiery Red Sunset"
+    Ink Black #03071E · Night Bordeaux #370617 · Black Cherry #6A040F · Oxblood #9D0208
+    Brick Ember #D00000 · Red Ochre #DC2F02 · Cayenne Red #E85D04 · Deep Saffron #F48C06
+    Orange #FAA307 · Amber Flame #FFBA08
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- Destaque: único colorido da interface -->
-    <Color x:Key="Accent">#2F6FE4</Color>
-    <Color x:Key="AccentHover">#245BC4</Color>
+    <!--
+      Destaque da marca: Cayenne Red. Quente e longe do azul nativo do Windows e do Android:
+      o nível Estilizado se diferencia do Base à primeira vista. Hover/pressionado em Red Ochre.
+    -->
+    <Color x:Key="Accent">#E85D04</Color>
+    <Color x:Key="AccentHover">#DC2F02</Color>
     <Color x:Key="OnAccent">#FFFFFF</Color>
 
-    <!-- Semânticas (preenchimento) -->
+    <!-- Semânticas (preenchimento): erro em Brick Ember, aviso em Deep Saffron -->
     <Color x:Key="Success">#1F8A5B</Color>
-    <Color x:Key="Warning">#C47A0A</Color>
-    <Color x:Key="Danger">#D23F3F</Color>
-    <Color x:Key="DangerHover">#B83232</Color>
+    <Color x:Key="Warning">#F48C06</Color>
+    <Color x:Key="Danger">#D00000</Color>
+    <Color x:Key="DangerHover">#9D0208</Color>
+
+    <!--
+      Níveis: cada um com a sua cor, a mesma em todo o app (seletor de nível, apresentação,
+      legenda da Home). Base em aço (o cru), Estilizado no Cayenne da marca, Biblioteca em
+      Amber Flame. Custom fica em verde-água de propósito: com os quatro quentes, os níveis
+      se confundiriam.
+    -->
+    <Color x:Key="TierBase">#8B93A1</Color>
+    <Color x:Key="TierStyled">#E85D04</Color>
+    <Color x:Key="TierCustom">#14A394</Color>
+    <Color x:Key="TierLibrary">#FFBA08</Color>
+
+    <!--
+      Syncfusion Toolkit: os controles Sf* usam estas chaves globais para foco, seleção e hover. O padrão
+      é o roxo do Material 3; aqui vira o Cayenne da marca, para nenhum controle da lib sair violeta.
+      Os estados desabilitados ficam com o cinza do próprio Syncfusion.
+    -->
+    <Color x:Key="PrimaryBackground">#E85D04</Color>
+    <Color x:Key="PrimaryBackgroundFocused">#E85D04</Color>
+    <Color x:Key="PrimaryBackgroundSelected">#E85D04</Color>
+    <Color x:Key="PrimaryBackgroundHovered">#DC2F02</Color>
+    <Color x:Key="PrimaryBackgroundPressed">#DC2F02</Color>
+    <Color x:Key="PrimaryBackgroundLight">#1FE85D04</Color>
+    <Color x:Key="PrimaryBorder">#E85D04</Color>
+    <Color x:Key="PrimaryBorderFocused">#E85D04</Color>
+    <Color x:Key="PrimaryBorderSelected">#E85D04</Color>
+    <Color x:Key="PrimaryBorderHovered">#DC2F02</Color>
+    <Color x:Key="PrimaryBorderPressed">#DC2F02</Color>
+    <Color x:Key="PrimaryForeground">#E85D04</Color>
+    <Color x:Key="PrimaryForegroundFocused">#E85D04</Color>
+    <Color x:Key="PrimaryForegroundSelected">#E85D04</Color>
+    <Color x:Key="PrimaryForegroundHovered">#DC2F02</Color>
+    <Color x:Key="PrimaryForegroundPressed">#DC2F02</Color>
+    <Color x:Key="PrimaryOverlayBackgroundHovered">#14E85D04</Color>
+    <Color x:Key="PrimaryOverlayBackgroundFocused">#1FE85D04</Color>
+    <Color x:Key="PrimaryOverlayBackgroundPressed">#29E85D04</Color>
+    <Color x:Key="PrimaryOverlayBackgroundSelected">#1FE85D04</Color>
 
     <!-- Origens: o badge é neutro e só o ponto é colorido. Syncfusion em rosa, sem violeta. -->
     <Color x:Key="OriginNative">#2F6FE4</Color>
     <Color x:Key="OriginCustom">#13857F</Color>
-    <Color x:Key="OriginFreeLibrary">#C47A0A</Color>
+    <Color x:Key="OriginFreeLibrary">#FAA307</Color>
     <Color x:Key="OriginSyncfusion">#C2456A</Color>
     <Color x:Key="OriginNew">#1F8A5B</Color>
 

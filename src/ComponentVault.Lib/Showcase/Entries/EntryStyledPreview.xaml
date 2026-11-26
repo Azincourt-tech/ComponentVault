@@ -1,36 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
              x:Class="ComponentVault.Lib.Showcase.Entries.EntryStyledPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="StrengthSegment" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="4" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Color" Value="{DynamicResource HairlineStrong}" />
+        </Style>
+    </ContentView.Resources>
 
     <!-- snippet:entry.styled -->
     <!--
       Formulário com validação no envio: o erro aparece embaixo do próprio campo e some
       assim que o valor fica válido. Uma linha de status anuncia o resultado.
     -->
-    <VerticalStackLayout Spacing="20" MaximumWidthRequest="440" HorizontalOptions="Start">
+    <VerticalStackLayout Spacing="20">
 
+        <!-- Ícone à esquerda diz o tipo de dado antes de ler o rótulo; no foco ele acende. -->
         <controls:VaultTextField x:Name="NameField"
                                  Label="Nome"
                                  Placeholder="Como devemos te chamar"
+                                 IconData="M8 1.5A3 3 0 1 0 8 7.5A3 3 0 1 0 8 1.5M2.5 14.5C2.5 11.5 5 9.5 8 9.5S13.5 11.5 13.5 14.5"
                                  ReturnType="Next"
                                  TextChanged="OnFieldChanged" />
 
         <controls:VaultTextField x:Name="EmailField"
                                  Label="E-mail"
                                  Placeholder="voce@exemplo.com"
+                                 IconData="M1.5 3.5H14.5V12.5H1.5ZM1.5 3.5L8 9L14.5 3.5"
                                  Keyboard="Email"
                                  ReturnType="Next"
                                  TextChanged="OnFieldChanged" />
 
-        <controls:VaultTextField x:Name="PasswordField"
-                                 Label="Senha"
-                                 Hint="Mínimo de 8 caracteres"
-                                 IsPassword="True"
-                                 ReturnType="Done"
-                                 TextChanged="OnFieldChanged" />
+        <!-- Senha: botão de mostrar/ocultar e medidor de força que enche e muda de cor ao digitar. -->
+        <VerticalStackLayout Spacing="8">
+            <controls:VaultTextField x:Name="PasswordField"
+                                     Label="Senha"
+                                     Hint="Mínimo de 8 caracteres"
+                                     IconData="M3.5 7.5H12.5V14.5H3.5ZM5.5 7.5V5A2.5 2.5 0 0 1 10.5 5V7.5"
+                                     IsPassword="True"
+                                     ReturnType="Done"
+                                     TextChanged="OnPasswordChanged" />
+            <Grid ColumnDefinitions="*,*,*,*,Auto" ColumnSpacing="6">
+                <BoxView x:Name="Strength1" Style="{StaticResource StrengthSegment}" />
+                <BoxView x:Name="Strength2" Grid.Column="1" Style="{StaticResource StrengthSegment}" />
+                <BoxView x:Name="Strength3" Grid.Column="2" Style="{StaticResource StrengthSegment}" />
+                <BoxView x:Name="Strength4" Grid.Column="3" Style="{StaticResource StrengthSegment}" />
+                <Label x:Name="StrengthLabel" Grid.Column="4" Style="{StaticResource Caption}" Text="Força da senha"
+                       LineHeight="1" VerticalOptions="Center" Margin="6,0,0,0" />
+            </Grid>
+        </VerticalStackLayout>
 
         <Button Text="Criar conta" Style="{StaticResource PrimaryButton}" HorizontalOptions="Fill" Clicked="OnSubmit" />
 

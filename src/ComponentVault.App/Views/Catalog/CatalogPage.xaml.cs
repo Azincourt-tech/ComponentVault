@@ -1,12 +1,15 @@
 using System.ComponentModel;
 using ComponentVault.App.Controls;
 using ComponentVault.Core.ViewModels;
+using ComponentVault.Lib.Theming;
 
 namespace ComponentVault.App.Views.Catalog;
 
 public partial class CatalogPage : ContentPage
 {
-    private const double ContentWidth = 880;
+    // 800px de conteúdo do cabeçalho (880 menos 40 de cada lado) + 8px de cada lado, que é o
+    // recuo interno das linhas: assim os ícones da lista alinham com a busca e os filtros.
+    private const double ContentWidth = 816;
 
     private readonly CatalogViewModel _viewModel;
     private bool _appeared;
@@ -42,12 +45,12 @@ public partial class CatalogPage : ContentPage
     }
 
     // Só layout: no Windows a CollectionView recorta itens quando tem MaximumWidthRequest,
-    // então ela ocupa a largura toda e a margem lateral centraliza a coluna de 880px.
+    // então ela ocupa a largura toda e a margem lateral centraliza a coluna.
     private void OnPageSizeChanged(object? sender, EventArgs e)
     {
         if (sender is not View root || root.Width <= 0) return;
 
-        var minimum = DeviceInfo.Idiom == DeviceIdiom.Phone ? 12 : 32;
+        var minimum = Adaptive.Current.IsCompact ? 12 : 32;
         var side = Math.Max(minimum, (root.Width - ContentWidth) / 2);
         ResultsList.Margin = new Thickness(side, 0, side, 0);
     }

@@ -36,3 +36,17 @@ public partial class OtpCustomPreview : ContentView
         ResendButton.IsEnabled = true;
     }
 }
+
+[ShowcasePreview("otp.syncfusion")]
+public partial class OtpSyncfusionPreview : ContentView
+{
+    public OtpSyncfusionPreview() => InitializeComponent();
+
+    // Com as 6 caixas preenchidas, a dica vira confirmação (num app real, aqui o código é enviado).
+    private void OnValueChanged(object? sender, Syncfusion.Maui.Toolkit.OtpInput.OtpInputValueChangedEventArgs e)
+    {
+        var complete = e.NewValue?.Length == SmsCode.Length;
+        SmsHint.Text = complete ? "Código completo. Verificando..." : "Cole o código inteiro ou digite um dígito por caixa.";
+        SmsHint.SetThemeColor(Label.TextColorProperty, complete ? "SuccessText" : "InkTertiary");
+    }
+}

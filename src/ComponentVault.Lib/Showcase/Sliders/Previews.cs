@@ -1,3 +1,4 @@
+using MauiIcons.Fluent;
 using System.Globalization;
 
 namespace ComponentVault.Lib.Showcase.Sliders;
@@ -11,10 +12,32 @@ public partial class SliderBasePreview : ContentView
 [ShowcasePreview("slider.styled")]
 public partial class SliderStyledPreview : ContentView
 {
+    private double _beforeMute = 65;
+
     public SliderStyledPreview() => InitializeComponent();
 
     // Encaixe em passos: o valor exibido e o salvo são sempre "redondos".
-    private void OnVolumeChanged(object? sender, ValueChangedEventArgs e) => Snap(sender, e.NewValue, 5);
+    private void OnVolumeChanged(object? sender, ValueChangedEventArgs e)
+    {
+        Snap(sender, e.NewValue, 5);
+        var value = VolumeSlider.Value;
+        VolumeValue.Text = value <= 0 ? "Mudo" : $"{value:F0}%";
+        // O ícone da esquerda acompanha o nível: cortado no mudo, uma onda no volume baixo.
+        MuteIcon.Icon = value <= 0 ? FluentIcons.SpeakerMute20 : value < 50 ? FluentIcons.Speaker120 : FluentIcons.Speaker020;
+    }
+
+    private void OnMuteTapped(object? sender, TappedEventArgs e)
+    {
+        if (VolumeSlider.Value > 0)
+        {
+            _beforeMute = VolumeSlider.Value;
+            VolumeSlider.Value = 0;
+        }
+        else
+        {
+            VolumeSlider.Value = _beforeMute > 0 ? _beforeMute : 50;
+        }
+    }
 
     private void OnFontChanged(object? sender, ValueChangedEventArgs e) => Snap(sender, e.NewValue, 1);
 

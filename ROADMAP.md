@@ -10,7 +10,30 @@ O que ainda falta no ComponentVault, em ordem de prioridade. Situação em 26/11
 - **Seletor de tema sempre sincronizado:** marca o tema visível, inclusive em "Sistema" e com `COMPONENTVAULT_THEME`.
 - **Filtros do catálogo e seletor de nível** em cápsula, com feedback de toque, no mesmo desenho da barra.
 
+## Feito em 27/11/2026: revisão geral, responsivo e nova identidade
+
+- **Revisão de alinhamento e espaçamento** de todas as variantes e páginas, por captura:
+  - cerca de 30 correções, como itens cortados em `FlexLayout`, blocos centralizados por engano, campos estreitos e ícones fora do centro;
+  - Lado a lado e Docs na mesma coluna do cabeçalho;
+  - Catálogo alinhado com a busca.
+- **Bug grave do Release:** a aba Código dizia "não encontrado" para todo snippet em XAML. O XamlC descartava os arquivos embutidos.
+- **App responsivo pela largura:**
+  - faixas compacta, média e expandida (`Adaptive`, `OnWidth`), no lugar de `OnIdiom`;
+  - larguras "até N" (`Fit.MaxWidth`) em vez de fixas;
+  - conferido em 390×844, 768×1024 e 1280×800.
+- **Navegação no celular:** barra inferior em largura total (Início, Catálogo, Tema). O Tema transforma a barra no seletor de temas, e o voltar do Detalhe fica no topo.
+- **Nova identidade:**
+  - paleta "Fiery Red Sunset", com o Cayenne `#E85D04` como destaque, longe do azul nativo, para o Estilizado se separar do Base; o ícone e o splash usam o degradê da paleta;
+  - Claro "Pérola" e Escuro com cards metalizados e luz de pôr do sol; Escuro e Vidro sobre o Ink Black `#03071E`;
+  - uma cor por nível (Base aço, Estilizado Cayenne, Custom verde-água, Biblioteca Amber Flame);
+  - fundo de galáxia animado: manchas de luz que fluem como líquido e estrelas que piscam, mais forte no Vidro.
+
 ## 1. Verificação pendente
+
+- [ ] **Barra inferior com clique** (faixa compacta): troca de seção e o seletor de temas que substitui a barra.
+- [ ] **Fundo animado no Android:** conferir a fluidez e o consumo de bateria das manchas e das estrelas. Se pesar, baixar a taxa de quadros ou desligar as estrelas no celular.
+- [ ] **Faixa da barra de título no Windows:** a luz do fundo é cortada na altura da `TitleBar`, que tem a cor `Ground` lisa. Avaliar estender o conteúdo por baixo dela.
+- [x] ~~Revisar os níveis Estilizado lado a lado com o Base~~ (27/11/2026): campos preenchidos (`FieldFrame` + `FieldFrames.Apply`), ícones e força da senha no Entry, ícone que acompanha a escolha no Picker, barra de formatação no Editor, ícones e valor em pílula no Slider, envio já em andamento no Progress, grade de cards clicáveis no Card. Os previews ocupam a largura toda do card.
 
 O que foi escrito, mas ainda não rodou de ponta a ponta.
 
@@ -49,27 +72,89 @@ Componentes que ainda têm um nível só:
 | ~~Alert~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (Border e Label crus) e Custom (pilha de avisos, `AlertStack`). Sem Biblioteca: não há lib gratuita de aviso em linha, e o Snackbar do Toolkit é um toast (já está no Toast). Testado pelo dono no Windows. |
 | ~~Chips~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`RadioButton` e `CheckBox` crus) e Custom (`ChoiceChipGroup` com pílula deslizante e `FilterChip` com check animado). O `SlidingIndicator` foi para a Lib e é usado pelo app e pelo preview. Falta testar com clique. |
 | ~~Empty state~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`CollectionView` com `EmptyView` em texto) e Custom (`SearchIllustration` em Microsoft.Maui.Graphics, com cartões flutuando e lupa passeando, mais sugestões de busca em chips). Testado pelo dono no Windows. |
-| Glass | Custom | Estilizado (só tokens, sem fundo ambiente) |
+| ~~Glass~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`Border` translúcido sem cena, um cinza lavado) e Estilizado (cards do design system só com tokens: sólidos no Claro e no Escuro, vidro no tema Vidro). Conferido por captura nos 3 temas. |
 | Código OTP | Custom | Base (Entry por dígito, para comparar) |
 | Rating | Custom | Base (botões), Biblioteca |
 | Skeleton | Custom | Biblioteca (shimmer) |
+
+### Uma aba por biblioteca e um Custom onde couber
+
+Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganha a sua aba no seletor de nível, para mostrar todas as possibilidades. E todo componente que dá para desenhar à mão ganha o nível Custom.
+
+**Regras para entrar uma lib:** 100% livre (MIT, Apache e afins, sem cadastro, chave nem limite de faturamento) e com build para .NET 10 no Windows e no Android. Conferido no NuGet em 27/11/2026:
+
+| Lib | Licença | .NET 10 | Situação |
+|---|---|---|---|
+| Syncfusion.Maui.Toolkit 1.0.12 | MIT | sim | **Entra.** É o toolkit open source, diferente da linha paga (que pede chave). Origem "Syncfusion" no catálogo. |
+| Plugin.Maui.Calendar 3.3.0 | MIT | sim | **Entra** (calendário). |
+| Microcharts.Maui 2.0.0.3 | MIT | sim (TFM `net10.0`) | **Entra** (gráficos). Conferir no Windows. |
+| CommunityToolkit.Maui.MediaElement 11.0.0 | MIT | sim | **Entra** quando vierem os players (a 12 já é .NET 11). |
+| UraniumUI, CommunityToolkit.Maui, Sharpnado.Tabs, LiveCharts, MauiIcons | MIT | sim | Já no projeto. |
+| Mopups, Maui.DataGrid, Plugin.Maui.Audio, SkiaSharp.Extended, Sharpnado.CollectionView, The49.BottomSheet | MIT | não | **Fora:** param no .NET 7, 8 ou 9. |
+| HorusStudio MaterialDesignControls | MIT | sem Windows | Fora. |
+| Plugin.Maui.SegmentedControl | MIT | só a 3.0 (.NET 11) tem Windows | Fora por enquanto. |
+| Syncfusion (linha paga), DevExpress, Telerik | comercial ou com cadastro | | Fora: o dono escolheu só libs 100% livres. |
+
+**Matriz** (✓ já existe, **+** a fazer):
+
+| Componente | Base | Estilizado | Custom | Bibliotecas |
+|---|---|---|---|---|
+| Avatar | ✓ | | **+** anel de status/stories | ✓ Toolkit |
+| Button | ✓ | ✓ | **+** segurar para confirmar | ✓ UraniumUI, **+** Syncfusion `SfButton` |
+| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, **+** Syncfusion `SfCardView`, **+** Syncfusion `SfAccordion` |
+| Carousel | ✓ | ✓ | **+** pilha de cartões | **+** Syncfusion `SfCarousel` |
+| Chart | | | ✓ | ✓ LiveCharts, **+** Syncfusion `SfCartesianChart`, **+** Microcharts |
+| CheckBox | ✓ | ✓ | **+** check desenhado | ✓ UraniumUI |
+| Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
+| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, **+** Syncfusion `SfCalendar`, **+** Plugin.Maui.Calendar |
+| Editor | ✓ | ✓ | **+** Markdown com prévia | |
+| Entry | ✓ | ✓ | **+** rótulo flutuante desenhado | ✓ UraniumUI, **+** Syncfusion `SfTextInputLayout` |
+| Icons | ✓ | | **+** ícone animado | ✓ MauiIcons |
+| List | ✓ | ✓ | **+** linhas com deslizar desenhado | **+** Syncfusion `SfPullToRefresh` |
+| Código OTP | **+** | | ✓ | ✓ Syncfusion `SfOtpInput` |
+| Picker | ✓ | ✓ | **+** roda (wheel) | ✓ UraniumUI, **+** Syncfusion `SfPicker` |
+| Popup | ✓ | | **+** folha inferior | ✓ Toolkit, **+** Syncfusion `SfPopup` |
+| Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
+| Radio | ✓ | ✓ | **+** opções desenhadas | ✓ UraniumUI |
+| SearchBar | ✓ | ✓ | **+** busca com sugestões | **+** UraniumUI `AutoCompleteTextField` |
+| Segmented | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
+| Skeleton | | | ✓ | ✓ Syncfusion `SfShimmer` |
+| Stepper | ✓ | ✓ | **+** contador desenhado | ✓ Syncfusion `SfNumericUpDown` |
+| Tabs | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, **+** UraniumUI `TabView` |
+| Toast | | | ✓ | ✓ Toolkit |
+
+Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBottomSheet`), Navigation drawer (`SfNavigationDrawer`), Pull to refresh e Accordion.
+
+**Atenção:** com quatro ou mais abas, o seletor de nível precisa caber na faixa compacta (rolar na horizontal ou quebrar em duas linhas).
 
 ## 4. Componentes novos
 
 Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, ScreensDesign) e as libs gratuitas do awesome-dotnet-maui:
 
-- [ ] **Bottom sheet**: Base com `Border` animado; Biblioteca com The49.Maui.BottomSheet.
-- [ ] **Expander / Accordion**: CommunityToolkit `Expander` e uma versão estilizada.
+- [ ] **Bottom sheet**: Base com `Border` animado; Biblioteca com o `SfBottomSheet` do Syncfusion Toolkit (o The49 parou no .NET 8).
+- [ ] **Expander / Accordion**: CommunityToolkit `Expander`, `SfExpander` e `SfAccordion` do Syncfusion Toolkit, e uma versão estilizada.
 - [ ] **FAB e menu de ações**: botão flutuante que abre as ações em leque.
 - [ ] **Assinatura / desenho**: CommunityToolkit `DrawingView`.
-- [ ] **Calendário**: seleção de intervalo, mais rico que o DatePicker.
-- [ ] **DataGrid / tabela**: ordenação e colunas fixas.
+- [ ] **Calendário**: seleção de intervalo, mais rico que o DatePicker. Libs: `SfCalendar` (Syncfusion Toolkit) e Plugin.Maui.Calendar.
+- [ ] **DataGrid / tabela**: ordenação e colunas fixas. Sem lib livre com .NET 10 hoje (o Maui.DataGrid parou no .NET 9): Custom.
 - [ ] **Range slider**: dois polegares, por exemplo para filtro de preço.
-- [ ] **Animação Lottie / vetorial**: SkiaSharp.Extended.
+- [ ] **Animação Lottie / vetorial**: o SkiaSharp.Extended parou no .NET 9; reavaliar quando sair versão para .NET 10.
 - [ ] **Paginação e indicador de páginas** (complementa o Carousel).
 - [ ] **Timeline / linha do tempo** (Custom).
 - [ ] **Tooltip e menu de contexto**: `MenuFlyout` no Windows, toque longo no Android.
 - [ ] **Seletor de cor** (Custom com Maui.Graphics).
+
+### Mídia e documentos
+
+- [ ] **Player de vídeo**: Base com `MediaElement` do CommunityToolkit (pacote gratuito `CommunityToolkit.Maui.MediaElement` 11, o último com .NET 10) e os controles nativos; Custom com controles próprios por cima (play/pausa, barra de progresso com prévia, tela cheia, legendas) no visual do design system.
+- [ ] **Player de áudio**: `MediaElement` sem vídeo, com capa, forma de onda desenhada em Maui.Graphics, velocidade de reprodução e mini player fixo (como o "Tocando agora" do Glass).
+- [ ] **Visualizador de PDF**: não há lib gratuita nativa e multiplataforma. Avaliar `WebView` com pdf.js empacotado (offline), o visualizador do sistema (`Launcher`) como Base, e citar a opção paga (Syncfusion) só como referência.
+- [ ] **Visualizador de documentos** (texto, Markdown, código): Markdown renderizado com uma lib gratuita (ex.: Markdig + `HtmlWebViewSource`, ou um renderizador nativo de Labels); prévia de arquivos por tipo com ícone e metadados.
+- [ ] **Imagem**: Base com `Image` e `Aspect`; Estilizado com placeholder, carregamento progressivo e cantos do design system; Custom com zoom por pinça, arrastar e toque duplo (`PinchGestureRecognizer` e `PanGestureRecognizer`).
+- [ ] **Galeria e lightbox**: grade de imagens que abre em tela cheia com deslizar entre fotos, contador e fechar arrastando para baixo (Custom); complementa o Carousel.
+- [ ] **Carrossel de mídia**: além do Carousel atual, versões com imagem de fundo e texto por cima, autoplay com pausa ao tocar e indicador de progresso por slide (no estilo dos stories).
+- [ ] **Seleção e envio de arquivos**: `FilePicker` e `MediaPicker` como Base; Custom com área de soltar (Windows), prévia, barra de progresso de envio e remover.
+- [ ] **Câmera e leitor de código**: avaliar `CommunityToolkit.Maui.Camera` e ZXing.Net.Maui (gratuitos) para foto e QR code.
 
 ## 5. Design e movimento (direção "ousada")
 

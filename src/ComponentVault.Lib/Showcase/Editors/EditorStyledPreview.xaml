@@ -1,34 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
              xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
              x:Class="ComponentVault.Lib.Showcase.Editors.EditorStyledPreview">
 
+    <ContentView.Resources>
+        <!-- Botão da barra: alvo de 32px, ícone neutro, fundo só no hover/pressionar. -->
+        <Style x:Key="ToolbarButton" TargetType="Border">
+            <Setter Property="WidthRequest" Value="32" />
+            <Setter Property="HeightRequest" Value="32" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 8" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentView.Resources>
+
     <!-- snippet:editor.styled -->
-    <VerticalStackLayout Spacing="6" MaximumWidthRequest="520" HorizontalOptions="Start">
+    <VerticalStackLayout Spacing="6">
 
         <Label Style="{StaticResource FieldLabel}" Text="Descrição do componente" />
 
-        <!-- Começa com 3 linhas, cresce até 8 e depois rola: o formulário não "pula". -->
-        <Border x:Name="EditorFrame" Style="{StaticResource FieldFrame}" Padding="14,10">
-            <controls:BorderlessEditor x:Name="DescriptionEditor"
-                                       Style="{StaticResource BareEditor}"
-                                       Placeholder="O que ele resolve, quando usar, o que evitar..."
-                                       AutoSize="TextChanges"
-                                       MinimumHeightRequest="84"
-                                       MaximumHeightRequest="200"
-                                       MaxLength="280"
-                                       TextChanged="OnTextChanged"
-                                       Focused="OnFocusChanged"
-                                       Unfocused="OnFocusChanged" />
+        <!--
+          Editor e barra de ferramentas na mesma moldura: começa com 3 linhas, cresce até 8 e depois
+          rola, então o formulário não "pula". A barra insere Markdown simples na posição do cursor.
+        -->
+        <Border x:Name="EditorFrame" Style="{StaticResource FieldFrame}" Padding="0">
+            <Grid RowDefinitions="*,Auto">
+                <controls:BorderlessEditor x:Name="DescriptionEditor"
+                                           Margin="16,10"
+                                           Style="{StaticResource BareEditor}"
+                                           Placeholder="O que ele resolve, quando usar, o que evitar..."
+                                           AutoSize="TextChanges"
+                                           MinimumHeightRequest="84"
+                                           MaximumHeightRequest="200"
+                                           MaxLength="280"
+                                           TextChanged="OnTextChanged"
+                                           Focused="OnFocusChanged"
+                                           Unfocused="OnFocusChanged" />
+
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto" ColumnSpacing="2" Padding="8,4,10,8">
+                    <Border Style="{StaticResource ToolbarButton}" SemanticProperties.Description="Negrito">
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnBoldTapped" /></Border.GestureRecognizers>
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=TextBold20}" IconSize="16" IconColor="{DynamicResource InkSecondary}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource ToolbarButton}" SemanticProperties.Description="Itálico">
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnItalicTapped" /></Border.GestureRecognizers>
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=TextItalic20}" IconSize="16" IconColor="{DynamicResource InkSecondary}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border Grid.Column="2" Style="{StaticResource ToolbarButton}" SemanticProperties.Description="Lista">
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnListTapped" /></Border.GestureRecognizers>
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=TextBulletListLtr20}" IconSize="16" IconColor="{DynamicResource InkSecondary}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border Grid.Column="3" Style="{StaticResource ToolbarButton}" SemanticProperties.Description="Link">
+                        <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnLinkTapped" /></Border.GestureRecognizers>
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=Link20}" IconSize="16" IconColor="{DynamicResource InkSecondary}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+
+                    <!-- Contador em pílula: neutro, aviso perto do limite e erro no limite. -->
+                    <Border x:Name="CounterPill" Grid.Column="5" StrokeThickness="0" StrokeShape="RoundRectangle 10"
+                            Padding="10,3" VerticalOptions="Center" BackgroundColor="{DynamicResource SurfaceAlt}">
+                        <Label x:Name="CounterLabel" Style="{StaticResource Caption}" LineHeight="1"
+                               FontFamily="{StaticResource FontMono}" Text="0/280" />
+                    </Border>
+                </Grid>
+            </Grid>
         </Border>
 
-        <Grid ColumnDefinitions="*,Auto">
-            <Label Style="{StaticResource Caption}" Text="Aparece no catálogo abaixo do nome." />
-            <!-- Contador: neutro, aviso perto do limite e erro no limite. -->
-            <Label x:Name="CounterLabel" Grid.Column="1" Style="{StaticResource Caption}" Text="0/280" />
-        </Grid>
+        <Label Style="{StaticResource Caption}" Text="Aparece no catálogo abaixo do nome. Aceita **negrito**, _itálico_ e listas." />
 
     </VerticalStackLayout>
     <!-- /snippet:editor.styled -->

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pb="clr-namespace:Syncfusion.Maui.Toolkit.ProgressBar;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Progress.ProgressSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:progress.syncfusion -->
+        <VerticalStackLayout Spacing="28">
+
+            <!-- Vídeo: progresso assistido e, mais claro, o que já foi baixado (SecondaryProgress). -->
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Style="{StaticResource FieldLabel}" Text="Reprodução" />
+                    <Label Grid.Column="1" Style="{StaticResource Caption}" Text="12:40 de 31:05" />
+                </Grid>
+                <pb:SfLinearProgressBar Progress="41" SecondaryProgress="68"
+                                        TrackHeight="6" ProgressHeight="6" SecondaryProgressHeight="6"
+                                        TrackCornerRadius="3" ProgressCornerRadius="3" SecondaryProgressCornerRadius="3"
+                                        TrackFill="{DynamicResource HairlineStrong}"
+                                        SecondaryProgressFill="{DynamicResource AccentTint}"
+                                        ProgressFill="{StaticResource Accent}" />
+            </VerticalStackLayout>
+
+            <!-- Etapas: a mesma barra dividida em segmentos, sem montar quatro barras à mão. -->
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Style="{StaticResource FieldLabel}" Text="Cadastro" />
+                    <Label Grid.Column="1" Style="{StaticResource Caption}" Text="Etapa 3 de 4" />
+                </Grid>
+                <pb:SfLinearProgressBar Progress="75" SegmentCount="4" SegmentGapWidth="6"
+                                        TrackHeight="6" ProgressHeight="6"
+                                        TrackCornerRadius="3" ProgressCornerRadius="3"
+                                        TrackFill="{DynamicResource HairlineStrong}"
+                                        ProgressFill="{StaticResource Accent}" />
+            </VerticalStackLayout>
+
+            <!-- Circulares: com o valor dentro (Content) e indeterminado para espera sem prazo. -->
+            <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="16">
+                <pb:SfCircularProgressBar Progress="72" WidthRequest="88" HeightRequest="88"
+                                          TrackThickness="8" ProgressThickness="8"
+                                          ProgressCornerStyle="BothCurve"
+                                          TrackFill="{DynamicResource HairlineStrong}"
+                                          ProgressFill="{StaticResource Accent}">
+                    <pb:SfCircularProgressBar.Content>
+                        <Label Style="{StaticResource CardTitle}" Text="72%" LineHeight="1"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </pb:SfCircularProgressBar.Content>
+                </pb:SfCircularProgressBar>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Armazenamento" />
+                    <Label Style="{StaticResource Caption}" Text="7,2 GB de 10 GB" />
+                </VerticalStackLayout>
+                <pb:SfCircularProgressBar Grid.Column="2" IsIndeterminate="True" WidthRequest="44" HeightRequest="44"
+                                          TrackThickness="4" ProgressThickness="4" ProgressCornerStyle="BothCurve"
+                                          TrackFill="{DynamicResource HairlineStrong}"
+                                          ProgressFill="{StaticResource Accent}" />
+                <VerticalStackLayout Grid.Column="3" Spacing="2" VerticalOptions="Center">
+                    <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Sincronizando" />
+                    <Label Style="{StaticResource Caption}" Text="Sem prazo definido" />
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:progress.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Syncfusion Toolkit (MIT) traz barra linear com progresso secundário e segmentos, e anel com conteúdo dentro e pontas arredondadas, todos animados. No MAUI puro, nada disso existe." />
+
+    </VerticalStackLayout>
+
+</ContentView>

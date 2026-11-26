@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
@@ -13,7 +14,7 @@
         <!-- 1. Card de resumo: título, número que importa e uma única ação. -->
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource FieldLabel}" Text="Card de resumo" />
-            <Border Style="{StaticResource Card}" Padding="20" MaximumWidthRequest="420" HorizontalOptions="Start">
+            <Border Style="{StaticResource Card}" Padding="20">
                 <VerticalStackLayout Spacing="14">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout Spacing="2">
@@ -35,7 +36,7 @@
         <!-- 2. Card de lista: cabeçalho e linhas separadas por linha fina, a linha inteira é tocável. -->
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource FieldLabel}" Text="Card com lista" />
-            <Border Style="{StaticResource Card}" MaximumWidthRequest="420" HorizontalOptions="Start">
+            <Border Style="{StaticResource Card}">
                 <VerticalStackLayout>
                     <Grid ColumnDefinitions="*,Auto" Padding="16,14">
                         <Label Style="{StaticResource CardTitle}" Text="Atividade recente" VerticalOptions="Center" />
@@ -75,23 +76,57 @@
             </Border>
         </VerticalStackLayout>
 
-        <!-- 3. Card de catálogo: clicável, sobe 2px e escurece a borda no hover. -->
+        <!--
+          3. Cards de catálogo em grade: clicáveis, sobem 2px e escurecem a borda no hover. As colunas
+          dividem a largura (três na tela larga, duas no celular), sem largura fixa nem vazio no fim da linha.
+        -->
         <VerticalStackLayout Spacing="10">
-            <Label Style="{StaticResource FieldLabel}" Text="Card clicável" />
-            <Border Style="{StaticResource InteractiveCard}" WidthRequest="220" HorizontalOptions="Start">
-                <VerticalStackLayout>
-                    <Grid HeightRequest="96" BackgroundColor="{DynamicResource SurfaceAlt}">
-                        <mic:MauiIcon Icon="{mi:Fluent Icon=ToggleRight24}" IconSize="30"
-                                      IconColor="{DynamicResource Ink}"
-                                      HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Grid>
-                    <BoxView Style="{StaticResource Divider}" />
-                    <VerticalStackLayout Padding="14,12" Spacing="8">
-                        <Label Style="{StaticResource CardTitle}" Text="VaultToggle" />
-                        <controls:OriginBadge Kind="Custom" IsCompact="True" />
+            <Label Style="{StaticResource FieldLabel}" Text="Cards clicáveis" />
+            <Grid ColumnDefinitions="{fit:OnWidth Compact='*,*', Default='*,*,*'}" ColumnSpacing="12">
+                <Border Style="{StaticResource InteractiveCard}">
+                    <VerticalStackLayout>
+                        <Grid HeightRequest="88" BackgroundColor="{DynamicResource SurfaceAlt}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=ToggleRight24}" IconSize="28"
+                                          IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <VerticalStackLayout Padding="14,12" Spacing="8">
+                            <Label Style="{StaticResource CardTitle}" Text="VaultToggle" LineBreakMode="TailTruncation" />
+                            <controls:OriginBadge Kind="Custom" IsCompact="True" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Border>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource InteractiveCard}">
+                    <VerticalStackLayout>
+                        <Grid HeightRequest="88" BackgroundColor="{DynamicResource SurfaceAlt}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=CursorClick24}" IconSize="28"
+                                          IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <VerticalStackLayout Padding="14,12" Spacing="8">
+                            <Label Style="{StaticResource CardTitle}" Text="Button" LineBreakMode="TailTruncation" />
+                            <controls:OriginBadge Kind="Styled" IsCompact="True" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+                <!-- No celular a grade tem duas colunas: o terceiro card sai, em vez de ir sozinho para outra linha. -->
+                <Border Grid.Column="2" Style="{StaticResource InteractiveCard}" IsVisible="{fit:OnWidth Compact=False, Default=True}">
+                    <VerticalStackLayout>
+                        <Grid HeightRequest="88" BackgroundColor="{DynamicResource SurfaceAlt}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=DataArea24}" IconSize="28"
+                                          IconColor="{DynamicResource Ink}"
+                                          HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <VerticalStackLayout Padding="14,12" Spacing="8">
+                            <Label Style="{StaticResource CardTitle}" Text="LiveCharts" LineBreakMode="TailTruncation" />
+                            <controls:OriginBadge Kind="Library" IsCompact="True" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
         </VerticalStackLayout>
 
     </VerticalStackLayout>

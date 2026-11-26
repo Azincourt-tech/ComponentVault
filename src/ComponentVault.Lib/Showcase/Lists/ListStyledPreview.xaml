@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Lists"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
@@ -9,7 +10,7 @@
              x:Name="Root">
 
     <!-- snippet:list.styled -->
-    <VerticalStackLayout Spacing="28" MaximumWidthRequest="520" HorizontalOptions="Fill">
+    <VerticalStackLayout Spacing="28">
 
         <!-- Grupo de configurações: ícone, título, descrição e valor à direita. A linha inteira é o alvo. -->
         <VerticalStackLayout Spacing="8">
@@ -93,7 +94,7 @@
                                                 <MenuFlyoutItem Text="Excluir" Clicked="OnDeleteMenuClicked" />
                                             </MenuFlyout>
                                         </FlyoutBase.ContextFlyout>
-                                        <Border WidthRequest="36" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 18"
+                                        <Border WidthRequest="34" HeightRequest="34" StrokeThickness="0" StrokeShape="RoundRectangle 17"
                                                 BackgroundColor="{DynamicResource AccentTint}" VerticalOptions="Center">
                                             <Label Text="{Binding Initials}" FontFamily="{StaticResource FontSemiBold}" FontSize="13"
                                                    TextColor="{DynamicResource AccentText}"
@@ -106,7 +107,7 @@
                                         <Label Grid.Column="2" Style="{StaticResource Caption}" Text="{Binding Time}" VerticalOptions="Start" />
                                     </Grid>
                                 </SwipeView>
-                                <BoxView Style="{StaticResource Divider}" Margin="64,0,0,0" />
+                                <BoxView Style="{StaticResource Divider}" Margin="62,0,0,0" />
                             </VerticalStackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>

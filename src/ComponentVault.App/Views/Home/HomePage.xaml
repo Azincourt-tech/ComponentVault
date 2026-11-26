@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:adaptive="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
              xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
              xmlns:controls="clr-namespace:ComponentVault.App.Controls"
              xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
@@ -11,7 +12,7 @@
              Title="">
 
     <ContentPage.Resources>
-        <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
+        <controls:TierToBadgeKindConverter x:Key="TierBadge" />
     </ContentPage.Resources>
 
     <Grid x:Name="Root" RowDefinitions="Auto,*,Auto">
@@ -19,17 +20,17 @@
         <lib:AmbientBackground Grid.RowSpan="3" />
 
         <!-- Navegação e tema: no topo no desktop, embaixo no celular -->
-        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" Section="Home" />
+        <controls:NavDock Grid.Row="{adaptive:OnWidth Compact=2, Default=0}" Section="Home" />
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="52"
+            <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,16', Default='40,32'}" Spacing="52"
                                  MaximumWidthRequest="{StaticResource ContentMaxWidth}">
 
                 <!-- Abertura -->
                 <Grid Margin="0,12,0,0">
 
                     <VerticalStackLayout Spacing="16">
-                        <Label Style="{StaticResource Display}" FontSize="{OnIdiom Phone=34, Default=48}"
+                        <Label Style="{StaticResource Display}" FontSize="{adaptive:OnWidth Compact=34, Default=48}"
                                CharacterSpacing="-0.4" LineHeight="1.08"
                                MaximumWidthRequest="640" HorizontalOptions="Start"
                                Text="Do controle cru ao acabado."
@@ -52,26 +53,27 @@
                         <Label Style="{StaticResource BodySmall}" Text="Toque nos alternadores: todos funcionam." />
                     </VerticalStackLayout>
                     <Border Style="{StaticResource Card}">
-                        <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*,*'}"
-                              RowDefinitions="{OnIdiom Phone='Auto,Auto,Auto', Default='Auto'}">
+                        <Grid ColumnDefinitions="{adaptive:OnWidth Compact='*', Default='*,*,*'}"
+                              RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto,Auto', Default='Auto'}">
 
                             <VerticalStackLayout Padding="28,24" Spacing="16">
-                                <lib:OriginBadge Kind="Native" Text="Base MAUI" />
-                                <Switch HorizontalOptions="Start" IsToggled="True" />
+                                <lib:OriginBadge Kind="Base" />
+                                <!-- Faixa de altura fixa: os três alternadores têm alturas diferentes e precisam ficar na mesma linha -->
+                                <Grid HeightRequest="40"><Switch HorizontalOptions="Start" VerticalOptions="Center" IsToggled="True" /></Grid>
                                 <Label Style="{StaticResource Caption}" Text="Visual da plataforma, sem tokens." />
                             </VerticalStackLayout>
 
-                            <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
+                            <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}"
                                                  Padding="28,24" Spacing="16">
-                                <lib:OriginBadge Kind="Native" Text="Estilizado" />
-                                <Switch Style="{StaticResource VaultSwitch}" HorizontalOptions="Start" IsToggled="True" />
+                                <lib:OriginBadge Kind="Styled" />
+                                <Grid HeightRequest="40"><Switch Style="{StaticResource VaultSwitch}" HorizontalOptions="Start" VerticalOptions="Center" IsToggled="True" /></Grid>
                                 <Label Style="{StaticResource Caption}" Text="Cor de destaque do design system." />
                             </VerticalStackLayout>
 
-                            <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=2}" Grid.Row="{OnIdiom Phone=2, Default=0}"
+                            <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=2}" Grid.Row="{adaptive:OnWidth Compact=2, Default=0}"
                                                  Padding="28,24" Spacing="16">
-                                <lib:OriginBadge Kind="Custom" Text="Custom" />
-                                <lib:VaultToggle IsToggled="True" />
+                                <lib:OriginBadge Kind="Custom" />
+                                <Grid HeightRequest="40"><lib:VaultToggle HorizontalOptions="Start" VerticalOptions="Center" IsToggled="True" /></Grid>
                                 <Label Style="{StaticResource Caption}" Text="Desenhado com Microsoft.Maui.Graphics." />
                             </VerticalStackLayout>
                         </Grid>
@@ -124,22 +126,22 @@
                 <!-- Legenda dos níveis -->
                 <VerticalStackLayout Spacing="16" Margin="0,0,0,32" motion:Motion.Entrance="True" motion:Motion.Delay="440">
                     <Label Style="{StaticResource SectionHeader}" Text="Como ler os níveis" />
-                    <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,*'}" ColumnSpacing="32" RowSpacing="18"
-                          RowDefinitions="{OnIdiom Phone='Auto,Auto,Auto,Auto', Default='Auto,Auto'}">
+                    <Grid ColumnDefinitions="{adaptive:OnWidth Compact='*', Default='*,*'}" ColumnSpacing="32" RowSpacing="18"
+                          RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto,Auto,Auto', Default='Auto,Auto'}">
                         <VerticalStackLayout Spacing="6">
-                            <lib:OriginBadge Kind="{Binding Tiers[0].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[0].Title}" />
+                            <lib:OriginBadge Kind="{Binding Tiers[0].Tier, Converter={StaticResource TierBadge}}" Text="{Binding Tiers[0].Title}" />
                             <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[0].Description}" />
                         </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}" Spacing="6">
-                            <lib:OriginBadge Kind="{Binding Tiers[1].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[1].Title}" />
+                        <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[1].Tier, Converter={StaticResource TierBadge}}" Text="{Binding Tiers[1].Title}" />
                             <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[1].Description}" />
                         </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Row="{OnIdiom Phone=2, Default=1}" Spacing="6">
-                            <lib:OriginBadge Kind="{Binding Tiers[2].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[2].Title}" />
+                        <VerticalStackLayout Grid.Row="{adaptive:OnWidth Compact=2, Default=1}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[2].Tier, Converter={StaticResource TierBadge}}" Text="{Binding Tiers[2].Title}" />
                             <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[2].Description}" />
                         </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=3, Default=1}" Spacing="6">
-                            <lib:OriginBadge Kind="{Binding Tiers[3].Origin, Converter={StaticResource BadgeKind}}" Text="{Binding Tiers[3].Title}" />
+                        <VerticalStackLayout Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=3, Default=1}" Spacing="6">
+                            <lib:OriginBadge Kind="{Binding Tiers[3].Tier, Converter={StaticResource TierBadge}}" Text="{Binding Tiers[3].Title}" />
                             <Label Style="{StaticResource BodySmall}" Text="{Binding Tiers[3].Description}" />
                         </VerticalStackLayout>
                     </Grid>

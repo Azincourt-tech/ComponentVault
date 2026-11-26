@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:adaptive="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:ComponentVault.Core.ViewModels;assembly=ComponentVault.Core"
              xmlns:controls="clr-namespace:ComponentVault.App.Controls"
@@ -20,12 +21,12 @@
         <!-- Luz ambiente (tema Vidro) atrás de tudo -->
         <lib:AmbientBackground Grid.RowSpan="3" />
 
-        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" Section="Catalog" />
+        <controls:NavDock Grid.Row="{adaptive:OnWidth Compact=2, Default=0}" Section="Catalog" />
 
         <Grid Grid.Row="1" RowDefinitions="Auto,*" SizeChanged="OnPageSizeChanged">
 
         <!-- Busca (RF04) e filtro de origem -->
-        <VerticalStackLayout Padding="{OnIdiom Phone='20,16,20,8', Default='40,16,40,8'}" Spacing="14"
+        <VerticalStackLayout Padding="{adaptive:OnWidth Compact='20,16,20,8', Default='40,16,40,8'}" Spacing="14"
                              MaximumWidthRequest="880">
             <Grid ColumnDefinitions="*,Auto">
                 <Label Style="{StaticResource PageTitle}" Text="Catálogo" />
@@ -53,15 +54,15 @@
                                 </Border.GestureRecognizers>
                                 <Border.Triggers>
                                     <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
-                                        <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
-                                        <Setter Property="Stroke" Value="{DynamicResource Ink}" />
+                                        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                                        <Setter Property="Stroke" Value="{StaticResource Accent}" />
                                     </DataTrigger>
                                 </Border.Triggers>
                                 <Label Text="{Binding Label}" FontFamily="{StaticResource FontMedium}" FontSize="14"
                                        VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="TextColor" Value="{DynamicResource OnInk}" />
+                                            <Setter Property="TextColor" Value="{StaticResource OnAccent}" />
                                         </DataTrigger>
                                     </Label.Triggers>
                                 </Label>
@@ -77,7 +78,12 @@
 
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate x:DataType="vm:ComponentGroup">
-                    <HorizontalStackLayout Spacing="8" Padding="8,28,8,8" controls:Cascade.Item="True">
+                    <!--
+                      O Windows soma ~16px ao recuo do cabeçalho de grupo: com recuo 0 e margem -8, o
+                      título fica alinhado aos ícones das linhas (medido na captura).
+                    -->
+                    <HorizontalStackLayout Spacing="8" Padding="{OnPlatform WinUI='0,28,8,8', Default='8,28,8,8'}"
+                                           Margin="{OnPlatform WinUI='-8,0,0,0', Default='0'}" controls:Cascade.Item="True">
                         <Label Style="{StaticResource FieldLabel}" Text="{Binding Title}" />
                         <Label Style="{StaticResource Caption}" Text="{Binding Count}" />
                     </HorizontalStackLayout>
@@ -107,7 +113,7 @@
                             </VerticalStackLayout>
                             <Label Grid.Column="2" Style="{StaticResource Caption}" FontSize="20" Text="›" VerticalOptions="Center" />
                         </Grid>
-                        <BoxView Style="{StaticResource Divider}" Margin="66,0,0,0" />
+                        <BoxView Style="{StaticResource Divider}" Margin="66,0,8,0" />
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

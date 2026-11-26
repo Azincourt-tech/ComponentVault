@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
              xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
              x:Class="ComponentVault.Lib.Showcase.Pickers.PickerStyledPreview">
 
-    <!-- snippet:picker.styled -->
-    <VerticalStackLayout Spacing="20" MaximumWidthRequest="440" HorizontalOptions="Start">
+    <ContentView.Resources>
+        <!-- Bloco do ícone à esquerda: tom de destaque bem leve, o ícone na cor do texto de destaque. -->
+        <Style x:Key="PickerIconTile" TargetType="Border">
+            <Setter Property="WidthRequest" Value="30" />
+            <Setter Property="HeightRequest" Value="30" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 9" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="-6,0,12,0" />
+        </Style>
+    </ContentView.Resources>
 
-        <!-- Rótulo fixo acima + chevron: fica claro que é um menu, mesmo depois de escolher. -->
+    <!-- snippet:picker.styled -->
+    <VerticalStackLayout Spacing="20">
+
+        <!--
+          Rótulo fixo acima, ícone que acompanha a escolha e chevron: fica claro que é um menu e
+          o que está escolhido, mesmo de relance.
+        -->
         <VerticalStackLayout Spacing="6">
             <Label Style="{StaticResource FieldLabel}" Text="Plataforma" />
             <Border x:Name="PlatformFrame" Style="{StaticResource FieldFrame}">
-                <Grid ColumnDefinitions="*,Auto">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Border Style="{StaticResource PickerIconTile}">
+                        <mic:MauiIcon x:Name="PlatformIcon" Icon="{mi:Fluent Icon=PhoneLaptop20}" IconSize="16"
+                                      IconColor="{DynamicResource AccentText}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
                     <controls:BorderlessPicker x:Name="PlatformPicker"
+                                               Grid.Column="1"
                                                Style="{StaticResource VaultPicker}"
                                                Title="Selecione"
                                                SelectedIndexChanged="OnPlatformChanged"
@@ -30,7 +53,7 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </controls:BorderlessPicker>
-                    <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
                                   IconColor="{DynamicResource InkTertiary}"
                                   VerticalOptions="Center" InputTransparent="True" />
                 </Grid>
@@ -42,8 +65,13 @@
         <VerticalStackLayout Spacing="6">
             <Label Style="{StaticResource FieldLabel}" Text="Ordenar por" />
             <Border Style="{StaticResource FieldFrame}">
-                <Grid ColumnDefinitions="*,Auto">
-                    <controls:BorderlessPicker Style="{StaticResource VaultPicker}" SelectedIndex="0">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Border Style="{StaticResource PickerIconTile}">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=ArrowSort20}" IconSize="16"
+                                      IconColor="{DynamicResource AccentText}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <controls:BorderlessPicker Grid.Column="1" Style="{StaticResource VaultPicker}" SelectedIndex="0">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Mais recentes</x:String>
@@ -52,18 +80,28 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </controls:BorderlessPicker>
-                    <mic:MauiIcon Grid.Column="1" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="18"
                                   IconColor="{DynamicResource InkTertiary}"
                                   VerticalOptions="Center" InputTransparent="True" />
                 </Grid>
             </Border>
         </VerticalStackLayout>
 
-        <!-- Desabilitado: fundo alternativo e o motivo escrito embaixo. -->
+        <!-- Desabilitado: cadeado no lugar do chevron e o motivo escrito embaixo. -->
         <VerticalStackLayout Spacing="6" Opacity="0.6">
             <Label Style="{StaticResource FieldLabel}" Text="Região" />
             <Border Style="{StaticResource FieldFrame}" BackgroundColor="{DynamicResource SurfaceAlt}">
-                <controls:BorderlessPicker Style="{StaticResource VaultPicker}" Title="Brasil" IsEnabled="False" />
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Border Style="{StaticResource PickerIconTile}" BackgroundColor="{DynamicResource Hairline}">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=Globe20}" IconSize="16"
+                                      IconColor="{DynamicResource InkTertiary}"
+                                      HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <controls:BorderlessPicker Grid.Column="1" Style="{StaticResource VaultPicker}" Title="Brasil" IsEnabled="False" />
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=LockClosed20}" IconSize="16"
+                                  IconColor="{DynamicResource InkTertiary}"
+                                  VerticalOptions="Center" InputTransparent="True" />
+                </Grid>
             </Border>
             <Label Style="{StaticResource Caption}" Text="Definida pela sua conta." />
         </VerticalStackLayout>

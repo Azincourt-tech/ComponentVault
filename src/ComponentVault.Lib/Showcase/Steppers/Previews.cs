@@ -44,3 +44,9 @@ public partial class StepperStyledPreview : ContentView
         PlusButton.IsEnabled = _quantity < Max;
     }
 }
+
+[ShowcasePreview("stepper.syncfusion")]
+public partial class StepperSyncfusionPreview : ContentView
+{
+    public StepperSyncfusionPreview() => InitializeComponent();
+}

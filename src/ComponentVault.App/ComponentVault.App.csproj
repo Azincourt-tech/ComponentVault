@@ -24,8 +24,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#4F8EF7" />
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#0E0E0E" BaseSize="128,128" />
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#E85D04" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#03071E" BaseSize="128,128" />
     <MauiImage Include="Resources\Images\*" />
     <!-- Plus Jakarta Sans + JetBrains Mono (SIL OFL). Os apelidos são registrados em UseVaultDesignSystem. -->
     <MauiFont Include="Resources\Fonts\*" />

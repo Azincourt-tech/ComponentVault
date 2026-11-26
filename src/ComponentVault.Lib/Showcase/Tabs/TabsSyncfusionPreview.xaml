@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tab="clr-namespace:Syncfusion.Maui.Toolkit.TabView;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Tabs.TabsSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:tabs.syncfusion -->
+        <!--
+          Abas com conteúdo: o indicador desliza sob a aba ativa e o conteúdo troca com transição
+          (também deslizando o dedo no celular). Cores do design system, sem a borda padrão da barra.
+        -->
+        <tab:SfTabView HeightRequest="170"
+                       TabBarBackground="Transparent"
+                       IndicatorBackground="{StaticResource Accent}"
+                       IndicatorPlacement="Bottom"
+                       IndicatorStrokeThickness="2"
+                       IndicatorWidthMode="Fit"
+                       IsContentTransitionEnabled="True"
+                       EnableSwiping="True">
+            <tab:SfTabView.Items>
+                <tab:SfTabItem Header="Visão geral" FontFamily="JakartaMedium" FontSize="14" TextColor="{DynamicResource Ink}">
+                    <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                        <Label Style="{StaticResource CardTitle}" Text="Projeto Atlas" />
+                        <Label Style="{StaticResource BodyMuted}" Text="Redesenho do aplicativo de vendas. Entrega da fase 2 prevista para 15 de dezembro." />
+                    </VerticalStackLayout>
+                </tab:SfTabItem>
+                <tab:SfTabItem Header="Atividade" FontFamily="JakartaMedium" FontSize="14" TextColor="{DynamicResource Ink}">
+                    <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                        <Label Style="{StaticResource CardTitle}" Text="3 atualizações hoje" />
+                        <Label Style="{StaticResource BodyMuted}" Text="Ana revisou o contrato, Bruno subiu as fotos e Carla aprovou o orçamento." />
+                    </VerticalStackLayout>
+                </tab:SfTabItem>
+                <tab:SfTabItem Header="Membros" FontFamily="JakartaMedium" FontSize="14" TextColor="{DynamicResource Ink}">
+                    <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                        <Label Style="{StaticResource CardTitle}" Text="6 pessoas" />
+                        <Label Style="{StaticResource BodyMuted}" Text="2 editores, 3 leitores e 1 administradora." />
+                    </VerticalStackLayout>
+                </tab:SfTabItem>
+            </tab:SfTabView.Items>
+        </tab:SfTabView>
+        <!-- /snippet:tabs.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfTabView (Syncfusion Toolkit, MIT) traz indicador animado, troca de conteúdo com transição e deslize, barra no topo, embaixo ou nas laterais, abas com ícone e rolagem quando são muitas." />
+
+    </VerticalStackLayout>
+
+</ContentView>

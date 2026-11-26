@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ComponentVault.Lib.Showcase.RadioButtons.RadioStyledPreview">
 
@@ -11,7 +12,8 @@
           só o visual é trocado: o card inteiro é o alvo de toque.
         -->
         <ControlTemplate x:Key="OptionCardTemplate">
-            <Border Padding="16,14"
+            <!-- Fill: sem isso o card fica do tamanho do texto, e os três ficam com larguras diferentes. -->
+            <Border Padding="16,14" HorizontalOptions="Fill"
                     BackgroundColor="{DynamicResource Surface}"
                     Stroke="{DynamicResource Hairline}"
                     StrokeThickness="1"
@@ -23,6 +25,8 @@
                                 <VisualState.Setters>
                                     <Setter Property="Stroke" Value="{StaticResource Accent}" />
                                     <Setter Property="StrokeThickness" Value="2" />
+                                    <!-- A borda cresce 1px: o recuo diminui 1px e o conteúdo não pula. -->
+                                    <Setter Property="Padding" Value="15,13" />
                                     <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
                                     <Setter TargetName="Ring" Property="Stroke" Value="{StaticResource Accent}" />
                                     <Setter TargetName="Dot" Property="Opacity" Value="1" />
@@ -48,23 +52,24 @@
         </ControlTemplate>
     </ContentView.Resources>
 
-    <VerticalStackLayout Spacing="12" MaximumWidthRequest="480" HorizontalOptions="Fill">
+    <VerticalStackLayout Spacing="12">
         <Label Style="{StaticResource FieldLabel}" Text="Plano" />
 
-        <RadioButton GroupName="plan" Value="free" ControlTemplate="{StaticResource OptionCardTemplate}"
+        <!-- No Windows o RadioButton ignora HorizontalOptions="Fill" e mede pelo conteúdo: o Fit dá a largura disponível. -->
+        <RadioButton GroupName="plan" fit:Fit.MaxWidth="10000" Value="free" ControlTemplate="{StaticResource OptionCardTemplate}"
                      CheckedChanged="OnPlanChanged" SemanticProperties.Description="Gratuito, zero reais">
             <RadioButton.Content>
                 <VerticalStackLayout Spacing="2">
                     <Grid ColumnDefinitions="*,Auto">
-                        <Label Style="{StaticResource CardTitle}" Text="Gratuito" />
-                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 0" />
+                        <Label Style="{StaticResource CardTitle}" Text="Gratuito" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1" VerticalOptions="Center" Text="R$ 0" />
                     </Grid>
                     <Label Style="{StaticResource BodySmall}" Text="Até 3 projetos, para testar sem compromisso." />
                 </VerticalStackLayout>
             </RadioButton.Content>
         </RadioButton>
 
-        <RadioButton GroupName="plan" Value="pro" IsChecked="True" ControlTemplate="{StaticResource OptionCardTemplate}"
+        <RadioButton GroupName="plan" fit:Fit.MaxWidth="10000" Value="pro" IsChecked="True" ControlTemplate="{StaticResource OptionCardTemplate}"
                      CheckedChanged="OnPlanChanged" SemanticProperties.Description="Pro, 29 reais por mês, recomendado">
             <RadioButton.Content>
                 <VerticalStackLayout Spacing="2">
@@ -73,20 +78,20 @@
                         <Border Grid.Column="1" Style="{StaticResource Tag}" HorizontalOptions="Start" VerticalOptions="Center">
                             <Label Style="{StaticResource TagText}" Text="Recomendado" />
                         </Border>
-                        <Label Grid.Column="2" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 29/mês" />
+                        <Label Grid.Column="2" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1" VerticalOptions="Center" Text="R$ 29/mês" />
                     </Grid>
                     <Label Style="{StaticResource BodySmall}" Text="Projetos ilimitados e exportação do código." />
                 </VerticalStackLayout>
             </RadioButton.Content>
         </RadioButton>
 
-        <RadioButton GroupName="plan" Value="team" ControlTemplate="{StaticResource OptionCardTemplate}"
+        <RadioButton GroupName="plan" fit:Fit.MaxWidth="10000" Value="team" ControlTemplate="{StaticResource OptionCardTemplate}"
                      CheckedChanged="OnPlanChanged" SemanticProperties.Description="Equipe, 79 reais por mês">
             <RadioButton.Content>
                 <VerticalStackLayout Spacing="2">
                     <Grid ColumnDefinitions="*,Auto">
-                        <Label Style="{StaticResource CardTitle}" Text="Equipe" />
-                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" Text="R$ 79/mês" />
+                        <Label Style="{StaticResource CardTitle}" Text="Equipe" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1" VerticalOptions="Center" Text="R$ 79/mês" />
                     </Grid>
                     <Label Style="{StaticResource BodySmall}" Text="Até 10 pessoas, com permissões por projeto." />
                 </VerticalStackLayout>

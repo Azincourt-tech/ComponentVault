@@ -6,6 +6,7 @@ using SkiaSharp;
 using MauiIcons.Fluent;
 using Microsoft.Maui.Handlers;
 using Sharpnado.Tabs;
+using Syncfusion.Maui.Toolkit.Hosting;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using UraniumUI;
 
@@ -37,7 +38,9 @@ public static class VaultHostingExtensions
             .UseFluentMauiIcons()
             .UseSkiaSharp()
             .UseLiveCharts()
-            .UseSharpnadoTabs(loggerEnable: false);
+            .UseSharpnadoTabs(loggerEnable: false)
+            // Syncfusion Toolkit (MIT): registra os handlers dos controles Sf*. Não pede chave de licença.
+            .ConfigureSyncfusionToolkit();
 
         // A LiveCharts desenha texto com SkiaSharp e não enxerga as fontes do MAUI: sem isto,
         // eixos e dicas saem na fonte do sistema e destoam do resto do app.
@@ -90,6 +93,16 @@ public static class VaultHostingExtensions
         {
             if (view is BorderlessPicker) Strip(handler.PlatformView);
         });
+#if WINDOWS
+        // No Windows o Title do Picker vira cabeçalho acima de uma caixa vazia; no campo do design
+        // system ele deve ser o texto de exemplo dentro da caixa, como nas outras plataformas.
+        PickerHandler.Mapper.AppendToMapping(nameof(Picker.Title), (handler, view) =>
+        {
+            if (view is not BorderlessPicker) return;
+            handler.PlatformView.Header = null;
+            handler.PlatformView.PlaceholderText = view.Title ?? string.Empty;
+        });
+#endif
         DatePickerHandler.Mapper.AppendToMapping("VaultBorderless", (handler, view) =>
         {
             if (view is BorderlessDatePicker) Strip(handler.PlatformView);
@@ -124,10 +137,18 @@ public static class VaultHostingExtensions
         "TextControlBorderBrush", "TextControlBorderBrushPointerOver", "TextControlBorderBrushFocused",
         "ComboBoxBackground", "ComboBoxBackgroundPointerOver", "ComboBoxBackgroundPressed", "ComboBoxBackgroundFocused",
         "ComboBoxBorderBrush", "ComboBoxBorderBrushPointerOver", "ComboBoxBorderBrushPressed", "ComboBoxBorderBrushFocused",
+        // Desabilitado: sem isto o ComboBox pinta um retângulo próprio dentro da moldura do design system.
+        "ComboBoxBackgroundDisabled", "ComboBoxBorderBrushDisabled",
         "CalendarDatePickerBackground", "CalendarDatePickerBackgroundPointerOver", "CalendarDatePickerBackgroundPressed",
         "CalendarDatePickerBorderBrush", "CalendarDatePickerBorderBrushPointerOver", "CalendarDatePickerBorderBrushPressed",
         "TimePickerButtonBackground", "TimePickerButtonBackgroundPointerOver", "TimePickerButtonBackgroundPressed",
         "TimePickerButtonBorderBrush", "TimePickerButtonBorderBrushPointerOver", "TimePickerButtonBorderBrushPressed",
+        // Chevron nativo do ComboBox: o campo do design system desenha o seu.
+        "ComboBoxDropDownGlyphForeground", "ComboBoxDropDownGlyphForegroundFocused",
+        "ComboBoxDropDownGlyphForegroundDisabled", "ComboBoxDropDownGlyphForegroundFocusedPressed",
+        // Ícone de calendário nativo: o campo do design system já mostra o seu à esquerda.
+        "CalendarDatePickerCalendarGlyphForeground", "CalendarDatePickerCalendarGlyphForegroundPointerOver",
+        "CalendarDatePickerCalendarGlyphForegroundPressed", "CalendarDatePickerCalendarGlyphForegroundDisabled",
     ];
 
     private static void Strip(Microsoft.UI.Xaml.Controls.Control view)
@@ -135,7 +156,50 @@ public static class VaultHostingExtensions
         var transparent = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
         view.BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
         view.Background = transparent;
-        foreach (var key in TransparentKeys) view.Resources[key] = transparent;
+        foreach (var key in TransparentKeys)
+        {
+            // Alguns controles recusam certas chaves de tema depois de montados (o CalendarDatePicker
+            // lançava COMException e derrubava o app). Chave recusada fica com o valor nativo.
+            try
+            {
+                view.Resources[key] = transparent;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+            }
+        }
+
+        // O espaço interno nativo (~10px) empurrava o texto para dentro do campo do design system,
+        // que já tem o seu. A largura mínima nativa fica: o TimePicker precisa de ~242px, e espremido
+        // ele corta os dígitos ("9" e "0" em vez de 09:00). Quem usa dá a ele a coluna de que precisa.
+        view.Padding = new Microsoft.UI.Xaml.Thickness(0);
+
+        switch (view)
+        {
+            // O ícone de calendário nativo não obedece às chaves de cor: some pelo nome no template.
+            case Microsoft.UI.Xaml.Controls.CalendarDatePicker calendar:
+                calendar.Loaded += (_, _) => Collapse(calendar, "CalendarGlyph");
+                break;
+            // O MAUI volta a pôr o Title como cabeçalho depois do mapeamento; ao carregar, ele sai
+            // e fica só o texto de exemplo dentro da caixa (ver o mapeamento de Title).
+            case Microsoft.UI.Xaml.Controls.ComboBox combo:
+                combo.Loaded += (_, _) => combo.Header = null;
+                break;
+        }
+    }
+
+    private static void Collapse(Microsoft.UI.Xaml.DependencyObject root, string name)
+    {
+        var count = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(root);
+        for (var i = 0; i < count; i++)
+        {
+            var child = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetChild(root, i);
+            if (child is Microsoft.UI.Xaml.FrameworkElement { Name: var childName } element && childName == name)
+            {
+                element.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+            }
+            Collapse(child, name);
+        }
     }
 #else
     private static void Strip(object view)

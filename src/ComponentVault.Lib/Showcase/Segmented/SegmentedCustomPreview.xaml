@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:segmented="clr-namespace:ComponentVault.Lib.Showcase.Segmented"
              x:Class="ComponentVault.Lib.Showcase.Segmented.SegmentedCustomPreview">
 
     <VerticalStackLayout Spacing="28">
 
         <!-- snippet:segmented.custom -->
-        <VerticalStackLayout Spacing="12" MaximumWidthRequest="480" HorizontalOptions="Fill">
+        <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="Período" />
             <segmented:SegmentedControl x:Name="PeriodControl" SelectedIndex="1" SelectionChanged="OnPeriodChanged">
                 <segmented:SegmentedControl.Items>
@@ -36,7 +37,7 @@
 
         <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="Duas opções, largura do conteúdo" />
-            <segmented:SegmentedControl WidthRequest="220" HorizontalOptions="Start">
+            <segmented:SegmentedControl fit:Fit.MaxWidth="220">
                 <segmented:SegmentedControl.Items>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Lista</x:String>

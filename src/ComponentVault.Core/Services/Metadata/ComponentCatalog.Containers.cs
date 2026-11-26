@@ -40,6 +40,36 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "glass.base",
+                    Title = "Base MAUI",
+                    Tier = VariantTier.Base,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Border com fundo translúcido, sem cena atrás e sem aresta de luz: um cinza lavado.",
+                    Highlights =
+                    [
+                        "Só transparência não faz vidro; no tema Claro o painel quase some.",
+                        "O MAUI não tem desfoque de fundo multiplataforma.",
+                    ],
+                    Snippets = [Xaml("Uso", "glass.base")],
+                },
+                new()
+                {
+                    Id = "glass.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Cards do design system só com tokens: sólidos no Claro e no Escuro, vidro no tema Vidro.",
+                    Highlights =
+                    [
+                        "Nenhuma cor fixa: Surface e CardStroke vêm da paleta ativa.",
+                        "No tema Vidro, Surface vira branco translúcido e CardStroke vira a aresta de luz.",
+                        "O fundo vivo é o AmbientBackground do app, não uma cena própria do componente.",
+                        "É assim que o app inteiro vira vidro: troca de paleta, não de marcação.",
+                    ],
+                    Snippets = [Xaml("Uso", "glass.styled")],
+                },
+                new()
+                {
                     Id = "glass.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,

@@ -43,6 +43,17 @@ public partial class App : Application
         window.TitleBar = titleBar;
 #endif
 
+        // Layout responsivo: as faixas de largura (Adaptive) acompanham o tamanho da janela.
+        window.SizeChanged += (_, _) => Adaptive.Current.Update(window.Width);
+
+        // Desenvolvimento e capturas: abre a janela num tamanho de teste, ex.: "390x844" (celular).
+        var size = Environment.GetEnvironmentVariable("COMPONENTVAULT_SIZE")?.Split('x');
+        if (size is [var w, var h] && double.TryParse(w, out var width) && double.TryParse(h, out var height))
+        {
+            window.Width = width;
+            window.Height = height;
+        }
+
         // Link profundo para desenvolvimento e capturas automatizadas, ex.:
         // COMPONENTVAULT_START="catalog" ou "catalog/component?id=button&variant=button.styled".
         var start = Environment.GetEnvironmentVariable("COMPONENTVAULT_START");

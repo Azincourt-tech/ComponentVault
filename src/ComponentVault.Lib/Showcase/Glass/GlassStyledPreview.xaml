@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:adaptive="clr-namespace:ComponentVault.Lib.Theming"
+             xmlns:mi="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             x:Class="ComponentVault.Lib.Showcase.Glass.GlassStyledPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Cards do design system, sem nenhuma cor fixa" />
+            <!-- snippet:glass.styled -->
+            <!-- Só tokens: Card usa Surface e CardStroke da paleta. No tema Vidro viram vidro sozinhos. -->
+            <VerticalStackLayout Spacing="16">
+                <Grid ColumnDefinitions="{adaptive:OnWidth Compact='*', Default='*,*'}" RowDefinitions="{adaptive:OnWidth Compact='Auto,Auto', Default='Auto'}"
+                      ColumnSpacing="16" RowSpacing="16">
+                    <Border Style="{StaticResource Card}" Padding="20">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Style="{StaticResource Caption}" Text="Componentes no vault" />
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Style="{StaticResource Display}" FontSize="36" Text="30" />
+                                <Label Style="{StaticResource Caption}" TextColor="{DynamicResource SuccessText}"
+                                       Text="+12 este mês" VerticalOptions="End" Margin="0,0,0,8" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="{adaptive:OnWidth Compact=0, Default=1}" Grid.Row="{adaptive:OnWidth Compact=1, Default=0}"
+                            Style="{StaticResource Card}" Padding="20">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                            <Border WidthRequest="48" HeightRequest="48" StrokeThickness="0" StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="{DynamicResource AccentTint}">
+                                <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Play24}" IconSize="20"
+                                             IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource Caption}" Text="Tocando agora" />
+                                <Label Style="{StaticResource CardTitle}" Text="Luz difusa" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto" Padding="18,14">
+                            <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Color24}" IconSize="20"
+                                         IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Style="{StaticResource Body}" LineHeight="1" Text="Aparência" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Style="{StaticResource Caption}" Text="Pela barra" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto" Padding="18,14">
+                            <mi:MauiIcon Icon="{x:Static fluent:FluentIcons.Alert24}" IconSize="20"
+                                         IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Style="{StaticResource Body}" LineHeight="1" Text="Notificações" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Style="{StaticResource Caption}" Text="Ligadas" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+            <!-- /snippet:glass.styled -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="A mesma marcação muda com o tema: nos temas Claro e Escuro são cards sólidos; no tema Vidro, Surface vira branco translúcido e CardStroke vira a aresta de luz, sobre o fundo ambiente do app. Troque o tema na barra para ver." />
+
+    </VerticalStackLayout>
+
+</ContentView>

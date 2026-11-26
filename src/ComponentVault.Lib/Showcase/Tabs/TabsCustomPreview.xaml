@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ComponentVault.Lib.Showcase.Tabs.TabsCustomPreview">
 
     <!-- snippet:tabs.custom -->
-    <VerticalStackLayout Spacing="0" MaximumWidthRequest="560" HorizontalOptions="Fill">
+    <VerticalStackLayout Spacing="0">
 
         <!-- Abas de largura igual; o sublinhado é um único elemento que desliza (TranslateTo, 200ms). -->
         <Grid x:Name="TabStrip" ColumnDefinitions="*,*,*" RowDefinitions="44,2">

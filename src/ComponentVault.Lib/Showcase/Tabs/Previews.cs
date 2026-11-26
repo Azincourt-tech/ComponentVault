@@ -63,3 +63,9 @@ public partial class TabsSharpnadoPreview : ContentView
 {
     public TabsSharpnadoPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("tabs.syncfusion")]
+public partial class TabsSyncfusionPreview : ContentView
+{
+    public TabsSyncfusionPreview() => InitializeComponent();
+}

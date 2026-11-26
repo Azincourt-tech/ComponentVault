@@ -5,11 +5,17 @@ namespace ComponentVault.Lib.Controls;
 
 public enum BadgeKind
 {
+    // Origens
     Native,
     Custom,
     FreeLibrary,
     Syncfusion,
     New,
+
+    // Níveis (Custom serve aos dois)
+    Base,
+    Styled,
+    Library,
 }
 
 // snippet:control.badge
@@ -72,13 +78,25 @@ public class OriginBadge : Border
         BadgeKind.FreeLibrary => "Lib Gratuita",
         BadgeKind.Syncfusion => "Syncfusion",
         BadgeKind.New => "Novo",
+        BadgeKind.Base => "Base MAUI",
+        BadgeKind.Styled => "Estilizado",
+        BadgeKind.Library => "Biblioteca",
         _ => kind.ToString(),
+    };
+
+    /// <summary>Token de cor do ponto: Tier{Nível} para níveis, Origin{Origem} para origens.</summary>
+    public static string ColorKey(BadgeKind kind) => kind switch
+    {
+        BadgeKind.Base => "TierBase",
+        BadgeKind.Styled => "TierStyled",
+        BadgeKind.Library => "TierLibrary",
+        BadgeKind.Custom => "TierCustom",
+        _ => $"Origin{kind}",
     };
 
     private void Refresh()
     {
-        // A cor do ponto vem do token Origin{Kind}.
-        _dot.SetThemeBrush(Shape.FillProperty, $"Origin{Kind}");
+        _dot.SetThemeBrush(Shape.FillProperty, ColorKey(Kind));
 
         var text = Text ?? DefaultText(Kind);
         _label.Text = text;

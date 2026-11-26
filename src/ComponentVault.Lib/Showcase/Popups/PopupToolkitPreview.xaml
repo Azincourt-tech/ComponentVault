@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
              x:Class="ComponentVault.Lib.Showcase.Popups.PopupToolkitPreview">
 
     <VerticalStackLayout Spacing="24">
 
-        <VerticalStackLayout Spacing="12" MaximumWidthRequest="440" HorizontalOptions="Start">
+        <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="Diálogo de confirmação" />
             <!-- snippet:popup.toolkit -->
             <Border Style="{StaticResource Card}" Padding="16">
