@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Alerts.AlertBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Aviso em linha montado à mão" />
+            <!-- snippet:alert.base -->
+            <VerticalStackLayout Spacing="10">
+                <Border Padding="12" Stroke="Gray">
+                    <VerticalStackLayout>
+                        <Label Text="Falha ao sincronizar" FontAttributes="Bold" />
+                        <Label Text="Sem conexão. As alterações continuam salvas neste aparelho." />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Padding="12" Stroke="Gray">
+                    <VerticalStackLayout>
+                        <Label Text="Componente publicado" FontAttributes="Bold" />
+                        <Label Text="O Slider custom já aparece no catálogo." />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+            <!-- /snippet:alert.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI não tem aviso em linha: o DisplayAlertAsync é um diálogo modal, que interrompe a tarefa (veja o componente Popup). Feitos à mão com Border e Label, erro e sucesso ficam iguais, sem ícone, sem tom e sem ação ou fechar." />
+
+    </VerticalStackLayout>
+
+</ContentView>

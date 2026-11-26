@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:alerts="clr-namespace:ComponentVault.Lib.Showcase.Alerts"
+             x:Class="ComponentVault.Lib.Showcase.Alerts.AlertCustomPreview">
+
+    <VerticalStackLayout Spacing="16" MaximumWidthRequest="560" HorizontalOptions="Fill">
+
+        <!-- snippet:alert.custom -->
+        <alerts:AlertStack x:Name="Stack">
+            <alerts:Callout Kind="Danger"
+                            Title="Falha ao sincronizar"
+                            Message="Sem conexão. As alterações continuam salvas neste aparelho."
+                            ActionText="Tentar de novo" />
+            <alerts:Callout Kind="Warning"
+                            Title="Armazenamento quase cheio"
+                            Message="Restam 300 MB. Limpe o cache de previews para liberar espaço."
+                            ActionText="Limpar cache" />
+            <alerts:Callout Kind="Success"
+                            Title="Componente publicado"
+                            Message="O Slider custom já aparece no catálogo." />
+            <alerts:Callout Kind="Info"
+                            Title="Nova versão do design system"
+                            Message="Os tokens de cor mudaram. Revise componentes com cores fixas." />
+        </alerts:AlertStack>
+        <!-- /snippet:alert.custom -->
+
+        <Button Text="Mostrar avisos fechados" Style="{StaticResource SecondaryButtonSmall}"
+                HorizontalOptions="Start" Clicked="OnRestoreClicked" />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -141,6 +141,20 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "alert.base",
+                    Title = "Base MAUI",
+                    Tier = VariantTier.Base,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Sem aviso em linha no MAUI: Border e Label montados à mão, sem tom, ícone, ação ou fechar.",
+                    Highlights =
+                    [
+                        "DisplayAlertAsync existe, mas é modal: bloqueia a tarefa para dar uma notícia.",
+                        "Erro e sucesso ficam com a mesma cara; a pessoa precisa ler para saber a gravidade.",
+                    ],
+                    Snippets = [Xaml("Uso", "alert.base")],
+                },
+                new()
+                {
                     Id = "alert.styled",
                     Title = "Estilizado",
                     Tier = VariantTier.Styled,
@@ -154,6 +168,22 @@ internal static partial class ComponentCatalog
                         "Fechar some em 150ms e libera o espaço.",
                     ],
                     Snippets = [Xaml("Uso", "alert.styled"), CSharp("Controle (Callout.cs)", "control.callout")],
+                },
+                new()
+                {
+                    Id = "alert.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Pilha de avisos, como as notificações agrupadas do iOS: recolhida com profundidade, abre em lista com animação.",
+                    Highlights =
+                    [
+                        "Vários avisos ocupam o espaço de um: o mais recente na frente, a borda de dois atrás.",
+                        "Tocar abre a lista com mola; \"Recolher\" volta à pilha.",
+                        "Fechar um aviso reorganiza a pilha e atualiza a contagem.",
+                        "Fundo opaco atrás de cada aviso: o tom suave do da frente não deixa ver os de trás.",
+                    ],
+                    Snippets = [Xaml("Uso", "alert.custom"), CSharp("Controle (AlertStack.cs)", "control.alertstack")],
                 },
             ],
         },
