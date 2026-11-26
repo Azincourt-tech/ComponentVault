@@ -5,13 +5,13 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
              xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
-             x:Class="ComponentVault.Lib.Showcase.Cards.CardExpanderPreview">
+             x:Class="ComponentVault.Lib.Showcase.Expanders.ExpanderToolkitPreview">
 
     <VerticalStackLayout Spacing="20">
 
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource FieldLabel}" Text="Detalhes recolhíveis" />
-            <!-- snippet:card.expander -->
+            <!-- snippet:expander.toolkit -->
             <Border Style="{StaticResource Card}">
                 <VerticalStackLayout>
 
@@ -83,7 +83,7 @@
 
                 </VerticalStackLayout>
             </Border>
-            <!-- /snippet:card.expander -->
+            <!-- /snippet:expander.toolkit -->
         </VerticalStackLayout>
 
         <Label Style="{StaticResource BodySmall}"

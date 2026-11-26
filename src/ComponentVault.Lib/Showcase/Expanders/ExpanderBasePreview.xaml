@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Expanders.ExpanderBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Button e IsVisible" />
+            <!-- snippet:expander.base -->
+            <VerticalStackLayout Spacing="8">
+                <Button x:Name="ToggleButton" Text="Mostrar detalhes do pedido" HorizontalOptions="Start" Clicked="OnToggleClicked" />
+                <VerticalStackLayout x:Name="Details" IsVisible="False" Spacing="4">
+                    <Label Text="Envio expresso, chega em até 2 dias úteis." />
+                    <Label Text="Pagamento no cartão final 4021." />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <!-- /snippet:expander.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI não tem expander fora do CommunityToolkit. Um Button que liga e desliga o IsVisible funciona, mas o conteúdo aparece de uma vez e empurra a tela, o estado só aparece no texto do botão e o leitor de tela não sabe que é uma seção." />
+
+    </VerticalStackLayout>
+
+</ContentView>

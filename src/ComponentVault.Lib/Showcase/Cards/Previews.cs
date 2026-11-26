@@ -12,12 +12,6 @@ public partial class CardStyledPreview : ContentView
     public CardStyledPreview() => InitializeComponent();
 }
 
-[ShowcasePreview("card.expander")]
-public partial class CardExpanderPreview : ContentView
-{
-    public CardExpanderPreview() => InitializeComponent();
-}
-
 [ShowcasePreview("card.syncfusion")]
 public partial class CardSyncfusionPreview : ContentView
 {
@@ -30,12 +24,6 @@ public partial class CardSyncfusionPreview : ContentView
         ReviewCard.IsDismissed = false;
         QuotaCard.IsDismissed = false;
     }
-}
-
-[ShowcasePreview("card.accordion")]
-public partial class CardAccordionPreview : ContentView
-{
-    public CardAccordionPreview() => InitializeComponent();
 }
 
 [ShowcasePreview("card.custom")]

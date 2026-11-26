@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             x:Class="ComponentVault.Lib.Showcase.Expanders.ExpanderStyledPreview">
+
+    <ContentView.Resources>
+        <!-- Cabeçalho: linha inteira tocável, 56px, título à esquerda e resumo + seta à direita. -->
+        <Style x:Key="ExpHeader" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="*,Auto,Auto" />
+            <Setter Property="ColumnSpacing" Value="10" />
+            <Setter Property="Padding" Value="18,14" />
+            <Setter Property="MinimumHeightRequest" Value="56" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+        <Style x:Key="SectionTitle" TargetType="Label" BasedOn="{StaticResource CardTitle}">
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="SectionSummary" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="SettingRow" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="*,Auto" />
+            <Setter Property="MinimumHeightRequest" Value="44" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:expander.styled -->
+        <!-- Seções de configuração num card só, separadas por linhas finas; cada uma abre sozinha. -->
+        <Border Style="{StaticResource Card}">
+            <VerticalStackLayout>
+
+                <Grid Style="{StaticResource ExpHeader}">
+                    <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnHeaderTapped" CommandParameter="{x:Reference NotificationsBody}" /></Grid.GestureRecognizers>
+                    <Label Style="{StaticResource SectionTitle}" Text="Notificações" />
+                    <Label Grid.Column="1" Style="{StaticResource SectionSummary}" Text="Push e e-mail" />
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16" Rotation="180"
+                                  IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center" />
+                </Grid>
+                <VerticalStackLayout x:Name="NotificationsBody" Padding="18,0,18,14" Spacing="4">
+                    <Grid Style="{StaticResource SettingRow}">
+                        <Label Style="{StaticResource Body}" LineHeight="1" Text="Notificações push" VerticalOptions="Center" />
+                        <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" />
+                    </Grid>
+                    <Grid Style="{StaticResource SettingRow}">
+                        <Label Style="{StaticResource Body}" LineHeight="1" Text="Resumo semanal por e-mail" VerticalOptions="Center" />
+                        <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" />
+                    </Grid>
+                </VerticalStackLayout>
+
+                <BoxView Style="{StaticResource Divider}" />
+
+                <Grid Style="{StaticResource ExpHeader}">
+                    <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnHeaderTapped" CommandParameter="{x:Reference PrivacyBody}" /></Grid.GestureRecognizers>
+                    <Label Style="{StaticResource SectionTitle}" Text="Privacidade" />
+                    <Label Grid.Column="1" Style="{StaticResource SectionSummary}" Text="Perfil público" />
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16"
+                                  IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center" />
+                </Grid>
+                <VerticalStackLayout x:Name="PrivacyBody" IsVisible="False" Padding="18,0,18,14" Spacing="4">
+                    <Grid Style="{StaticResource SettingRow}">
+                        <Label Style="{StaticResource Body}" LineHeight="1" Text="Mostrar perfil para todos" VerticalOptions="Center" />
+                        <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" />
+                    </Grid>
+                </VerticalStackLayout>
+
+                <BoxView Style="{StaticResource Divider}" />
+
+                <Grid Style="{StaticResource ExpHeader}">
+                    <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnHeaderTapped" CommandParameter="{x:Reference StorageBody}" /></Grid.GestureRecognizers>
+                    <Label Style="{StaticResource SectionTitle}" Text="Armazenamento" />
+                    <Label Grid.Column="1" Style="{StaticResource SectionSummary}" Text="2,4 de 5 GB" />
+                    <mic:MauiIcon Grid.Column="2" Icon="{mi:Fluent Icon=ChevronDown20}" IconSize="16"
+                                  IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center" />
+                </Grid>
+                <VerticalStackLayout x:Name="StorageBody" IsVisible="False" Padding="18,0,18,18" Spacing="8">
+                    <ProgressBar Style="{StaticResource VaultProgressBar}" Progress="0.48" />
+                    <Label Style="{StaticResource Caption}" Text="Fotos ocupam 1,6 GB. Os arquivos da lixeira saem em 30 dias." />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+        <!-- /snippet:expander.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O mesmo IsVisible do Base, com o design system: cabeçalho inteiro tocável, resumo à vista mesmo fechado, seta que gira 180° e conteúdo que entra com fade. Sem lib e sem animar a altura: isso fica para o Custom." />
+
+    </VerticalStackLayout>
+
+</ContentView>

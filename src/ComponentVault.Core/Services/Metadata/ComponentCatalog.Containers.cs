@@ -97,7 +97,7 @@ internal static partial class ComponentCatalog
             Icon = "Board24",
             Category = ComponentCategory.Containers,
             Summary = "Agrupa conteúdo relacionado numa superfície.",
-            Tags = ["border", "container", "superfície", "expander", "toolkit", "accordion"],
+            Tags = ["border", "container", "superfície", "cardview", "syncfusion"],
             AddedOn = new DateOnly(2026, 11, 20),
             Docs = new ComponentDocs
             {
@@ -147,22 +147,6 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
-                    Id = "card.expander",
-                    Title = "Toolkit Expander",
-                    Tier = VariantTier.Library,
-                    Origin = ComponentOrigin.FreeLibrary,
-                    PackageId = "CommunityToolkit.Maui",
-                    Summary = "Seções recolhíveis dentro de um card, com o Expander do CommunityToolkit.",
-                    Highlights =
-                    [
-                        "Cabeçalho inteiro clicável, com 52px de altura mínima.",
-                        "A seta gira 180° para mostrar o estado, além do conteúdo aparecer.",
-                        "Resumo à vista no cabeçalho (ex.: \"Cartão final 4021\") sem precisar abrir.",
-                    ],
-                    Snippets = [Xaml("Uso", "card.expander")],
-                },
-                new()
-                {
                     Id = "card.syncfusion",
                     Title = "Syncfusion Toolkit",
                     Tier = VariantTier.Library,
@@ -177,9 +161,103 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "card.syncfusion")],
                 },
+            ],
+        },
+        new()
+        {
+            Id = "expander",
+            Name = "Expander",
+            Icon = "ChevronDown20",
+            Category = ComponentCategory.Containers,
+            Summary = "Seções que abrem e fecham, sozinhas ou em acordeão.",
+            Tags = ["expander", "accordion", "acordeão", "recolher", "faq", "seção", "toolkit"],
+            AddedOn = new DateOnly(2026, 11, 28),
+            Docs = new ComponentDocs
+            {
+                Overview = "O MAUI só tem expander no CommunityToolkit. O Base liga e desliga o IsVisible; o Estilizado dá cabeçalho, resumo e seta; o Custom anima a altura e abre uma seção por vez; e as bibliotecas trazem o Expander do Toolkit, o SfExpander e o SfAccordion.",
+                Properties =
+                [
+                    new("IsExpanded", "Se a seção está aberta."),
+                    new("Header / Content", "Cabeçalho sempre visível e conteúdo recolhível."),
+                    new("ExpandMode", "No acordeão: uma aberta por vez ou várias (SfAccordion)."),
+                    new("HeaderIconPosition", "Seta no início ou no fim do cabeçalho (Syncfusion)."),
+                ],
+                UseCases = ["Perguntas frequentes.", "Seções de configurações e filtros avançados.", "Detalhes secundários de um pedido."],
+                Limitations = ["Não esconda o que a pessoa precisa para decidir: deixe um resumo no cabeçalho."],
+            },
+            Variants =
+            [
+                Base("expander.base", "Button que mostra e esconde o conteúdo com IsVisible.",
+                    "O conteúdo aparece de uma vez e empurra a tela.",
+                    "O estado só aparece no texto do botão.",
+                    "O leitor de tela não sabe que é uma seção."),
                 new()
                 {
-                    Id = "card.accordion",
+                    Id = "expander.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Seções de configurações num card, com resumo no cabeçalho e seta que gira.",
+                    Highlights =
+                    [
+                        "Cabeçalho inteiro tocável, com 56px de altura mínima.",
+                        "Resumo à vista mesmo fechado (\"2,4 de 5 GB\").",
+                        "A seta gira 180° e o conteúdo entra com fade.",
+                        "Sem animar a altura: isso fica para o Custom.",
+                    ],
+                    Snippets = [Xaml("Uso", "expander.styled")],
+                },
+                new()
+                {
+                    Id = "expander.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Collapsible em cartão com altura animada e AccordionStack com um aberto por vez.",
+                    Highlights =
+                    [
+                        "O conteúdo é medido e o recorte cresce até ele em 260ms: a tela desliza em vez de pular.",
+                        "O + desenhado gira e vira −; a seção aberta ganha a borda de destaque.",
+                        "O preço fica no cabeçalho, visível mesmo fechado.",
+                        "Abrir um plano fecha o outro (AllowMultiple libera vários).",
+                    ],
+                    Snippets = [Xaml("Uso", "expander.custom"), CSharp("Controle (Collapsible.cs)", "control.collapsible")],
+                },
+                new()
+                {
+                    Id = "expander.toolkit",
+                    Title = "Toolkit Expander",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "CommunityToolkit.Maui",
+                    Summary = "Seções recolhíveis de um pedido, com o Expander do CommunityToolkit.",
+                    Highlights =
+                    [
+                        "Cabeçalho inteiro clicável, com 52px de altura mínima.",
+                        "A seta gira 180° para mostrar o estado, além do conteúdo aparecer.",
+                        "Resumo à vista no cabeçalho (ex.: \"Cartão final 4021\") sem precisar abrir.",
+                    ],
+                    Snippets = [Xaml("Uso", "expander.toolkit")],
+                },
+                new()
+                {
+                    Id = "expander.syncfusion",
+                    Title = "Syncfusion Expander",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfExpander com filtros avançados recolhidos e a contagem de filtros ativos no cabeçalho.",
+                    Highlights =
+                    [
+                        "Seta no fim do cabeçalho (HeaderIconPosition) e abertura animada.",
+                        "O resumo conta os filtros ligados: dá para saber sem abrir.",
+                        "Eventos Expanding e Collapsing permitem cancelar a troca.",
+                    ],
+                    Snippets = [Xaml("Uso", "expander.syncfusion")],
+                },
+                new()
+                {
+                    Id = "expander.accordion",
                     Title = "Syncfusion Accordion",
                     Tier = VariantTier.Library,
                     Origin = ComponentOrigin.Syncfusion,
@@ -191,7 +269,7 @@ internal static partial class ComponentCatalog
                         "A seta fica no fim do cabeçalho (HeaderIconPosition) e gira ao abrir.",
                         "AutoScrollPosition rola a página até o item aberto.",
                     ],
-                    Snippets = [Xaml("Uso", "card.accordion")],
+                    Snippets = [Xaml("Uso", "expander.accordion")],
                 },
             ],
         },

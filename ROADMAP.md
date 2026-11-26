@@ -102,13 +102,14 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 |---|---|---|---|---|
 | Avatar | ✓ | ✓ | ✓ anel de stories e status | ✓ Toolkit |
 | Button | ✓ | ✓ | ✓ segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
-| Card | ✓ | ✓ | ✓ card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, ✓ Syncfusion `SfAccordion` |
+| Card | ✓ | ✓ | ✓ card que vira | ✓ Syncfusion `SfCardView` |
 | Carousel | ✓ | ✓ | ✓ pilha de cartões | ✓ Syncfusion `SfCarousel` |
 | Chart | | ✓ | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
 | CheckBox | ✓ | ✓ | ✓ check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
 | DatePicker | ✓ | ✓ | ✓ faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
 | Editor | ✓ | ✓ | ✓ Markdown com prévia | |
+| Expander | ✓ | ✓ | ✓ seção com altura animada | ✓ Toolkit `Expander`, ✓ Syncfusion `SfExpander`, ✓ Syncfusion `SfAccordion` |
 | Entry | ✓ | ✓ | ✓ rótulo flutuante | ✓ UraniumUI, ✓ Syncfusion `SfTextInputLayout` |
 | Icons | ✓ | ✓ | ✓ ícone animado | ✓ MauiIcons |
 | List | ✓ | ✓ | ✓ linhas com deslizar desenhado | ✓ Syncfusion `SfPullToRefresh` |
@@ -127,7 +128,7 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 
 Lacunas que ficam de propósito: Chart, Segmented, Skeleton, Tabs e Toast não têm Base porque o MAUI não tem esses controles (o Estilizado já mostra a montagem com controles nativos). O Skeleton não tem Estilizado porque o Custom já é feito só com `Border` e pulso de opacidade. Rating e OTP não têm Estilizado: o Base mostra o limite, e o Custom resolve.
 
-Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBottomSheet`), Navigation drawer (`SfNavigationDrawer`), Pull to refresh e Accordion.
+Componentes novos que o Syncfusion Toolkit também cobre: Navigation drawer (`SfNavigationDrawer`) e Pull to refresh. Bottom sheet e Expander já viraram componentes próprios.
 
 **Atenção:** com quatro ou mais abas, o seletor de nível precisa caber na faixa compacta (rolar na horizontal ou quebrar em duas linhas).
 
@@ -136,7 +137,7 @@ Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBotto
 Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, ScreensDesign) e as libs gratuitas do awesome-dotnet-maui:
 
 - [x] ~~**Bottom sheet**~~: feito em 28/11/2026 com os quatro níveis: Base (`Border` com `IsVisible`), Estilizado (tokens, fundo escurecido e animação), Custom (`SnapSheet` com três paradas arrastáveis, como nos apps de mapa) e Biblioteca (`SfBottomSheet`). Falta testar o arrasto à mão.
-- [ ] **Expander / Accordion**: CommunityToolkit `Expander`, `SfExpander` e `SfAccordion` do Syncfusion Toolkit, e uma versão estilizada.
+- [x] ~~**Expander / Accordion**~~: feito em 28/11/2026 como o componente Expander: Base (`Button` e `IsVisible`), Estilizado (seções de configurações com resumo e seta), Custom (`Collapsible` com altura animada e `AccordionStack` com um aberto por vez) e as bibliotecas Toolkit `Expander`, `SfExpander` e `SfAccordion`. As abas Toolkit Expander e Syncfusion Accordion saíram do Card e vieram para cá. Falta testar a abertura à mão.
 - [ ] **FAB e menu de ações**: botão flutuante que abre as ações em leque.
 - [ ] **Assinatura / desenho**: CommunityToolkit `DrawingView`.
 - [ ] **Calendário**: seleção de intervalo, mais rico que o DatePicker. Libs: `SfCalendar` (Syncfusion Toolkit) e Plugin.Maui.Calendar.

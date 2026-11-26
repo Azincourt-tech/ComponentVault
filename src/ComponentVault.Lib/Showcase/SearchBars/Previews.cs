@@ -96,7 +96,7 @@ public partial class SearchBarUraniumPreview : ContentView
     private static readonly string[] Components =
     [
         "Alert", "Avatar", "Badge", "Bottom sheet", "Button", "Card", "Carousel", "Chart", "CheckBox", "Chips",
-        "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Glass", "Ícones", "List",
+        "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Expander", "Glass", "Ícones", "List",
         "Picker", "Popup", "Progress", "RadioButton", "Rating", "SearchBar", "Segmented control",
         "Skeleton", "Slider", "Stepper", "Switch", "Tabs", "Toast",
     ];
@@ -123,7 +123,7 @@ public partial class SearchBarCustomPreview : ContentView
         Search.Items =
         [
             "Picker", "Slider", "Chips", "Alert", "Avatar", "Badge", "Button", "Card", "Carousel", "Chart",
-            "Bottom sheet", "CheckBox", "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Glass", "Ícones", "List",
+            "Bottom sheet", "CheckBox", "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Expander", "Glass", "Ícones", "List",
             "Popup", "Progress", "RadioButton", "Rating", "SearchBar", "Segmented control", "Skeleton",
             "Stepper", "Switch", "Tabs", "Toast",
         ];

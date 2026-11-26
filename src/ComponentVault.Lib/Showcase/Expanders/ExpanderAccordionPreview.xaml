@@ -2,7 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:acc="clr-namespace:Syncfusion.Maui.Toolkit.Accordion;assembly=Syncfusion.Maui.Toolkit"
-             x:Class="ComponentVault.Lib.Showcase.Cards.CardAccordionPreview">
+             x:Class="ComponentVault.Lib.Showcase.Expanders.ExpanderAccordionPreview">
 
     <ContentView.Resources>
         <Style x:Key="FaqHeader" TargetType="Label">
@@ -19,7 +19,7 @@
 
     <VerticalStackLayout Spacing="24">
 
-        <!-- snippet:card.accordion -->
+        <!-- snippet:expander.accordion -->
         <VerticalStackLayout Spacing="10">
 
             <Label Style="{StaticResource FieldLabel}" Text="Perguntas frequentes" />
@@ -61,7 +61,7 @@
             </Border>
 
         </VerticalStackLayout>
-        <!-- /snippet:card.accordion -->
+        <!-- /snippet:expander.accordion -->
 
         <Label Style="{StaticResource BodySmall}"
                Text="O SfAccordion (Syncfusion Toolkit, MIT) controla um grupo de seções: um aberto por vez ou vários, seta no início ou no fim, animação e rolagem até o item aberto. Para uma seção solta, há o SfExpander." />

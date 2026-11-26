@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:exp="clr-namespace:Syncfusion.Maui.Toolkit.Expander;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Expanders.ExpanderSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:expander.syncfusion -->
+        <VerticalStackLayout Spacing="10">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Busca de voos" />
+
+            <!--
+              SfExpander solto: filtros avançados recolhidos por padrão. A seta fica no fim
+              (HeaderIconPosition) e a abertura é animada (AnimationDuration, AnimationEasing).
+            -->
+            <Border Style="{StaticResource Card}">
+                <exp:SfExpander x:Name="Filters" HeaderIconPosition="End" AnimationDuration="200" AnimationEasing="SinOut"
+                                HeaderBackground="Transparent" HeaderIconColor="{DynamicResource InkSecondary}"
+                                Expanded="OnExpandedChanged" Collapsed="OnExpandedChanged">
+                    <exp:SfExpander.Header>
+                        <Grid ColumnDefinitions="*,Auto" Padding="18,14" MinimumHeightRequest="56">
+                            <Label Style="{StaticResource CardTitle}" Text="Filtros avançados" VerticalOptions="Center" />
+                            <Label x:Name="FilterSummary" Grid.Column="1" Style="{StaticResource Caption}" Text="2 ativos" VerticalOptions="Center" />
+                        </Grid>
+                    </exp:SfExpander.Header>
+                    <exp:SfExpander.Content>
+                        <VerticalStackLayout Padding="18,0,18,18" Spacing="4">
+                            <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="44">
+                                <Label Style="{StaticResource Body}" LineHeight="1" Text="Só voos diretos" VerticalOptions="Center" />
+                                <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" Toggled="OnFilterToggled" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="44">
+                                <Label Style="{StaticResource Body}" LineHeight="1" Text="Bagagem incluída" VerticalOptions="Center" />
+                                <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" IsToggled="True" Toggled="OnFilterToggled" />
+                            </Grid>
+                            <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="44">
+                                <Label Style="{StaticResource Body}" LineHeight="1" Text="Remarcação grátis" VerticalOptions="Center" />
+                                <Switch Grid.Column="1" Style="{StaticResource VaultSwitch}" Toggled="OnFilterToggled" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </exp:SfExpander.Content>
+                </exp:SfExpander>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:expander.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="SfExpander (Syncfusion Toolkit, MIT): cabeçalho e conteúdo livres, seta no início ou no fim, animação com duração e curva, e os eventos Expanding e Collapsing para cancelar a troca. Para um grupo com uma seção aberta por vez, há o SfAccordion." />
+
+    </VerticalStackLayout>
+
+</ContentView>
