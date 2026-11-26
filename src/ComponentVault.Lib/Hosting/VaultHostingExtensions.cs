@@ -96,8 +96,19 @@ public static class VaultHostingExtensions
         });
         TimePickerHandler.Mapper.AppendToMapping("VaultBorderless", (handler, view) =>
         {
-            if (view is BorderlessTimePicker) Strip(handler.PlatformView);
+            // O TimePickerField da UraniumUI usa o TimePicker nativo por dentro: no Windows ele
+            // desenhava caixas cinzas atrás de hora e minuto, destoando do campo de data ao lado.
+            if (view is BorderlessTimePicker || IsInside(view as Element, "TimePickerField")) Strip(handler.PlatformView);
         });
+    }
+
+    private static bool IsInside(Element? element, string typeName)
+    {
+        for (var current = element?.Parent; current is not null; current = current.Parent)
+        {
+            if (current.GetType().Name == typeName) return true;
+        }
+        return false;
     }
 
 #if ANDROID

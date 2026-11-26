@@ -8,16 +8,20 @@
 
         <VerticalStackLayout Spacing="12">
             <Label Style="{StaticResource FieldLabel}" Text="DatePickerField e TimePickerField" />
+            <!--
+              Largura do conteúdo: uma data e um horário são curtos, campo largo sobra vazio.
+              280 é o mínimo que cabe o seletor de horário nativo do Windows mais o botão de limpar.
+            -->
             <!-- snippet:datepicker.uranium -->
-            <VerticalStackLayout Spacing="16" WidthRequest="{OnIdiom Phone=-1, Default=440}" HorizontalOptions="{OnIdiom Phone=Fill, Default=Start}">
+            <VerticalStackLayout Spacing="16" WidthRequest="{OnIdiom Phone=-1, Default=280}" HorizontalOptions="{OnIdiom Phone=Fill, Default=Start}">
                 <material:DatePickerField Title="Data de entrega" Format="dd/MM/yyyy" AllowClear="True" />
-                <material:TimePickerField Title="Horário" Format="HH:mm" AllowClear="True" />
+                <material:TimePickerField Title="Horário" Format="HH:mm" AllowClear="True" Time="14:30" />
             </VerticalStackLayout>
             <!-- /snippet:datepicker.uranium -->
         </VerticalStackLayout>
 
         <Label Style="{StaticResource BodySmall}"
-               Text="Campos Material com título flutuante e limpar. Úteis quando a data é opcional: vazio é um estado válido, diferente do DatePicker nativo, que sempre tem um valor." />
+               Text="Campos Material com título flutuante e limpar: a data vazia mostra o título no lugar do valor, e o horário preenchido o leva para a borda. Úteis quando a data é opcional, porque vazio é um estado válido, diferente do DatePicker nativo, que sempre tem um valor." />
 
     </VerticalStackLayout>
 
