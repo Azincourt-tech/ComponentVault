@@ -44,8 +44,9 @@ public class Callout : ContentView
     private readonly MauiIcon _icon = new() { IconSize = 20, VerticalOptions = LayoutOptions.Start, Margin = new Thickness(0, 1, 0, 0) };
     private readonly Label _title = new() { FontFamily = "JakartaSemiBold", FontSize = 15 };
     private readonly Label _message = new() { FontFamily = "JakartaRegular", FontSize = 14, LineHeight = 1.4 };
-    private readonly Button _action = new() { Padding = new Thickness(0), FontFamily = "JakartaSemiBold", FontSize = 14, BackgroundColor = Colors.Transparent, HorizontalOptions = LayoutOptions.Start, MinimumHeightRequest = 32 };
-    private readonly Button _dismiss = new() { Text = "✕", FontSize = 14, Padding = new Thickness(0), WidthRequest = 44, HeightRequest = 44, BackgroundColor = Colors.Transparent, VerticalOptions = LayoutOptions.Start, Margin = new Thickness(0, -10, 0, 0) };
+    // BorderWidth 0: sem isso o botão do Windows desenha um contorno retangular em volta do texto.
+    private readonly Button _action = new() { Padding = new Thickness(0), FontFamily = "JakartaSemiBold", FontSize = 14, BorderWidth = 0, BackgroundColor = Colors.Transparent, HorizontalOptions = LayoutOptions.Start, MinimumHeightRequest = 32 };
+    private readonly Button _dismiss = new() { Text = "✕", FontSize = 14, Padding = new Thickness(0), WidthRequest = 44, HeightRequest = 44, BorderWidth = 0, CornerRadius = 22, BackgroundColor = Colors.Transparent, VerticalOptions = LayoutOptions.Start, Margin = new Thickness(0, -10, 0, 0) };
 
     public Callout()
     {
