@@ -48,7 +48,7 @@ Componentes que ainda têm um nível só:
 |---|---|---|
 | ~~Alert~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (Border e Label crus) e Custom (pilha de avisos, `AlertStack`). Sem Biblioteca: não há lib gratuita de aviso em linha, e o Snackbar do Toolkit é um toast (já está no Toast). Testado pelo dono no Windows. |
 | ~~Chips~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`RadioButton` e `CheckBox` crus) e Custom (`ChoiceChipGroup` com pílula deslizante e `FilterChip` com check animado). O `SlidingIndicator` foi para a Lib e é usado pelo app e pelo preview. Falta testar com clique. |
-| Empty state | Estilizado | Custom com ilustração animada |
+| ~~Empty state~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`CollectionView` com `EmptyView` em texto) e Custom (`SearchIllustration` em Microsoft.Maui.Graphics, com cartões flutuando e lupa passeando, mais sugestões de busca em chips). Testado pelo dono no Windows. |
 | Glass | Custom | Estilizado (só tokens, sem fundo ambiente) |
 | Código OTP | Custom | Base (Entry por dígito, para comparar) |
 | Rating | Custom | Base (botões), Biblioteca |
