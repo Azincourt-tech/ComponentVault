@@ -3,6 +3,7 @@ using System.ComponentModel;
 using ComponentVault.App.Controls;
 using ComponentVault.Core.Models;
 using ComponentVault.Core.ViewModels;
+using ComponentVault.Lib.Controls;
 
 namespace ComponentVault.App.Views.Detail;
 

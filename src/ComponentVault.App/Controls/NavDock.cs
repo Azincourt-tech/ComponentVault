@@ -2,6 +2,7 @@ using System.ComponentModel;
 using ComponentVault.App.Views.Catalog;
 using ComponentVault.Core.Navigation;
 using ComponentVault.Core.ViewModels;
+using ComponentVault.Lib.Controls;
 using ComponentVault.Lib.Theming;
 using MauiIcons.Core;
 using MauiIcons.Fluent;

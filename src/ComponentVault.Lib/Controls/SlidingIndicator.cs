@@ -1,4 +1,4 @@
-namespace ComponentVault.App.Controls;
+namespace ComponentVault.Lib.Controls;
 
 /// <summary>
 /// Move um indicador (pílula, sublinhado) até o item selecionado de uma linha, com deslize
