@@ -3,6 +3,7 @@ using LiveChartsCore;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using SkiaSharp;
 
 namespace ComponentVault.Lib.Showcase.Charts;
@@ -29,31 +30,47 @@ public partial class ChartLiveChartsPreview : ContentView
     // snippet:chart.livecharts.code
     private void BuildCharts()
     {
-        // Paleta tirada dos tokens do tema atual: destaque para o dado principal, neutros para o resto.
+        // Uma cor só (o destaque) em intensidades diferentes; o resto vem dos tokens neutros do tema.
         var accent = Sk("Accent");
         var ink = Sk("Ink");
-        var muted = Sk("InkSecondary");
+        var muted = Sk("InkTertiary");
         var grid = Sk("Hairline");
-        var neutral = Sk("HairlineStrong");
 
         string[] months = ["Jun", "Jul", "Ago", "Set", "Out", "Nov"];
 
         OrdersChart.Series =
         [
-            new ColumnSeries<double>
+            // Meses anteriores atenuados e o mês atual cheio: o olho vai direto para o dado de agora.
+            // Duas séries na mesma posição (IgnoresBarPosition), cada uma com os meses dela.
+            new ColumnSeries<double?>
             {
                 Name = "Pedidos",
-                Values = [168, 182, 175, 201, 214, 236],
+                Values = [168, 182, 175, 201, 214, null],
+                Fill = new SolidColorPaint(accent.WithAlpha(110)),
+                Rx = 6,
+                Ry = 6,
+                MaxBarWidth = 32,
+                IgnoresBarPosition = true,
+            },
+            new ColumnSeries<double?>
+            {
+                Name = "Pedidos (mês atual)",
+                Values = [null, null, null, null, null, 236],
                 Fill = new SolidColorPaint(accent),
                 Rx = 6,
                 Ry = 6,
-                MaxBarWidth = 28,
+                MaxBarWidth = 32,
+                IgnoresBarPosition = true,
             },
             new LineSeries<double>
             {
                 Name = "Meta",
                 Values = [170, 175, 180, 190, 200, 210],
-                Stroke = new SolidColorPaint(ink) { StrokeThickness = 2 },
+                Stroke = new SolidColorPaint(ink.WithAlpha(150))
+                {
+                    StrokeThickness = 1.5f,
+                    PathEffect = new DashEffect([5, 5]),
+                },
                 Fill = null,
                 GeometrySize = 0,
                 LineSmoothness = 0,
@@ -65,7 +82,7 @@ public partial class ChartLiveChartsPreview : ContentView
             {
                 Labels = months,
                 LabelsPaint = new SolidColorPaint(muted),
-                TextSize = 13,
+                TextSize = 12,
                 SeparatorsPaint = null,
             },
         ];
@@ -74,36 +91,39 @@ public partial class ChartLiveChartsPreview : ContentView
             new Axis
             {
                 LabelsPaint = new SolidColorPaint(muted),
-                TextSize = 13,
+                TextSize = 12,
                 MinLimit = 0,
+                MinStep = 50,
+                Labeler = value => value.ToString("0"),
                 SeparatorsPaint = new SolidColorPaint(grid) { StrokeThickness = 1 },
             },
         ];
         OrdersChart.LegendPosition = LegendPosition.Hidden;
         OrdersChart.TooltipTextPaint = new SolidColorPaint(ink);
-        OrdersChart.TooltipBackgroundPaint = new SolidColorPaint(Sk("Surface"));
+        OrdersChart.TooltipBackgroundPaint = new SolidColorPaint(Sk("Ground"));
 
-        // Rosca com 3 fatias: um tom de destaque e dois neutros, rótulos na legenda (não dentro das fatias).
-        (string Name, double Value, SKColor Color)[] channels =
+        // Rosca: o mesmo azul em 100%, 55% e 25%. A legenda fica no XAML, na fonte do app.
+        (string Name, double Value, byte Alpha)[] channels =
         [
-            ("App", 58, accent),
-            ("Site", 31, ink),
-            ("Loja física", 11, neutral),
+            ("App", 58, 255),
+            ("Site", 31, 140),
+            ("Loja física", 11, 64),
         ];
 
         ChannelChart.Series = channels
             .Select(c => (ISeries)new PieSeries<double>
             {
-                Name = $"{c.Name} · {c.Value:0}%",
+                Name = c.Name,
                 Values = [c.Value],
-                Fill = new SolidColorPaint(c.Color),
-                InnerRadius = 56,
+                Fill = new SolidColorPaint(accent.WithAlpha(c.Alpha)),
+                InnerRadius = 64,
+                MaxRadialColumnWidth = 22,
                 Pushout = 0,
             })
             .ToArray();
-        ChannelChart.LegendPosition = LegendPosition.Right;
-        ChannelChart.LegendTextPaint = new SolidColorPaint(ink);
-        ChannelChart.LegendTextSize = 14;
+        ChannelChart.LegendPosition = LegendPosition.Hidden;
+        ChannelChart.TooltipTextPaint = new SolidColorPaint(ink);
+        ChannelChart.TooltipBackgroundPaint = new SolidColorPaint(Sk("Ground"));
     }
 
     private static SKColor Sk(string token)

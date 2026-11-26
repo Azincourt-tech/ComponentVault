@@ -1,5 +1,8 @@
 using ComponentVault.Lib.Controls;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Maui;
+using SkiaSharp;
 using MauiIcons.Fluent;
 using Microsoft.Maui.Handlers;
 using Sharpnado.Tabs;
@@ -36,8 +39,40 @@ public static class VaultHostingExtensions
             .UseLiveCharts()
             .UseSharpnadoTabs(loggerEnable: false);
 
+        // A LiveCharts desenha texto com SkiaSharp e não enxerga as fontes do MAUI: sem isto,
+        // eixos e dicas saem na fonte do sistema e destoam do resto do app.
+        if (LoadTypeface("PlusJakartaSans-Regular.ttf") is { } typeface)
+        {
+            LiveCharts.Configure(config => config.HasTextSettings(new TextSettings { DefaultTypeface = typeface }));
+        }
+
         RemoveNativeChrome();
         return builder;
+    }
+
+    // MauiFont vai para a pasta do app no Windows e para os assets no Android.
+    private static SKTypeface? LoadTypeface(string file)
+    {
+        try
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, file);
+            if (File.Exists(path)) return SKTypeface.FromFile(path);
+#if ANDROID
+            using var asset = Android.App.Application.Context.Assets?.Open(file);
+            if (asset is null) return null;
+            using var copy = new MemoryStream();
+            asset.CopyTo(copy);
+            copy.Position = 0;
+            return SKTypeface.FromStream(copy);
+#else
+            return null;
+#endif
+        }
+        catch (Exception)
+        {
+            // Sem a fonte, os gráficos seguem na fonte do sistema: não vale derrubar a abertura.
+            return null;
+        }
     }
 
     // Só afeta os controles Borderless*: os nativos continuam crus (é o que a variante Base mostra).
