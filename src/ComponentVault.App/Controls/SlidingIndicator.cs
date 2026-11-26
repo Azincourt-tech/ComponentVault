@@ -24,6 +24,14 @@ public sealed class SlidingIndicator
         // ficava torto.
         row.SizeChanged += (_, _) => Remeasure();
         foreach (var child in row.Children.OfType<VisualElement>()) child.SizeChanged += (_, _) => Remeasure();
+
+        // Itens que chegam depois (BindableLayout preenchido quando os dados carregam).
+        row.ChildAdded += (_, e) =>
+        {
+            if (e.Element is VisualElement child) child.SizeChanged += (_, _) => Remeasure();
+            Remeasure();
+        };
+        row.ChildRemoved += (_, _) => Remeasure();
     }
 
     /// <summary>Item que o indicador deve marcar. Mudar o alvo desliza até ele.</summary>
@@ -31,8 +39,6 @@ public sealed class SlidingIndicator
 
     /// <summary>Disparado quando o layout fica pronto (ou muda) e o alvo pode ser medido.</summary>
     public event EventHandler? Measured;
-
-    public bool IsPlaced => _goal is not null;
 
     public void SlideTo(View? target)
     {

@@ -50,44 +50,44 @@
                         SemanticProperties.Hint="Mostra só o componente, sem a interface ao redor" />
             </Grid>
 
-            <!-- Seletor de nível: trilho segmentado, o selecionado vira superfície com linha fina -->
+            <!--
+              Seletor de nível: trilho segmentado com uma pílula só, que desliza até o nível escolhido
+              (SlidingIndicator no code-behind). O peso do texto não muda na seleção, para a largura
+              do item ficar estável e a pílula não tremer.
+            -->
             <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                 <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0"
                         StrokeShape="RoundRectangle 24" Padding="4" HorizontalOptions="Start">
-                    <HorizontalStackLayout Spacing="4" BindableLayout.ItemsSource="{Binding Variants}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="vm:VariantOption">
-                                <Border Padding="16,0" HeightRequest="40" StrokeShape="RoundRectangle 20"
-                                        motion:Motion.Press="True"
-                                        StrokeThickness="1" Stroke="Transparent" BackgroundColor="Transparent"
-                                        SemanticProperties.Description="{Binding Title, StringFormat='Nível {0}'}">
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SelectVariantCommand, Source={RelativeSource AncestorType={x:Type vm:ComponentDetailViewModel}}, x:DataType=vm:ComponentDetailViewModel}"
-                                                              CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-                                    <Border.Triggers>
-                                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
-                                            <Setter Property="Stroke" Value="{DynamicResource Hairline}" />
-                                        </DataTrigger>
-                                    </Border.Triggers>
-                                    <HorizontalStackLayout Spacing="8">
+                    <Grid>
+                        <Border x:Name="TierPill" HeightRequest="40" WidthRequest="0" StrokeShape="RoundRectangle 20"
+                                StrokeThickness="1" Stroke="{DynamicResource Hairline}"
+                                BackgroundColor="{DynamicResource Surface}" />
+                        <HorizontalStackLayout x:Name="TierRow" Spacing="4" BindableLayout.ItemsSource="{Binding Variants}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:VariantOption">
+                                    <HorizontalStackLayout Padding="16,0" HeightRequest="40" Spacing="8"
+                                                           BackgroundColor="Transparent"
+                                                           motion:Motion.Press="True"
+                                                           SemanticProperties.Description="{Binding Title, StringFormat='Nível {0}'}">
+                                        <HorizontalStackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectVariantCommand, Source={RelativeSource AncestorType={x:Type vm:ComponentDetailViewModel}}, x:DataType=vm:ComponentDetailViewModel}"
+                                                                  CommandParameter="{Binding .}" />
+                                        </HorizontalStackLayout.GestureRecognizers>
                                         <Ellipse WidthRequest="7" HeightRequest="7" VerticalOptions="Center"
                                                  Fill="{Binding Origin, Converter={StaticResource OriginBrush}}" />
                                         <Label Text="{Binding Title}" FontFamily="{StaticResource FontMedium}" FontSize="14"
-                                               VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
+                                               VerticalOptions="Center" TextColor="{DynamicResource InkTertiary}">
                                             <Label.Triggers>
                                                 <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
                                                     <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-                                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
                                                 </DataTrigger>
                                             </Label.Triggers>
                                         </Label>
                                     </HorizontalStackLayout>
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+                    </Grid>
                 </Border>
             </ScrollView>
 

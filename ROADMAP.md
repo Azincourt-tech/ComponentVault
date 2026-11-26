@@ -77,7 +77,7 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 
 - [x] ~~Barra de navegação flutuante de vidro~~ (`NavDock`).
 - [x] ~~Abas do detalhe com indicador deslizante~~ (`SlidingIndicator`, o mesmo da barra flutuante).
-- [ ] **Seletor de nível do detalhe com a pílula deslizante** (hoje a seleção troca de fundo sem movimento).
+- [x] ~~Seletor de nível do detalhe com a pílula deslizante~~ (testado pelo dono no Windows; `SlidingIndicator`, que agora também acompanha itens criados depois, como os de um `BindableLayout`).
 - [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima (celular).
 - [ ] **Transição entre páginas**: o card do catálogo "cresce" até o cabeçalho do detalhe (shared element aproximado com Translation e Scale).
 - [ ] **Entrada em cascata** dos itens do catálogo ao rolar e ao filtrar.
