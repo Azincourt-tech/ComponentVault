@@ -276,6 +276,20 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "emptystate.base",
+                    Title = "Base MAUI",
+                    Tier = VariantTier.Base,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "CollectionView vazia com EmptyView em texto: a frase aparece solta, sem destaque nem saída.",
+                    Highlights =
+                    [
+                        "EmptyView aceita texto ou qualquer View; só texto é o mínimo possível.",
+                        "Não diz por que está vazio nem o que fazer em seguida.",
+                    ],
+                    Snippets = [Xaml("Uso", "emptystate.base")],
+                },
+                new()
+                {
                     Id = "emptystate.styled",
                     Title = "Estilizado",
                     Tier = VariantTier.Styled,
@@ -289,6 +303,26 @@ internal static partial class ComponentCatalog
                         "Versão em linha para listas que não podem ocupar a tela.",
                     ],
                     Snippets = [Xaml("Uso", "emptystate.styled")],
+                },
+                new()
+                {
+                    Id = "emptystate.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Busca sem resultado com ilustração animada desenhada em código e sugestões de busca em chips.",
+                    Highlights =
+                    [
+                        "Ilustração em Microsoft.Maui.Graphics, sem imagem: cores da paleta, acompanha o tema.",
+                        "Movimento lento (ciclo de 5s): dá vida sem competir com o texto.",
+                        "Sugestões em chips dizem o que tentar; tocar troca o termo buscado.",
+                        "Uma ação só (Limpar filtros), e o conteúdo entra em sequência.",
+                    ],
+                    Snippets =
+                    [
+                        Xaml("Uso", "emptystate.custom"),
+                        CSharp("Ilustração (SearchIllustration.cs)", "control.searchillustration"),
+                    ],
                 },
             ],
         },

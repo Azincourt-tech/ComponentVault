@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:empty="clr-namespace:ComponentVault.Lib.Showcase.EmptyStates"
+             x:Class="ComponentVault.Lib.Showcase.EmptyStates.EmptyStateBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="CollectionView com EmptyView em texto" />
+            <!-- snippet:emptystate.base -->
+            <CollectionView ItemsSource="{x:Static empty:EmptyStateBasePreview.NoItems}"
+                            EmptyView="Nenhum componente encontrado."
+                            HeightRequest="140" />
+            <!-- /snippet:emptystate.base -->
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O EmptyView aceita um texto ou qualquer View. Só com texto, o MAUI mostra a frase solta no meio da lista, sem destaque, sem explicar o porquê e sem uma saída: a pessoa fica sem saber o que fazer." />
+
+    </VerticalStackLayout>
+
+</ContentView>

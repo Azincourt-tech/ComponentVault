@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:empty="clr-namespace:ComponentVault.Lib.Showcase.EmptyStates"
+             xmlns:motion="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.EmptyStates.EmptyStateCustomPreview"
+             x:DataType="empty:EmptyStateCustomPreview">
+
+    <!-- snippet:emptystate.custom -->
+    <!--
+      Busca sem resultado que ajuda a seguir: ilustração viva, o termo buscado no título,
+      sugestões em chips (tocar refaz a busca) e uma ação só. O conteúdo entra em sequência.
+    -->
+    <VerticalStackLayout Spacing="14" HorizontalOptions="Center" MaximumWidthRequest="420" Padding="0,8">
+
+        <empty:SearchIllustration HorizontalOptions="Center" motion:Motion.Entrance="True" />
+
+        <Label Style="{StaticResource CardTitle}" FontSize="18" HorizontalTextAlignment="Center"
+               Text="{Binding Title}"
+               motion:Motion.Entrance="True" motion:Motion.Delay="80" />
+        <Label Style="{StaticResource BodySmall}" HorizontalTextAlignment="Center"
+               Text="Talvez esteja com outro nome. Tente uma destas buscas:"
+               motion:Motion.Entrance="True" motion:Motion.Delay="140" />
+
+        <FlexLayout Wrap="Wrap" JustifyContent="Center" BindableLayout.ItemsSource="{Binding Suggestions}"
+                    motion:Motion.Entrance="True" motion:Motion.Delay="200">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <!-- Espaço com Padding no contêiner: o FlexLayout não conta Margin ao medir e cortaria os chips. -->
+                    <Grid Padding="4">
+                    <Border Padding="14,0" HeightRequest="34" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 17" Stroke="{DynamicResource HairlineStrong}"
+                            BackgroundColor="{DynamicResource Surface}" motion:Motion.Press="True"
+                            SemanticProperties.Description="{Binding ., StringFormat='Buscar {0}'}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSuggestionTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding .}" FontFamily="{StaticResource FontMedium}" FontSize="14"
+                               TextColor="{DynamicResource Ink}" VerticalOptions="Center" />
+                    </Border>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+        <Button Text="Limpar filtros" Style="{StaticResource PrimaryButton}" HorizontalOptions="Center" Margin="0,6,0,0"
+                Clicked="OnClearClicked"
+                motion:Motion.Entrance="True" motion:Motion.Delay="260" />
+    </VerticalStackLayout>
+    <!-- /snippet:emptystate.custom -->
+
+</ContentView>
