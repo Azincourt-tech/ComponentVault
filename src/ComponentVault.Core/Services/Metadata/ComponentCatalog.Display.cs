@@ -75,6 +75,22 @@ internal static partial class ComponentCatalog
                 Base("avatar.base", "Border circular com Label, cores fixas."),
                 new()
                 {
+                    Id = "avatar.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Estilos por tamanho, tons da paleta por pessoa, grupo sobreposto e ponto de status.",
+                    Highlights =
+                    [
+                        "Três tamanhos (32, 40 e 56 px) com a fonte já proporcional.",
+                        "Grupo sobreposto com anel da cor do card e o restante resumido em \"+3\".",
+                        "Ponto de status com borda, legível sobre qualquer tom.",
+                        "Só tokens: troca de tema sem tocar em cor.",
+                    ],
+                    Snippets = [Xaml("Uso", "avatar.styled")],
+                },
+                new()
+                {
                     Id = "avatar.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,
@@ -131,6 +147,22 @@ internal static partial class ComponentCatalog
             Variants =
             [
                 Base("icons.base", "FontImageSource com glifos Unicode da fonte do sistema."),
+                new()
+                {
+                    Id = "icons.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Os mesmos glifos Unicode com escala fixa, cor da paleta e contêineres por estado.",
+                    Highlights =
+                    [
+                        "Escala de 16, 20, 24 e 32 px, sempre na cor da tinta.",
+                        "Contêiner de 40 px com o par fundo/ícone de cada estado.",
+                        "Ícone e rótulo centralizados na mesma linha.",
+                        "Mostra o limite do Unicode: conjunto pequeno e desenho que varia por plataforma.",
+                    ],
+                    Snippets = [Xaml("Uso", "icons.styled")],
+                },
                 new()
                 {
                     Id = "icons.custom",

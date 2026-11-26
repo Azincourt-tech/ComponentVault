@@ -82,3 +82,9 @@ public partial class IconsCustomPreview : ContentView
         SemanticProperties.SetDescription(icon, action);
     }
 }
+
+[ShowcasePreview("icons.styled")]
+public partial class IconsStyledPreview : ContentView
+{
+    public IconsStyledPreview() => InitializeComponent();
+}

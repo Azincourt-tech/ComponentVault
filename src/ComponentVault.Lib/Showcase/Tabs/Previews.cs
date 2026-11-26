@@ -75,3 +75,17 @@ public partial class TabsUraniumPreview : ContentView
 {
     public TabsUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("tabs.styled")]
+public partial class TabsStyledPreview : ContentView
+{
+    public TabsStyledPreview() => InitializeComponent();
+
+    private void OnTabChanged(object? sender, CheckedChangedEventArgs e)
+    {
+        if (!e.Value || OverviewPanel is null) return;
+        OverviewPanel.IsVisible = sender == OverviewTab;
+        ActivityPanel.IsVisible = sender == ActivityTab;
+        MembersPanel.IsVisible = sender == MembersTab;
+    }
+}

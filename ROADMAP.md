@@ -74,8 +74,8 @@ Componentes que ainda têm um nível só:
 | ~~Chips~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`RadioButton` e `CheckBox` crus) e Custom (`ChoiceChipGroup` com pílula deslizante e `FilterChip` com check animado). O `SlidingIndicator` foi para a Lib e é usado pelo app e pelo preview. Falta testar com clique. |
 | ~~Empty state~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`CollectionView` com `EmptyView` em texto) e Custom (`SearchIllustration` em Microsoft.Maui.Graphics, com cartões flutuando e lupa passeando, mais sugestões de busca em chips). Testado pelo dono no Windows. |
 | ~~Glass~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`Border` translúcido sem cena, um cinza lavado) e Estilizado (cards do design system só com tokens: sólidos no Claro e no Escuro, vidro no tema Vidro). Conferido por captura nos 3 temas. |
-| Código OTP | Custom | Base (Entry por dígito, para comparar) |
-| Rating | Custom | Base (botões), Biblioteca |
+| ~~Código OTP~~ | Base, Custom, Biblioteca | Feito em 28/11/2026: Base com um `Entry` por dígito e avanço de foco, mostrando o que falha (colar, apagar, leitor de tela). |
+| ~~Rating~~ | Base, Custom, Biblioteca | Feito em 28/11/2026: Base com cinco `Button` de estrela em texto e Biblioteca com o `RatingView` do CommunityToolkit.Maui (já no projeto), com estrela, coração e média só para leitura. |
 | ~~Skeleton~~ | Custom, Biblioteca | Feito em 27/11/2026: Biblioteca com o `SfShimmer` do Syncfusion Toolkit (modelo pronto e esqueleto do item real). |
 
 ### Uma aba por biblioteca e um Custom onde couber
@@ -100,29 +100,32 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 
 | Componente | Base | Estilizado | Custom | Bibliotecas |
 |---|---|---|---|---|
-| Avatar | ✓ | | ✓ anel de stories e status | ✓ Toolkit |
+| Avatar | ✓ | ✓ | ✓ anel de stories e status | ✓ Toolkit |
 | Button | ✓ | ✓ | ✓ segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
 | Card | ✓ | ✓ | ✓ card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, ✓ Syncfusion `SfAccordion` |
 | Carousel | ✓ | ✓ | ✓ pilha de cartões | ✓ Syncfusion `SfCarousel` |
-| Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
+| Chart | | ✓ | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
 | CheckBox | ✓ | ✓ | ✓ check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
 | DatePicker | ✓ | ✓ | ✓ faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
 | Editor | ✓ | ✓ | ✓ Markdown com prévia | |
 | Entry | ✓ | ✓ | ✓ rótulo flutuante | ✓ UraniumUI, ✓ Syncfusion `SfTextInputLayout` |
-| Icons | ✓ | | ✓ ícone animado | ✓ MauiIcons |
+| Icons | ✓ | ✓ | ✓ ícone animado | ✓ MauiIcons |
 | List | ✓ | ✓ | ✓ linhas com deslizar desenhado | ✓ Syncfusion `SfPullToRefresh` |
-| Código OTP | **+** | | ✓ | ✓ Syncfusion `SfOtpInput` |
+| Código OTP | ✓ | | ✓ | ✓ Syncfusion `SfOtpInput` |
 | Picker | ✓ | ✓ | ✓ roda (wheel) | ✓ UraniumUI, ✓ Syncfusion `SfPicker` |
-| Popup | ✓ | | ✓ folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
+| Popup | ✓ | ✓ | ✓ folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
 | Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
 | Radio | ✓ | ✓ | ✓ opções desenhadas | ✓ UraniumUI |
+| Rating | ✓ | | ✓ | ✓ Toolkit `RatingView` |
 | SearchBar | ✓ | ✓ | ✓ busca com sugestões | ✓ UraniumUI `AutoCompleteTextField` |
-| Segmented | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
+| Segmented | | ✓ | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
 | Skeleton | | | ✓ | ✓ Syncfusion `SfShimmer` |
 | Stepper | ✓ | ✓ | ✓ contador que rola | ✓ Syncfusion `SfNumericUpDown` |
-| Tabs | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, ✓ UraniumUI `TabView` |
-| Toast | | | ✓ | ✓ Toolkit |
+| Tabs | | ✓ | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, ✓ UraniumUI `TabView` |
+| Toast | | ✓ | ✓ | ✓ Toolkit |
+
+Lacunas que ficam de propósito: Chart, Segmented, Skeleton, Tabs e Toast não têm Base porque o MAUI não tem esses controles (o Estilizado já mostra a montagem com controles nativos). O Skeleton não tem Estilizado porque o Custom já é feito só com `Border` e pulso de opacidade. Rating e OTP não têm Estilizado: o Base mostra o limite, e o Custom resolve.
 
 Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBottomSheet`), Navigation drawer (`SfNavigationDrawer`), Pull to refresh e Accordion.
 

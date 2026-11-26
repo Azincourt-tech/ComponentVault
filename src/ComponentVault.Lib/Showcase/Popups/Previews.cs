@@ -122,3 +122,31 @@ public partial class PopupCustomPreview : ContentView
         ShareSheet.Close();
     }
 }
+
+[ShowcasePreview("popup.styled")]
+public partial class PopupStyledPreview : ContentView
+{
+    public PopupStyledPreview() => InitializeComponent();
+
+    private async void OnOpenClicked(object? sender, EventArgs e)
+    {
+        Scrim.IsVisible = Dialog.IsVisible = true;
+        Dialog.Scale = 0.96;
+        await Task.WhenAll(
+            Scrim.FadeToAsync(0.45, 180),
+            Dialog.FadeToAsync(1, 180),
+            Dialog.ScaleToAsync(1, 220, Easing.CubicOut));
+        SemanticScreenReader.Announce("Excluir o projeto Atlas?");
+    }
+
+    private void OnCancelClicked(object? sender, EventArgs e) => Close("Nada foi excluído.");
+
+    private void OnConfirmClicked(object? sender, EventArgs e) => Close("Projeto na lixeira por 30 dias.");
+
+    private async void Close(string result)
+    {
+        ResultLabel.Text = result;
+        await Task.WhenAll(Scrim.FadeToAsync(0, 140), Dialog.FadeToAsync(0, 140), Dialog.ScaleToAsync(0.96, 140));
+        Scrim.IsVisible = Dialog.IsVisible = false;
+    }
+}

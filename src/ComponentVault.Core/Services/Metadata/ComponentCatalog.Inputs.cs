@@ -328,6 +328,10 @@ internal static partial class ComponentCatalog
             },
             Variants =
             [
+                Base("otp.base", "Seis Entries de um dígito com avanço de foco.",
+                    "Colar o código inteiro só preenche a primeira caixa.",
+                    "Apagar não volta para a caixa anterior.",
+                    "O leitor de tela anuncia seis campos soltos."),
                 new()
                 {
                     Id = "otp.custom",

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Icons.IconsStyledPreview">
+
+    <ContentView.Resources>
+        <!-- Glifo: cor da paleta e a fonte que tem o símbolo no Windows. -->
+        <Style x:Key="Glyph" TargetType="Label">
+            <Setter Property="FontFamily" Value="{OnPlatform WinUI='Segoe UI Symbol'}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <!-- Contêiner de 40 px: área de toque maior que o glifo e tom da paleta atrás. -->
+        <Style x:Key="IconTile" TargetType="Border">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:icons.styled -->
+        <VerticalStackLayout Spacing="24">
+
+            <!-- Escala fixa de tamanhos (16, 20, 24, 32), sempre na cor da tinta. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Escala" />
+                <HorizontalStackLayout Spacing="20">
+                    <Label Style="{StaticResource Glyph}" FontSize="16" Text="★" />
+                    <Label Style="{StaticResource Glyph}" FontSize="20" Text="★" />
+                    <Label Style="{StaticResource Glyph}" FontSize="24" Text="★" />
+                    <Label Style="{StaticResource Glyph}" FontSize="32" Text="★" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Em contêiner com tom: cada estado tem o seu par fundo/ícone. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Em contêiner" />
+                <HorizontalStackLayout Spacing="12">
+                    <Border Style="{StaticResource IconTile}" SemanticProperties.Description="Favorito">
+                        <Label Style="{StaticResource Glyph}" TextColor="{DynamicResource AccentText}" Text="★" />
+                    </Border>
+                    <Border Style="{StaticResource IconTile}" BackgroundColor="{DynamicResource SuccessTint}" SemanticProperties.Description="Concluído">
+                        <Label Style="{StaticResource Glyph}" TextColor="{DynamicResource SuccessText}" Text="✓" />
+                    </Border>
+                    <Border Style="{StaticResource IconTile}" BackgroundColor="{DynamicResource WarningTint}" SemanticProperties.Description="Atenção">
+                        <Label Style="{StaticResource Glyph}" TextColor="{DynamicResource WarningText}" Text="⚠" />
+                    </Border>
+                    <Border Style="{StaticResource IconTile}" BackgroundColor="{DynamicResource DangerTint}" SemanticProperties.Description="Erro">
+                        <Label Style="{StaticResource Glyph}" TextColor="{DynamicResource DangerText}" Text="✕" />
+                    </Border>
+                    <Border Style="{StaticResource IconTile}" BackgroundColor="{DynamicResource SurfaceAlt}" SemanticProperties.Description="Configurações">
+                        <Label Style="{StaticResource Glyph}" TextColor="{DynamicResource InkSecondary}" Text="⚙" />
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Ícone com texto: alinhados ao centro da linha, com 10 px entre os dois. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Com rótulo" />
+                <HorizontalStackLayout Spacing="20">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Glyph}" FontSize="18" TextColor="{DynamicResource InkSecondary}" Text="✉" />
+                        <Label Style="{StaticResource Body}" LineHeight="1" VerticalOptions="Center" Text="Mensagens" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Glyph}" FontSize="18" TextColor="{DynamicResource InkSecondary}" Text="⌂" />
+                        <Label Style="{StaticResource Body}" LineHeight="1" VerticalOptions="Center" Text="Início" />
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:icons.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Os mesmos glifos Unicode do Base, agora com escala fixa, cor da paleta e contêineres por estado. Melhora muito, mas o conjunto continua pequeno e o desenho varia por plataforma: é por isso que existe a aba MauiIcons." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Ratings.RatingBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Cinco botões com estrela em texto" />
+            <!-- snippet:rating.base -->
+            <HorizontalStackLayout x:Name="Stars" Spacing="4">
+                <Button Text="☆" FontSize="22" Padding="6,0" Clicked="OnStarClicked" />
+                <Button Text="☆" FontSize="22" Padding="6,0" Clicked="OnStarClicked" />
+                <Button Text="☆" FontSize="22" Padding="6,0" Clicked="OnStarClicked" />
+                <Button Text="☆" FontSize="22" Padding="6,0" Clicked="OnStarClicked" />
+                <Button Text="☆" FontSize="22" Padding="6,0" Clicked="OnStarClicked" />
+            </HorizontalStackLayout>
+            <!-- /snippet:rating.base -->
+            <Label x:Name="ValueLabel" Text="Nota: 0 de 5" />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Funciona com toque e teclado, mas cada estrela é um botão inteiro com fundo nativo, o glifo muda de desenho conforme a fonte da plataforma, não há meia estrela e uma média como 4,3 não tem como aparecer." />
+
+    </VerticalStackLayout>
+
+</ContentView>

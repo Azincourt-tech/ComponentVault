@@ -12,7 +12,7 @@
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-03071E)](LICENSE)
 
 ![Componentes](https://img.shields.io/badge/componentes-30-F48C06)
-![Variantes](https://img.shields.io/badge/variantes-107-FAA307)
+![Variantes](https://img.shields.io/badge/variantes-117-FAA307)
 ![Temas](https://img.shields.io/badge/temas-Claro%20%C2%B7%20Escuro%20%C2%B7%20Vidro-FFBA08)
 ![Testes](https://img.shields.io/badge/testes-xUnit%20v3-6A040F)
 
@@ -117,7 +117,7 @@ Só entram libs **100% livres** (MIT ou equivalente, sem cadastro nem chave) e c
 |---|---|---|
 | [Syncfusion Toolkit](https://github.com/syncfusion/maui-toolkit) | MIT | Button, Card, Accordion, Carousel, Chart, Chips, DatePicker, Entry, List, OTP, Picker, Popup, Progress, Segmented, Skeleton, Stepper, Tabs |
 | [UraniumUI](https://github.com/enisn/UraniumUI) | MIT | Button, CheckBox, DatePicker, Entry, Picker, RadioButton, SearchBar, Tabs |
-| [CommunityToolkit.Maui](https://github.com/CommunityToolkit/Maui) | MIT | Avatar, Card (Expander), Popup, Toast |
+| [CommunityToolkit.Maui](https://github.com/CommunityToolkit/Maui) | MIT | Avatar, Card (Expander), Popup, Rating, Toast |
 | [Sharpnado.Tabs](https://github.com/roubachof/Sharpnado.Tabs) | MIT | Tabs, Segmented |
 | [LiveCharts2](https://github.com/beto-rodriguez/LiveCharts2) | MIT | Chart |
 | [Microcharts](https://github.com/microcharts-dotnet/Microcharts) | MIT | Chart (minigráficos) |

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Otp.OtpBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <VerticalStackLayout Spacing="12">
+            <Label Style="{StaticResource FieldLabel}" Text="Um Entry por dígito" />
+            <!-- snippet:otp.base -->
+            <HorizontalStackLayout x:Name="Boxes" Spacing="8">
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+                <Entry WidthRequest="44" MaxLength="1" Keyboard="Numeric" HorizontalTextAlignment="Center" TextChanged="OnDigitChanged" />
+            </HorizontalStackLayout>
+            <!-- /snippet:otp.base -->
+            <Label x:Name="CodeLabel" Text="Código: ______" />
+        </VerticalStackLayout>
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Seis Entries com avanço de foco no TextChanged. Parece pronto, mas colar o código inteiro só preenche a primeira caixa, apagar não volta para a anterior, o leitor de tela anuncia seis campos soltos e no Windows cada caixa aceita letras." />
+
+    </VerticalStackLayout>
+
+</ContentView>

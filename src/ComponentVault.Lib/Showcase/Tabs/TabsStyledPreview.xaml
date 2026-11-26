@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Tabs.TabsStyledPreview">
+
+    <ContentView.Resources>
+        <!-- Aba = RadioButton com outro modelo: texto e um sublinhado de 2 px que acende quando marcado. -->
+        <ControlTemplate x:Key="TabTemplate">
+            <Grid RowDefinitions="*,Auto" RowSpacing="8" Padding="2,8,2,0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="Text" Property="Label.TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter TargetName="Underline" Property="BoxView.Color" Value="{StaticResource Accent}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="Text" Property="Label.TextColor" Value="{DynamicResource InkSecondary}" />
+                                    <Setter TargetName="Underline" Property="BoxView.Color" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Label x:Name="Text" x:DataType="RadioButton" FontFamily="{StaticResource FontSemiBold}" FontSize="15"
+                       Text="{Binding Source={RelativeSource TemplatedParent}, Path=Value}" HorizontalOptions="Center" />
+                <BoxView x:Name="Underline" Grid.Row="1" HeightRequest="2" CornerRadius="1" />
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="Tab" TargetType="RadioButton">
+            <Setter Property="ControlTemplate" Value="{StaticResource TabTemplate}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:tabs.styled -->
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Abas do tamanho do texto, alinhadas à esquerda, com uma linha fina embaixo. -->
+            <HorizontalStackLayout Spacing="24" RadioButtonGroup.GroupName="ProjectTabs">
+                <RadioButton x:Name="OverviewTab" Style="{StaticResource Tab}" Value="Visão geral" IsChecked="True" CheckedChanged="OnTabChanged" />
+                <RadioButton x:Name="ActivityTab" Style="{StaticResource Tab}" Value="Atividade" CheckedChanged="OnTabChanged" />
+                <RadioButton x:Name="MembersTab" Style="{StaticResource Tab}" Value="Membros" CheckedChanged="OnTabChanged" />
+            </HorizontalStackLayout>
+            <BoxView Style="{StaticResource Divider}" />
+
+            <!-- Painéis: só o da aba marcada fica visível. -->
+            <Grid Padding="0,18,0,0">
+                <VerticalStackLayout x:Name="OverviewPanel" Spacing="8">
+                    <Label Style="{StaticResource CardTitle}" Text="Projeto Atlas" />
+                    <Label Style="{StaticResource BodyMuted}" Text="Redesenho do aplicativo de vendas. Entrega da fase 2 prevista para 15 de dezembro." />
+                </VerticalStackLayout>
+                <VerticalStackLayout x:Name="ActivityPanel" Spacing="8" IsVisible="False">
+                    <Label Style="{StaticResource Body}" Text="Ana publicou 3 telas novas" />
+                    <Label Style="{StaticResource BodySmall}" Text="Há 2 horas" />
+                </VerticalStackLayout>
+                <VerticalStackLayout x:Name="MembersPanel" Spacing="8" IsVisible="False">
+                    <Label Style="{StaticResource Body}" Text="Ana Souza, Bruno Lima e Carla Mendes" />
+                    <Label Style="{StaticResource BodySmall}" Text="3 pessoas com acesso de edição" />
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:tabs.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI só tem abas dentro do Shell. Fora dele, RadioButton com ControlTemplate dá a escolha única, o teclado e o leitor de tela; o modelo desenha o texto e o sublinhado na cor de destaque. O sublinhado troca sem deslizar, o que fica para o Custom." />
+
+    </VerticalStackLayout>
+
+</ContentView>

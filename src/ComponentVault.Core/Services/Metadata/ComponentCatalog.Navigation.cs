@@ -31,6 +31,22 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "tabs.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Abas fora do Shell com RadioButton e ControlTemplate: texto e sublinhado na cor de destaque.",
+                    Highlights =
+                    [
+                        "Escolha única, teclado e leitor de tela vêm do grupo de RadioButton.",
+                        "Abas do tamanho do texto, alinhadas à esquerda, sobre uma linha fina.",
+                        "Só o painel da aba marcada fica visível.",
+                        "O sublinhado troca sem deslizar: o deslize é do Custom.",
+                    ],
+                    Snippets = [Xaml("Uso", "tabs.styled")],
+                },
+                new()
+                {
                     Id = "tabs.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,
@@ -119,6 +135,22 @@ internal static partial class ComponentCatalog
             Variants =
             [
                 Base("popup.base", "Alerta, confirmação e lista de ações nativas da página."),
+                new()
+                {
+                    Id = "popup.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Diálogo de confirmação montado com Border e Button, por cima do conteúdo.",
+                    Highlights =
+                    [
+                        "Fundo que escurece e cartão que surge com escala de 0,96 a 1.",
+                        "Ícone e cor de perigo para a ação destrutiva, que fica à direita.",
+                        "O texto diz o que acontece e o que dá para recuperar (30 dias na lixeira).",
+                        "Tocar fora cancela.",
+                    ],
+                    Snippets = [Xaml("Uso", "popup.styled")],
+                },
                 new()
                 {
                     Id = "popup.custom",

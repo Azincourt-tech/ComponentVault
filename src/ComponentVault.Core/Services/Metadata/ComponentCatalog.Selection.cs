@@ -290,6 +290,22 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "segmented.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "RadioButtons com ControlTemplate: o segmento marcado vira uma pílula clara sobre o trilho.",
+                    Highlights =
+                    [
+                        "O grupo de RadioButton cuida da escolha única, do teclado e do leitor de tela.",
+                        "Estados Checked e Unchecked no VisualStateManager do modelo.",
+                        "Colunas iguais ocupando a largura toda.",
+                        "Sem animação de deslize: essa fica para o Custom.",
+                    ],
+                    Snippets = [Xaml("Uso", "segmented.styled")],
+                },
+                new()
+                {
                     Id = "segmented.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,
@@ -349,7 +365,7 @@ internal static partial class ComponentCatalog
             AddedOn = new DateOnly(2026, 11, 24),
             Docs = new ComponentDocs
             {
-                Overview = "Não há controle de avaliação no MAUI. O RatingView desenha as estrelas com PathF e recorta a parte preenchida pela fração do valor, servindo tanto para votar quanto para exibir médias.",
+                Overview = "Não há controle de avaliação no MAUI: o Base improvisa com botões, e o CommunityToolkit.Maui traz um RatingView pronto. O Custom desenha as estrelas com PathF e recorta a parte preenchida pela fração do valor, servindo tanto para votar quanto para exibir médias.",
                 Properties =
                 [
                     new("Value (TwoWay)", "Nota atual; aceita frações na exibição."),
@@ -362,6 +378,9 @@ internal static partial class ComponentCatalog
             },
             Variants =
             [
+                Base("rating.base", "Cinco Buttons com estrela em texto (☆ e ★).",
+                    "Cada estrela é um botão inteiro, com o fundo nativo da plataforma.",
+                    "Sem meia estrela e sem como exibir uma média fracionada."),
                 new()
                 {
                     Id = "rating.custom",
@@ -376,6 +395,23 @@ internal static partial class ComponentCatalog
                         "Médias fracionadas (4,3) aparecem exatas, não arredondadas.",
                     ],
                     Snippets = [Xaml("Uso", "rating.custom"), CSharp("Controle (RatingView.cs)", "control.rating")],
+                },
+                new()
+                {
+                    Id = "rating.toolkit",
+                    Title = "Toolkit RatingView",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "CommunityToolkit.Maui",
+                    Summary = "RatingView do CommunityToolkit.Maui com estrela, coração e média só para leitura.",
+                    Highlights =
+                    [
+                        "Formas prontas (estrela, coração, círculo, like) ou um Path próprio.",
+                        "Cores de preenchimento, vazio e contorno ligadas aos tokens do tema.",
+                        "Nota fracionada para leitura; ao tocar, a nota é sempre inteira.",
+                        "Evento RatingChanged para mostrar o significado da nota em texto.",
+                    ],
+                    Snippets = [Xaml("Uso", "rating.toolkit")],
                 },
             ],
         },

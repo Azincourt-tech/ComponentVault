@@ -31,6 +31,22 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "chart.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Barras feitas com Border numa grade de 7 colunas, com linha de meta e barra selecionada.",
+                    Highlights =
+                    [
+                        "Altura proporcional ao valor, recalculada quando o gráfico muda de largura.",
+                        "Tocar numa barra a destaca e mostra o valor no título.",
+                        "Linha da meta na altura proporcional, por trás das barras.",
+                        "Bom para poucos pontos; com eixos e zoom, use uma biblioteca.",
+                    ],
+                    Snippets = [Xaml("Uso", "chart.styled")],
+                },
+                new()
+                {
                     Id = "chart.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,

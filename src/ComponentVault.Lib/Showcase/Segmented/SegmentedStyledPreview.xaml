@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Segmented.SegmentedStyledPreview">
+
+    <ContentView.Resources>
+        <!--
+          O RadioButton com outro ControlTemplate vira segmento: o grupo garante a escolha única, o
+          teclado e o leitor de tela; o modelo só muda o visual de marcado e desmarcado.
+        -->
+        <ControlTemplate x:Key="SegmentTemplate">
+            <Border x:Name="Segment" StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="38"
+                    BackgroundColor="Transparent">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceRaised}" />
+                                    <Setter Property="StrokeThickness" Value="1" />
+                                    <Setter Property="Stroke" Value="{DynamicResource Hairline}" />
+                                    <Setter TargetName="Text" Property="Label.TextColor" Value="{DynamicResource Ink}" />
+                                    <Setter TargetName="Text" Property="Label.FontFamily" Value="{StaticResource FontSemiBold}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter Property="StrokeThickness" Value="0" />
+                                    <Setter TargetName="Text" Property="Label.TextColor" Value="{DynamicResource InkSecondary}" />
+                                    <Setter TargetName="Text" Property="Label.FontFamily" Value="{StaticResource FontMedium}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Label x:Name="Text" x:DataType="RadioButton" FontSize="14"
+                       Text="{Binding Source={RelativeSource TemplatedParent}, Path=Value}"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="Segment" TargetType="RadioButton">
+            <Setter Property="ControlTemplate" Value="{StaticResource SegmentTemplate}" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:segmented.styled -->
+        <VerticalStackLayout Spacing="14">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Período" />
+
+            <!-- Trilho neutro com três RadioButtons do mesmo grupo, em colunas iguais. -->
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 13" Padding="4"
+                    BackgroundColor="{DynamicResource SurfaceAlt}">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4"
+                      RadioButtonGroup.GroupName="Period">
+                    <RadioButton Style="{StaticResource Segment}" Value="Dia" CheckedChanged="OnPeriodChanged" />
+                    <RadioButton Grid.Column="1" Style="{StaticResource Segment}" Value="Semana" IsChecked="True" CheckedChanged="OnPeriodChanged" />
+                    <RadioButton Grid.Column="2" Style="{StaticResource Segment}" Value="Mês" CheckedChanged="OnPeriodChanged" />
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Spacing="2">
+                    <Label Style="{StaticResource Caption}" Text="Visitas ao catálogo" />
+                    <Label x:Name="MetricLabel" Style="{StaticResource PageTitle}" />
+                </VerticalStackLayout>
+                <Label x:Name="DeltaLabel" Grid.Column="1" Style="{StaticResource BodySmall}" VerticalOptions="End" />
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:segmented.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="RadioButton com ControlTemplate: o grupo cuida da escolha única, do teclado e do leitor de tela, e o modelo desenha o segmento marcado como uma pílula clara sobre o trilho. Sem animação de deslize, que fica para o Custom." />
+
+    </VerticalStackLayout>
+
+</ContentView>

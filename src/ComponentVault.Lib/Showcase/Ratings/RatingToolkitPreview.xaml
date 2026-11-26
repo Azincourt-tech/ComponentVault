@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Ratings.RatingToolkitPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:rating.toolkit -->
+        <VerticalStackLayout Spacing="28">
+
+            <!-- Estrelas interativas com as cores do design system. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Avalie a entrega" />
+                <toolkit:RatingView Rating="4"
+                                    MaximumRating="5"
+                                    Shape="Star"
+                                    ShapeDiameter="32"
+                                    Spacing="6"
+                                    FillColor="{StaticResource Accent}"
+                                    EmptyShapeColor="{DynamicResource SurfaceAlt}"
+                                    ShapeBorderColor="{DynamicResource HairlineStrong}"
+                                    ShapeBorderThickness="1"
+                                    RatingChanged="OnRatingChanged" />
+                <Label x:Name="MeaningLabel" Style="{StaticResource BodySmall}" Text="Muito bom" />
+            </VerticalStackLayout>
+
+            <!-- Outras formas prontas: coração para favoritos e nota fracionada só para leitura. -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="Coração" />
+                    <toolkit:RatingView Rating="3" Shape="Heart" ShapeDiameter="24" Spacing="4"
+                                        FillColor="{StaticResource Danger}"
+                                        EmptyShapeColor="{DynamicResource SurfaceAlt}"
+                                        ShapeBorderColor="{DynamicResource HairlineStrong}" ShapeBorderThickness="1" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="Média (só leitura)" />
+                    <HorizontalStackLayout Spacing="8">
+                        <toolkit:RatingView Rating="4.3" IsReadOnly="True" Shape="Star" ShapeDiameter="18" Spacing="2"
+                                            FillColor="{StaticResource Accent}"
+                                            EmptyShapeColor="{DynamicResource SurfaceAlt}"
+                                            ShapeBorderColor="{DynamicResource HairlineStrong}" ShapeBorderThickness="1"
+                                            VerticalOptions="Center" />
+                        <Label Style="{StaticResource Body}" LineHeight="1" FontFamily="{StaticResource FontSemiBold}"
+                               Text="4,3" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:rating.toolkit -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="RatingView do CommunityToolkit.Maui: estrela, coração, círculo, like ou um Path próprio, nota fracionada só para leitura e o evento RatingChanged. As cores vêm dos tokens. Tocar sempre dá nota inteira: não há meia estrela." />
+
+    </VerticalStackLayout>
+
+</ContentView>

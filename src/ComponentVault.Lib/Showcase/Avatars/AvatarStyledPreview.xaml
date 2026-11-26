@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Avatars.AvatarStyledPreview">
+
+    <ContentView.Resources>
+        <!-- Três tamanhos com raio e fonte já casados: ninguém recalcula à mão. -->
+        <Style x:Key="AvatarSmall" TargetType="Border">
+            <Setter Property="WidthRequest" Value="32" />
+            <Setter Property="HeightRequest" Value="32" />
+            <Setter Property="StrokeShape" Value="Ellipse" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+        </Style>
+        <Style x:Key="AvatarMedium" TargetType="Border" BasedOn="{StaticResource AvatarSmall}">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+        </Style>
+        <Style x:Key="AvatarLarge" TargetType="Border" BasedOn="{StaticResource AvatarSmall}">
+            <Setter Property="WidthRequest" Value="56" />
+            <Setter Property="HeightRequest" Value="56" />
+        </Style>
+        <!-- No grupo, um anel da cor do card separa cada rosto do vizinho. -->
+        <Style x:Key="AvatarStacked" TargetType="Border" BasedOn="{StaticResource AvatarMedium}">
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stroke" Value="{DynamicResource Surface}" />
+        </Style>
+        <Style x:Key="Initials" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{DynamicResource AccentText}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:avatar.styled -->
+        <VerticalStackLayout Spacing="24">
+
+            <!-- Escala: 32, 40 e 56 px, com a fonte proporcional. -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Tamanhos" />
+                <HorizontalStackLayout Spacing="14">
+                    <Border Style="{StaticResource AvatarSmall}" VerticalOptions="Center">
+                        <Label Style="{StaticResource Initials}" FontSize="12" Text="AS" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarMedium}" VerticalOptions="Center">
+                        <Label Style="{StaticResource Initials}" Text="AS" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarLarge}" VerticalOptions="Center">
+                        <Label Style="{StaticResource Initials}" FontSize="19" Text="AS" />
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Grupo sobreposto, com o restante resumido em "+3". -->
+            <VerticalStackLayout Spacing="10">
+                <Label Style="{StaticResource FieldLabel}" Text="Time do projeto" />
+                <HorizontalStackLayout Spacing="-10" SemanticProperties.Description="Ana, Bruno, Carla, Diego e mais 3 pessoas">
+                    <Border Style="{StaticResource AvatarStacked}">
+                        <Label Style="{StaticResource Initials}" Text="AS" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarStacked}" BackgroundColor="{DynamicResource SuccessTint}">
+                        <Label Style="{StaticResource Initials}" TextColor="{DynamicResource SuccessText}" Text="BL" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarStacked}" BackgroundColor="{DynamicResource WarningTint}">
+                        <Label Style="{StaticResource Initials}" TextColor="{DynamicResource WarningText}" Text="CM" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarStacked}" BackgroundColor="{DynamicResource InfoTint}">
+                        <Label Style="{StaticResource Initials}" TextColor="{DynamicResource Ink}" Text="DR" />
+                    </Border>
+                    <Border Style="{StaticResource AvatarStacked}" BackgroundColor="{DynamicResource SurfaceAlt}">
+                        <Label Style="{StaticResource Initials}" TextColor="{DynamicResource InkSecondary}" FontSize="13" Text="+3" />
+                    </Border>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Na linha de lista: status no canto, nome e função ao lado. -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Grid WidthRequest="44" HeightRequest="44" VerticalOptions="Center">
+                    <Border Style="{StaticResource AvatarMedium}" HorizontalOptions="Start" VerticalOptions="Start">
+                        <Label Style="{StaticResource Initials}" Text="WA" />
+                    </Border>
+                    <Border WidthRequest="14" HeightRequest="14" StrokeShape="Ellipse" StrokeThickness="2"
+                            Stroke="{DynamicResource Surface}" BackgroundColor="{StaticResource Success}"
+                            HorizontalOptions="End" VerticalOptions="End" Margin="0,0,2,2"
+                            SemanticProperties.Description="Online" />
+                </Grid>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Style="{StaticResource Body}" LineHeight="1" FontFamily="{StaticResource FontMedium}" Text="Wagner Alves" />
+                    <Label Style="{StaticResource BodySmall}" Text="Design system · online agora" />
+                </VerticalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:avatar.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O mesmo Border com Label do Base, agora com estilos por tamanho, tons da paleta por pessoa, anel para empilhar e ponto de status. Tudo em tokens: troca de tema sem tocar em cor nenhuma." />
+
+    </VerticalStackLayout>
+
+</ContentView>

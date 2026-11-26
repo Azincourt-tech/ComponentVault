@@ -50,3 +50,21 @@ public partial class OtpSyncfusionPreview : ContentView
         SmsHint.SetThemeColor(Label.TextColorProperty, complete ? "SuccessText" : "InkTertiary");
     }
 }
+
+[ShowcasePreview("otp.base")]
+public partial class OtpBasePreview : ContentView
+{
+    public OtpBasePreview() => InitializeComponent();
+
+    // O mínimo para ser usável: ao digitar, o foco vai para a próxima caixa.
+    private void OnDigitChanged(object? sender, TextChangedEventArgs e)
+    {
+        var boxes = Boxes.Children.OfType<Entry>().ToList();
+        if (sender is Entry entry && !string.IsNullOrEmpty(e.NewTextValue))
+        {
+            var next = boxes.IndexOf(entry) + 1;
+            if (next < boxes.Count) boxes[next].Focus();
+        }
+        CodeLabel.Text = "Código: " + string.Concat(boxes.Select(b => string.IsNullOrEmpty(b.Text) ? "_" : b.Text));
+    }
+}

@@ -105,3 +105,36 @@ public partial class ToastToolkitPreview : ContentView
     }
     // /snippet:toast.toolkit
 }
+
+[ShowcasePreview("toast.styled")]
+public partial class ToastStyledPreview : ContentView
+{
+    private CancellationTokenSource? _hide;
+
+    public ToastStyledPreview() => InitializeComponent();
+
+    private void OnSaveClicked(object? sender, EventArgs e) => Show("Preferências salvas");
+
+    private void OnUndoClicked(object? sender, EventArgs e) => Show("Alteração desfeita", undo: false);
+
+    // Um aviso por vez: mostrar de novo reinicia os 3 segundos em vez de empilhar.
+    private async void Show(string text, bool undo = true)
+    {
+        _hide?.Cancel();
+        var token = (_hide = new CancellationTokenSource()).Token;
+        ToastLabel.Text = text;
+        UndoButton.IsVisible = undo;
+        if (!Toast.IsVisible)
+        {
+            Toast.TranslationY = 16;
+            Toast.IsVisible = true;
+            await Task.WhenAll(Toast.FadeToAsync(1, 180), Toast.TranslateToAsync(0, 0, 220, Easing.CubicOut));
+        }
+        SemanticScreenReader.Announce(text);
+
+        try { await Task.Delay(3000, token); }
+        catch (TaskCanceledException) { return; }
+        await Task.WhenAll(Toast.FadeToAsync(0, 160), Toast.TranslateToAsync(0, 16, 160, Easing.CubicIn));
+        Toast.IsVisible = false;
+    }
+}

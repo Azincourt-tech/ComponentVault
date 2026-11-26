@@ -39,3 +39,29 @@ public partial class SegmentedSyncfusionPreview : ContentView
         if (index >= 0 && index < Periods.Length) PeriodLabel.Text = $"Mostrando {Periods[index]}.";
     }
 }
+
+[ShowcasePreview("segmented.styled")]
+public partial class SegmentedStyledPreview : ContentView
+{
+    public SegmentedStyledPreview()
+    {
+        InitializeComponent();
+        Show("Semana");
+    }
+
+    private void OnPeriodChanged(object? sender, CheckedChangedEventArgs e)
+    {
+        if (e.Value && sender is RadioButton { Value: string period }) Show(period);
+    }
+
+    private void Show(string period)
+    {
+        if (MetricLabel is null) return;
+        (MetricLabel.Text, DeltaLabel.Text) = period switch
+        {
+            "Dia" => ("312", "+4% vs. ontem"),
+            "Mês" => ("8.940", "+21% vs. outubro"),
+            _ => ("2.176", "+12% vs. semana anterior"),
+        };
+    }
+}

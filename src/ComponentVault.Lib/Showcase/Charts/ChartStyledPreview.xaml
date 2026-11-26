@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ComponentVault.Lib.Showcase.Charts.ChartStyledPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:chart.styled -->
+        <!--
+          Gráfico de barras sem lib: cada barra é um Border com altura proporcional ao valor
+          (calculada no código), numa grade de 7 colunas que ocupa a largura toda.
+        -->
+        <VerticalStackLayout Spacing="14">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Spacing="2">
+                    <Label Style="{StaticResource FieldLabel}" Text="Cópias de código por dia" />
+                    <Label x:Name="SelectedLabel" Style="{StaticResource PageTitle}" />
+                </VerticalStackLayout>
+                <Label Grid.Column="1" Style="{StaticResource Caption}" Text="Meta: 120/dia" VerticalOptions="End" />
+            </Grid>
+
+            <!-- Barras e a linha da meta na mesma célula: a linha fica na altura proporcional à meta. -->
+            <Grid HeightRequest="160">
+                <Grid x:Name="Bars" ColumnSpacing="10" />
+                <BoxView x:Name="GoalLine" HeightRequest="1" VerticalOptions="End" Color="{DynamicResource HairlineStrong}"
+                         InputTransparent="True" />
+            </Grid>
+            <Grid x:Name="Days" ColumnSpacing="10" />
+
+        </VerticalStackLayout>
+        <!-- /snippet:chart.styled -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Só Border e Label: a barra tocada ganha a cor de destaque e o valor aparece no título; as outras ficam no tom suave. Serve para poucos pontos. Com eixos, zoom ou muitas séries, use uma das bibliotecas." />
+
+    </VerticalStackLayout>
+
+</ContentView>

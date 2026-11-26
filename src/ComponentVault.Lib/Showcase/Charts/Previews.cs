@@ -243,3 +243,56 @@ public partial class ChartMicrochartsPreview : ContentView
         };
     }
 }
+
+[ShowcasePreview("chart.styled")]
+public partial class ChartStyledPreview : ContentView
+{
+    private static readonly (string Day, int Value)[] Week =
+        [("Seg", 96), ("Ter", 118), ("Qua", 132), ("Qui", 104), ("Sex", 141), ("Sáb", 58), ("Dom", 47)];
+
+    private const double Goal = 120;
+    private readonly List<Border> _bars = [];
+    private int _selected = 4;
+
+    public ChartStyledPreview()
+    {
+        InitializeComponent();
+        var max = Week.Max(d => d.Value) * 1.1;
+        for (var i = 0; i < Week.Length; i++)
+        {
+            Bars.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+            Days.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+
+            var index = i;
+            var bar = new Border
+            {
+                VerticalOptions = LayoutOptions.End,
+                StrokeThickness = 0,
+                StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = new CornerRadius(8, 8, 3, 3) },
+            };
+            // Altura proporcional ao maior valor (+10% de folga), recalculada quando o gráfico muda de tamanho.
+            Bars.SizeChanged += (_, _) => bar.HeightRequest = Math.Max(4, Bars.Height * Week[index].Value / max);
+            var tap = new TapGestureRecognizer();
+            tap.Tapped += (_, _) => Select(index);
+            bar.GestureRecognizers.Add(tap);
+            SemanticProperties.SetDescription(bar, $"{Week[i].Day}: {Week[i].Value} cópias");
+            _bars.Add(bar);
+            Bars.Add(bar, i);
+
+            var day = new Label { Text = Week[i].Day, FontFamily = "JakartaMedium", FontSize = 12, HorizontalTextAlignment = TextAlignment.Center };
+            day.SetThemeColor(Label.TextColorProperty, "InkTertiary");
+            Days.Add(day, i);
+        }
+
+        Bars.SizeChanged += (_, _) => GoalLine.Margin = new Thickness(0, 0, 0, Bars.Height * Goal / max);
+        Select(_selected);
+    }
+
+    private void Select(int index)
+    {
+        _selected = index;
+        for (var i = 0; i < _bars.Count; i++) _bars[i].SetThemeColor(BackgroundColorProperty, i == index ? "Accent" : "AccentTint");
+        var (day, value) = Week[index];
+        SelectedLabel.Text = $"{value} · {day}";
+    }
+}

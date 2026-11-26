@@ -253,6 +253,22 @@ internal static partial class ComponentCatalog
             [
                 new()
                 {
+                    Id = "toast.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "Aviso montado com Border e Label, que sobe da borda e some em 3 segundos.",
+                    Highlights =
+                    [
+                        "Tinta escura em qualquer tema, para se destacar do conteúdo.",
+                        "Ação \"Desfazer\" no próprio aviso, em vez de confirmar antes.",
+                        "Mostrar de novo reinicia o tempo em vez de empilhar avisos.",
+                        "O leitor de tela anuncia o texto.",
+                    ],
+                    Snippets = [Xaml("Uso", "toast.styled")],
+                },
+                new()
+                {
                     Id = "toast.custom",
                     Title = "Custom",
                     Tier = VariantTier.Custom,
