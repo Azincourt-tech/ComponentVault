@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Charts.ChartMicrochartsPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:chart.microcharts -->
+        <!--
+          Três gráficos pequenos lado a lado (um embaixo do outro no celular). O ChartView recebe o
+          gráfico (LineChart, DonutChart, RadialGaugeChart...) montado no código, com as cores da paleta.
+        -->
+        <Grid ColumnDefinitions="{fit:OnWidth Compact='*', Default='*,*,*'}"
+              RowDefinitions="{fit:OnWidth Compact='Auto,Auto,Auto', Default='Auto'}"
+              ColumnSpacing="16" RowSpacing="16">
+
+            <Border Style="{StaticResource Card}" Padding="18,16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Style="{StaticResource Caption}" Text="Visitas nos últimos 7 dias" />
+                    <Label Style="{StaticResource CardTitle}" Text="4.820" />
+                    <mc:ChartView x:Name="VisitsChart" HeightRequest="120" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Column="{fit:OnWidth Compact=0, Default=1}" Grid.Row="{fit:OnWidth Compact=1, Default=0}"
+                    Style="{StaticResource Card}" Padding="18,16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Style="{StaticResource Caption}" Text="De onde vêm" />
+                    <Label Style="{StaticResource CardTitle}" Text="Busca orgânica" />
+                    <mc:ChartView x:Name="SourcesChart" HeightRequest="140" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Column="{fit:OnWidth Compact=0, Default=2}" Grid.Row="{fit:OnWidth Compact=2, Default=0}"
+                    Style="{StaticResource Card}" Padding="18,16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Style="{StaticResource Caption}" Text="Meta do mês" />
+                    <Label Style="{StaticResource CardTitle}" Text="78% atingida" />
+                    <mc:ChartView x:Name="GoalChart" HeightRequest="140" />
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
+        <!-- /snippet:chart.microcharts -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Microcharts (MIT) desenha gráficos simples com SkiaSharp: barras, linha, pontos, rosca, radar e medidores. É leve e direto para mini gráficos em cards; para eixos, zoom e dicas, prefira LiveCharts ou Syncfusion." />
+
+    </VerticalStackLayout>
+
+</ContentView>

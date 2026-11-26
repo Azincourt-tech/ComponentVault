@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:acc="clr-namespace:Syncfusion.Maui.Toolkit.Accordion;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardAccordionPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="FaqHeader" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaSemiBold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="Padding" Value="18,16" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="FaqAnswer" TargetType="Label" BasedOn="{StaticResource BodyMuted}">
+            <Setter Property="Padding" Value="18,0,18,18" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:card.accordion -->
+        <VerticalStackLayout Spacing="10">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Perguntas frequentes" />
+
+            <!--
+              Accordion num card só: abrir uma pergunta fecha a anterior (ExpandMode Single), a seta fica
+              à direita e a página rola sozinha até o item aberto (AutoScrollPosition).
+            -->
+            <Border Style="{StaticResource Card}" Padding="0">
+                <acc:SfAccordion ExpandMode="SingleOrNone" HeaderIconPosition="End" AutoScrollPosition="MakeVisible"
+                                 AnimationDuration="180" AnimationEasing="SinOut" ItemSpacing="0" Background="Transparent">
+                    <acc:SfAccordion.Items>
+                        <acc:AccordionItem IsExpanded="True" HeaderBackground="Transparent" Background="Transparent" HeaderIconColor="{DynamicResource InkTertiary}">
+                            <acc:AccordionItem.Header>
+                                <Label Style="{StaticResource FaqHeader}" Text="O ComponentVault é gratuito?" />
+                            </acc:AccordionItem.Header>
+                            <acc:AccordionItem.Content>
+                                <Label Style="{StaticResource FaqAnswer}" Text="Sim. O código é MIT e só usa bibliotecas livres, sem chave nem cadastro." />
+                            </acc:AccordionItem.Content>
+                        </acc:AccordionItem>
+                        <acc:AccordionItem HeaderBackground="Transparent" Background="Transparent" HeaderIconColor="{DynamicResource InkTertiary}">
+                            <acc:AccordionItem.Header>
+                                <Label Style="{StaticResource FaqHeader}" Text="Funciona no Android e no Windows?" />
+                            </acc:AccordionItem.Header>
+                            <acc:AccordionItem.Content>
+                                <Label Style="{StaticResource FaqAnswer}" Text="Sim. O layout responde à largura da janela, não ao aparelho: a mesma tela serve no celular e no desktop." />
+                            </acc:AccordionItem.Content>
+                        </acc:AccordionItem>
+                        <acc:AccordionItem HeaderBackground="Transparent" Background="Transparent" HeaderIconColor="{DynamicResource InkTertiary}">
+                            <acc:AccordionItem.Header>
+                                <Label Style="{StaticResource FaqHeader}" Text="Posso copiar o código dos exemplos?" />
+                            </acc:AccordionItem.Header>
+                            <acc:AccordionItem.Content>
+                                <Label Style="{StaticResource FaqAnswer}" Text="Pode. A aba Código mostra o trecho exato que roda na tela, com botão de copiar." />
+                            </acc:AccordionItem.Content>
+                        </acc:AccordionItem>
+                    </acc:SfAccordion.Items>
+                </acc:SfAccordion>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:card.accordion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfAccordion (Syncfusion Toolkit, MIT) controla um grupo de seções: um aberto por vez ou vários, seta no início ou no fim, animação e rolagem até o item aberto. Para uma seção solta, há o SfExpander." />
+
+    </VerticalStackLayout>
+
+</ContentView>

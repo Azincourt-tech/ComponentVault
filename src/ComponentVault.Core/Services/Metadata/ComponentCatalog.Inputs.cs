@@ -166,6 +166,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "searchbar.styled")],
                 },
+                new()
+                {
+                    Id = "searchbar.uranium",
+                    Title = "UraniumUI",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "UraniumUI.Material",
+                    Summary = "AutoCompleteTextField: campo Material com sugestões do catálogo enquanto se digita.",
+                    Highlights =
+                    [
+                        "A lista de sugestões abre a partir da primeira letra (Threshold) e filtra a cada tecla.",
+                        "Escolher uma sugestão preenche o campo; o rótulo flutua para a borda.",
+                        "Ícone de busca e botão de limpar no próprio campo.",
+                    ],
+                    Snippets = [Xaml("Uso", "searchbar.uranium")],
+                },
             ],
         },
         new()
@@ -430,6 +446,22 @@ internal static partial class ComponentCatalog
                         "Navega por mês, ano, década e século; também abre como popup.",
                     ],
                     Snippets = [Xaml("Uso", "datepicker.syncfusion")],
+                },
+                new()
+                {
+                    Id = "datepicker.calendar",
+                    Title = "Plugin.Maui.Calendar",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "Plugin.Maui.Calendar",
+                    Summary = "Calendário de agenda: pontos nos dias com compromisso e a lista do dia escolhido.",
+                    Highlights =
+                    [
+                        "Um ponto coral embaixo dos dias com eventos; no dia escolhido, o ponto fica branco.",
+                        "Tocar num dia mostra os compromissos dele logo abaixo do mês (EventTemplate).",
+                        "Troca de mês deslizando; também tem as visões de semana e duas semanas.",
+                    ],
+                    Snippets = [Xaml("Uso", "datepicker.calendar")],
                 },
             ],
         },

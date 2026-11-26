@@ -83,3 +83,27 @@ public partial class DatePickerSyncfusionPreview : ContentView
             : $"{from.ToString("d MMM", PtBr)} → {to.ToString("d MMM", PtBr)} · {(to - from).Days} noites";
     }
 }
+
+/// <summary>Compromisso da agenda do exemplo com Plugin.Maui.Calendar.</summary>
+public sealed record AgendaItem(string Time, string Title);
+
+[ShowcasePreview("datepicker.calendar")]
+public partial class DatePickerCalendarPreview : ContentView
+{
+    public DatePickerCalendarPreview()
+    {
+        InitializeComponent();
+        // Compromissos espalhados pelo mês, a partir de hoje (num app real, viriam do serviço de agenda).
+        var today = DateTime.Today;
+        Agenda.Events = new Plugin.Maui.Calendar.Models.EventCollection
+        {
+            [today] = new List<AgendaItem> { new("09:00", "Daily do time"), new("14:30", "Revisão do Slider") },
+            [today.AddDays(2)] = new List<AgendaItem> { new("10:00", "Entrevista de design") },
+            [today.AddDays(5)] = new List<AgendaItem> { new("16:00", "Demo para o cliente") },
+            [today.AddDays(9)] = new List<AgendaItem> { new("11:00", "Planejamento da sprint"), new("15:00", "1:1 com a Ana") },
+            [today.AddDays(-3)] = new List<AgendaItem> { new("13:00", "Retrospectiva") },
+        };
+        Agenda.Culture = CultureInfo.GetCultureInfo("pt-BR"); // CultureInfo: o XAML não converte a partir de texto
+        Agenda.SelectedDate = today;
+    }
+}

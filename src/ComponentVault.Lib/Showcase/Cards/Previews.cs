@@ -31,3 +31,9 @@ public partial class CardSyncfusionPreview : ContentView
         QuotaCard.IsDismissed = false;
     }
 }
+
+[ShowcasePreview("card.accordion")]
+public partial class CardAccordionPreview : ContentView
+{
+    public CardAccordionPreview() => InitializeComponent();
+}

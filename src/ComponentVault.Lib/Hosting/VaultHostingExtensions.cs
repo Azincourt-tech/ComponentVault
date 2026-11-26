@@ -1,5 +1,6 @@
 using ComponentVault.Lib.Controls;
 using LiveChartsCore;
+using Microcharts.Maui;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Maui;
 using SkiaSharp;
@@ -40,11 +41,14 @@ public static class VaultHostingExtensions
             .UseLiveCharts()
             .UseSharpnadoTabs(loggerEnable: false)
             // Syncfusion Toolkit (MIT): registra os handlers dos controles Sf*. Não pede chave de licença.
-            .ConfigureSyncfusionToolkit();
+            .ConfigureSyncfusionToolkit()
+            // Microcharts (MIT): gráficos simples desenhados com SkiaSharp.
+            .UseMicrocharts();
 
         // A LiveCharts desenha texto com SkiaSharp e não enxerga as fontes do MAUI: sem isto,
         // eixos e dicas saem na fonte do sistema e destoam do resto do app.
-        if (LoadTypeface("PlusJakartaSans-Regular.ttf") is { } typeface)
+        Typeface = LoadTypeface("PlusJakartaSans-Regular.ttf");
+        if (Typeface is { } typeface)
         {
             LiveCharts.Configure(config => config.HasTextSettings(new TextSettings { DefaultTypeface = typeface }));
         }
@@ -52,6 +56,12 @@ public static class VaultHostingExtensions
         RemoveNativeChrome();
         return builder;
     }
+
+    /// <summary>
+    /// Plus Jakarta carregada para o SkiaSharp. As libs que desenham texto com Skia (LiveCharts,
+    /// Microcharts) não enxergam as fontes do MAUI e precisam receber esta.
+    /// </summary>
+    public static SKTypeface? Typeface { get; private set; }
 
     // MauiFont vai para a pasta do app no Windows e para os assets no Android.
     private static SKTypeface? LoadTypeface(string file)

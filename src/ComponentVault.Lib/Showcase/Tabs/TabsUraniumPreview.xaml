@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             x:Class="ComponentVault.Lib.Showcase.Tabs.TabsUraniumPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:tabs.uranium -->
+        <!--
+          TabView Material: cabeçalhos dividindo a largura, conteúdo de cada aba logo abaixo e troca
+          animada. TabPlacement põe a barra no topo, embaixo ou nas laterais.
+        -->
+        <material:TabView TabPlacement="Top" UseAnimation="True" HeightRequest="190">
+            <!--
+              Cabeçalho próprio: o padrão do UraniumUI usa cores do Material que somem nos temas escuros.
+              Cada cabeçalho recebe o TabItem: Title, IsSelected e o Command que seleciona a aba.
+            -->
+            <material:TabView.TabHeaderItemTemplate>
+                <DataTemplate x:DataType="material:TabItem">
+                    <Grid RowDefinitions="*,2" HeightRequest="44">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Command}" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="{Binding Title}" FontFamily="JakartaMedium" FontSize="14"
+                               HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                                    <Setter Property="TextColor" Value="{DynamicResource InkTertiary}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <BoxView Grid.Row="1" Color="{StaticResource Accent}" CornerRadius="1"
+                                 IsVisible="{Binding IsSelected}" />
+                    </Grid>
+                </DataTemplate>
+            </material:TabView.TabHeaderItemTemplate>
+            <material:TabItem Title="Visão geral">
+                <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                    <Label Style="{StaticResource CardTitle}" Text="Projeto Atlas" />
+                    <Label Style="{StaticResource BodyMuted}" Text="Redesenho do aplicativo de vendas. Entrega da fase 2 prevista para 15 de dezembro." />
+                </VerticalStackLayout>
+            </material:TabItem>
+            <material:TabItem Title="Atividade">
+                <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                    <Label Style="{StaticResource CardTitle}" Text="3 atualizações hoje" />
+                    <Label Style="{StaticResource BodyMuted}" Text="Ana revisou o contrato, Bruno subiu as fotos e Carla aprovou o orçamento." />
+                </VerticalStackLayout>
+            </material:TabItem>
+            <material:TabItem Title="Membros">
+                <VerticalStackLayout Padding="0,18,0,0" Spacing="6">
+                    <Label Style="{StaticResource CardTitle}" Text="6 pessoas" />
+                    <Label Style="{StaticResource BodyMuted}" Text="2 editores, 3 leitores e 1 administradora." />
+                </VerticalStackLayout>
+            </material:TabItem>
+        </material:TabView>
+        <!-- /snippet:tabs.uranium -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O TabView do UraniumUI (MIT) monta abas com conteúdo no próprio XAML, cada TabItem com título e conteúdo, troca animada e barra em qualquer lado. Também aceita ItemsSource com modelos." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -76,6 +76,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "tabs.syncfusion")],
                 },
+                new()
+                {
+                    Id = "tabs.uranium",
+                    Title = "UraniumUI",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "UraniumUI.Material",
+                    Summary = "TabView Material com conteúdo por aba e troca animada.",
+                    Highlights =
+                    [
+                        "Cada TabItem tem título e conteúdo no próprio XAML, sem ViewSwitcher.",
+                        "Cabeçalhos dividem a largura; a troca de aba é animada (UseAnimation).",
+                        "Barra no topo, embaixo ou nas laterais (TabPlacement).",
+                    ],
+                    Snippets = [Xaml("Uso", "tabs.uranium")],
+                },
             ],
         },
         new()

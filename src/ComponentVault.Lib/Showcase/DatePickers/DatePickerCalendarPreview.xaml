@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cal="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.DatePickers"
+             x:Class="ComponentVault.Lib.Showcase.DatePickers.DatePickerCalendarPreview">
+
+    <ContentView.Resources>
+        <!-- O cabeçalho padrão da lib é azul e com setas de mês e de ano: aqui fica em tinta, só com o mês. -->
+        <Style x:Key="CalMonthLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaBold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="CalArrow" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="BorderColor" Value="{DynamicResource HairlineStrong}" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="WidthRequest" Value="36" />
+            <Setter Property="HeightRequest" Value="36" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style x:Key="CalPrev" TargetType="Button" BasedOn="{StaticResource CalArrow}">
+            <Setter Property="Text" Value="‹" />
+        </Style>
+        <Style x:Key="CalNext" TargetType="Button" BasedOn="{StaticResource CalArrow}">
+            <Setter Property="Text" Value="›" />
+        </Style>
+        <Style x:Key="CalDaysTitle" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaMedium" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="TextColor" Value="{DynamicResource InkTertiary}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="CalDay" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaRegular" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:datepicker.calendar -->
+        <!--
+          Agenda: um ponto embaixo dos dias com compromisso (EventIndicatorType BottomDot) e, ao tocar
+          num dia, os compromissos dele aparecem logo abaixo do mês (EventTemplate).
+        -->
+        <Border Style="{StaticResource Card}" Padding="12,8,12,16">
+            <cal:Calendar x:Name="Agenda"
+                          ShowYearPicker="False"
+                          MonthLabelStyle="{StaticResource CalMonthLabel}"
+                          PreviousMonthArrowButtonStyle="{StaticResource CalPrev}"
+                          NextMonthArrowButtonStyle="{StaticResource CalNext}"
+                          DaysTitleLabelStyle="{StaticResource CalDaysTitle}"
+                          WeekendTitleStyle="{StaticResource CalDaysTitle}"
+                          DaysLabelStyle="{StaticResource CalDay}"
+                          DaysTitleMaximumLength="ThreeChars"
+                          DaysTitleLabelFirstUpperRestLower="True"
+                          EventIndicatorType="BottomDot"
+                          EventIndicatorColor="{StaticResource Accent}"
+                          EventIndicatorSelectedColor="{StaticResource OnAccent}"
+                          EventIndicatorTextColor="{DynamicResource Ink}"
+                          EventIndicatorSelectedTextColor="{StaticResource OnAccent}"
+                          SelectedDayBackgroundColor="{StaticResource Accent}"
+                          SelectedDayTextColor="{StaticResource OnAccent}"
+                          SelectedTodayTextColor="{StaticResource OnAccent}"
+                          TodayOutlineColor="{StaticResource Accent}"
+                          TodayFillColor="Transparent"
+                          TodayTextColor="{DynamicResource Ink}"
+                          DeselectedDayTextColor="{DynamicResource Ink}"
+                          OtherMonthDayColor="{DynamicResource InkTertiary}"
+                          WeekendDayColor="{DynamicResource Ink}"
+                          DisabledDayColor="{DynamicResource InkTertiary}"
+                          DayViewSize="40"
+                          DayViewCornerRadius="20"
+                          FooterSectionVisible="False"
+                          EventsScrollViewVisible="True">
+                <cal:Calendar.EventTemplate>
+                    <DataTemplate x:DataType="local:AgendaItem">
+                        <Grid ColumnDefinitions="4,Auto,*" ColumnSpacing="12" Padding="4,8">
+                            <BoxView Color="{StaticResource Accent}" CornerRadius="2" />
+                            <Label Grid.Column="1" Text="{Binding Time}" Style="{StaticResource Caption}" FontFamily="{StaticResource FontMono}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="{Binding Title}" Style="{StaticResource Body}" LineHeight="1.2" VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </cal:Calendar.EventTemplate>
+                <cal:Calendar.EmptyTemplate>
+                    <DataTemplate>
+                        <Label Text="Nenhum compromisso neste dia." Style="{StaticResource Caption}" Padding="4,8" />
+                    </DataTemplate>
+                </cal:Calendar.EmptyTemplate>
+            </cal:Calendar>
+        </Border>
+        <!-- /snippet:datepicker.calendar -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O Plugin.Maui.Calendar (MIT) é um calendário de agenda: marca os dias com eventos, lista os do dia escolhido, troca de mês deslizando e alterna entre semana, duas semanas e mês." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -16,6 +16,8 @@
     <PackageVersion Include="Sharpnado.Tabs.Maui" Version="4.0.1" />
     <!-- Toolkit open source do Syncfusion (MIT, sem chave). Não confundir com a linha paga. -->
     <PackageVersion Include="Syncfusion.Maui.Toolkit" Version="1.0.12" />
+    <PackageVersion Include="Plugin.Maui.Calendar" Version="3.3.0" />
+    <PackageVersion Include="Microcharts.Maui" Version="2.0.0.3" />
   </ItemGroup>
 
   <ItemGroup Label="Core">

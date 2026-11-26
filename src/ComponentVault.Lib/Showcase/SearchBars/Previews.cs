@@ -88,3 +88,27 @@ public partial class SearchBarStyledPreview : ContentView
         OnPropertyChanged(nameof(EmptyText));
     }
 }
+
+[ShowcasePreview("searchbar.uranium")]
+public partial class SearchBarUraniumPreview : ContentView
+{
+    // Sugestões: os nomes do próprio catálogo (num app real, viriam do serviço de busca).
+    private static readonly string[] Components =
+    [
+        "Alert", "Avatar", "Badge", "Button", "Card", "Carousel", "Chart", "CheckBox", "Chips",
+        "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Glass", "Ícones", "List",
+        "Picker", "Popup", "Progress", "RadioButton", "Rating", "SearchBar", "Segmented control",
+        "Skeleton", "Slider", "Stepper", "Switch", "Tabs", "Toast",
+    ];
+
+    public SearchBarUraniumPreview()
+    {
+        InitializeComponent();
+        SearchField.ItemsSource = Components;
+        SearchField.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName != nameof(SearchField.SelectedText) || string.IsNullOrEmpty(SearchField.SelectedText)) return;
+            ResultLabel.Text = $"Abrindo {SearchField.SelectedText}.";
+        };
+    }
+}

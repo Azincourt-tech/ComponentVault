@@ -75,7 +75,7 @@ Componentes que ainda têm um nível só:
 | ~~Glass~~ | Base, Estilizado, Custom | Feito em 27/11/2026: Base (`Border` translúcido sem cena, um cinza lavado) e Estilizado (cards do design system só com tokens: sólidos no Claro e no Escuro, vidro no tema Vidro). Conferido por captura nos 3 temas. |
 | Código OTP | Custom | Base (Entry por dígito, para comparar) |
 | Rating | Custom | Base (botões), Biblioteca |
-| Skeleton | Custom | Biblioteca (shimmer) |
+| ~~Skeleton~~ | Custom, Biblioteca | Feito em 27/11/2026: Biblioteca com o `SfShimmer` do Syncfusion Toolkit (modelo pronto e esqueleto do item real). |
 
 ### Uma aba por biblioteca e um Custom onde couber
 
@@ -101,26 +101,26 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 |---|---|---|---|---|
 | Avatar | ✓ | | **+** anel de status/stories | ✓ Toolkit |
 | Button | ✓ | ✓ | **+** segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
-| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, **+** Syncfusion `SfAccordion` |
+| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, ✓ Syncfusion `SfAccordion` |
 | Carousel | ✓ | ✓ | **+** pilha de cartões | ✓ Syncfusion `SfCarousel` |
-| Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, **+** Microcharts |
+| Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
 | CheckBox | ✓ | ✓ | **+** check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
-| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, **+** Plugin.Maui.Calendar |
+| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
 | Editor | ✓ | ✓ | **+** Markdown com prévia | |
 | Entry | ✓ | ✓ | **+** rótulo flutuante desenhado | ✓ UraniumUI, ✓ Syncfusion `SfTextInputLayout` |
 | Icons | ✓ | | **+** ícone animado | ✓ MauiIcons |
-| List | ✓ | ✓ | **+** linhas com deslizar desenhado | **+** Syncfusion `SfPullToRefresh` |
+| List | ✓ | ✓ | **+** linhas com deslizar desenhado | ✓ Syncfusion `SfPullToRefresh` |
 | Código OTP | **+** | | ✓ | ✓ Syncfusion `SfOtpInput` |
 | Picker | ✓ | ✓ | **+** roda (wheel) | ✓ UraniumUI, ✓ Syncfusion `SfPicker` |
 | Popup | ✓ | | **+** folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
 | Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
 | Radio | ✓ | ✓ | **+** opções desenhadas | ✓ UraniumUI |
-| SearchBar | ✓ | ✓ | **+** busca com sugestões | **+** UraniumUI `AutoCompleteTextField` |
+| SearchBar | ✓ | ✓ | **+** busca com sugestões | ✓ UraniumUI `AutoCompleteTextField` |
 | Segmented | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
 | Skeleton | | | ✓ | ✓ Syncfusion `SfShimmer` |
 | Stepper | ✓ | ✓ | **+** contador desenhado | ✓ Syncfusion `SfNumericUpDown` |
-| Tabs | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, **+** UraniumUI `TabView` |
+| Tabs | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, ✓ UraniumUI `TabView` |
 | Toast | | | ✓ | ✓ Toolkit |
 
 Componentes novos que o Syncfusion Toolkit também cobre: Bottom sheet (`SfBottomSheet`), Navigation drawer (`SfNavigationDrawer`), Pull to refresh e Accordion.
@@ -186,5 +186,5 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [ ] **Testes de UI** (Appium) para os fluxos principais, quando o bug de UIA do Windows for corrigido.
 - [ ] **CI**: o workflow atual compila e testa. Adicionar os artefatos Windows e Android (APK) e o build com `TreatWarningsAsErrors`.
 - [ ] **Desempenho**: medir a abertura do catálogo e o custo da deriva do fundo em aparelho Android modesto.
-- [ ] **Primeiro commit e PR** para `develop`: identidade pessoal, mensagens em pt-BR.
+- [ ] **PR da `develop` para a `main`**: os commits já estão na `develop` (identidade pessoal, mensagens em pt-BR); a `main` só tem o commit inicial, então o README novo ainda não aparece na página do repositório.
 - [ ] **Capturas no README** quando os componentes estiverem completos: Home nos 3 temas, Detalhe com Lado a lado, Catálogo no Vidro e o celular (390 px). Guardar em `docs/images` e atualizar os selos de contagem (componentes e variantes).

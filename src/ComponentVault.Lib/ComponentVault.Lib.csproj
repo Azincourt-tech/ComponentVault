@@ -24,6 +24,8 @@
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" />
     <PackageReference Include="Sharpnado.Tabs.Maui" />
     <PackageReference Include="Syncfusion.Maui.Toolkit" />
+    <PackageReference Include="Plugin.Maui.Calendar" />
+    <PackageReference Include="Microcharts.Maui" />
   </ItemGroup>
 
   <!--

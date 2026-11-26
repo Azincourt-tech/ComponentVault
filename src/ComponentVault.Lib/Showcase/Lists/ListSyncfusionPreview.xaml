@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ptr="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Lists"
+             x:Class="ComponentVault.Lib.Showcase.Lists.ListSyncfusionPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:list.syncfusion -->
+        <VerticalStackLayout Spacing="10">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label x:Name="StatusLabel" Style="{StaticResource FieldLabel}" Text="Puxe a lista para baixo para atualizar" VerticalOptions="Center" />
+                <!-- No mouse não há "puxar": o botão faz o mesmo. -->
+                <Button Grid.Column="1" Text="Atualizar" Style="{StaticResource TertiaryButton}" Clicked="OnRefreshClicked" />
+            </Grid>
+
+            <!--
+              Puxar para atualizar: o anel aparece por cima da lista (SlideOnTop) enquanto as mensagens
+              novas chegam, e some sozinho no fim (IsRefreshing = false).
+            -->
+            <Border Style="{StaticResource Card}" Padding="0" HeightRequest="300">
+                <ptr:SfPullToRefresh x:Name="Refresher"
+                                     TransitionMode="SlideOnTop"
+                                     ProgressColor="{StaticResource Accent}"
+                                     ProgressBackground="{DynamicResource SurfaceRaised}"
+                                     ProgressThickness="3"
+                                     Refreshing="OnRefreshing">
+                    <ptr:SfPullToRefresh.PullableContent>
+                        <ScrollView>
+                            <VerticalStackLayout x:Name="Inbox">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="local:InboxMessage">
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14" Padding="18,12">
+                                            <Border WidthRequest="40" HeightRequest="40" StrokeThickness="0" StrokeShape="RoundRectangle 20"
+                                                    BackgroundColor="{DynamicResource AccentTint}" VerticalOptions="Center">
+                                                <Label Text="{Binding Initials}" FontFamily="JakartaSemiBold" FontSize="14" TextColor="{DynamicResource AccentText}"
+                                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                                            </Border>
+                                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                                <Label Text="{Binding Name}" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" />
+                                                <Label Text="{Binding Preview}" Style="{StaticResource Caption}" LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="2" Text="{Binding Time}" Style="{StaticResource Caption}" VerticalOptions="Start" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </ptr:SfPullToRefresh.PullableContent>
+                </ptr:SfPullToRefresh>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:list.syncfusion -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O SfPullToRefresh (Syncfusion Toolkit, MIT) envolve qualquer conteúdo rolável e mostra o anel ao puxar, empurrando a lista (Push) ou por cima dela (SlideOnTop). O RefreshView do MAUI não funciona com mouse no Windows." />
+
+    </VerticalStackLayout>
+
+</ContentView>

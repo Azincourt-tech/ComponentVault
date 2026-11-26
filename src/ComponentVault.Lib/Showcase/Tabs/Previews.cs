@@ -69,3 +69,9 @@ public partial class TabsSyncfusionPreview : ContentView
 {
     public TabsSyncfusionPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("tabs.uranium")]
+public partial class TabsUraniumPreview : ContentView
+{
+    public TabsUraniumPreview() => InitializeComponent();
+}

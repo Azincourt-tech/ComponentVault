@@ -78,6 +78,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "chart.syncfusion")],
                 },
+                new()
+                {
+                    Id = "chart.microcharts",
+                    Title = "Microcharts",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.FreeLibrary,
+                    PackageId = "Microcharts.Maui",
+                    Summary = "Microcharts: mini gráficos de linha, rosca e medidor em cards.",
+                    Highlights =
+                    [
+                        "Leve: desenha direto com SkiaSharp, bom para gráficos pequenos dentro de cards.",
+                        "Cores da paleta e a fonte do design system passadas ao gráfico.",
+                        "Sem eixos nem interação: para isso, prefira LiveCharts ou Syncfusion.",
+                    ],
+                    Snippets = [Xaml("Uso", "chart.microcharts")],
+                },
             ],
         },
     ];

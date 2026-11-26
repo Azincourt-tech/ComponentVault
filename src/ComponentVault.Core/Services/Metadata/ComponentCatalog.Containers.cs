@@ -162,6 +162,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "card.syncfusion")],
                 },
+                new()
+                {
+                    Id = "card.accordion",
+                    Title = "Syncfusion Accordion",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfAccordion num card: perguntas frequentes com uma aberta por vez.",
+                    Highlights =
+                    [
+                        "ExpandMode decide se abre uma por vez ou várias; SingleOrNone deixa fechar todas.",
+                        "A seta fica no fim do cabeçalho (HeaderIconPosition) e gira ao abrir.",
+                        "AutoScrollPosition rola a página até o item aberto.",
+                    ],
+                    Snippets = [Xaml("Uso", "card.accordion")],
+                },
             ],
         },
         new()
@@ -207,6 +223,22 @@ internal static partial class ComponentCatalog
                         "Excluir por deslize ou clique direito, sem diálogo, e sempre com \"Desfazer\".",
                     ],
                     Snippets = [Xaml("Uso", "list.styled"), CSharp("Excluir e desfazer", "list.styled.code")],
+                },
+                new()
+                {
+                    Id = "list.syncfusion",
+                    Title = "Syncfusion Toolkit",
+                    Tier = VariantTier.Library,
+                    Origin = ComponentOrigin.Syncfusion,
+                    PackageId = "Syncfusion.Maui.Toolkit",
+                    Summary = "SfPullToRefresh numa caixa de entrada: puxar para baixo traz mensagens novas.",
+                    Highlights =
+                    [
+                        "O anel aparece por cima da lista (SlideOnTop) ou a empurra (Push).",
+                        "Funciona com o dedo e com o mouse; um botão Atualizar faz o mesmo no desktop.",
+                        "Envolve qualquer conteúdo rolável, não só listas.",
+                    ],
+                    Snippets = [Xaml("Uso", "list.syncfusion")],
                 },
             ],
         },

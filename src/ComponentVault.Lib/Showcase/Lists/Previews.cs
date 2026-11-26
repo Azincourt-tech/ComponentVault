@@ -58,3 +58,55 @@ public partial class ListStyledPreview : ContentView
 
     public ListStyledPreview() => InitializeComponent();
 }
+
+/// <summary>Mensagem da caixa de entrada do exemplo de puxar para atualizar.</summary>
+public sealed record InboxMessage(string Initials, string Name, string Preview, string Time);
+
+[ShowcasePreview("list.syncfusion")]
+public partial class ListSyncfusionPreview : ContentView
+{
+    private readonly ObservableCollection<InboxMessage> _messages =
+    [
+        new("AS", "Ana Souza", "Revisão do contrato com os ajustes da cláusula 4", "09:42"),
+        new("BL", "Bruno Lima", "Fotos do evento de sábado", "Ontem"),
+        new("CM", "Carla Mendes", "Orçamento aprovado, podemos seguir", "Seg"),
+        new("DR", "Diego Rocha", "Reunião remarcada para quinta", "Dom"),
+    ];
+
+    // Cada atualização traz uma das mensagens novas, em ordem.
+    private readonly Queue<InboxMessage> _incoming = new(
+    [
+        new("EF", "Elisa Fontes", "Subi a nova versão do ícone", "Agora"),
+        new("GP", "Gabriel Prado", "Os testes passaram no Android", "Agora"),
+        new("HT", "Helena Tavares", "Pode revisar o texto da Home?", "Agora"),
+    ]);
+
+    public ListSyncfusionPreview()
+    {
+        InitializeComponent();
+        BindableLayout.SetItemsSource(Inbox, _messages);
+    }
+
+    private void OnRefreshClicked(object? sender, EventArgs e)
+    {
+        if (!Refresher.IsRefreshing) Refresher.IsRefreshing = true;
+        OnRefreshing(Refresher, EventArgs.Empty);
+    }
+
+    // Simula a busca no servidor; num app real, aqui vai o RefreshCommand da ViewModel.
+    private async void OnRefreshing(object? sender, EventArgs e)
+    {
+        StatusLabel.Text = "Buscando mensagens novas…";
+        await Task.Delay(900);
+        if (_incoming.TryDequeue(out var message))
+        {
+            _messages.Insert(0, message);
+            StatusLabel.Text = "1 mensagem nova";
+        }
+        else
+        {
+            StatusLabel.Text = "Nenhuma mensagem nova";
+        }
+        Refresher.IsRefreshing = false;
+    }
+}

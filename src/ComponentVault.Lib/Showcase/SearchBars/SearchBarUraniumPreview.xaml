@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             x:Class="ComponentVault.Lib.Showcase.SearchBars.SearchBarUraniumPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:searchbar.uranium -->
+        <VerticalStackLayout Spacing="10">
+
+            <!--
+              Autocompletar: a partir da 1ª letra (Threshold) a lista de sugestões abre embaixo do campo;
+              escolher uma preenche o texto. O rótulo flutua para a borda como nos outros campos Material.
+              Sem ícone: o UraniumUI posiciona a lupa um pouco acima do texto, e o rótulo já diz o que o campo faz.
+            -->
+            <material:AutoCompleteTextField x:Name="SearchField"
+                                            Title="Buscar componente"
+                                            Threshold="1"
+                                            AllowClear="True"
+                                            AccentColor="{StaticResource Accent}"
+                                            BorderColor="{DynamicResource HairlineStrong}"
+                                            TextColor="{DynamicResource Ink}"
+                                            TitleColor="{DynamicResource InkTertiary}"
+                                            FontFamily="JakartaRegular"
+                                            FontSize="16"
+                                            CornerRadius="14" />
+
+            <Label x:Name="ResultLabel" Style="{StaticResource Caption}" Text="Digite, por exemplo, &quot;s&quot; ou &quot;pi&quot;." />
+
+        </VerticalStackLayout>
+        <!-- /snippet:searchbar.uranium -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O AutoCompleteTextField do UraniumUI (MIT) junta o campo Material e a lista de sugestões, filtrando enquanto se digita. O SearchBar do MAUI não sugere nada: a lista fica por conta de quem usa." />
+
+    </VerticalStackLayout>
+
+</ContentView>

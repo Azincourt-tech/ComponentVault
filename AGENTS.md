@@ -107,7 +107,7 @@ tests/ComponentVault.Tests xUnit v3.
   - movimento curto (press de 90ms, escala 0,985).
 - **Evitar** o padrão "pill + título enorme + CTA + cards de estatística", que o dono achou com cara de IA.
 - **Referências visuais:** Mobbin, ScreensDesign, Appshots, Loadmore, o estilo de vidro da Apple e apps populares de Android e iOS. **Não usar o Grial UI Kit** (é pago e foi descartado).
-- **Libs:** só gratuitas. Já estão no projeto UraniumUI, CommunityToolkit.Maui, MauiIcons (Fluent), LiveCharts, Sharpnado.Tabs e SkiaSharp.
+- **Libs:** só 100% livres (MIT ou equivalente, sem cadastro nem chave) e com build para .NET 10. Nenhuma das atuais deve ser removida. No projeto: UraniumUI, CommunityToolkit.Maui, MauiIcons (Fluent), LiveCharts, Sharpnado.Tabs, SkiaSharp, Syncfusion Toolkit, Plugin.Maui.Calendar e Microcharts.Maui.
 
 ## Armadilhas já encontradas
 
@@ -138,6 +138,9 @@ tests/ComponentVault.Tests xUnit v3.
 - **`CollectionView` com `MaximumWidthRequest` corta itens no Windows.** A margem é calculada no `SizeChanged` da página (veja `CatalogPage.xaml.cs`).
 - **`CharacterSpacing` muito negativo cola as palavras** na Plus Jakarta. O limite seguro é -0.4.
 - **Windows + UI Automation/Narrador derruba o app em páginas com `ScrollView`.** É bug do framework (ver README). Por isso, não automatize cliques via UIA.
+- **UraniumUI nos temas escuros:** o cabeçalho padrão do `TabView` usa cores do Material que somem no Escuro e no Vidro. Use `TabHeaderItemTemplate` com `x:DataType="material:TabItem"` (`Title`, `IsSelected` e `Command`). No `AutoCompleteTextField`, o ícone fica desalinhado do texto; prefira sem ícone.
+- **Plugin.Maui.Calendar:** `Culture` é `CultureInfo` (defina no código). Um estilo próprio nas setas (`PreviousMonthArrowButtonStyle`) substitui o da lib inteiro, inclusive o texto da seta: inclua um `Setter` de `Text`. Dias com evento usam `EventIndicatorTextColor`, não `DeselectedDayTextColor`.
+- **Microcharts:** registre com `UseMicrocharts()`. Ele desenha com SkiaSharp e não enxerga as fontes do MAUI: passe `VaultHostingExtensions.Typeface` e as cores como `SKColor`, e refaça o gráfico no `ThemeColors.PaletteChanged`.
 - **Syncfusion Toolkit** (`Syncfusion.Maui.Toolkit`, MIT, registrado com `ConfigureSyncfusionToolkit()`):
   - No XAML da Lib, use `clr-namespace:Syncfusion.Maui.Toolkit.<Área>;assembly=Syncfusion.Maui.Toolkit`.
   - Várias propriedades documentadas são internas (`HoveredBackground`, `FocusedStroke` e `SeparatorColor` do OTP) ou fogem da convenção (`SelectedSegmentTextColor`). Algumas o XamlC barra; outras só quebram ao abrir a tela ("Attempt to access field ...Property failed"). Antes de usar uma propriedade, confira por reflexão se o setter é público.

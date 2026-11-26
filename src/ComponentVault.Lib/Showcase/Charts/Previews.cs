@@ -167,3 +167,79 @@ public partial class ChartSyncfusionPreview : ContentView
         };
     }
 }
+
+[ShowcasePreview("chart.microcharts")]
+public partial class ChartMicrochartsPreview : ContentView
+{
+    public ChartMicrochartsPreview()
+    {
+        InitializeComponent();
+        Paint();
+        Loaded += (_, _) => ThemeColors.PaletteChanged += OnMicroPaletteChanged;
+        Unloaded += (_, _) => ThemeColors.PaletteChanged -= OnMicroPaletteChanged;
+    }
+
+    private void OnMicroPaletteChanged(object? sender, AppThemeChangedEventArgs e) => Paint();
+
+    private static SkiaSharp.SKColor Sk(string key, Color fallback) =>
+        SkiaSharp.SKColor.Parse(ThemeColors.Resolve(key, fallback).ToArgbHex(includeAlpha: true));
+
+    // O Microcharts desenha com SkiaSharp: as cores vêm da paleta como SKColor, o fundo fica
+    // transparente (o card mostra o dele) e o texto usa a Plus Jakarta carregada no início.
+    private void Paint()
+    {
+        var accent = Sk("Accent", Colors.OrangeRed);
+        var ink = Sk("InkSecondary", Colors.Gray);
+        var muted = Sk("HairlineStrong", Colors.LightGray);
+        var typeface = ComponentVault.Lib.Hosting.VaultHostingExtensions.Typeface;
+
+        float[] visits = [520, 610, 580, 720, 690, 810, 890];
+
+        VisitsChart.Chart = new Microcharts.LineChart
+        {
+            // Sparkline: sem rótulos. O título do card já diz o período, e 7 nomes de dia não cabem na largura.
+            Entries = visits.Select(v => new Microcharts.ChartEntry(v) { Color = accent }),
+            LineMode = Microcharts.LineMode.Spline,
+            LineSize = 3,
+            LineAreaAlpha = 40,
+            PointSize = 0,
+            EnableYFadeOutGradient = true,
+            LabelTextSize = 13,
+            LabelOrientation = Microcharts.Orientation.Horizontal,
+            BackgroundColor = SkiaSharp.SKColors.Transparent,
+            LabelColor = ink,
+            Typeface = typeface,
+            Margin = 8,
+        };
+
+        SourcesChart.Chart = new Microcharts.DonutChart
+        {
+            Entries =
+            [
+                new Microcharts.ChartEntry(58) { Label = "Busca", ValueLabel = "58%", Color = accent, TextColor = ink, ValueLabelColor = ink },
+                new Microcharts.ChartEntry(27) { Label = "Direto", ValueLabel = "27%", Color = SkiaSharp.SKColor.Parse("#FAA307"), TextColor = ink, ValueLabelColor = ink },
+                new Microcharts.ChartEntry(15) { Label = "Redes", ValueLabel = "15%", Color = muted, TextColor = ink, ValueLabelColor = ink },
+            ],
+            HoleRadius = 0.62f,
+            LabelMode = Microcharts.LabelMode.RightOnly,
+            LabelTextSize = 13,
+            BackgroundColor = SkiaSharp.SKColors.Transparent,
+            Typeface = typeface,
+            Margin = 6,
+        };
+
+        GoalChart.Chart = new Microcharts.RadialGaugeChart
+        {
+            // Sem legenda: o título do card já diz o valor, e a legenda do medidor ficaria por cima do anel.
+            Entries = [new Microcharts.ChartEntry(78) { Color = accent }],
+            MinValue = 0,
+            MaxValue = 100,
+            LineSize = 18,
+            LineAreaAlpha = 40,
+            LabelTextSize = 13,
+            BackgroundColor = SkiaSharp.SKColors.Transparent,
+            Typeface = typeface,
+            Margin = 6,
+        };
+    }
+}
