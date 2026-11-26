@@ -32,7 +32,7 @@
                 <Label Grid.Column="1" Style="{StaticResource Caption}" Text="{Binding ResultSummary}" VerticalOptions="End" />
             </Grid>
 
-            <lib:VaultTextField Placeholder="Buscar por nome, tag ou biblioteca"
+            <lib:VaultTextField Placeholder="Buscar por nome, tag ou biblioteca" RefusesInitialFocus="True"
                                 IconData="M7 1.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 1 0 0-11M11 11L14.5 14.5"
                                 Text="{Binding SearchText, Mode=TwoWay}" />
 

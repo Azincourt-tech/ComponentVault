@@ -47,10 +47,28 @@ public partial class VaultTextField : ContentView
         nameof(State), typeof(FieldState), typeof(VaultTextField), FieldState.Normal,
         propertyChanged: (b, _, _) => ((VaultTextField)b).UpdateVisuals());
 
+    public static readonly BindableProperty RefusesInitialFocusProperty = BindableProperty.Create(
+        nameof(RefusesInitialFocus), typeof(bool), typeof(VaultTextField), false);
+
+    // Janela em que um foco recebido é tratado como automático (dado pela plataforma), não pela pessoa.
+    private static readonly TimeSpan InitialFocusWindow = TimeSpan.FromSeconds(1);
+    private DateTime _loadedAt = DateTime.MinValue;
+
     public VaultTextField()
     {
         InitializeComponent();
         UpdateVisuals();
+        Loaded += (_, _) => _loadedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Recusa o foco que a plataforma dá sozinha ao abrir a página (o Windows foca o primeiro
+    /// campo; no celular isso abriria o teclado sem pedir). O toque da pessoa continua focando.
+    /// </summary>
+    public bool RefusesInitialFocus
+    {
+        get => (bool)GetValue(RefusesInitialFocusProperty);
+        set => SetValue(RefusesInitialFocusProperty, value);
     }
 
     public event EventHandler<TextChangedEventArgs>? TextChanged;
@@ -91,7 +109,16 @@ public partial class VaultTextField : ContentView
         Input.Focus();
     }
 
-    private void OnInputFocusChanged(object? sender, FocusEventArgs e) => UpdateVisuals();
+    private void OnInputFocusChanged(object? sender, FocusEventArgs e)
+    {
+        if (e.IsFocused && RefusesInitialFocus && DateTime.UtcNow - _loadedAt < InitialFocusWindow)
+        {
+            Dispatcher.Dispatch(() => Input.Unfocus());
+            return;
+        }
+
+        UpdateVisuals();
+    }
 
     private void UpdateClearButton() =>
         ClearButton.IsVisible = ShowClearButton && !IsPassword && !string.IsNullOrEmpty(Text);
