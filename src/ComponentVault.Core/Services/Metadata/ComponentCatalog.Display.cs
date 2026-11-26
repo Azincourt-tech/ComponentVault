@@ -133,6 +133,22 @@ internal static partial class ComponentCatalog
                 Base("icons.base", "FontImageSource com glifos Unicode da fonte do sistema."),
                 new()
                 {
+                    Id = "icons.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Ícones desenhados que se transformam: menu em X, play em pausa e curtir com explosão.",
+                    Highlights =
+                    [
+                        "A forma muda no lugar (320ms), em vez de trocar um glifo pelo outro.",
+                        "Cada desenho interpola os próprios pontos com Microsoft.Maui.Graphics.",
+                        "O coração pula e solta seis pontos só ao curtir; descurtir é discreto.",
+                        "O leitor de tela ouve a ação do próximo toque (\"Pausar\", \"Fechar menu\").",
+                    ],
+                    Snippets = [Xaml("Uso", "icons.custom"), CSharp("Controle (AnimatedIcon.cs)", "control.animatedicon")],
+                },
+                new()
+                {
                     Id = "icons.mauiicons",
                     Title = "MauiIcons Fluent",
                     Tier = VariantTier.Library,

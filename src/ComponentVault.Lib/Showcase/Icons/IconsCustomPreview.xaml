@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Icons"
+             x:Class="ComponentVault.Lib.Showcase.Icons.IconsCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="IconTile" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Padding" Value="8,18,8,14" />
+        </Style>
+        <Style x:Key="IconName" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaSemiBold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="IconState" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:icons.custom -->
+        <!-- Toque num ícone: ele se transforma no outro estado em vez de trocar de glifo. -->
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+
+            <Border Style="{StaticResource IconTile}">
+                <VerticalStackLayout Spacing="6">
+                    <local:AnimatedIcon x:Name="MenuIcon" Glyph="Menu" HorizontalOptions="Center" Toggled="OnToggled"
+                                        SemanticProperties.Description="Menu" />
+                    <Label Style="{StaticResource IconName}" Text="Menu" />
+                    <Label x:Name="MenuState" Style="{StaticResource IconState}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource IconTile}">
+                <VerticalStackLayout Spacing="6">
+                    <local:AnimatedIcon x:Name="PlayIcon" Glyph="PlayPause" HorizontalOptions="Center" Toggled="OnToggled"
+                                        SemanticProperties.Description="Reproduzir" />
+                    <Label Style="{StaticResource IconName}" Text="Player" />
+                    <Label x:Name="PlayState" Style="{StaticResource IconState}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource IconTile}">
+                <VerticalStackLayout Spacing="6">
+                    <local:AnimatedIcon x:Name="HeartIcon" Glyph="Heart" IsActive="True" HorizontalOptions="Center" Toggled="OnToggled"
+                                        SemanticProperties.Description="Curtir" />
+                    <Label Style="{StaticResource IconName}" Text="Curtir" />
+                    <Label x:Name="HeartState" Style="{StaticResource IconState}" />
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
+        <!-- /snippet:icons.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="AnimatedIcon: desenhado com Microsoft.Maui.Graphics, interpola os próprios pontos entre os dois estados (320ms). A forma muda no lugar, então o olho acompanha a ação sem perder a posição do botão." />
+
+    </VerticalStackLayout>
+
+</ContentView>

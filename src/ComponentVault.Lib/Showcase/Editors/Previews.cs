@@ -65,3 +65,54 @@ public partial class EditorStyledPreview : ContentView
         DescriptionEditor.SelectionLength = 0;
     }
 }
+
+[ShowcasePreview("editor.custom")]
+public partial class EditorCustomPreview : ContentView
+{
+    private const string Sample = """
+        # Notas da versão 2.4
+        O **modo Apresentar** agora abre em tela cheia no Windows. Use as setas para trocar o nível e `Esc` para sair.
+
+        ## O que mudou
+        - Fundo de _galáxia_ animado nos três temas
+        - Campos preenchidos com anel de foco
+        - Dez controles Custom novos
+
+        > Feito com tokens: muda de tema sem recarregar.
+
+        ```
+        dotnet build -c Release
+        ```
+        Detalhes no [repositório](https://github.com).
+        """;
+
+    public EditorCustomPreview()
+    {
+        InitializeComponent();
+        Source.Text = Sample;
+    }
+
+    private void OnSourceChanged(object? sender, TextChangedEventArgs e)
+    {
+        var text = e.NewTextValue ?? string.Empty;
+        Rendered.Markdown = text;
+        var words = text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Count(w => w.Any(char.IsLetterOrDigit));
+        StatsLabel.Text = $"{words} palavras · {Math.Max(1, (int)Math.Ceiling(words / 200d))} min";
+    }
+
+    // Troca com fade: a área que sai some em 120ms e a que entra sobe 6px enquanto aparece.
+    private async void OnTabChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(Chips.ChoiceChipGroup.SelectedIndex) || WritePane is null) return;
+        var (show, hide) = Tabs.SelectedIndex == 0 ? ((View)WritePane, (View)PreviewPane) : (PreviewPane, WritePane);
+        if (show.IsVisible && show.Opacity >= 1) return;
+
+        await hide.FadeToAsync(0, 120);
+        hide.IsVisible = false;
+        show.Opacity = 0;
+        show.TranslationY = 6;
+        show.IsVisible = true;
+        await Task.WhenAll(show.FadeToAsync(1, 160), show.TranslateToAsync(0, 0, 160, Easing.CubicOut));
+        if (show == WritePane) Source.Focus();
+    }
+}

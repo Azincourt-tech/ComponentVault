@@ -107,3 +107,25 @@ public partial class DatePickerCalendarPreview : ContentView
         Agenda.SelectedDate = today;
     }
 }
+
+[ShowcasePreview("datepicker.custom")]
+public partial class DatePickerCustomPreview : ContentView
+{
+    private static readonly CultureInfo PtBr = CultureInfo.GetCultureInfo("pt-BR");
+
+    public DatePickerCustomPreview()
+    {
+        InitializeComponent();
+        // Abre com um fim de semana prolongado já marcado, para a faixa aparecer de cara.
+        Strip.SetRange(DateTime.Today.AddDays(3), DateTime.Today.AddDays(6));
+        OnRangeChanged(Strip, EventArgs.Empty);
+    }
+
+    private void OnRangeChanged(object? sender, EventArgs e)
+    {
+        if (SummaryLabel is null) return;
+        SummaryLabel.Text = Strip.StartDate is not DateTime from ? "Escolha a entrada"
+            : Strip.EndDate is not DateTime to ? $"Entrada em {from.ToString("d MMM", PtBr)}. Toque na saída"
+            : $"{from.ToString("ddd, d MMM", PtBr)} → {to.ToString("ddd, d MMM", PtBr)} · {(to - from).Days} {((to - from).Days == 1 ? "noite" : "noites")}";
+    }
+}

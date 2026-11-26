@@ -110,3 +110,62 @@ public partial class ListSyncfusionPreview : ContentView
         Refresher.IsRefreshing = false;
     }
 }
+
+[ShowcasePreview("list.custom")]
+public partial class ListCustomPreview : ContentView
+{
+    private static readonly InboxItem[] Seed =
+    [
+        new("Ana Souza", "Revisão do contrato com os ajustes da cláusula 4", "09:42"),
+        new("Bruno Lima", "Fotos do evento de sábado", "Ontem"),
+        new("Carla Mendes", "Orçamento aprovado, podemos seguir", "Seg"),
+        new("Diego Rocha", "Reunião remarcada para quinta", "Dom"),
+    ];
+
+    private readonly ObservableCollection<InboxItem> _messages = new(Seed);
+    private (InboxItem Item, int Index)? _last;
+
+    public ListCustomPreview()
+    {
+        InitializeComponent();
+        BindableLayout.SetItemsSource(Inbox, _messages);
+        UpdateCount();
+    }
+
+    private void OnSwiped(object? sender, SwipeAction action)
+    {
+        if ((sender as BindableObject)?.BindingContext is not InboxItem item) return;
+        var index = _messages.IndexOf(item);
+        if (index < 0) return;
+
+        _messages.RemoveAt(index);
+        _last = (item, index);
+        UndoLabel.Text = $"Mensagem de {item.Sender} {(action == SwipeAction.Archive ? "arquivada" : "excluída")}";
+        UndoBar.IsVisible = true;
+        UpdateCount();
+    }
+
+    private void OnUndoClicked(object? sender, EventArgs e)
+    {
+        if (_last is not { } last) return;
+        _messages.Insert(Math.Min(last.Index, _messages.Count), last.Item);
+        _last = null;
+        UndoBar.IsVisible = false;
+        UpdateCount();
+    }
+
+    private void OnRestoreClicked(object? sender, EventArgs e)
+    {
+        _messages.Clear();
+        foreach (var item in Seed) _messages.Add(item);
+        _last = null;
+        UndoBar.IsVisible = false;
+        UpdateCount();
+    }
+
+    private void UpdateCount()
+    {
+        CountLabel.Text = _messages.Count == 1 ? "1 mensagem" : $"{_messages.Count} mensagens";
+        EmptyState.IsVisible = _messages.Count == 0;
+    }
+}

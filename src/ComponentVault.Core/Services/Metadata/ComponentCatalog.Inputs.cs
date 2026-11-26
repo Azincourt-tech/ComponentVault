@@ -139,6 +139,22 @@ internal static partial class ComponentCatalog
                     ],
                     Snippets = [Xaml("Uso", "editor.styled")],
                 },
+                new()
+                {
+                    Id = "editor.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Editor de Markdown com prévia renderizada em Labels, sem WebView.",
+                    Highlights =
+                    [
+                        "Escrever e Prévia na mesma área, com a pílula deslizante e um fade curto.",
+                        "Títulos, listas, citação, bloco de código, negrito, itálico, código e links.",
+                        "A prévia usa as fontes e os tokens do app, então acompanha os três temas.",
+                        "Contagem de palavras e tempo de leitura ao lado das abas.",
+                    ],
+                    Snippets = [Xaml("Uso", "editor.custom"), CSharp("Controle (MarkdownView.cs)", "control.markdownview")],
+                },
             ],
         },
         new()
@@ -180,6 +196,22 @@ internal static partial class ComponentCatalog
                         "Sem resultado, repete o termo buscado e sugere o que tentar.",
                     ],
                     Snippets = [Xaml("Uso", "searchbar.styled")],
+                },
+                new()
+                {
+                    Id = "searchbar.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Busca recolhida numa lupa que se expande sobre o título, com sugestões em cascata.",
+                    Highlights =
+                    [
+                        "Ocupa só um botão até ser chamada; abre na largura toda em 280ms.",
+                        "Sem texto mostra sugestões; digitando, até cinco resultados com o trecho em destaque.",
+                        "Ignora acentos e maiúsculas (\"icone\" acha \"Ícones\").",
+                        "Enter abre o primeiro resultado; o X fecha na ordem inversa.",
+                    ],
+                    Snippets = [Xaml("Uso", "searchbar.custom"), CSharp("Controle (ExpandingSearch.cs)", "control.expandingsearch")],
                 },
                 new()
                 {
@@ -460,6 +492,22 @@ internal static partial class ComponentCatalog
                         "Um resumo em frase (\"amanhã às 09:00\") confirma a escolha.",
                     ],
                     Snippets = [Xaml("Uso", "datepicker.styled")],
+                },
+                new()
+                {
+                    Id = "datepicker.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Faixa de três semanas para escolher um período arrastando de um dia a outro.",
+                    Highlights =
+                    [
+                        "Pressione e arraste, ou toque na entrada e depois na saída.",
+                        "A faixa é desenhada e estica até o dia sob o dedo (180ms).",
+                        "Dias passados ficam bloqueados; hoje tem um ponto embaixo.",
+                        "Resumo em frase com o número de noites.",
+                    ],
+                    Snippets = [Xaml("Uso", "datepicker.custom"), CSharp("Controle (DateRangeStrip.cs)", "control.daterangestrip")],
                 },
                 new()
                 {

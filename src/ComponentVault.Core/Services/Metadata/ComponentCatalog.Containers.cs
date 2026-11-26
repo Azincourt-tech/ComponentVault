@@ -241,6 +241,22 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "list.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Linhas em cartão com deslizar desenhado: direita arquiva, esquerda exclui.",
+                    Highlights =
+                    [
+                        "Passado um terço da largura, um círculo de cor cresce a partir do ícone: soltar confirma.",
+                        "Soltar antes do limiar devolve a linha ao lugar.",
+                        "A linha sai pela borda e a altura se fecha antes de o item sair, sem salto na lista.",
+                        "No Windows, o botão direito oferece Arquivar e Excluir.",
+                    ],
+                    Snippets = [Xaml("Uso", "list.custom"), CSharp("Controle (SwipeRow.cs)", "control.swiperow")],
+                },
+                new()
+                {
                     Id = "list.syncfusion",
                     Title = "Syncfusion Toolkit",
                     Tier = VariantTier.Library,

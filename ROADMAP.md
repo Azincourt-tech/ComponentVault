@@ -43,6 +43,7 @@ O que foi escrito, mas ainda não rodou de ponta a ponta.
   - Campos da UraniumUI (Entry, Picker e DatePicker) encolhidos ao tamanho do texto de exemplo: agora 440 px no desktop e largura total no celular.
 - [x] ~~UraniumUI `TimePickerField` vazio com o título no alto~~: o exemplo ganhou um horário inicial (14:30), e o par agora mostra os dois estados (data vazia, horário preenchido). As caixas cinzas que o TimePicker nativo desenhava no Windows dentro do campo foram removidas (mesma limpeza dos campos sem borda). Os campos de data e horário ficaram com 280 px no desktop, o tamanho do conteúdo, em vez dos 440 px dos campos de texto.
 - [ ] **SwipeView e Popup com interação real** (deslizar a linha, abrir o popup): as capturas só mostram o estado inicial.
+- [ ] **Gestos dos Custom novos** (segurar, virar, arrastar, rodas, folha inferior, faixa de dias, `SwipeRow`, busca que expande, ícones animados): as capturas só mostram o estado estático. Conferir à mão no Windows e no Android, principalmente o arrasto com mouse (`PanGestureRecognizer`) no Windows.
 - [ ] **Interação real no Windows.** As capturas automatizadas só abrem rotas. Clicar à mão e conferir:
   - [ ] o seletor "Aparência"
   - [ ] o botão Tema
@@ -106,17 +107,17 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 | Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
 | CheckBox | ✓ | ✓ | ✓ check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
-| DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
-| Editor | ✓ | ✓ | **+** Markdown com prévia | |
+| DatePicker | ✓ | ✓ | ✓ faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
+| Editor | ✓ | ✓ | ✓ Markdown com prévia | |
 | Entry | ✓ | ✓ | ✓ rótulo flutuante | ✓ UraniumUI, ✓ Syncfusion `SfTextInputLayout` |
-| Icons | ✓ | | **+** ícone animado | ✓ MauiIcons |
-| List | ✓ | ✓ | **+** linhas com deslizar desenhado | ✓ Syncfusion `SfPullToRefresh` |
+| Icons | ✓ | | ✓ ícone animado | ✓ MauiIcons |
+| List | ✓ | ✓ | ✓ linhas com deslizar desenhado | ✓ Syncfusion `SfPullToRefresh` |
 | Código OTP | **+** | | ✓ | ✓ Syncfusion `SfOtpInput` |
 | Picker | ✓ | ✓ | ✓ roda (wheel) | ✓ UraniumUI, ✓ Syncfusion `SfPicker` |
 | Popup | ✓ | | ✓ folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
 | Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
 | Radio | ✓ | ✓ | ✓ opções desenhadas | ✓ UraniumUI |
-| SearchBar | ✓ | ✓ | **+** busca com sugestões | ✓ UraniumUI `AutoCompleteTextField` |
+| SearchBar | ✓ | ✓ | ✓ busca com sugestões | ✓ UraniumUI `AutoCompleteTextField` |
 | Segmented | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
 | Skeleton | | | ✓ | ✓ Syncfusion `SfShimmer` |
 | Stepper | ✓ | ✓ | ✓ contador que rola | ✓ Syncfusion `SfNumericUpDown` |

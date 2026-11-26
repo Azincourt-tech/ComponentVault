@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Editors"
+             xmlns:chips="clr-namespace:ComponentVault.Lib.Showcase.Chips"
+             xmlns:controls="clr-namespace:ComponentVault.Lib.Controls"
+             x:Class="ComponentVault.Lib.Showcase.Editors.EditorCustomPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:editor.custom -->
+        <VerticalStackLayout Spacing="12">
+
+            <!-- Escrever e Prévia na mesma área: a pílula desliza e o conteúdo troca com um fade curto. -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <chips:ChoiceChipGroup x:Name="Tabs" SelectedIndex="1" PropertyChanged="OnTabChanged">
+                    <chips:ChoiceChipGroup.Options>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Escrever</x:String>
+                            <x:String>Prévia</x:String>
+                        </x:Array>
+                    </chips:ChoiceChipGroup.Options>
+                </chips:ChoiceChipGroup>
+                <Label x:Name="StatsLabel" Grid.Column="1" Style="{StaticResource Caption}" VerticalOptions="Center" />
+            </Grid>
+
+            <Grid>
+                <Border x:Name="WritePane" Style="{StaticResource FieldFrame}" Padding="0" IsVisible="False" Opacity="0">
+                    <controls:BorderlessEditor x:Name="Source"
+                                               Margin="16,12"
+                                               Style="{StaticResource BareEditor}"
+                                               FontFamily="{StaticResource FontMono}"
+                                               FontSize="14"
+                                               AutoSize="TextChanges"
+                                               MinimumHeightRequest="240"
+                                               TextChanged="OnSourceChanged" />
+                </Border>
+
+                <Border x:Name="PreviewPane" Style="{StaticResource Card}" Padding="18,16" MinimumHeightRequest="240">
+                    <local:MarkdownView x:Name="Rendered" />
+                </Border>
+            </Grid>
+
+        </VerticalStackLayout>
+        <!-- /snippet:editor.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="MarkdownView: cada bloco vira um Label (títulos, listas, citação, código) e o meio da linha vira Spans (negrito, itálico, código, link). Sem WebView, então segue as fontes e os três temas do app." />
+
+    </VerticalStackLayout>
+
+</ContentView>

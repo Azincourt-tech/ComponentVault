@@ -112,3 +112,22 @@ public partial class SearchBarUraniumPreview : ContentView
         };
     }
 }
+
+[ShowcasePreview("searchbar.custom")]
+public partial class SearchBarCustomPreview : ContentView
+{
+    public SearchBarCustomPreview()
+    {
+        InitializeComponent();
+        // Os primeiros itens viram as sugestões de quando o campo está vazio.
+        Search.Items =
+        [
+            "Picker", "Slider", "Chips", "Alert", "Avatar", "Badge", "Button", "Card", "Carousel", "Chart",
+            "CheckBox", "Código OTP", "DatePicker", "Editor", "Empty state", "Entry", "Glass", "Ícones", "List",
+            "Popup", "Progress", "RadioButton", "Rating", "SearchBar", "Segmented control", "Skeleton",
+            "Stepper", "Switch", "Tabs", "Toast",
+        ];
+    }
+
+    private void OnItemChosen(object? sender, string item) => ResultLabel.Text = $"Abrindo {item}.";
+}

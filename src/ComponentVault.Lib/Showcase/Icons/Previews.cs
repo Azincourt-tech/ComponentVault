@@ -57,3 +57,28 @@ public partial class IconsMauiIconsPreview : ContentView
         }
     }
 }
+
+[ShowcasePreview("icons.custom")]
+public partial class IconsCustomPreview : ContentView
+{
+    public IconsCustomPreview()
+    {
+        InitializeComponent();
+        OnToggled(this, EventArgs.Empty);
+    }
+
+    // O texto embaixo diz o que o toque faz agora, e o leitor de tela recebe a mesma frase.
+    private void OnToggled(object? sender, EventArgs e)
+    {
+        if (MenuState is null || PlayState is null || HeartState is null) return;
+        Describe(MenuIcon, MenuState, MenuIcon.IsActive ? "Aberto" : "Fechado", MenuIcon.IsActive ? "Fechar menu" : "Abrir menu");
+        Describe(PlayIcon, PlayState, PlayIcon.IsActive ? "Tocando" : "Pausado", PlayIcon.IsActive ? "Pausar" : "Reproduzir");
+        Describe(HeartIcon, HeartState, HeartIcon.IsActive ? "Curtido" : "Não curtido", HeartIcon.IsActive ? "Descurtir" : "Curtir");
+    }
+
+    private static void Describe(AnimatedIcon icon, Label state, string text, string action)
+    {
+        state.Text = text;
+        SemanticProperties.SetDescription(icon, action);
+    }
+}
