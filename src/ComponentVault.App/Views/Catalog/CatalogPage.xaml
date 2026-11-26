@@ -87,16 +87,16 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:ComponentCardModel">
                     <VerticalStackLayout>
-                        <Grid Style="{StaticResource ListRow}" Padding="8,12" ColumnDefinitions="Auto,*,Auto" motion:Motion.Press="True"
+                        <Grid Style="{StaticResource ListRow}" Padding="8,12" ColumnDefinitions="Auto,*,Auto" motion:Motion.Press="True" controls:Hero.Source="True"
                               SemanticProperties.Description="{Binding Name}">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenComponentCommand, Source={RelativeSource AncestorType={x:Type vm:CatalogViewModel}}, x:DataType=vm:CatalogViewModel}"
                                                       CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
-                            <controls:ComponentThumb WidthRequest="44" HeightRequest="44" IconName="{Binding Icon}" VerticalOptions="Start" />
+                            <controls:ComponentThumb WidthRequest="44" HeightRequest="44" IconName="{Binding Icon}" VerticalOptions="Start" controls:Hero.Key="thumb" />
                             <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
                                 <HorizontalStackLayout Spacing="8">
-                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" />
+                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" controls:Hero.Key="title" />
                                     <Label Text="Novo" FontFamily="{StaticResource FontMedium}" FontSize="13"
                                            TextColor="{DynamicResource AccentText}"
                                            IsVisible="{Binding IsNew}" VerticalOptions="Center" />

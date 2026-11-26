@@ -78,8 +78,9 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 - [x] ~~Barra de navegação flutuante de vidro~~ (`NavDock`).
 - [x] ~~Abas do detalhe com indicador deslizante~~ (`SlidingIndicator`, o mesmo da barra flutuante).
 - [x] ~~Seletor de nível do detalhe com a pílula deslizante~~ (testado pelo dono no Windows; `SlidingIndicator`, que agora também acompanha itens criados depois, como os de um `BindableLayout`).
-- [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima (celular).
-- [ ] **Transição entre páginas**: o card do catálogo "cresce" até o cabeçalho do detalhe (shared element aproximado com Translation e Scale).
+- [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima. Só faz sentido no celular, então fica para quando o Android rodar.
+- [x] ~~Transição entre páginas~~: o ícone e o título da linha tocada (Catálogo ou recentes da Home) voam até o cabeçalho do Detalhe, que ganhou o ícone do componente, e o resto entra em cascata (`App/Controls/Hero.cs`). Testado pelo dono no Windows.
+- [ ] **Transição de volta** (Detalhe → Catálogo), com o ícone voltando para a linha.
 - [ ] **Entrada em cascata** dos itens do catálogo ao rolar e ao filtrar.
 - [ ] **Modo Apresentar**: tela cheia com o componente centralizado e troca de nível por gesto ou teclado.
 - [ ] **Microinterações**: feedback háptico no Android (`HapticFeedback`) e o realce do botão copiar.

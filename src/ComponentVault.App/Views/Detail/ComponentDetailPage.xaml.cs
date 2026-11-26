@@ -29,6 +29,9 @@ public partial class ComponentDetailPage : ContentPage, IQueryAttributable
         };
 
         viewModel.PropertyChanged += OnViewModelChanged;
+
+        // Ícone e título saem da linha tocada no catálogo (ou nos recentes da Home).
+        Loaded += (_, _) => Hero.PlayInto(Header);
     }
 
     // Só repassa: IQueryAttributable é do MAUI e a ViewModel não pode conhecê-lo (RNF 7.1).

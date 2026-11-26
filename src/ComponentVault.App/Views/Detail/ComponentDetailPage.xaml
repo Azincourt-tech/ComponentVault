@@ -37,15 +37,23 @@
                              MaximumWidthRequest="{StaticResource ContentMaxWidth}"
                              IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
 
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
-                <VerticalStackLayout Spacing="4">
-                    <Label Style="{StaticResource PageTitle}" Text="{Binding Component.Name}" />
-                    <Label Style="{StaticResource BodySmall}" Text="{Binding Component.Summary}" />
-                    <Label Style="{StaticResource Caption}" Text="{Binding Subtitle}" />
+            <!-- Ícone e título vêm voando da linha tocada no catálogo (Hero) -->
+            <Grid x:Name="Header" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                <controls:ComponentThumb WidthRequest="56" HeightRequest="56" IconSize="26"
+                                         IconName="{Binding Component.Icon}" VerticalOptions="Start"
+                                         controls:Hero.Key="thumb" />
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <Label Style="{StaticResource PageTitle}" Text="{Binding Component.Name}"
+                           HorizontalOptions="Start" controls:Hero.Key="title" />
+                    <VerticalStackLayout Spacing="4" motion:Motion.Entrance="True" motion:Motion.Delay="140">
+                        <Label Style="{StaticResource BodySmall}" Text="{Binding Component.Summary}" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding Subtitle}" />
+                    </VerticalStackLayout>
                     <Label Style="{StaticResource Body}" TextColor="{DynamicResource DangerText}"
                            Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" />
                 </VerticalStackLayout>
-                <Button Grid.Column="1" Text="Apresentar" Style="{StaticResource SecondaryButtonSmall}"
+                <Button Grid.Column="2" Text="Apresentar" Style="{StaticResource SecondaryButtonSmall}"
+                        motion:Motion.Entrance="True" motion:Motion.Delay="200"
                         VerticalOptions="Start" Command="{Binding TogglePresentationCommand}"
                         SemanticProperties.Hint="Mostra só o componente, sem a interface ao redor" />
             </Grid>
@@ -55,7 +63,8 @@
               (SlidingIndicator no code-behind). O peso do texto não muda na seleção, para a largura
               do item ficar estável e a pílula não tremer.
             -->
-            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
+                        motion:Motion.Entrance="True" motion:Motion.Delay="220">
                 <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0"
                         StrokeShape="RoundRectangle 24" Padding="4" HorizontalOptions="Start">
                     <Grid>
@@ -96,7 +105,7 @@
               escolhida (SlidingIndicator no code-behind), como a pílula da barra flutuante.
               O peso do texto não muda na seleção: mudar a largura da aba faria o sublinhado tremer.
             -->
-            <Grid RowDefinitions="Auto,Auto">
+            <Grid RowDefinitions="Auto,Auto" motion:Motion.Entrance="True" motion:Motion.Delay="280">
                 <HorizontalStackLayout x:Name="TabRow" Spacing="20">
                     <Label x:Name="PreviewTab" Text="Preview" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
                            TextColor="{DynamicResource InkTertiary}" motion:Motion.Press="True">
@@ -150,7 +159,8 @@
         </VerticalStackLayout>
 
         <!-- ===== Preview (RF02) + decisões do nível ===== -->
-        <ScrollView Grid.Row="1" IsVisible="{Binding IsPreviewTab}">
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsPreviewTab}"
+                    motion:Motion.Entrance="True" motion:Motion.Delay="340">
             <VerticalStackLayout Padding="{OnIdiom Phone='20,20,20,40', Default='40,28,40,48'}" Spacing="28"
                                  MaximumWidthRequest="{StaticResource ContentMaxWidth}">
                 <Border Style="{StaticResource PreviewCanvas}" Padding="{OnIdiom Phone=20, Default=36}">

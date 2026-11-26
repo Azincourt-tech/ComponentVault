@@ -66,6 +66,7 @@ tests/ComponentVault.Tests xUnit v3.
 - **Troca de tema:** o `VaultThemeManager.Apply(palette)` troca o dicionário e dispara `ThemeColors.PaletteChanged`.
 - **Estilos sempre nomeados** (`Style="{StaticResource PrimaryButton}"`), nunca implícitos, para a variante Base continuar crua.
 - **Tipografia:** Plus Jakarta Sans (`FontRegular`/`Medium`/`SemiBold`/`Bold`) e JetBrains Mono (`FontMono`). Os arquivos ficam em `App/Resources/Fonts` como `MauiFont`.
+- **Transição de página (Hero):** a linha tocável recebe `controls:Hero.Source="True"`, e o ícone e o título, na linha e no destino, recebem `controls:Hero.Key="thumb"` / `"title"`. A página de destino chama `Hero.PlayInto(...)` no `Loaded`. As posições vêm da janela nativa (`TransformToVisual` no Windows, `GetLocationInWindow` no Android).
 - **Movimento:** use `Motion.Entrance`, `Motion.Delay` e `Motion.Press` (propriedades anexadas em `Lib/Theming/Motion.cs`). O `AmbientBackground` é o fundo de luz do Vidro. Nos dois temas sólidos as manchas são transparentes.
 - **Regras de gosto** (adaptadas da taste-skill, Leonxlnx/taste-skill):
   - interface 90–95% neutra, com uma só cor de destaque;
@@ -88,6 +89,7 @@ tests/ComponentVault.Tests xUnit v3.
 - **Atualização de tema a partir de thread de fundo:** use `Application.Current.Dispatcher.Dispatch`. O `MainThread.BeginInvokeOnMainThread` falha na abertura do Windows com "Unable to find main thread".
 - **Abas do Shell escondidas (`TabBarIsVisible=False`) não trocam de conteúdo no Windows:** o Shell muda de rota, mas a tela fica na aba anterior. Por isso não há `TabBar`, só páginas empilhadas.
 - **`SizeChanged` de um layout dispara antes de os filhos serem posicionados.** Para ler `X`/`Width` dos filhos, adie com `Dispatcher.Dispatch`. Para pílula ou sublinhado que desliza até o item selecionado, use `App/Controls/SlidingIndicator.cs`, que já trata isso.
+- **Numa rota com várias páginas (`catalog/component`), o Shell insere as de baixo na pilha só depois que a de cima carrega.** O `CurrentState` também pode estar atrasado no `Loaded`. Confira de novo no `Shell.Navigated` (veja `NavDock.UpdateSectionFromStack`).
 - **Voltar do Shell duplicado:** nas páginas empilhadas, use `Shell.BackButtonBehavior IsVisible="False"`. O voltar é o da `NavDock`.
 - **Shell:** resolva o `AppShell` em `CreateWindow`, não no construtor do `App`, porque os recursos do `App.xaml` ainda não existem lá. Use `Title=""` nas páginas para não duplicar o título na barra.
 - **`CollectionView` com `MaximumWidthRequest` corta itens no Windows.** A margem é calculada no `SizeChanged` da página (veja `CatalogPage.xaml.cs`).

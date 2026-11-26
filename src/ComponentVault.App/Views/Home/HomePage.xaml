@@ -91,16 +91,16 @@
                                 <DataTemplate x:DataType="vm:ComponentCardModel">
                                     <VerticalStackLayout>
                                         <Grid Style="{StaticResource ListRow}" ColumnDefinitions="Auto,*,Auto"
-                                              motion:Motion.Press="True"
+                                              motion:Motion.Press="True" controls:Hero.Source="True"
                                               SemanticProperties.Description="{Binding Name}">
                                             <Grid.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding OpenComponentCommand, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, x:DataType=vm:HomeViewModel}"
                                                                       CommandParameter="{Binding .}" />
                                             </Grid.GestureRecognizers>
-                                            <controls:ComponentThumb WidthRequest="40" HeightRequest="40" IconName="{Binding Icon}" />
+                                            <controls:ComponentThumb WidthRequest="40" HeightRequest="40" IconName="{Binding Icon}" controls:Hero.Key="thumb" />
                                             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                                                 <HorizontalStackLayout Spacing="8">
-                                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" />
+                                                    <Label Style="{StaticResource CardTitle}" Text="{Binding Name}" controls:Hero.Key="title" />
                                                     <Label Text="Novo" FontFamily="{StaticResource FontMedium}" FontSize="13"
                                                            TextColor="{DynamicResource AccentText}"
                                                            IsVisible="{Binding IsNew}" VerticalOptions="Center" />
