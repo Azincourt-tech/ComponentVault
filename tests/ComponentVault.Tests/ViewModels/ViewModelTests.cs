@@ -19,7 +19,7 @@ public class CatalogViewModelTests
     public CatalogViewModelTests()
     {
         var metadata = new ComponentMetadataService(new FakeTimeProvider(new DateTimeOffset(2026, 11, 25, 0, 0, 0, TimeSpan.Zero)));
-        _vm = new CatalogViewModel(metadata, _navigation, new ThemeService(new InMemoryPreferenceStore(), new FakeThemeApplier()));
+        _vm = new CatalogViewModel(metadata, _navigation);
     }
 
     [Fact]
@@ -231,8 +231,7 @@ public class HomeViewModelTests
     public void Mostra_recentes_e_estatisticas_do_catalogo()
     {
         var metadata = new ComponentMetadataService(new FakeTimeProvider(new DateTimeOffset(2026, 11, 25, 0, 0, 0, TimeSpan.Zero)));
-        var theme = new ThemeService(new InMemoryPreferenceStore(), new FakeThemeApplier());
-        var vm = new HomeViewModel(metadata, new FakeNavigation(), theme, new AppearanceViewModel(theme));
+        var vm = new HomeViewModel(metadata, new FakeNavigation());
 
         Assert.Equal(HomeViewModel.RecentCount, vm.Recent.Count);
         Assert.Equal(metadata.GetAll().Count, vm.Stats[0].Value);

@@ -58,6 +58,36 @@ public class ThemeServiceTests
     }
 
     [Fact]
+    public async Task Em_sistema_o_seletor_marca_o_tema_que_o_SO_escolheu()
+    {
+        var service = new ThemeService(new InMemoryPreferenceStore(), new FakeThemeApplier { SystemIsDark = true });
+        var appearance = new Core.ViewModels.AppearanceViewModel(service);
+
+        await service.InitializeAsync();
+
+        Assert.Equal(AppThemePreference.System, service.Current);
+        Assert.Equal(AppThemePreference.Dark, service.Visible);
+        Assert.Equal(AppThemePreference.Dark, appearance.Selected.Preference);
+        Assert.Single(appearance.Options, o => o.IsSelected);
+    }
+
+    [Fact]
+    public async Task Preview_aplica_e_avisa_sem_salvar()
+    {
+        var store = new InMemoryPreferenceStore();
+        var applier = new FakeThemeApplier();
+        var service = new ThemeService(store, applier);
+        var appearance = new Core.ViewModels.AppearanceViewModel(service);
+        await service.InitializeAsync();
+
+        service.Preview(AppThemePreference.Glass);
+
+        Assert.Equal(AppThemePreference.Glass, applier.Applied[^1]);
+        Assert.Equal(AppThemePreference.Glass, appearance.Selected.Preference);
+        Assert.False(store.Values.ContainsKey(ThemeService.PreferenceKey));
+    }
+
+    [Fact]
     public async Task Alternar_parte_do_tema_visivel_quando_a_preferencia_e_sistema()
     {
         var applier = new FakeThemeApplier { SystemIsDark = true };

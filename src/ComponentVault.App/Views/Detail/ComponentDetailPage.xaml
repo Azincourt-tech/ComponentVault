@@ -6,26 +6,34 @@
              xmlns:models="clr-namespace:ComponentVault.Core.Models;assembly=ComponentVault.Core"
              xmlns:controls="clr-namespace:ComponentVault.App.Controls"
              xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
+             xmlns:motion="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
              x:Class="ComponentVault.App.Views.Detail.ComponentDetailPage"
              x:DataType="vm:ComponentDetailViewModel"
              Style="{StaticResource VaultPage}"
-             Title=""
-             Shell.TabBarIsVisible="False"
-             Shell.NavBarIsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
+             Title="">
 
     <ContentPage.Resources>
         <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
         <controls:OriginToBrushConverter x:Key="OriginBrush" />
     </ContentPage.Resources>
 
-    <Grid>
-        <!-- Luz ambiente (tema Vidro) atrás de tudo -->
-        <lib:AmbientBackground />
+    <!-- O voltar é o da barra flutuante; o do Shell duplicaria na barra de título do Windows. -->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
 
-        <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Luz ambiente (tema Vidro) atrás de tudo -->
+        <lib:AmbientBackground Grid.RowSpan="3" />
+
+        <!-- Voltar, seções e tema; some no modo apresentação -->
+        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" ShowBack="True"
+                          IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}" />
+
+        <Grid Grid.Row="1" RowDefinitions="Auto,*">
 
         <!-- ===== Cabeçalho, níveis e abas (somem no modo apresentação) ===== -->
-        <VerticalStackLayout Padding="{OnIdiom Phone='20,12,20,0', Default='40,24,40,0'}" Spacing="18"
+        <VerticalStackLayout Padding="{OnIdiom Phone='20,12,20,0', Default='40,12,40,0'}" Spacing="18"
                              MaximumWidthRequest="{StaticResource ContentMaxWidth}"
                              IsVisible="{Binding IsPresentationMode, Converter={toolkit:InvertedBoolConverter}}">
 
@@ -45,11 +53,12 @@
             <!-- Seletor de nível: trilho segmentado, o selecionado vira superfície com linha fina -->
             <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                 <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="0"
-                        StrokeShape="RoundRectangle 12" Padding="4" HorizontalOptions="Start">
+                        StrokeShape="RoundRectangle 24" Padding="4" HorizontalOptions="Start">
                     <HorizontalStackLayout Spacing="4" BindableLayout.ItemsSource="{Binding Variants}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:VariantOption">
-                                <Border Padding="14,0" HeightRequest="40" StrokeShape="RoundRectangle 9"
+                                <Border Padding="16,0" HeightRequest="40" StrokeShape="RoundRectangle 20"
+                                        motion:Motion.Press="True"
                                         StrokeThickness="1" Stroke="Transparent" BackgroundColor="Transparent"
                                         SemanticProperties.Description="{Binding Title, StringFormat='Nível {0}'}">
                                     <Border.GestureRecognizers>
@@ -82,72 +91,62 @@
                 </Border>
             </ScrollView>
 
-            <!-- Abas Preview · Docs · Código -->
-            <VerticalStackLayout Spacing="0">
-                <HorizontalStackLayout Spacing="8">
-                    <VerticalStackLayout>
-                        <VerticalStackLayout.GestureRecognizers>
+            <!--
+              Abas Preview · Lado a lado · Docs · Código. O sublinhado é um só e desliza até a aba
+              escolhida (SlidingIndicator no code-behind), como a pílula da barra flutuante.
+              O peso do texto não muda na seleção: mudar a largura da aba faria o sublinhado tremer.
+            -->
+            <Grid RowDefinitions="Auto,Auto">
+                <HorizontalStackLayout x:Name="TabRow" Spacing="20">
+                    <Label x:Name="PreviewTab" Text="Preview" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                           TextColor="{DynamicResource InkTertiary}" motion:Motion.Press="True">
+                        <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Preview}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label Text="Preview" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
-                               TextColor="{DynamicResource InkSecondary}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsPreviewTab}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsPreviewTab}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Margin="16,0,0,0" IsVisible="{Binding CanCompare}">
-                        <VerticalStackLayout.GestureRecognizers>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsPreviewTab}" Value="True">
+                                <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label x:Name="CompareTab" Text="Lado a lado" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                           TextColor="{DynamicResource InkTertiary}" IsVisible="{Binding CanCompare}" motion:Motion.Press="True">
+                        <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Compare}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label Text="Lado a lado" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
-                               TextColor="{DynamicResource InkSecondary}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsCompareTab}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsCompareTab}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Margin="16,0,0,0">
-                        <VerticalStackLayout.GestureRecognizers>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsCompareTab}" Value="True">
+                                <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label x:Name="DocsTab" Text="Docs" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                           TextColor="{DynamicResource InkTertiary}" motion:Motion.Press="True">
+                        <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Docs}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label Text="Docs" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
-                               TextColor="{DynamicResource InkSecondary}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsDocsTab}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsDocsTab}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Margin="16,0,0,0">
-                        <VerticalStackLayout.GestureRecognizers>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsDocsTab}" Value="True">
+                                <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label x:Name="CodeTab" Text="Código" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
+                           TextColor="{DynamicResource InkTertiary}" motion:Motion.Press="True">
+                        <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SelectTabCommand}" CommandParameter="{x:Static models:DetailTab.Code}" />
-                        </VerticalStackLayout.GestureRecognizers>
-                        <Label Text="Código" Padding="4,12" FontFamily="{StaticResource FontMedium}" FontSize="15"
-                               TextColor="{DynamicResource InkSecondary}">
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding IsCodeTab}" Value="True">
-                                    <Setter Property="TextColor" Value="{DynamicResource Ink}" />
-                                    <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
-                                </DataTrigger>
-                            </Label.Triggers>
-                        </Label>
-                        <BoxView HeightRequest="2" Color="{DynamicResource Ink}" IsVisible="{Binding IsCodeTab}" />
-                    </VerticalStackLayout>
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsCodeTab}" Value="True">
+                                <Setter Property="TextColor" Value="{DynamicResource Ink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </HorizontalStackLayout>
-                <BoxView Style="{StaticResource Divider}" />
-            </VerticalStackLayout>
+                <BoxView Grid.Row="1" Style="{StaticResource Divider}" />
+                <BoxView x:Name="TabUnderline" Grid.Row="1" HeightRequest="2" CornerRadius="1"
+                         Color="{DynamicResource Ink}" VerticalOptions="End" />
+            </Grid>
         </VerticalStackLayout>
 
         <!-- ===== Preview (RF02) + decisões do nível ===== -->

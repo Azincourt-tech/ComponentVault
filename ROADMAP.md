@@ -1,6 +1,14 @@
 # Roadmap
 
-O que ainda falta no ComponentVault, em ordem de prioridade. Situação em 25/11/2026: 30 componentes e 63 variantes, 3 temas, build Release do Windows sem avisos e 61 testes passando. Nada foi commitado ainda.
+O que ainda falta no ComponentVault, em ordem de prioridade. Situação em 26/11/2026: 30 componentes e 63 variantes, 3 temas, barra flutuante de navegação e tema, build Release do Windows sem avisos e 63 testes passando.
+
+## Feito em 26/11/2026
+
+- **Barra flutuante (`NavDock`)** no lugar das abas e do botão "Tema" do Shell. Fica no topo no desktop e embaixo no celular, e reúne voltar, Início, Catálogo e o seletor direto dos 3 temas. A pílula desliza entre as seções, inclusive ao trocar de página, e a barra entra com animação na abertura do app.
+- **Navegação empilhada.** A Home é a única raiz, e o Catálogo e o Detalhe são empilhados sobre ela. Abas escondidas do Shell não trocam de conteúdo no Windows.
+- **Barra de título do Windows** com as cores da paleta. Corrige o título ilegível no tema Claro.
+- **Seletor de tema sempre sincronizado:** marca o tema visível, inclusive em "Sistema" e com `COMPONENTVAULT_THEME`.
+- **Filtros do catálogo e seletor de nível** em cápsula, com feedback de toque, no mesmo desenho da barra.
 
 ## 1. Verificação pendente
 
@@ -21,13 +29,17 @@ O que foi escrito, mas ainda não rodou de ponta a ponta.
   - [ ] a aba Lado a lado
   - [ ] o copiar código
   - [ ] a busca e os filtros
+- [x] ~~Barra flutuante com cliques reais~~ (testada pelo dono no Windows em 26/11/2026).
+- [ ] **Barra flutuante no celular:** a largura (só a seção ativa mostra o nome) e a margem sobre a barra de gestos do Android.
+- [ ] **Foco automático na busca** ao abrir o Catálogo no Windows. Decidir se fica; no celular abriria o teclado sem pedir.
 - [ ] **Tema Vidro em todas as telas** além de Home, Catálogo e Detalhe do Switch: o componente Glass, a aba Código (cores de sintaxe) e os popups.
 
 ## 2. Bugs conhecidos
 
-- [ ] **Título da janela ilegível no tema Claro.** Depois de trocar de um tema escuro para o Claro em execução, o texto "ComponentVault" da barra de título fica branco sobre cinza claro. A barra não acompanha o `UserAppTheme`. Ajustar as cores da barra de título no Windows (`AppWindow.TitleBar`) ao trocar de paleta.
-- [ ] **Seletor "Aparência" fora de sincronia com `COMPONENTVAULT_THEME`.** Ele marca a preferência salva, não o tema forçado pela variável. Só afeta as capturas, mas convém o `AppearanceViewModel` refletir a paleta ativa.
-- [ ] **Catálogo às vezes abre rolado** (visto uma vez no Vidro, com o grupo "Entradas" no topo). Confirmar se a lista restaura a posição ou se é efeito do ponteiro sobre a janela durante a captura.
+- [x] ~~Título da janela ilegível no tema Claro~~ (barra de título com as cores da paleta).
+- [x] ~~Seletor de tema fora de sincronia com `COMPONENTVAULT_THEME`~~ (`IThemeService.Preview`).
+- [ ] **Catálogo às vezes abre rolado** (visto uma vez antes da navegação empilhada). Agora a página é nova a cada abertura; confirmar se ainda acontece.
+- [x] ~~Código morto do botão Tema antigo~~ (removido da Home, do Catálogo e do seletor de aparência).
 - [ ] **ScrollView + UI Automation derruba o app no Windows** (bug do framework, descrito no README). Testar de novo a cada versão do MAUI e do Windows App SDK.
 
 ## 3. Componentes: completar os níveis
@@ -63,7 +75,10 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 
 ## 5. Design e movimento (direção "ousada")
 
-- [ ] **Barra de navegação flutuante de vidro**, no lugar da barra padrão do Shell: cápsula translúcida com o indicador animado entre Início e Catálogo.
+- [x] ~~Barra de navegação flutuante de vidro~~ (`NavDock`).
+- [x] ~~Abas do detalhe com indicador deslizante~~ (`SlidingIndicator`, o mesmo da barra flutuante).
+- [ ] **Seletor de nível do detalhe com a pílula deslizante** (hoje a seleção troca de fundo sem movimento).
+- [ ] **Barra que se recolhe ao rolar** para baixo e volta ao rolar para cima (celular).
 - [ ] **Transição entre páginas**: o card do catálogo "cresce" até o cabeçalho do detalhe (shared element aproximado com Translation e Scale).
 - [ ] **Entrada em cascata** dos itens do catálogo ao rolar e ao filtrar.
 - [ ] **Modo Apresentar**: tela cheia com o componente centralizado e troca de nível por gesto ou teclado.

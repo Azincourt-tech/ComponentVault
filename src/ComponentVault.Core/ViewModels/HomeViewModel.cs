@@ -4,7 +4,6 @@ using ComponentVault.Core.Models;
 using ComponentVault.Core.Navigation;
 using ComponentVault.Core.Presentation;
 using ComponentVault.Core.Services.Metadata;
-using ComponentVault.Core.Services.Theming;
 
 namespace ComponentVault.Core.ViewModels;
 
@@ -13,13 +12,10 @@ public sealed partial class HomeViewModel : BaseViewModel
     public const int RecentCount = 5;
 
     private readonly INavigationService _navigation;
-    private readonly IThemeService _theme;
 
-    public HomeViewModel(IComponentMetadataService metadata, INavigationService navigation, IThemeService theme, AppearanceViewModel appearance)
+    public HomeViewModel(IComponentMetadataService metadata, INavigationService navigation)
     {
         _navigation = navigation;
-        _theme = theme;
-        Appearance = appearance;
         Title = "ComponentVault";
 
         var all = metadata.GetAll();
@@ -34,8 +30,6 @@ public sealed partial class HomeViewModel : BaseViewModel
             new StatModel(libraries, Labels.Plural(libraries, "biblioteca", "bibliotecas")),
         ];
     }
-
-    public AppearanceViewModel Appearance { get; }
 
     public IReadOnlyList<ComponentCardModel> Recent { get; }
 
@@ -58,9 +52,6 @@ public sealed partial class HomeViewModel : BaseViewModel
 
     [RelayCommand]
     private Task OpenCatalogAsync() => _navigation.GoToAsync(Routes.Catalog);
-
-    [RelayCommand]
-    private Task ToggleThemeAsync() => _theme.ToggleAsync();
 }
 
 public sealed record StatModel(int Value, string Label);

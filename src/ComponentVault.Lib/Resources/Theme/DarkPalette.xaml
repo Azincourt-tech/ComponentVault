@@ -18,6 +18,8 @@
     <Color x:Key="Hairline">#2A2A27</Color>
     <Color x:Key="HairlineStrong">#3C3B38</Color>
     <SolidColorBrush x:Key="CardStroke" Color="#2A2A27" />
+    <Color x:Key="Chrome">#F01C1C1B</Color>
+    <Color x:Key="ChromeStroke">#363633</Color>
 
     <Color x:Key="AccentText">#7EA8F6</Color>
     <Color x:Key="AccentTint">#2E5D8FF0</Color>

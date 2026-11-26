@@ -5,7 +5,6 @@
              xmlns:controls="clr-namespace:ComponentVault.App.Controls"
              xmlns:lib="clr-namespace:ComponentVault.Lib.Controls;assembly=ComponentVault.Lib"
              xmlns:motion="clr-namespace:ComponentVault.Lib.Theming;assembly=ComponentVault.Lib"
-             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
              x:Class="ComponentVault.App.Views.Home.HomePage"
              x:DataType="vm:HomeViewModel"
              Style="{StaticResource VaultPage}"
@@ -13,25 +12,21 @@
 
     <ContentPage.Resources>
         <controls:OriginToBadgeKindConverter x:Key="BadgeKind" />
-        <controls:FluentIconConverter x:Key="FluentIcon" />
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Tema" IconImageSource="theme.png" Command="{Binding Appearance.CycleCommand}" />
-    </ContentPage.ToolbarItems>
-
-    <Grid>
+    <Grid RowDefinitions="Auto,*,Auto">
         <!-- Luz ambiente: só acende no tema Vidro, e deriva devagar. -->
-        <lib:AmbientBackground />
+        <lib:AmbientBackground Grid.RowSpan="3" />
 
-        <ScrollView>
+        <!-- Navegação e tema: no topo no desktop, embaixo no celular -->
+        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" Section="Home" />
+
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="52"
                                  MaximumWidthRequest="{StaticResource ContentMaxWidth}">
 
                 <!-- Abertura -->
-                <Grid ColumnDefinitions="{OnIdiom Phone='*', Default='*,Auto'}"
-                      RowDefinitions="{OnIdiom Phone='Auto,Auto', Default='Auto'}"
-                      ColumnSpacing="32" RowSpacing="24" Margin="0,12,0,0">
+                <Grid Margin="0,12,0,0">
 
                     <VerticalStackLayout Spacing="16">
                         <Label Style="{StaticResource Display}" FontSize="{OnIdiom Phone=34, Default=48}"
@@ -47,54 +42,6 @@
                             <Button Text="Explorar o catálogo" Style="{StaticResource PrimaryButtonLarge}"
                                     Command="{Binding OpenCatalogCommand}" />
                         </HorizontalStackLayout>
-                    </VerticalStackLayout>
-
-                    <!-- Aparência: três temas, troca ao vivo -->
-                    <VerticalStackLayout Grid.Column="{OnIdiom Phone=0, Default=1}" Grid.Row="{OnIdiom Phone=1, Default=0}"
-                                         Spacing="10" VerticalOptions="End"
-                                         motion:Motion.Entrance="True" motion:Motion.Delay="220">
-                        <Label Style="{StaticResource FieldLabel}" Text="Aparência" />
-                        <Border BackgroundColor="{DynamicResource SurfaceAlt}" StrokeThickness="1"
-                                Stroke="{DynamicResource CardStroke}" StrokeShape="RoundRectangle 22" Padding="4"
-                                HorizontalOptions="Start">
-                            <HorizontalStackLayout Spacing="4" BindableLayout.ItemsSource="{Binding Appearance.Options}">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="vm:ThemeOption">
-                                        <Border HeightRequest="38" Padding="14,0" StrokeShape="RoundRectangle 19"
-                                                StrokeThickness="0" BackgroundColor="Transparent"
-                                                SemanticProperties.Description="{Binding Label, StringFormat='Tema {0}'}">
-                                            <Border.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Appearance.SelectCommand, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, x:DataType=vm:HomeViewModel}"
-                                                                      CommandParameter="{Binding .}" />
-                                            </Border.GestureRecognizers>
-                                            <Border.Triggers>
-                                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
-                                                    <Setter Property="BackgroundColor" Value="{DynamicResource Ink}" />
-                                                </DataTrigger>
-                                            </Border.Triggers>
-                                            <HorizontalStackLayout Spacing="8">
-                                                <mic:MauiIcon Icon="{Binding Icon, Converter={StaticResource FluentIcon}}" IconSize="16"
-                                                              IconColor="{DynamicResource InkSecondary}" VerticalOptions="Center">
-                                                    <mic:MauiIcon.Triggers>
-                                                        <DataTrigger TargetType="mic:MauiIcon" Binding="{Binding IsSelected}" Value="True">
-                                                            <Setter Property="IconColor" Value="{DynamicResource OnInk}" />
-                                                        </DataTrigger>
-                                                    </mic:MauiIcon.Triggers>
-                                                </mic:MauiIcon>
-                                                <Label Text="{Binding Label}" FontFamily="{StaticResource FontMedium}" FontSize="14"
-                                                       VerticalOptions="Center" TextColor="{DynamicResource InkSecondary}">
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
-                                                            <Setter Property="TextColor" Value="{DynamicResource OnInk}" />
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
-                                                </Label>
-                                            </HorizontalStackLayout>
-                                        </Border>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </HorizontalStackLayout>
-                        </Border>
                     </VerticalStackLayout>
                 </Grid>
 

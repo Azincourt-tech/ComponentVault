@@ -1,3 +1,4 @@
+using ComponentVault.App.Views.Catalog;
 using ComponentVault.App.Views.Detail;
 using ComponentVault.Core.Navigation;
 
@@ -9,7 +10,8 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        // Rotas empilhadas sobre as abas (ADR-004). Parâmetros chegam via IQueryAttributable.
+        // Rotas empilhadas sobre a Home (ADR-004). Parâmetros chegam via IQueryAttributable.
+        Routing.RegisterRoute(Routes.Catalog, typeof(CatalogPage));
         Routing.RegisterRoute(Routes.ComponentDetail, typeof(ComponentDetailPage));
     }
 }

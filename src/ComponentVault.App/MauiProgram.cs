@@ -46,7 +46,8 @@ public static class MauiProgram
         services.AddSingleton<IClipboardService, MauiClipboardService>();
         services.AddSingleton<INavigationService, ShellNavigationService>();
 
-        // ViewModels e páginas. O catálogo é singleton para manter busca, filtro e scroll ao voltar.
+        // ViewModels e páginas. A ViewModel do catálogo é singleton para manter busca e filtro ao voltar;
+        // a página é nova a cada vez, porque agora é empilhada (uma página não pode entrar duas vezes na pilha).
         services.AddSingleton<AppearanceViewModel>();
         services.AddTransient<HomeViewModel>();
         services.AddSingleton<CatalogViewModel>();
@@ -54,7 +55,7 @@ public static class MauiProgram
 
         services.AddSingleton<AppShell>();
         services.AddTransient<HomePage>();
-        services.AddSingleton<CatalogPage>();
+        services.AddTransient<CatalogPage>();
         services.AddTransient<ComponentDetailPage>();
 
         return builder.Build();

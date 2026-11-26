@@ -28,6 +28,9 @@
         <GradientStop Color="#1AFFFFFF" Offset="0.35" />
         <GradientStop Color="#0DFFFFFF" Offset="1" />
     </LinearGradientBrush>
+    <!-- Barra flutuante: vidro fumê, mais denso que os cards para continuar legível sobre o conteúdo -->
+    <Color x:Key="Chrome">#C7141A2D</Color>
+    <Color x:Key="ChromeStroke">#40FFFFFF</Color>
 
     <Color x:Key="AccentText">#A3C4FF</Color>
     <Color x:Key="AccentTint">#3D4F8EF7</Color>

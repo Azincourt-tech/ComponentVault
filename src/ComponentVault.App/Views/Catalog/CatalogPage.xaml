@@ -11,18 +11,21 @@
              Style="{StaticResource VaultPage}"
              Title="">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Tema" IconImageSource="theme.png" Command="{Binding ToggleThemeCommand}" />
-    </ContentPage.ToolbarItems>
+    <!-- O voltar é o da barra flutuante; o do Shell duplicaria na barra de título do Windows. -->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
 
-    <Grid>
+    <Grid RowDefinitions="Auto,*,Auto">
         <!-- Luz ambiente (tema Vidro) atrás de tudo -->
-        <lib:AmbientBackground />
+        <lib:AmbientBackground Grid.RowSpan="3" />
 
-        <Grid RowDefinitions="Auto,*" SizeChanged="OnPageSizeChanged">
+        <controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" Section="Catalog" />
+
+        <Grid Grid.Row="1" RowDefinitions="Auto,*" SizeChanged="OnPageSizeChanged">
 
         <!-- Busca (RF04) e filtro de origem -->
-        <VerticalStackLayout Padding="{OnIdiom Phone='20,16,20,8', Default='40,28,40,8'}" Spacing="14"
+        <VerticalStackLayout Padding="{OnIdiom Phone='20,16,20,8', Default='40,16,40,8'}" Spacing="14"
                              MaximumWidthRequest="880">
             <Grid ColumnDefinitions="*,Auto">
                 <Label Style="{StaticResource PageTitle}" Text="Catálogo" />
@@ -38,7 +41,8 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="vm:OriginFilterOption">
                             <Border Padding="14,0" HeightRequest="36" MinimumWidthRequest="44"
-                                    StrokeShape="RoundRectangle 8"
+                                    StrokeShape="RoundRectangle 18"
+                                    motion:Motion.Press="True"
                                     StrokeThickness="1"
                                     Stroke="{DynamicResource HairlineStrong}"
                                     BackgroundColor="Transparent"

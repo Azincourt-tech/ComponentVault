@@ -35,7 +35,7 @@ dotnet build src/ComponentVault.App -f net10.0-windows10.0.19041.0 -t:Run
 - Trabalhe na branch `develop`. A `main` só tem o commit inicial.
 - **Identidade dos commits:** autor "Willian Almeida", com o mesmo e-mail pessoal dos commits existentes (`git log -1 --format='%an <%ae>'`). Configure com `git config --local user.name` e `user.email` antes do primeiro commit. Nunca use o e-mail corporativo.
 - Mensagens de commit em pt-BR. **Sem `Co-Authored-By` e sem citar assistente de IA.**
-- Só commite quando o dono pedir. Até 25/11/2026 todo o trabalho estava sem commit, em cima do commit inicial.
+- Só commite quando o dono pedir.
 
 ## Arquitetura
 
@@ -53,6 +53,7 @@ tests/ComponentVault.Tests xUnit v3.
   2. Crie as Views com os marcadores de snippet e o `Previews.cs` com os atributos.
   3. Adicione a entrada no `ComponentCatalog.<Categoria>.cs`.
   4. Rode os testes.
+- **Navegação:** a Home é a única raiz do Shell. O Catálogo (`catalog`) e o Detalhe (`component`) são empilhados. As barras nativas do Shell ficam escondidas, e a navegação visível é a `NavDock` (`App/Controls/NavDock.cs`), uma barra flutuante em cada página: no topo no desktop, embaixo no celular, com voltar, seções e o seletor dos 3 temas. Página nova entra com `<controls:NavDock Grid.Row="{OnIdiom Phone=2, Default=0}" Section="..." />` num Grid `Auto,*,Auto`.
 - **ViewModels** usam CommunityToolkit.Mvvm com campos `[ObservableProperty]`. A navegação passa por `INavigationService`, o tema por `IThemeService`/`IThemeApplier`: nada de `Microsoft.Maui.*` no Core.
 
 ## Design system
@@ -85,6 +86,9 @@ tests/ComponentVault.Tests xUnit v3.
 - **`BoxView` ignora `Background` em degradê.** Use `Grid` ou `Border`.
 - **Na Lib, o XamlC em Release não resolve os namespaces `http://` das libs.** Use `clr-namespace:...;assembly=...`. No Sharpnado, o assembly se chama `Maui.Tabs`.
 - **Atualização de tema a partir de thread de fundo:** use `Application.Current.Dispatcher.Dispatch`. O `MainThread.BeginInvokeOnMainThread` falha na abertura do Windows com "Unable to find main thread".
+- **Abas do Shell escondidas (`TabBarIsVisible=False`) não trocam de conteúdo no Windows:** o Shell muda de rota, mas a tela fica na aba anterior. Por isso não há `TabBar`, só páginas empilhadas.
+- **`SizeChanged` de um layout dispara antes de os filhos serem posicionados.** Para ler `X`/`Width` dos filhos, adie com `Dispatcher.Dispatch`. Para pílula ou sublinhado que desliza até o item selecionado, use `App/Controls/SlidingIndicator.cs`, que já trata isso.
+- **Voltar do Shell duplicado:** nas páginas empilhadas, use `Shell.BackButtonBehavior IsVisible="False"`. O voltar é o da `NavDock`.
 - **Shell:** resolva o `AppShell` em `CreateWindow`, não no construtor do `App`, porque os recursos do `App.xaml` ainda não existem lá. Use `Title=""` nas páginas para não duplicar o título na barra.
 - **`CollectionView` com `MaximumWidthRequest` corta itens no Windows.** A margem é calculada no `SizeChanged` da página (veja `CatalogPage.xaml.cs`).
 - **`CharacterSpacing` muito negativo cola as palavras** na Plus Jakarta. O limite seguro é -0.4.
@@ -94,7 +98,7 @@ tests/ComponentVault.Tests xUnit v3.
 
 Para capturar uma tela sem interagir, abra o exe com estas variáveis:
 
-- `COMPONENTVAULT_START`: uma rota do Shell (`//home`, `//catalog`, `component?id=switch`);
+- `COMPONENTVAULT_START`: uma rota do Shell (`catalog`, `component?id=switch`, `catalog/component?id=switch`);
 - `COMPONENTVAULT_THEME`: `Light`, `Dark` ou `Glass`.
 
 Depois capture a janela (ex.: `PrintWindow`). As exceções não tratadas vão para `%LOCALAPPDATA%\ComponentVault\crash.log`.

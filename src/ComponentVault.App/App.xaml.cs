@@ -1,3 +1,4 @@
+using ComponentVault.Core.Models;
 using ComponentVault.Core.Services.Theming;
 using ComponentVault.Lib.Theming;
 using Microsoft.Extensions.Logging;
@@ -33,8 +34,17 @@ public partial class App : Application
             MinimumHeight = 560,
         };
 
+#if WINDOWS
+        // Barra de título com as cores da paleta: a nativa não acompanha a troca de tema em
+        // execução e deixava o título branco sobre cinza claro no tema Claro.
+        var titleBar = new TitleBar { Title = "ComponentVault", HeightRequest = 40 };
+        titleBar.SetThemeColor(VisualElement.BackgroundColorProperty, "Ground");
+        titleBar.SetThemeColor(TitleBar.ForegroundColorProperty, "InkSecondary");
+        window.TitleBar = titleBar;
+#endif
+
         // Link profundo para desenvolvimento e capturas automatizadas, ex.:
-        // COMPONENTVAULT_START="//catalog" ou "component?id=button&variant=button.styled".
+        // COMPONENTVAULT_START="catalog" ou "catalog/component?id=button&variant=button.styled".
         var start = Environment.GetEnvironmentVariable("COMPONENTVAULT_START");
         if (!string.IsNullOrWhiteSpace(start))
         {
@@ -50,11 +60,13 @@ public partial class App : Application
         {
             await theme.InitializeAsync();
 
-            // Desenvolvimento/capturas: força uma paleta nesta execução, sem salvar a preferência.
+            // Desenvolvimento/capturas: força um tema nesta execução, sem salvar a preferência.
+            // Passa pelo serviço para o seletor de tema marcar o tema certo.
             var forced = Environment.GetEnvironmentVariable("COMPONENTVAULT_THEME");
-            if (Enum.TryParse<VaultPalette>(forced, ignoreCase: true, out var palette))
+            if (Enum.TryParse<AppThemePreference>(forced, ignoreCase: true, out var preference)
+                && preference != AppThemePreference.System)
             {
-                Current?.Dispatcher.Dispatch(() => VaultThemeManager.Apply(palette));
+                theme.Preview(preference);
             }
         }
         catch (Exception ex)

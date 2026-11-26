@@ -31,13 +31,15 @@ public sealed partial class AppearanceViewModel : ObservableObject
     private Task SelectAsync(ThemeOption? option) =>
         option is null ? Task.CompletedTask : _theme.SetThemeAsync(option.Preference);
 
-    [RelayCommand]
-    private Task CycleAsync() => _theme.ToggleAsync();
+    /// <summary>O tema na tela agora; em "Sistema", o Claro ou o Escuro que o SO escolheu.</summary>
+    public ThemeOption Selected => Options.First(o => o.Preference == _theme.Visible);
 
-    /// <summary>Atualiza a marcação; em "Sistema" nenhuma opção fica marcada até o usuário escolher.</summary>
+    /// <summary>Marca o tema visível: em "Sistema" fica marcado o que o SO escolheu, nunca nenhum.</summary>
     public void Refresh()
     {
-        foreach (var option in Options) option.IsSelected = option.Preference == _theme.Current;
+        var visible = _theme.Visible;
+        foreach (var option in Options) option.IsSelected = option.Preference == visible;
+        OnPropertyChanged(nameof(Selected));
     }
 }
 

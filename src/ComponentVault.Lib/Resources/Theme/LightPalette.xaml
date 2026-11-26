@@ -18,6 +18,9 @@
     <Color x:Key="Hairline">#E4E3DF</Color>
     <Color x:Key="HairlineStrong">#CFCEC8</Color>
     <SolidColorBrush x:Key="CardStroke" Color="#E4E3DF" />
+    <!-- Barra flutuante: quase opaca, para o conteúdo que passa por baixo não brigar com ela -->
+    <Color x:Key="Chrome">#EDFFFFFF</Color>
+    <Color x:Key="ChromeStroke">#DAD9D3</Color>
 
     <Color x:Key="AccentText">#2560CC</Color>
     <Color x:Key="AccentTint">#142F6FE4</Color>

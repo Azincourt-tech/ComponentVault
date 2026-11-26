@@ -54,7 +54,7 @@ Variáveis de ambiente para desenvolvimento e capturas:
 
 | Variável | Efeito |
 |---|---|
-| `COMPONENTVAULT_START` | Abre o app numa rota do Shell, ex.: `//catalog` ou `component?id=switch` |
+| `COMPONENTVAULT_START` | Abre o app numa rota do Shell, ex.: `catalog` ou `catalog/component?id=switch` |
 | `COMPONENTVAULT_THEME` | Força `Light`, `Dark` ou `Glass` nesta execução, sem salvar a preferência |
 
 No Windows, uma exceção não tratada é registrada em `%LOCALAPPDATA%\ComponentVault\crash.log`.

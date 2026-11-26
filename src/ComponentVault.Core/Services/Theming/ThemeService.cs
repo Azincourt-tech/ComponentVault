@@ -8,10 +8,16 @@ public interface IThemeService
 {
     AppThemePreference Current { get; }
 
+    /// <summary>O tema na tela: igual a <see cref="Current"/>, exceto em "Sistema", que vira Claro ou Escuro.</summary>
+    AppThemePreference Visible { get; }
+
     event EventHandler<AppThemePreference>? ThemeChanged;
 
     /// <summary>Lê a preferência salva e aplica. Chamado uma vez na subida do app.</summary>
     Task InitializeAsync();
+
+    /// <summary>Aplica um tema só nesta execução, sem salvar (capturas e desenvolvimento).</summary>
+    void Preview(AppThemePreference preference);
 
     Task SetThemeAsync(AppThemePreference preference);
 
@@ -25,7 +31,18 @@ public sealed class ThemeService(IPreferenceStore store, IThemeApplier applier) 
 
     public AppThemePreference Current { get; private set; } = AppThemePreference.System;
 
+    public AppThemePreference Visible => Current == AppThemePreference.System
+        ? applier.IsDarkActive ? AppThemePreference.Dark : AppThemePreference.Light
+        : Current;
+
     public event EventHandler<AppThemePreference>? ThemeChanged;
+
+    public void Preview(AppThemePreference preference)
+    {
+        Current = preference;
+        applier.Apply(preference);
+        ThemeChanged?.Invoke(this, preference);
+    }
 
     public async Task InitializeAsync()
     {
@@ -51,11 +68,7 @@ public sealed class ThemeService(IPreferenceStore store, IThemeApplier applier) 
     public Task ToggleAsync()
     {
         // "Sistema" parte do tema visível no momento.
-        var visible = Current == AppThemePreference.System
-            ? applier.IsDarkActive ? AppThemePreference.Dark : AppThemePreference.Light
-            : Current;
-
-        return SetThemeAsync(visible switch
+        return SetThemeAsync(Visible switch
         {
             AppThemePreference.Light => AppThemePreference.Dark,
             AppThemePreference.Dark => AppThemePreference.Glass,

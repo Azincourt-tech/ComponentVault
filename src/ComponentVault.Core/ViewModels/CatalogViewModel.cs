@@ -5,7 +5,6 @@ using ComponentVault.Core.Models;
 using ComponentVault.Core.Navigation;
 using ComponentVault.Core.Presentation;
 using ComponentVault.Core.Services.Metadata;
-using ComponentVault.Core.Services.Theming;
 
 namespace ComponentVault.Core.ViewModels;
 
@@ -13,7 +12,6 @@ public sealed partial class CatalogViewModel : BaseViewModel
 {
     private readonly IComponentMetadataService _metadata;
     private readonly INavigationService _navigation;
-    private readonly IThemeService _theme;
 
     [ObservableProperty]
     private string _searchText = string.Empty;
@@ -26,11 +24,10 @@ public sealed partial class CatalogViewModel : BaseViewModel
     [ObservableProperty]
     private IReadOnlyList<ComponentGroup> _groups = [];
 
-    public CatalogViewModel(IComponentMetadataService metadata, INavigationService navigation, IThemeService theme)
+    public CatalogViewModel(IComponentMetadataService metadata, INavigationService navigation)
     {
         _metadata = metadata;
         _navigation = navigation;
-        _theme = theme;
         Title = "Catálogo";
 
         Filters =
@@ -80,9 +77,6 @@ public sealed partial class CatalogViewModel : BaseViewModel
         card is null
             ? Task.CompletedTask
             : _navigation.GoToAsync(Routes.ComponentDetail, new Dictionary<string, object> { [Routes.Params.ComponentId] = card.Id });
-
-    [RelayCommand]
-    private Task ToggleThemeAsync() => _theme.ToggleAsync();
 
     private void ApplyFilter()
     {
