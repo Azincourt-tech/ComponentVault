@@ -37,3 +37,16 @@ public partial class CardAccordionPreview : ContentView
 {
     public CardAccordionPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("card.custom")]
+public partial class CardCustomPreview : ContentView
+{
+    public CardCustomPreview() => InitializeComponent();
+
+    // A dica acompanha a face visível.
+    private void OnCardPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(FlipCard.IsFlipped) || SideLabel is null) return;
+        SideLabel.Text = CreditCard.IsFlipped ? "Toque para voltar à frente" : "Toque no cartão para ver o verso";
+    }
+}

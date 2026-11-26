@@ -100,11 +100,11 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 | Componente | Base | Estilizado | Custom | Bibliotecas |
 |---|---|---|---|---|
 | Avatar | ✓ | | **+** anel de status/stories | ✓ Toolkit |
-| Button | ✓ | ✓ | **+** segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
-| Card | ✓ | ✓ | **+** card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, ✓ Syncfusion `SfAccordion` |
+| Button | ✓ | ✓ | ✓ segurar para confirmar | ✓ UraniumUI, ✓ Syncfusion `SfButton` |
+| Card | ✓ | ✓ | ✓ card que vira | ✓ Toolkit Expander, ✓ Syncfusion `SfCardView`, ✓ Syncfusion `SfAccordion` |
 | Carousel | ✓ | ✓ | **+** pilha de cartões | ✓ Syncfusion `SfCarousel` |
 | Chart | | | ✓ | ✓ LiveCharts, ✓ Syncfusion `SfCartesianChart`, ✓ Microcharts |
-| CheckBox | ✓ | ✓ | **+** check desenhado | ✓ UraniumUI |
+| CheckBox | ✓ | ✓ | ✓ check desenhado | ✓ UraniumUI |
 | Chips | ✓ | ✓ | ✓ | ✓ Syncfusion `SfChipGroup` |
 | DatePicker | ✓ | ✓ | **+** faixa de dias | ✓ UraniumUI, ✓ Syncfusion `SfCalendar`, ✓ Plugin.Maui.Calendar |
 | Editor | ✓ | ✓ | **+** Markdown com prévia | |
@@ -115,11 +115,11 @@ Pedido do dono em 27/11/2026: se mais de uma lib tem o componente, cada uma ganh
 | Picker | ✓ | ✓ | **+** roda (wheel) | ✓ UraniumUI, ✓ Syncfusion `SfPicker` |
 | Popup | ✓ | | **+** folha inferior | ✓ Toolkit, ✓ Syncfusion `SfPopup` |
 | Progress | ✓ | ✓ | ✓ | ✓ Syncfusion linear e circular |
-| Radio | ✓ | ✓ | **+** opções desenhadas | ✓ UraniumUI |
+| Radio | ✓ | ✓ | ✓ opções desenhadas | ✓ UraniumUI |
 | SearchBar | ✓ | ✓ | **+** busca com sugestões | ✓ UraniumUI `AutoCompleteTextField` |
 | Segmented | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfSegmentedControl` |
 | Skeleton | | | ✓ | ✓ Syncfusion `SfShimmer` |
-| Stepper | ✓ | ✓ | **+** contador desenhado | ✓ Syncfusion `SfNumericUpDown` |
+| Stepper | ✓ | ✓ | ✓ contador que rola | ✓ Syncfusion `SfNumericUpDown` |
 | Tabs | | | ✓ | ✓ Sharpnado, ✓ Syncfusion `SfTabView`, ✓ UraniumUI `TabView` |
 | Toast | | | ✓ | ✓ Toolkit |
 

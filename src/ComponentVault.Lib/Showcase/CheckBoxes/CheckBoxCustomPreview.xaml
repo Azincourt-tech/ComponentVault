@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.CheckBoxes"
+             x:Class="ComponentVault.Lib.Showcase.CheckBoxes.CheckBoxCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="PermissionRow" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="Auto,*" />
+            <Setter Property="ColumnSpacing" Value="12" />
+            <Setter Property="Padding" Value="16,12" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:checkbox.custom -->
+        <VerticalStackLayout Spacing="10">
+
+            <Label Style="{StaticResource FieldLabel}" Text="O que o app pode acessar" />
+
+            <!--
+              A linha inteira é o alvo de toque. "Todas" fica indeterminada (um traço) quando só parte
+              está marcada; tocar nela marca tudo.
+            -->
+            <Border Style="{StaticResource Card}" Padding="0">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource PermissionRow}">
+                        <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnAllTapped" /></Grid.GestureRecognizers>
+                        <local:AnimatedCheck x:Name="AllCheck" InputTransparent="True" SemanticProperties.Description="Todas as permissões" />
+                        <Label Grid.Column="1" Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1"
+                               Text="Todas" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <Grid Style="{StaticResource PermissionRow}">
+                        <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference CameraCheck}" /></Grid.GestureRecognizers>
+                        <local:AnimatedCheck x:Name="CameraCheck" IsChecked="True" InputTransparent="True" SemanticProperties.Description="Câmera" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" LineHeight="1.2" Text="Câmera" />
+                            <Label Style="{StaticResource Caption}" Text="Para ler QR codes de componentes." />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid Style="{StaticResource PermissionRow}">
+                        <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference NotifyCheck}" /></Grid.GestureRecognizers>
+                        <local:AnimatedCheck x:Name="NotifyCheck" InputTransparent="True" SemanticProperties.Description="Notificações" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" LineHeight="1.2" Text="Notificações" />
+                            <Label Style="{StaticResource Caption}" Text="Avisos de versões novas das bibliotecas." />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid Style="{StaticResource PermissionRow}">
+                        <Grid.GestureRecognizers><TapGestureRecognizer Tapped="OnRowTapped" CommandParameter="{x:Reference FilesCheck}" /></Grid.GestureRecognizers>
+                        <local:AnimatedCheck x:Name="FilesCheck" IsChecked="True" InputTransparent="True" SemanticProperties.Description="Arquivos" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" LineHeight="1.2" Text="Arquivos" />
+                            <Label Style="{StaticResource Caption}" Text="Para exportar snippets." />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:checkbox.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="AnimatedCheck desenhado com GraphicsView: o preenchimento cresce do centro e o traço do check é desenhado de ponta a ponta, em 220ms. O contorno forte deixa a caixa vazia visível sem depender da cor." />
+
+    </VerticalStackLayout>
+
+</ContentView>

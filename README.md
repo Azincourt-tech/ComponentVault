@@ -12,7 +12,7 @@
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-03071E)](LICENSE)
 
 ![Componentes](https://img.shields.io/badge/componentes-30-F48C06)
-![Variantes](https://img.shields.io/badge/variantes-92-FAA307)
+![Variantes](https://img.shields.io/badge/variantes-97-FAA307)
 ![Temas](https://img.shields.io/badge/temas-Claro%20%C2%B7%20Escuro%20%C2%B7%20Vidro-FFBA08)
 ![Testes](https://img.shields.io/badge/testes-xUnit%20v3-6A040F)
 

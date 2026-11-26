@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Cards"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Cards.CardCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="OnCardLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontFamily" Value="JakartaMedium" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:card.custom -->
+        <VerticalStackLayout Spacing="12">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource FieldLabel}" Text="Cartão principal" VerticalOptions="Center" />
+                <Label x:Name="SideLabel" Grid.Column="1" Style="{StaticResource Caption}" Text="Toque no cartão para ver o verso" VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Proporção de cartão (1,586:1); a largura acompanha o espaço até 360px. -->
+            <local:FlipCard x:Name="CreditCard" fit:Fit.MaxWidth="360" HeightRequest="214" PropertyChanged="OnCardPropertyChanged">
+
+                <!-- Frente: degradê da paleta, chip, número mascarado, nome e validade. -->
+                <Border StrokeThickness="0" StrokeShape="RoundRectangle 20" Padding="22,20">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#F48C06" Offset="0" />
+                            <GradientStop Color="#DC2F02" Offset="0.5" />
+                            <GradientStop Color="#6A040F" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid RowDefinitions="Auto,*,Auto,Auto" RowSpacing="6">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Border WidthRequest="40" HeightRequest="30" StrokeThickness="0" StrokeShape="RoundRectangle 6" BackgroundColor="#FFD79A"
+                                    HorizontalOptions="Start" />
+                            <Label Grid.Column="1" Style="{StaticResource OnCardLabel}" FontFamily="JakartaBold" FontSize="18" Text="vault" />
+                        </Grid>
+                        <Label Grid.Row="2" Style="{StaticResource OnCardLabel}" FontFamily="JetBrainsMono" FontSize="19" Text="•••• •••• •••• 4021" />
+                        <Grid Grid.Row="3" ColumnDefinitions="*,Auto">
+                            <Label Style="{StaticResource OnCardLabel}" FontSize="13" Text="ANA SOUZA" CharacterSpacing="0.4" />
+                            <Label Grid.Column="1" Style="{StaticResource OnCardLabel}" FontSize="13" Text="09/29" />
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Verso: tarja magnética, faixa de assinatura com o CVV e aviso. -->
+                <local:FlipCard.Back>
+                    <Border StrokeThickness="0" StrokeShape="RoundRectangle 20" BackgroundColor="#370617">
+                        <Grid RowDefinitions="20,42,Auto,*" Padding="0,0,0,18">
+                            <BoxView Grid.Row="1" Color="#03071E" />
+                            <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="22,18,22,0" ColumnSpacing="10">
+                                <Border HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 6" BackgroundColor="#F2E8DF" />
+                                <Border Grid.Column="1" WidthRequest="64" HeightRequest="36" StrokeThickness="0" StrokeShape="RoundRectangle 6" BackgroundColor="White">
+                                    <Label Text="381" FontFamily="JetBrainsMono" FontSize="16" TextColor="#03071E"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Border>
+                            </Grid>
+                            <Label Grid.Row="3" Style="{StaticResource OnCardLabel}" FontSize="12" Opacity="0.8" Margin="22,0"
+                                   VerticalOptions="End" Text="Código de segurança: os 3 dígitos ao lado da assinatura." />
+                        </Grid>
+                    </Border>
+                </local:FlipCard.Back>
+
+            </local:FlipCard>
+
+        </VerticalStackLayout>
+        <!-- /snippet:card.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="FlipCard: duas faces no mesmo espaço e um giro em RotationY em duas metades (140ms + 160ms), trocando a face quando o card está de lado. O leitor de tela anuncia qual face ficou visível." />
+
+    </VerticalStackLayout>
+
+</ContentView>

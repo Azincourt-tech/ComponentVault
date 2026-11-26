@@ -50,3 +50,26 @@ public partial class StepperSyncfusionPreview : ContentView
 {
     public StepperSyncfusionPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("stepper.custom")]
+public partial class StepperCustomPreview : ContentView
+{
+    private static readonly CultureInfo PtBr = CultureInfo.GetCultureInfo("pt-BR");
+
+    public StepperCustomPreview()
+    {
+        InitializeComponent();
+        UpdateTotal();
+    }
+
+    private void OnTicketsChanged(object? sender, ValueChangedEventArgs e) => UpdateTotal();
+
+    private void UpdateTotal()
+    {
+        if (FullStepper is null || HalfStepper is null || KidStepper is null) return;
+        var count = FullStepper.Value + HalfStepper.Value + KidStepper.Value;
+        var total = FullStepper.Value * 60m + HalfStepper.Value * 30m;
+        CountLabel.Text = count == 1 ? "1 ingresso" : $"{count} ingressos";
+        TotalLabel.Text = total.ToString("C", PtBr);
+    }
+}

@@ -132,6 +132,21 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "card.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Cartão que vira ao tocar: frente com número e nome, verso com o código de segurança.",
+                    Highlights =
+                    [
+                        "Giro em duas metades: troca a face quando o card está de lado, sem piscar.",
+                        "As duas faces ocupam o mesmo espaço; o layout em volta não se mexe.",
+                        "A dica acima do cartão e o leitor de tela dizem qual face está visível.",
+                    ],
+                    Snippets = [Xaml("Uso", "card.custom"), CSharp("Controle (FlipCard.cs)", "control.flipcard")],
+                },
+                new()
+                {
                     Id = "card.expander",
                     Title = "Toolkit Expander",
                     Tier = VariantTier.Library,

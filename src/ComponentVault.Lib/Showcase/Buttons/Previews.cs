@@ -72,3 +72,18 @@ public partial class ButtonSyncfusionPreview : ContentView
         FollowButton.TextColor = ComponentVault.Lib.Theming.ThemeColors.Resolve(following ? "AccentText" : "Ink", Colors.Black);
     }
 }
+
+[ShowcasePreview("button.custom")]
+public partial class ButtonCustomPreview : ContentView
+{
+    public ButtonCustomPreview() => InitializeComponent();
+
+    // Depois de confirmar, oferece desfazer em vez de deixar o botão sem saída.
+    private void OnConfirmed(object? sender, EventArgs e) => UndoButton.IsVisible = true;
+
+    private void OnUndoClicked(object? sender, EventArgs e)
+    {
+        DeleteButton.Reset();
+        UndoButton.IsVisible = false;
+    }
+}

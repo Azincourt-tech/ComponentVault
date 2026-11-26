@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.RadioButtons"
+             x:Class="ComponentVault.Lib.Showcase.RadioButtons.RadioCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="ShippingOption" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="{DynamicResource Hairline}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+            <Setter Property="Padding" Value="16,14" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:radio.custom -->
+        <VerticalStackLayout Spacing="10">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Entrega" />
+
+            <!--
+              Cada opção é um card inteiro tocável. O escolhido ganha contorno e fundo no tom do destaque,
+              e o ponto do marcador cresce com uma mola curta.
+            -->
+            <Border x:Name="StandardOption" Style="{StaticResource ShippingOption}">
+                <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnOptionTapped" CommandParameter="0" /></Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <local:AnimatedRadio x:Name="StandardRadio" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Padrão" />
+                        <Label Style="{StaticResource Caption}" Text="5 a 7 dias úteis" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Body}" LineHeight="1" Text="Grátis" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border x:Name="ExpressOption" Style="{StaticResource ShippingOption}">
+                <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnOptionTapped" CommandParameter="1" /></Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <local:AnimatedRadio x:Name="ExpressRadio" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Expressa" />
+                        <Label Style="{StaticResource Caption}" Text="Amanhã até as 18h" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Body}" LineHeight="1" Text="R$ 24,90" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border x:Name="PickupOption" Style="{StaticResource ShippingOption}">
+                <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnOptionTapped" CommandParameter="2" /></Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <local:AnimatedRadio x:Name="PickupRadio" VerticalOptions="Center" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Retirar na loja" />
+                        <Label Style="{StaticResource Caption}" Text="Pronto em 2 horas · Av. Paulista, 1000" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Body}" LineHeight="1" Text="Grátis" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="SummaryLabel" Style="{StaticResource Caption}" Margin="0,4,0,0" />
+
+        </VerticalStackLayout>
+        <!-- /snippet:radio.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="AnimatedRadio desenhado com GraphicsView: o anel muda de cor e o ponto interno cresce com mola ao escolher, e encolhe direto ao sair. O card inteiro é o alvo de toque." />
+
+    </VerticalStackLayout>
+
+</ContentView>

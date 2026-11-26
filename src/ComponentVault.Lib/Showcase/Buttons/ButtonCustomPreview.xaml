@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Buttons"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Buttons.ButtonCustomPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:button.custom -->
+        <VerticalStackLayout Spacing="12">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Excluir o projeto Atlas" />
+            <Label Style="{StaticResource BodyMuted}"
+                   Text="Apaga as 12 telas, os snippets e o histórico. Para não acontecer por engano, segure o botão até o fim." />
+
+            <!--
+              Segurar para confirmar: o preenchimento cruza o botão em 1,2s. Soltar antes desfaz;
+              chegar ao fim confirma, e o botão diz o que aconteceu.
+            -->
+            <local:HoldButton x:Name="DeleteButton" fit:Fit.MaxWidth="360" Margin="0,4,0,0"
+                              Text="Segure para excluir" DoneText="Projeto excluído"
+                              Confirmed="OnConfirmed" />
+
+            <Button x:Name="UndoButton" Text="Desfazer" Style="{StaticResource TertiaryButton}"
+                    HorizontalOptions="Start" IsVisible="False" Clicked="OnUndoClicked" />
+
+        </VerticalStackLayout>
+        <!-- /snippet:button.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Desenhado com GraphicsView: trilha, preenchimento recortado pela forma do botão e animação ligada ao tempo segurado. Funciona com dedo e com mouse, e anuncia o resultado ao leitor de tela." />
+
+    </VerticalStackLayout>
+
+</ContentView>

@@ -226,6 +226,21 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "stepper.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Contador em que o número rola na direção da mudança, com total que acompanha.",
+                    Highlights =
+                    [
+                        "Ao aumentar o número sobe; ao diminuir, desce: a direção confirma o toque.",
+                        "No limite, o botão fica apagado no lugar, sem mexer no layout.",
+                        "O total e a contagem em texto se atualizam a cada toque.",
+                    ],
+                    Snippets = [Xaml("Uso", "stepper.custom"), CSharp("Controle (RollingStepper.cs)", "control.rollingstepper")],
+                },
+                new()
+                {
                     Id = "stepper.syncfusion",
                     Title = "Syncfusion Toolkit",
                     Tier = VariantTier.Library,

@@ -104,6 +104,21 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "checkbox.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Check desenhado: a caixa se enche do centro e o traço do check é desenhado de ponta a ponta.",
+                    Highlights =
+                    [
+                        "Animação de 220ms que mostra a ação acontecendo, não só o estado final.",
+                        "Estado indeterminado (um traço) no \"Todas\" quando só parte está marcada.",
+                        "A linha inteira é o alvo de toque; o contorno forte deixa a caixa vazia visível.",
+                    ],
+                    Snippets = [Xaml("Uso", "checkbox.custom"), CSharp("Controle (AnimatedCheck.cs)", "control.animatedcheck")],
+                },
+                new()
+                {
                     Id = "checkbox.uranium",
                     Title = "UraniumUI",
                     Tier = VariantTier.Library,
@@ -160,6 +175,21 @@ internal static partial class ComponentCatalog
                         "Linha de status confirma a escolha em texto.",
                     ],
                     Snippets = [Xaml("Uso e ControlTemplate", "radio.styled")],
+                },
+                new()
+                {
+                    Id = "radio.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Opções de entrega em cards, com o ponto do marcador crescendo com mola ao escolher.",
+                    Highlights =
+                    [
+                        "O card inteiro é tocável; o escolhido ganha contorno e fundo no tom do destaque.",
+                        "O ponto entra com mola e sai direto: a escolha chama atenção, a saída não.",
+                        "Um resumo em frase confirma prazo e preço da opção escolhida.",
+                    ],
+                    Snippets = [Xaml("Uso", "radio.custom"), CSharp("Controle (AnimatedRadio.cs)", "control.animatedradio")],
                 },
                 new()
                 {

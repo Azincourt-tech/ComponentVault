@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Steppers"
+             x:Class="ComponentVault.Lib.Showcase.Steppers.StepperCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="TicketRow" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="*,Auto" />
+            <Setter Property="Padding" Value="18,12" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:stepper.custom -->
+        <VerticalStackLayout Spacing="10">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Ingressos" />
+
+            <!-- Cada tipo com seu contador; o total acompanha. Máximo de 6 por tipo, meia e infantil podem ser 0. -->
+            <Border Style="{StaticResource Card}" Padding="0">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource TicketRow}">
+                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Inteira" />
+                            <Label Style="{StaticResource Caption}" Text="R$ 60,00" />
+                        </VerticalStackLayout>
+                        <local:RollingStepper x:Name="FullStepper" Grid.Column="1" Value="2" Minimum="0" Maximum="6"
+                                              ValueChanged="OnTicketsChanged" SemanticProperties.Hint="Ingressos inteira" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource TicketRow}">
+                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Meia" />
+                            <Label Style="{StaticResource Caption}" Text="R$ 30,00 · estudantes e +60" />
+                        </VerticalStackLayout>
+                        <local:RollingStepper x:Name="HalfStepper" Grid.Column="1" Value="1" Minimum="0" Maximum="6"
+                                              ValueChanged="OnTicketsChanged" SemanticProperties.Hint="Ingressos meia" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource TicketRow}">
+                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Body}" FontFamily="{StaticResource FontSemiBold}" LineHeight="1.2" Text="Infantil" />
+                            <Label Style="{StaticResource Caption}" Text="Grátis até 6 anos" />
+                        </VerticalStackLayout>
+                        <local:RollingStepper x:Name="KidStepper" Grid.Column="1" Value="0" Minimum="0" Maximum="6"
+                                              ValueChanged="OnTicketsChanged" SemanticProperties.Hint="Ingressos infantil" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid ColumnDefinitions="*,Auto" Padding="18,14">
+                        <Label x:Name="CountLabel" Style="{StaticResource Body}" LineHeight="1" VerticalOptions="Center" />
+                        <Label x:Name="TotalLabel" Grid.Column="1" Style="{StaticResource CardTitle}" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+        <!-- /snippet:stepper.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="RollingStepper: o número rola na direção da mudança (sobe ao aumentar, desce ao diminuir) dentro de uma janela recortada. No limite, o botão fica apagado no lugar, sem mexer no layout." />
+
+    </VerticalStackLayout>
+
+</ContentView>

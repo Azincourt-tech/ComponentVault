@@ -56,6 +56,22 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "button.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Segurar para confirmar: o preenchimento cruza o botão enquanto se segura, para ações destrutivas.",
+                    Highlights =
+                    [
+                        "Substitui o diálogo \"Tem certeza?\": a confirmação está no próprio gesto, sem tela a mais.",
+                        "Soltar antes do fim desfaz o preenchimento; nada acontece por engano.",
+                        "Depois de confirmar, o texto diz o que aconteceu e aparece a opção de desfazer.",
+                        "Funciona com dedo e com mouse; o resultado é anunciado ao leitor de tela.",
+                    ],
+                    Snippets = [Xaml("Uso", "button.custom"), CSharp("Controle (HoldButton.cs)", "control.holdbutton")],
+                },
+                new()
+                {
                     Id = "button.uranium",
                     Title = "UraniumUI",
                     Tier = VariantTier.Library,

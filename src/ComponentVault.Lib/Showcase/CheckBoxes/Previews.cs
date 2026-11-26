@@ -68,3 +68,38 @@ public partial class CheckBoxUraniumPreview : ContentView
 {
     public CheckBoxUraniumPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("checkbox.custom")]
+public partial class CheckBoxCustomPreview : ContentView
+{
+    public CheckBoxCustomPreview()
+    {
+        InitializeComponent();
+        UpdateAll();
+    }
+
+    private AnimatedCheck[] Items => [CameraCheck, NotifyCheck, FilesCheck];
+
+    // A linha inteira marca o item (CommandParameter aponta o check da linha).
+    private void OnRowTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Parameter is not AnimatedCheck check) return;
+        check.Toggle();
+        UpdateAll();
+    }
+
+    // "Todas": se alguma está desmarcada, marca todas; se todas estão marcadas, desmarca todas.
+    private void OnAllTapped(object? sender, TappedEventArgs e)
+    {
+        var next = !Items.All(c => c.IsChecked);
+        foreach (var check in Items) check.IsChecked = next;
+        UpdateAll();
+    }
+
+    private void UpdateAll()
+    {
+        var marked = Items.Count(c => c.IsChecked);
+        AllCheck.IsIndeterminate = marked > 0 && marked < Items.Length;
+        AllCheck.IsChecked = marked == Items.Length;
+    }
+}
