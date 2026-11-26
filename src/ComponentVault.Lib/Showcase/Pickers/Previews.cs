@@ -59,3 +59,21 @@ public partial class PickerSyncfusionPreview : ContentView
         ChoiceLabel.Text = $"{Sizes[SizePicker.Columns[0].SelectedIndex]} · {ColorNames[SizePicker.Columns[1].SelectedIndex]}";
     }
 }
+
+[ShowcasePreview("picker.custom")]
+public partial class PickerCustomPreview : ContentView
+{
+    public PickerCustomPreview()
+    {
+        InitializeComponent();
+        HourWheel.Items = Enumerable.Range(0, 24).Select(h => h.ToString("00")).ToList();
+        MinuteWheel.Items = Enumerable.Range(0, 12).Select(m => (m * 5).ToString("00")).ToList();
+        OnTimeChanged(this, EventArgs.Empty);
+    }
+
+    private void OnTimeChanged(object? sender, EventArgs e)
+    {
+        if (SummaryLabel is null || HourWheel is null || MinuteWheel is null) return;
+        SummaryLabel.Text = $"Todo dia às {HourWheel.SelectedItem}:{MinuteWheel.SelectedItem}";
+    }
+}

@@ -53,6 +53,21 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "entry.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Rótulo flutuante feito à mão: sobe e vira o título do campo ao focar ou preencher.",
+                    Highlights =
+                    [
+                        "O rótulo nunca some como um placeholder: o campo continua dizendo o que é.",
+                        "No erro, a moldura e o rótulo ficam vermelhos e o campo sacode de leve.",
+                        "Tocar em qualquer ponto da moldura foca o campo, inclusive sobre o rótulo.",
+                    ],
+                    Snippets = [Xaml("Uso", "entry.custom"), CSharp("Controle (FloatingField.cs)", "control.floatingfield")],
+                },
+                new()
+                {
                     Id = "entry.uranium",
                     Title = "UraniumUI",
                     Tier = VariantTier.Library,
@@ -358,6 +373,21 @@ internal static partial class ComponentCatalog
                         "Desabilitado diz o motivo em vez de só esmaecer.",
                     ],
                     Snippets = [Xaml("Uso", "picker.styled")],
+                },
+                new()
+                {
+                    Id = "picker.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Roda de opções como no iOS, com duas colunas para a hora de um lembrete.",
+                    Highlights =
+                    [
+                        "Mostra as opções vizinhas, o que a lista do Picker esconde.",
+                        "Arrastar gira a roda e ela encaixa na opção mais próxima ao soltar.",
+                        "Tocar numa opção vizinha a traz para o centro.",
+                    ],
+                    Snippets = [Xaml("Uso", "picker.custom"), CSharp("Controle (WheelPicker.cs)", "control.wheelpicker")],
                 },
                 new()
                 {

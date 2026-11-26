@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Popups"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Popups.PopupCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="ShareTile" TargetType="VerticalStackLayout">
+            <Setter Property="Spacing" Value="8" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="ShareIcon" TargetType="Border">
+            <Setter Property="WidthRequest" Value="52" />
+            <Setter Property="HeightRequest" Value="52" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceAlt}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="ShareName" TargetType="Label">
+            <Setter Property="FontFamily" Value="JakartaRegular" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{DynamicResource InkSecondary}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:popup.custom -->
+        <!--
+          Moldura de celular com a folha por cima do conteúdo (mesma célula do Grid). A folha fecha
+          tocando fora, arrastando a alça para baixo ou escolhendo uma opção.
+        -->
+        <Border fit:Fit.MaxWidth="380" HeightRequest="460" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" BackgroundColor="{DynamicResource Ground}" Padding="0">
+            <Grid IsClippedToBounds="True">
+
+                <!-- Tela do app por baixo. -->
+                <VerticalStackLayout Padding="20,24" Spacing="14">
+                    <Border HeightRequest="200" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FFBA08" Offset="0" />
+                                <GradientStop Color="#E85D04" Offset="0.5" />
+                                <GradientStop Color="#6A040F" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Label Style="{StaticResource CardTitle}" Text="Pôr do sol na Paulista" />
+                    <Label Style="{StaticResource BodyMuted}" Text="Foto de Ana Souza · 26 de novembro" />
+                    <Button x:Name="ShareButton" Text="Compartilhar" Style="{StaticResource PrimaryButton}" HorizontalOptions="Start" Clicked="OnShareClicked" />
+                    <Label x:Name="ResultLabel" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+
+                <local:BottomSheet x:Name="ShareSheet">
+                    <VerticalStackLayout Spacing="18">
+                        <Label Style="{StaticResource CardTitle}" Text="Compartilhar" />
+                        <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                            <VerticalStackLayout Style="{StaticResource ShareTile}">
+                                <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="OnShareOption" CommandParameter="Link copiado." /></VerticalStackLayout.GestureRecognizers>
+                                <Border Style="{StaticResource ShareIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=Link24}" IconSize="22" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <Label Style="{StaticResource ShareName}" Text="Copiar link" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Style="{StaticResource ShareTile}">
+                                <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="OnShareOption" CommandParameter="Enviado por e-mail." /></VerticalStackLayout.GestureRecognizers>
+                                <Border Style="{StaticResource ShareIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=Mail24}" IconSize="22" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <Label Style="{StaticResource ShareName}" Text="E-mail" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Style="{StaticResource ShareTile}">
+                                <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="OnShareOption" CommandParameter="QR code gerado." /></VerticalStackLayout.GestureRecognizers>
+                                <Border Style="{StaticResource ShareIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=QrCode24}" IconSize="22" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <Label Style="{StaticResource ShareName}" Text="QR code" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="3" Style="{StaticResource ShareTile}">
+                                <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="OnShareOption" CommandParameter="Enviado para a impressora." /></VerticalStackLayout.GestureRecognizers>
+                                <Border Style="{StaticResource ShareIcon}"><mic:MauiIcon Icon="{mi:Fluent Icon=Print24}" IconSize="22" IconColor="{DynamicResource Ink}" HorizontalOptions="Center" VerticalOptions="Center" /></Border>
+                                <Label Style="{StaticResource ShareName}" Text="Imprimir" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Button Text="Cancelar" Style="{StaticResource SecondaryButton}" HorizontalOptions="Fill" Clicked="OnCancelClicked" />
+                    </VerticalStackLayout>
+                </local:BottomSheet>
+
+            </Grid>
+        </Border>
+        <!-- /snippet:popup.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="BottomSheet: fundo que escurece e folha que sobe da borda (260ms), com alça para arrastar e fechar. Na tela do celular, é o padrão para ações rápidas: o polegar alcança e o contexto continua visível atrás." />
+
+    </VerticalStackLayout>
+
+</ContentView>

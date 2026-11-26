@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Carousels"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Carousels.CarouselCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="TipCard" TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="Stroke" Value="{DynamicResource HairlineStrong}" />
+            <Setter Property="Background" Value="{DynamicResource Surface}" />
+            <Setter Property="Padding" Value="22,20" />
+            <Setter Property="HeightRequest" Value="180" />
+        </Style>
+        <Style x:Key="TipIcon" TargetType="Border">
+            <Setter Property="WidthRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentTint}" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:carousel.custom -->
+        <VerticalStackLayout Spacing="14">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Style="{StaticResource FieldLabel}" Text="Dicas para começar" VerticalOptions="Center" />
+                <Label x:Name="CounterLabel" Grid.Column="1" Style="{StaticResource Caption}" VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Pilha: arraste o cartão de cima para o lado, ou use os botões. -->
+            <local:CardStack x:Name="Tips" fit:Fit.MaxWidth="440" CurrentChanged="OnCurrentChanged">
+                <Border Style="{StaticResource TipCard}">
+                    <VerticalStackLayout Spacing="10">
+                        <Border Style="{StaticResource TipIcon}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Board24}" IconSize="20" IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Label Style="{StaticResource CardTitle}" Text="Compare os níveis" />
+                        <Label Style="{StaticResource BodyMuted}" Text="A aba Lado a lado mostra o controle cru, o estilizado e os desenhados juntos." />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource TipCard}">
+                    <VerticalStackLayout Spacing="10">
+                        <Border Style="{StaticResource TipIcon}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Code24}" IconSize="20" IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Label Style="{StaticResource CardTitle}" Text="Copie o código" />
+                        <Label Style="{StaticResource BodyMuted}" Text="A aba Código traz o trecho exato que roda na tela, com botão de copiar." />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource TipCard}">
+                    <VerticalStackLayout Spacing="10">
+                        <Border Style="{StaticResource TipIcon}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=PaintBrush24}" IconSize="20" IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Label Style="{StaticResource CardTitle}" Text="Troque o tema" />
+                        <Label Style="{StaticResource BodyMuted}" Text="Claro, Escuro e Vidro mudam ao vivo, inclusive nos componentes de biblioteca." />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource TipCard}">
+                    <VerticalStackLayout Spacing="10">
+                        <Border Style="{StaticResource TipIcon}">
+                            <mic:MauiIcon Icon="{mi:Fluent Icon=Play24}" IconSize="20" IconColor="{DynamicResource AccentText}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <Label Style="{StaticResource CardTitle}" Text="Apresente" />
+                        <Label Style="{StaticResource BodyMuted}" Text="O modo Apresentar mostra só o componente em tela cheia, trocando de nível pelas setas." />
+                    </VerticalStackLayout>
+                </Border>
+            </local:CardStack>
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Anterior" Style="{StaticResource SecondaryButton}" Clicked="OnPreviousClicked" />
+                <Button Text="Próximo" Style="{StaticResource PrimaryButton}" Clicked="OnNextClicked" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        <!-- /snippet:carousel.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="CardStack: os cartões de trás descem e encolhem um pouco por nível; o de cima segue o dedo e inclina, voa ao passar do limite e vai para o fim da pilha. Os botões fazem o mesmo com mouse e teclado." />
+
+    </VerticalStackLayout>
+
+</ContentView>

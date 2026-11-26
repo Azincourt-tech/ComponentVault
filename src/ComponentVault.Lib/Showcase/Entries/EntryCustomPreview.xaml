@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Entries"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Entries.EntryCustomPreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- snippet:entry.custom -->
+        <VerticalStackLayout Spacing="14">
+
+            <Label Style="{StaticResource FieldLabel}" Text="Endereço de entrega" />
+
+            <!--
+              Rótulo flutuante: vazio, ele ocupa o lugar do texto; ao focar ou preencher, sobe e vira o
+              título do campo. "Continuar" valida e sacode os campos obrigatórios vazios.
+            -->
+            <Grid ColumnDefinitions="{fit:OnWidth Compact='*', Default='*,2*'}"
+                  RowDefinitions="{fit:OnWidth Compact='Auto,Auto', Default='Auto'}"
+                  ColumnSpacing="14" RowSpacing="14">
+                <local:FloatingField x:Name="ZipField" Label="CEP" Keyboard="Numeric" MaxLength="9" />
+                <local:FloatingField x:Name="StreetField" Grid.Column="{fit:OnWidth Compact=0, Default=1}" Grid.Row="{fit:OnWidth Compact=1, Default=0}"
+                                     Label="Rua" Text="Av. Paulista" />
+            </Grid>
+            <Grid ColumnDefinitions="*,2*" ColumnSpacing="14">
+                <local:FloatingField x:Name="NumberField" Label="Número" Keyboard="Numeric" MaxLength="6" />
+                <local:FloatingField Grid.Column="1" Label="Complemento (opcional)" />
+            </Grid>
+
+            <Button Text="Continuar" Style="{StaticResource PrimaryButton}" HorizontalOptions="Start" Margin="0,4,0,0" Clicked="OnContinueClicked" />
+            <Label x:Name="StatusLabel" Style="{StaticResource Caption}" IsVisible="False" />
+
+        </VerticalStackLayout>
+        <!-- /snippet:entry.custom -->
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="FloatingField: o rótulo é um Label que sobe e encolhe (160ms) sobre o Entry, dentro da moldura de campo do design system. No erro, a moldura e o rótulo ficam vermelhos e o campo sacode de leve." />
+
+    </VerticalStackLayout>
+
+</ContentView>

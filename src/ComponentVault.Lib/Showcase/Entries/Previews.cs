@@ -98,3 +98,22 @@ public partial class EntrySyncfusionPreview : ContentView
 {
     public EntrySyncfusionPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("entry.custom")]
+public partial class EntryCustomPreview : ContentView
+{
+    public EntryCustomPreview() => InitializeComponent();
+
+    // Valida os obrigatórios; cada campo vazio mostra a própria mensagem e sacode.
+    private void OnContinueClicked(object? sender, EventArgs e)
+    {
+        var errors = 0;
+        if (string.IsNullOrWhiteSpace(ZipField.Text) || ZipField.Text.Count(char.IsDigit) != 8) { ZipField.ShowError("Informe os 8 dígitos do CEP."); errors++; }
+        if (string.IsNullOrWhiteSpace(StreetField.Text)) { StreetField.ShowError("Informe a rua."); errors++; }
+        if (string.IsNullOrWhiteSpace(NumberField.Text)) { NumberField.ShowError("Informe o número ou \"s/n\"."); errors++; }
+
+        StatusLabel.IsVisible = true;
+        StatusLabel.Text = errors == 0 ? "Endereço confirmado." : errors == 1 ? "Falta 1 campo." : $"Faltam {errors} campos.";
+        StatusLabel.SetThemeColor(Label.TextColorProperty, errors == 0 ? "SuccessText" : "DangerText");
+    }
+}

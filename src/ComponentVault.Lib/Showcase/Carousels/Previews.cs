@@ -118,3 +118,24 @@ public partial class CarouselSyncfusionPreview : ContentView
         CoverLabel.Text = $"{index + 1} de {_items.Count}: {_items[index].Title}";
     }
 }
+
+[ShowcasePreview("carousel.custom")]
+public partial class CarouselCustomPreview : ContentView
+{
+    public CarouselCustomPreview()
+    {
+        InitializeComponent();
+        OnCurrentChanged(this, EventArgs.Empty);
+    }
+
+    // Pode disparar durante o InitializeComponent, antes de os campos x:Name estarem prontos.
+    private void OnCurrentChanged(object? sender, EventArgs e)
+    {
+        if (CounterLabel is null || Tips is null) return;
+        CounterLabel.Text = $"{Tips.CurrentIndex + 1} de {Tips.Cards.Count}";
+    }
+
+    private void OnNextClicked(object? sender, EventArgs e) => Tips.Next();
+
+    private void OnPreviousClicked(object? sender, EventArgs e) => Tips.Previous();
+}

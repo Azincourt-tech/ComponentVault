@@ -121,6 +121,21 @@ internal static partial class ComponentCatalog
                 Base("popup.base", "Alerta, confirmação e lista de ações nativas da página."),
                 new()
                 {
+                    Id = "popup.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Folha inferior (bottom sheet) com opções de compartilhar, numa moldura de celular.",
+                    Highlights =
+                    [
+                        "O fundo escurece e a folha sobe da borda de baixo, ao alcance do polegar.",
+                        "Fecha tocando fora, arrastando a alça para baixo ou escolhendo uma opção.",
+                        "O contexto continua visível atrás, diferente de um diálogo no meio da tela.",
+                    ],
+                    Snippets = [Xaml("Uso", "popup.custom"), CSharp("Controle (BottomSheet.cs)", "control.bottomsheet")],
+                },
+                new()
+                {
                     Id = "popup.toolkit",
                     Title = "Toolkit Popup",
                     Tier = VariantTier.Library,

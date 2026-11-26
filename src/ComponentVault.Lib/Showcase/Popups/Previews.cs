@@ -105,3 +105,20 @@ public partial class PopupSyncfusionPreview : ContentView
         ResultLabel.SetThemeColor(Label.TextColorProperty, _accepted ? "DangerText" : "InkSecondary");
     }
 }
+
+[ShowcasePreview("popup.custom")]
+public partial class PopupCustomPreview : ContentView
+{
+    public PopupCustomPreview() => InitializeComponent();
+
+    private void OnShareClicked(object? sender, EventArgs e) => ShareSheet.Open();
+
+    private void OnCancelClicked(object? sender, EventArgs e) => ShareSheet.Close();
+
+    // Escolher uma opção fecha a folha e mostra o resultado na tela de baixo.
+    private void OnShareOption(object? sender, TappedEventArgs e)
+    {
+        ResultLabel.Text = e.Parameter as string;
+        ShareSheet.Close();
+    }
+}

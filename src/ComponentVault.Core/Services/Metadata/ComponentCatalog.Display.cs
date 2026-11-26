@@ -75,6 +75,21 @@ internal static partial class ComponentCatalog
                 Base("avatar.base", "Border circular com Label, cores fixas."),
                 new()
                 {
+                    Id = "avatar.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Anel de stories no degradê da paleta e status desenhado na borda do avatar.",
+                    Highlights =
+                    [
+                        "Anel novo em degradê, visto em cinza fino: dá para saber o que é novidade de relance.",
+                        "Status com forma própria (traço no ocupado, lua no ausente), não só cor.",
+                        "O ponto de status é recortado do avatar por um contorno na cor da superfície.",
+                    ],
+                    Snippets = [Xaml("Uso", "avatar.custom"), CSharp("Controle (StoryAvatar.cs)", "control.storyavatar")],
+                },
+                new()
+                {
                     Id = "avatar.toolkit",
                     Title = "Toolkit AvatarView",
                     Tier = VariantTier.Library,

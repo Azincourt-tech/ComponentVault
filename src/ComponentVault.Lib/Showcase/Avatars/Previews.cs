@@ -11,3 +11,9 @@ public partial class AvatarToolkitPreview : ContentView
 {
     public AvatarToolkitPreview() => InitializeComponent();
 }
+
+[ShowcasePreview("avatar.custom")]
+public partial class AvatarCustomPreview : ContentView
+{
+    public AvatarCustomPreview() => InitializeComponent();
+}

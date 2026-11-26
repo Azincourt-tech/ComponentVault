@@ -304,6 +304,21 @@ internal static partial class ComponentCatalog
                 },
                 new()
                 {
+                    Id = "carousel.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "Pilha de cartões: o de cima segue o dedo e voa para o fim da pilha ao passar do limite.",
+                    Highlights =
+                    [
+                        "Os de trás descem e encolhem um pouco por nível, como um baralho.",
+                        "Soltar antes do limite devolve o cartão ao lugar; nada some por engano.",
+                        "Botões Anterior e Próximo fazem o mesmo com mouse e teclado.",
+                    ],
+                    Snippets = [Xaml("Uso", "carousel.custom"), CSharp("Controle (CardStack.cs)", "control.cardstack")],
+                },
+                new()
+                {
                     Id = "carousel.syncfusion",
                     Title = "Syncfusion Toolkit",
                     Tier = VariantTier.Library,
