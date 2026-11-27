@@ -27,9 +27,9 @@
         <BackButtonBehavior IsVisible="False" />
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{DynamicResource TitleBarInset}">
         <!-- Luz ambiente (tema Vidro) atrás de tudo -->
-        <lib:AmbientBackground Grid.RowSpan="3" />
+        <lib:AmbientBackground Grid.RowSpan="3" Margin="{DynamicResource TitleBarBleed}" />
 
         <!-- Voltar, seções e tema; some no modo apresentação -->
         <controls:NavDock Grid.Row="{adaptive:OnWidth Compact=2, Default=0}" ShowBack="True"

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Fabs.FabBasePreview">
+
+    <VerticalStackLayout Spacing="24">
+
+        <Border fit:Fit.MaxWidth="380" HeightRequest="420" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" BackgroundColor="{DynamicResource Ground}" Padding="0">
+            <!-- snippet:fab.base -->
+            <Grid IsClippedToBounds="True">
+                <VerticalStackLayout Padding="20" Spacing="12">
+                    <Label Text="Notas" FontSize="22" />
+                    <Label Text="Lista de compras" />
+                    <Label Text="Ideias para o app" />
+                    <Label Text="Reunião de quinta" />
+                </VerticalStackLayout>
+
+                <!-- Um Button redondo no canto: as opções abrem na lista nativa da plataforma. -->
+                <Button Text="+" FontSize="24" WidthRequest="56" HeightRequest="56" CornerRadius="28" Padding="0"
+                        HorizontalOptions="End" VerticalOptions="End" Margin="20" Clicked="OnFabClicked" />
+            </Grid>
+            <!-- /snippet:fab.base -->
+        </Border>
+
+        <Label x:Name="ResultLabel" Style="{StaticResource Caption}" Text="Nenhuma ação escolhida ainda" />
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="O MAUI não tem botão flutuante. Um Button redondo no canto do Grid resolve a posição, mas o + é texto (muda com a fonte), a cor é a da plataforma e as opções abrem num diálogo genérico, longe do botão." />
+
+    </VerticalStackLayout>
+
+</ContentView>

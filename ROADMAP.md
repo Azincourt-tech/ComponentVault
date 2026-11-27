@@ -32,7 +32,7 @@ O que ainda falta no ComponentVault, em ordem de prioridade. Situação em 26/11
 
 - [ ] **Barra inferior com clique** (faixa compacta): troca de seção e o seletor de temas que substitui a barra.
 - [ ] **Fundo animado no Android:** conferir a fluidez e o consumo de bateria das manchas e das estrelas. Se pesar, baixar a taxa de quadros ou desligar as estrelas no celular.
-- [ ] **Faixa da barra de título no Windows:** a luz do fundo é cortada na altura da `TitleBar`, que tem a cor `Ground` lisa. Avaliar estender o conteúdo por baixo dela.
+- [x] ~~**Faixa da barra de título no Windows**~~: feito em 28/11/2026. A barra ficou transparente e a página passa por baixo dela (`TitleBarOverlay`), então o fundo animado vai até o topo da janela. Conferido por captura nos três temas, no celular e no modo Apresentar. Falta arrastar a janela pela barra à mão.
 - [x] ~~Revisar os níveis Estilizado lado a lado com o Base~~ (27/11/2026): campos preenchidos (`FieldFrame` + `FieldFrames.Apply`), ícones e força da senha no Entry, ícone que acompanha a escolha no Picker, barra de formatação no Editor, ícones e valor em pílula no Slider, envio já em andamento no Progress, grade de cards clicáveis no Card. Os previews ocupam a largura toda do card.
 
 O que foi escrito, mas ainda não rodou de ponta a ponta.
@@ -138,7 +138,7 @@ Candidatos, priorizando os que mais aparecem nos apps de referência (Mobbin, Sc
 
 - [x] ~~**Bottom sheet**~~: feito em 28/11/2026 com os quatro níveis: Base (`Border` com `IsVisible`), Estilizado (tokens, fundo escurecido e animação), Custom (`SnapSheet` com três paradas arrastáveis, como nos apps de mapa) e Biblioteca (`SfBottomSheet`). Falta testar o arrasto à mão.
 - [x] ~~**Expander / Accordion**~~: feito em 28/11/2026 como o componente Expander: Base (`Button` e `IsVisible`), Estilizado (seções de configurações com resumo e seta), Custom (`Collapsible` com altura animada e `AccordionStack` com um aberto por vez) e as bibliotecas Toolkit `Expander`, `SfExpander` e `SfAccordion`. As abas Toolkit Expander e Syncfusion Accordion saíram do Card e vieram para cá. Falta testar a abertura à mão.
-- [ ] **FAB e menu de ações**: botão flutuante que abre as ações em leque.
+- [x] ~~**FAB e menu de ações**~~: feito em 28/11/2026 com Base (`Button` redondo e lista de ações nativa), Estilizado (FAB estendido que encolhe ao rolar) e Custom (`SpeedDial` com as ações em leque). Sem Biblioteca: nenhuma lib livre com .NET 10 traz FAB. Falta testar o toque e a rolagem à mão.
 - [ ] **Assinatura / desenho**: CommunityToolkit `DrawingView`.
 - [ ] **Calendário**: seleção de intervalo, mais rico que o DatePicker. Libs: `SfCalendar` (Syncfusion Toolkit) e Plugin.Maui.Calendar.
 - [ ] **DataGrid / tabela**: ordenação e colunas fixas. Sem lib livre com .NET 10 hoje (o Maui.DataGrid parou no .NET 9): Custom.

@@ -135,6 +135,11 @@ tests/ComponentVault.Tests xUnit v3.
 - **O estilo `Body` tem `LineHeight` 1,45:** numa linha única ao lado de um valor ou ícone, ele desce alguns pixels. Use `LineHeight="1"` e `VerticalOptions="Center"`.
 - **Voltar do Shell duplicado:** nas páginas empilhadas, use `Shell.BackButtonBehavior IsVisible="False"`. O voltar é o da `NavDock`.
 - **Shell:** resolva o `AppShell` em `CreateWindow`, não no construtor do `App`, porque os recursos do `App.xaml` ainda não existem lá. Use `Title=""` nas páginas para não duplicar o título na barra.
+- **Barra de título do Windows por cima da página:** o MAUI reserva a altura da `TitleBar` com uma margem no `ContentGrid` do Shell (o que fica dentro do `ContentRoot`; há outro `ContentGrid`, no painel lateral). O `App/Controls/TitleBarOverlay.cs` zera essa margem a cada passada de layout, deixa a barra transparente e com o título por cima. Página nova precisa de duas coisas:
+  - `Padding="{DynamicResource TitleBarInset}"` no Grid raiz;
+  - `Margin="{DynamicResource TitleBarBleed}"` no `AmbientBackground`.
+
+  Em tela cheia (modo Apresentar), `TitleBarOverlay.SetVisible(false)` zera os dois. A transição Hero desconta o padding do Grid raiz ao posicionar as cópias.
 - **`CollectionView` com `MaximumWidthRequest` corta itens no Windows.** A margem é calculada no `SizeChanged` da página (veja `CatalogPage.xaml.cs`).
 - **`CharacterSpacing` muito negativo cola as palavras** na Plus Jakarta. O limite seguro é -0.4.
 - **Windows + UI Automation/Narrador derruba o app em páginas com `ScrollView`.** É bug do framework (ver README). Por isso, não automatize cliques via UIA.

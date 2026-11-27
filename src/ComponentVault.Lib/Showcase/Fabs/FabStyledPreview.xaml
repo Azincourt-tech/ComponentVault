@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:mic="clr-namespace:MauiIcons.Core;assembly=MauiIcons.Core"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Fabs.FabStyledPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="NoteCard" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Padding" Value="16,14" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="24">
+
+        <Border fit:Fit.MaxWidth="380" HeightRequest="420" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" BackgroundColor="{DynamicResource Ground}" Padding="0">
+            <!-- snippet:fab.styled -->
+            <!--
+              FAB estendido: ícone e rótulo enquanto a lista está no topo; ao rolar para baixo ele
+              encolhe até o círculo, para não cobrir o conteúdo, e volta ao rolar para cima.
+            -->
+            <Grid IsClippedToBounds="True">
+                <ScrollView Scrolled="OnScrolled">
+                    <VerticalStackLayout Padding="20,20,20,96" Spacing="10">
+                        <Label Style="{StaticResource SectionHeader}" Text="Notas" />
+                        <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Lista de compras" /><Label Style="{StaticResource BodySmall}" Text="Café, pão, frutas e detergente" /></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Ideias para o app" /><Label Style="{StaticResource BodySmall}" Text="Modo apresentação e atalhos de teclado" /></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Reunião de quinta" /><Label Style="{StaticResource BodySmall}" Text="Revisar o roadmap e as capturas" /></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Leituras" /><Label Style="{StaticResource BodySmall}" Text="Três artigos sobre acessibilidade" /></VerticalStackLayout></Border>
+                        <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Viagem" /><Label Style="{StaticResource BodySmall}" Text="Reservar hotel e conferir o voo" /></VerticalStackLayout></Border>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <Border x:Name="Fab" HeightRequest="56" Padding="18,0" StrokeThickness="0" StrokeShape="RoundRectangle 18"
+                        BackgroundColor="{StaticResource Accent}" HorizontalOptions="End" VerticalOptions="End" Margin="20"
+                        SemanticProperties.Description="Nova nota">
+                    <Border.Shadow><Shadow Brush="Black" Opacity="0.25" Radius="16" Offset="0,6" /></Border.Shadow>
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnFabTapped" /></Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <mic:MauiIcon Icon="{mi:Fluent Icon=Add24}" IconSize="22" IconColor="{StaticResource OnAccent}" VerticalOptions="Center" />
+                        <Label x:Name="FabLabel" Text="Nova nota" FontFamily="{StaticResource FontSemiBold}" FontSize="15"
+                               TextColor="{StaticResource OnAccent}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+            <!-- /snippet:fab.styled -->
+        </Border>
+
+        <Label x:Name="ResultLabel" Style="{StaticResource Caption}" Text="Role a lista: o botão encolhe e volta." />
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="Border com ícone e rótulo nos tokens do design system, cantos de 18 e uma sombra curta (a única do app, para ele flutuar sobre o conteúdo). O rótulo diz a ação principal da tela e some ao rolar para baixo." />
+
+    </VerticalStackLayout>
+
+</ContentView>

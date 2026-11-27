@@ -143,8 +143,11 @@ public static class Hero
         ghost.InputTransparent = true;
         ghost.AnchorX = 0;
         ghost.AnchorY = 0;
-        ghost.TranslationX = from.X - host.X;
-        ghost.TranslationY = from.Y - host.Y;
+        // A cópia nasce no canto da área de conteúdo, que começa depois do padding do Grid.
+        var originX = host.X + overlay.Padding.Left;
+        var originY = host.Y + overlay.Padding.Top;
+        ghost.TranslationX = from.X - originX;
+        ghost.TranslationY = from.Y - originY;
         ghost.Scale = from.Height / to.Height;
         Grid.SetRowSpan(ghost, Math.Max(1, overlay.RowDefinitions.Count));
         Grid.SetColumnSpan(ghost, Math.Max(1, overlay.ColumnDefinitions.Count));
@@ -152,8 +155,8 @@ public static class Hero
 
         var flight = new Animation
         {
-            { 0, 1, new Animation(v => ghost.TranslationX = v, ghost.TranslationX, to.X - host.X, Easing.CubicInOut) },
-            { 0, 1, new Animation(v => ghost.TranslationY = v, ghost.TranslationY, to.Y - host.Y, Easing.CubicInOut) },
+            { 0, 1, new Animation(v => ghost.TranslationX = v, ghost.TranslationX, to.X - originX, Easing.CubicInOut) },
+            { 0, 1, new Animation(v => ghost.TranslationY = v, ghost.TranslationY, to.Y - originY, Easing.CubicInOut) },
             { 0, 1, new Animation(v => ghost.Scale = v, ghost.Scale, 1, Easing.CubicInOut) },
         };
         flight.Commit(ghost, "HeroReturn", rate: 16, length: Length, finished: (_, _) =>

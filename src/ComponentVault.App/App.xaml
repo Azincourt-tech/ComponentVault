@@ -9,6 +9,14 @@
                 <!-- Design system inteiro: cores, tokens e estilos nomeados. -->
                 <theme:VaultTheme />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--
+              Espaço da barra de título do Windows: a página passa por baixo dela, o conteúdo desce
+              (TitleBarInset) e o fundo animado sobe (TitleBarBleed). Zero nas outras plataformas;
+              o TitleBarOverlay ajusta no Windows e zera em tela cheia.
+            -->
+            <Thickness x:Key="TitleBarInset">0</Thickness>
+            <Thickness x:Key="TitleBarBleed">0</Thickness>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

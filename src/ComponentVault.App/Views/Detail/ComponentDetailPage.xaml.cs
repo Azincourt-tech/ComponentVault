@@ -115,6 +115,8 @@ public partial class ComponentDetailPage : ContentPage, IQueryAttributable
     private void SetFullScreen(bool fullScreen)
     {
         if (Window?.Handler?.PlatformView is not Microsoft.UI.Xaml.Window native) return;
+        // Em tela cheia a barra de título some: a página deixa de reservar o espaço dela.
+        Controls.TitleBarOverlay.SetVisible(!fullScreen);
         native.AppWindow.SetPresenter(fullScreen
             ? Microsoft.UI.Windowing.AppWindowPresenterKind.FullScreen
             : Microsoft.UI.Windowing.AppWindowPresenterKind.Overlapped);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ComponentVault.Lib.Showcase.Fabs"
+             xmlns:fit="clr-namespace:ComponentVault.Lib.Theming"
+             x:Class="ComponentVault.Lib.Showcase.Fabs.FabCustomPreview">
+
+    <ContentView.Resources>
+        <Style x:Key="NoteCard" TargetType="Border" BasedOn="{StaticResource Card}">
+            <Setter Property="Padding" Value="16,14" />
+        </Style>
+    </ContentView.Resources>
+
+    <VerticalStackLayout Spacing="16">
+
+        <!-- snippet:fab.custom -->
+        <!-- Tela por baixo e o SpeedDial por cima, na mesma célula do Grid. As ações vão no código. -->
+        <Border fit:Fit.MaxWidth="380" HeightRequest="440" StrokeThickness="1" StrokeShape="RoundRectangle 28"
+                Stroke="{DynamicResource HairlineStrong}" BackgroundColor="{DynamicResource Ground}" Padding="0">
+            <Grid IsClippedToBounds="True">
+                <VerticalStackLayout Padding="20" Spacing="10">
+                    <Label Style="{StaticResource SectionHeader}" Text="Notas" />
+                    <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Lista de compras" /><Label Style="{StaticResource BodySmall}" Text="Café, pão, frutas e detergente" /></VerticalStackLayout></Border>
+                    <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Ideias para o app" /><Label Style="{StaticResource BodySmall}" Text="Modo apresentação e atalhos de teclado" /></VerticalStackLayout></Border>
+                    <Border Style="{StaticResource NoteCard}"><VerticalStackLayout Spacing="2"><Label Style="{StaticResource CardTitle}" Text="Reunião de quinta" /><Label Style="{StaticResource BodySmall}" Text="Revisar o roadmap e as capturas" /></VerticalStackLayout></Border>
+                </VerticalStackLayout>
+
+                <local:SpeedDial x:Name="Dial" ActionInvoked="OnActionInvoked" />
+            </Grid>
+        </Border>
+        <!-- /snippet:fab.custom -->
+
+        <Label x:Name="ResultLabel" Style="{StaticResource Caption}" Text="Toque no + para abrir o leque." />
+
+        <Label Style="{StaticResource BodySmall}"
+               Text="SpeedDial: o + gira e vira ×, o fundo escurece e as ações saem do centro do botão num quarto de círculo, uma depois da outra, com mola. As opções aparecem junto do dedo, em vez de num diálogo no meio da tela." />
+
+    </VerticalStackLayout>
+
+</ContentView>

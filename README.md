@@ -11,8 +11,8 @@
 [![Plataformas](https://img.shields.io/badge/plataformas-Android%20%7C%20Windows-370617)](#começando)
 [![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-03071E)](LICENSE)
 
-![Componentes](https://img.shields.io/badge/componentes-32-F48C06)
-![Variantes](https://img.shields.io/badge/variantes-125-FAA307)
+![Componentes](https://img.shields.io/badge/componentes-33-F48C06)
+![Variantes](https://img.shields.io/badge/variantes-128-FAA307)
 ![Temas](https://img.shields.io/badge/temas-Claro%20%C2%B7%20Escuro%20%C2%B7%20Vidro-FFBA08)
 ![Testes](https://img.shields.io/badge/testes-xUnit%20v3-6A040F)
 
@@ -58,7 +58,7 @@ A cor de cada nível é a mesma em todo o app: no seletor de nível, nos selos, 
 
 | Categoria | Componentes |
 |---|---|
-| **Ações** | Button, Chips |
+| **Ações** | Button, Chips, FAB |
 | **Entradas** | Entry, Editor, SearchBar, Stepper, Código OTP, Picker, DatePicker |
 | **Seleção** | Switch, CheckBox, RadioButton, Slider, Segmented control, Rating |
 | **Feedback** | Progress, Skeleton, Alert, Toast, Empty state |

@@ -1,3 +1,4 @@
+using ComponentVault.App.Controls;
 using ComponentVault.Core.Models;
 using ComponentVault.Core.Services.Theming;
 using ComponentVault.Lib.Theming;
@@ -35,13 +36,14 @@ public partial class App : Application
         };
 
 #if WINDOWS
-        // Barra de título com as cores da paleta: a nativa não acompanha a troca de tema em
-        // execução e deixava o título branco sobre cinza claro no tema Claro.
-        var titleBar = new TitleBar { Title = "ComponentVault", HeightRequest = 40 };
-        titleBar.SetThemeColor(VisualElement.BackgroundColorProperty, "Ground");
+        // Barra de título transparente por cima da página: o fundo animado continua até o topo da
+        // janela, em vez de ser cortado por uma faixa lisa. O título acompanha a paleta.
+        var titleBar = new TitleBar { Title = "ComponentVault", HeightRequest = TitleBarOverlay.Height, BackgroundColor = Colors.Transparent };
         titleBar.SetThemeColor(TitleBar.ForegroundColorProperty, "InkSecondary");
         window.TitleBar = titleBar;
+        TitleBarOverlay.Attach(window);
 #endif
+        TitleBarOverlay.SetVisible(OperatingSystem.IsWindows());
 
         // Layout responsivo: as faixas de largura (Adaptive) acompanham o tamanho da janela.
         window.SizeChanged += (_, _) => Adaptive.Current.Update(window.Width);

@@ -15,9 +15,9 @@
         <controls:TierToBadgeKindConverter x:Key="TierBadge" />
     </ContentPage.Resources>
 
-    <Grid x:Name="Root" RowDefinitions="Auto,*,Auto">
+    <Grid x:Name="Root" RowDefinitions="Auto,*,Auto" Padding="{DynamicResource TitleBarInset}">
         <!-- Luz ambiente: só acende no tema Vidro, e deriva devagar. -->
-        <lib:AmbientBackground Grid.RowSpan="3" />
+        <lib:AmbientBackground Grid.RowSpan="3" Margin="{DynamicResource TitleBarBleed}" />
 
         <!-- Navegação e tema: no topo no desktop, embaixo no celular -->
         <controls:NavDock Grid.Row="{adaptive:OnWidth Compact=2, Default=0}" Section="Home" />

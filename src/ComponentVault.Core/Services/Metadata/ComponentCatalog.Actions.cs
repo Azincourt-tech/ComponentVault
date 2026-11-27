@@ -205,5 +205,64 @@ internal static partial class ComponentCatalog
                 },
             ],
         },
+        new()
+        {
+            Id = "fab",
+            Name = "FAB",
+            Icon = "Add24",
+            Category = ComponentCategory.Actions,
+            Summary = "Botão flutuante com a ação principal da tela, sozinho ou abrindo um leque de ações.",
+            Tags = ["fab", "botão flutuante", "speed dial", "leque", "criar", "ação principal"],
+            AddedOn = new DateOnly(2026, 11, 28),
+            Docs = new ComponentDocs
+            {
+                Overview = "O MAUI não tem botão flutuante. O Base usa um Button redondo no canto do Grid; o Estilizado é um FAB estendido que encolhe ao rolar; e o Custom abre as ações em leque a partir do próprio botão. Nenhuma lib livre com .NET 10 traz um FAB pronto.",
+                Properties =
+                [
+                    new("HorizontalOptions / VerticalOptions = End", "Prende o botão no canto do Grid, por cima do conteúdo."),
+                    new("Actions", "Ações do leque, com ícone e rótulo (SpeedDial)."),
+                    new("ActionInvoked (evento)", "Disparado ao tocar numa ação do leque."),
+                ],
+                UseCases = ["A ação principal de uma lista: nova nota, novo e-mail, novo item.", "Até quatro formas de criar algo, num leque."],
+                Limitations = ["Um FAB por tela. Ações secundárias ficam na barra ou num menu."],
+            },
+            Variants =
+            [
+                Base("fab.base", "Button redondo no canto do Grid, abrindo a lista de ações nativa.",
+                    "O + é texto e muda com a fonte da plataforma.",
+                    "As opções abrem num diálogo genérico, longe do botão."),
+                new()
+                {
+                    Id = "fab.styled",
+                    Title = "Estilizado",
+                    Tier = VariantTier.Styled,
+                    Origin = ComponentOrigin.Native,
+                    Summary = "FAB estendido com ícone e rótulo, que encolhe até o círculo ao rolar a lista.",
+                    Highlights =
+                    [
+                        "O rótulo diz a ação (\"Nova nota\") enquanto a lista está no topo.",
+                        "Rolar para baixo recolhe o rótulo; rolar para cima estende de novo.",
+                        "Cantos de 18 e a única sombra do app, para flutuar sobre o conteúdo.",
+                    ],
+                    Snippets = [Xaml("Uso", "fab.styled")],
+                },
+                new()
+                {
+                    Id = "fab.custom",
+                    Title = "Custom",
+                    Tier = VariantTier.Custom,
+                    Origin = ComponentOrigin.Custom,
+                    Summary = "SpeedDial: o + vira × e as ações saem do botão num quarto de círculo, com mola.",
+                    Highlights =
+                    [
+                        "As ações aparecem junto do dedo, em vez de num diálogo no meio da tela.",
+                        "Saem uma depois da outra (40ms) e voltam na ordem inversa.",
+                        "O fundo escurece; tocar fora ou numa ação fecha.",
+                        "Cada ação tem rótulo, também para o leitor de tela.",
+                    ],
+                    Snippets = [Xaml("Uso", "fab.custom"), CSharp("Controle (SpeedDial.cs)", "control.speeddial")],
+                },
+            ],
+        },
     ];
 }
